@@ -82,21 +82,11 @@ function FooterLinks({
 export function Footer1() {
   return (
     <footer
-      className="border-t bg-background relative overflow-hidden"
+      className="border-t bg-background"
       role="contentinfo"
       aria-label="Site footer"
     >
-      <div
-        className="pointer-events-none absolute inset-0"
-        aria-hidden="true"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 2px 2px, oklch(0.37 0.1 260 / 0.04) 1px, transparent 0)",
-          backgroundSize: "28px 28px",
-        }}
-      />
-
-      <div className="container-padding-x container relative mx-auto py-12 lg:py-16">
+      <div className="container-padding-x container mx-auto py-12 lg:py-16">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1fr] lg:gap-8">
           <div className="flex flex-col gap-5">
             <Link href="/" aria-label="Go to homepage" className="w-fit">
@@ -110,10 +100,10 @@ export function Footer1() {
             <div className="flex flex-col gap-2.5">
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
-                className="text-muted-foreground hover:text-foreground inline-flex w-fit items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors"
+                className="text-muted-foreground hover:text-foreground inline-flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors sm:w-fit"
               >
                 <Mail className="h-4 w-4 text-primary" aria-hidden="true" />
-                <span>{CONTACT_EMAIL}</span>
+                <span className="break-all sm:break-normal">{CONTACT_EMAIL}</span>
               </a>
               <p className="text-muted-foreground inline-flex items-center gap-2 px-2 py-1.5 text-sm">
                 <Clock className="h-4 w-4 text-primary" aria-hidden="true" />

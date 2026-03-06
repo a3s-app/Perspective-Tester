@@ -13,17 +13,6 @@ export function HeroSection2() {
       className="relative overflow-hidden border-b bg-background section-padding-y"
       aria-labelledby="hero-heading"
     >
-      {/* Subtle background pattern */}
-      <div
-        className="pointer-events-none absolute inset-0"
-        aria-hidden="true"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 1px 1px, oklch(0.37 0.1 260 / 0.04) 1px, transparent 0)",
-          backgroundSize: "32px 32px",
-        }}
-      />
-
       <div className="container-padding-x container relative z-10 mx-auto">
         <div className="flex flex-col items-center gap-12 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
           {/* Left content */}
@@ -49,21 +38,21 @@ export function HeroSection2() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col gap-3 sm:flex-row">
-              <Link href="#products">
-                <Button size="lg">
+              <Link href="#products" className="w-full sm:w-auto">
+                <Button size="lg" className="w-full sm:w-auto">
                   View Products
                   <ArrowRight />
                 </Button>
               </Link>
-              <Link href="/contact">
-                <Button variant="outline" size="lg">
+              <Link href="/contact" className="w-full sm:w-auto">
+                <Button variant="outline" size="lg" className="w-full sm:w-auto">
                   Talk to Sales
                 </Button>
               </Link>
             </div>
 
             {/* Compliance badges */}
-            <div className="flex items-center gap-3 pt-2">
+            <div className="flex flex-wrap items-center gap-3 pt-2">
               {["WCAG 2.2", "Section 508", "ADA Title II"].map((badge) => (
                 <div
                   key={badge}

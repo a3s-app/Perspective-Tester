@@ -67,16 +67,16 @@ export function AccessibilityStatementPage() {
                   </p>
                   <ul className="flex flex-col gap-2 pl-5 text-sm text-muted-foreground list-disc">
                     <li>
-                      WCAG 2.2 Level AA — Web Content Accessibility Guidelines
+                      WCAG 2.2 Level AA: Web Content Accessibility Guidelines
                     </li>
                     <li>
-                      ADA Title III — Americans with Disabilities Act
+                      ADA Title III: Americans with Disabilities Act
                     </li>
                     <li>
                       Section 508 of the Rehabilitation Act
                     </li>
                     <li>
-                      EN 301 549 — European Accessibility Standard
+                      EN 301 549: European Accessibility Standard
                     </li>
                   </ul>
                 </div>

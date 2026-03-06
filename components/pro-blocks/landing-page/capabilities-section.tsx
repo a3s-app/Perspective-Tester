@@ -16,7 +16,7 @@ const services = [
     icon: FileText,
     title: "PDF & Document Remediation",
     description:
-      "We remediate PDFs, Word documents, and spreadsheets to meet WCAG 2.2 AA and PDF/UA standards — ensuring your downloadable content is fully accessible.",
+      "We remediate PDFs, Word documents, and spreadsheets to meet WCAG 2.2 AA and PDF/UA standards, ensuring your downloadable content is fully accessible.",
   },
   {
     icon: ScanSearch,
@@ -28,7 +28,7 @@ const services = [
     icon: Code,
     title: "Custom Development & Remediation",
     description:
-      "Our senior developers write production-ready code fixes for accessibility issues — from ARIA patterns and keyboard navigation to semantic HTML restructuring.",
+      "Our senior developers write production-ready code fixes for accessibility issues, from ARIA patterns and keyboard navigation to semantic HTML restructuring.",
   },
   {
     icon: FileCheck,
@@ -46,7 +46,7 @@ const services = [
     icon: Scale,
     title: "Legal Compliance Consulting",
     description:
-      "Expert guidance on ADA Title II & III, Section 508, and state-level digital accessibility legislation — including litigation response support.",
+      "Expert guidance on ADA Title II & III, Section 508, and state-level digital accessibility legislation, including litigation response support.",
   },
 ];
 

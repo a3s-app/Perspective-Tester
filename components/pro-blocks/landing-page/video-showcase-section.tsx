@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { Tagline } from "@/components/pro-blocks/landing-page/tagline";
-import { Button } from "@/components/ui/button";
-import { ArrowUpRight, FileText, PlayCircle } from "lucide-react";
+import { FileText, PlayCircle } from "lucide-react";
 
 type VideoItem = {
   id: string;
@@ -69,7 +68,7 @@ export function VideoShowcaseSection() {
         </div>
 
         <div className="mx-auto grid w-full max-w-6xl gap-6 lg:grid-cols-[1.45fr_1fr]">
-          <article className="rounded-2xl border bg-card p-4 shadow-sm sm:p-5">
+          <article className="min-w-0 rounded-2xl border bg-card p-4 shadow-sm sm:p-5">
             <VideoEmbed id={featuredVideo.id} title={featuredVideo.title} />
             <div className="mt-4 flex flex-col gap-2">
               <p className="text-primary text-xs font-semibold tracking-wide uppercase">
@@ -85,7 +84,7 @@ export function VideoShowcaseSection() {
                 href="https://p15r.com/wp-content/uploads/2024/03/Our-Story-Video-Alternative-Text-1.docx"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary mt-1 inline-flex w-fit items-center gap-1.5 text-sm font-medium hover:underline"
+                className="text-primary mt-1 inline-flex w-full items-center gap-1.5 text-sm font-medium hover:underline sm:w-fit"
               >
                 <FileText className="h-4 w-4" />
                 Download Story Video Text Alternative
@@ -97,7 +96,7 @@ export function VideoShowcaseSection() {
             {secondaryVideos.map((video) => (
               <article
                 key={video.id}
-                className="rounded-2xl border bg-card p-3.5 shadow-sm"
+                className="min-w-0 rounded-2xl border bg-card p-3.5 shadow-sm"
               >
                 <VideoEmbed id={video.id} title={video.title} />
                 <div className="mt-3 flex flex-col gap-1.5">
@@ -113,14 +112,6 @@ export function VideoShowcaseSection() {
           </div>
         </div>
 
-        <div className="mx-auto">
-          <Link href="https://p15r.com/video/" target="_blank" rel="noopener noreferrer">
-            <Button variant="outline" size="lg">
-              View Full Video Library
-              <ArrowUpRight />
-            </Button>
-          </Link>
-        </div>
       </div>
     </section>
   );

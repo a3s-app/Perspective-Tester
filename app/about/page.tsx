@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "About Us | Perspective Tester",
     description:
-      "Meet the team behind Perspective Tester — accessibility experts dedicated to engineering equity in digital experiences.",
+      "Meet the team behind Perspective Tester, accessibility experts dedicated to engineering equity in digital experiences.",
     url: "/about",
   },
 };
