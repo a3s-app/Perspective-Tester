@@ -81,11 +81,65 @@ export function ContactPage() {
     formData.set("_template", "table");
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/Info@perspectivetester.com", {
+      // Send to FormSubmit (email)
+      const formSubmitPromise = fetch("https://formsubmit.co/ajax/Info@perspectivetester.com", {
         method: "POST",
         body: formData,
         headers: { Accept: "application/json" },
       });
+
+      // Send to Slack webhook (if configured)
+      const slackWebhookUrl = process.env.NEXT_PUBLIC_SLACK_WEBHOOK_URL;
+      if (slackWebhookUrl) {
+        const serviceName = formData.get("service") as string;
+        const firstName = formData.get("firstName") as string;
+        const lastName = formData.get("lastName") as string;
+        const email = formData.get("email") as string;
+        const organization = formData.get("organization") as string;
+        const phone = formData.get("phone") as string;
+        const orgTypeVal = formData.get("orgType") as string;
+        const budgetVal = formData.get("budget") as string;
+        const website = formData.get("website") as string;
+        const message = formData.get("message") as string;
+
+        const slackBlocks = {
+          text: `New inquiry from ${firstName} ${lastName} (${organization})`,
+          blocks: [
+            {
+              type: "header",
+              text: { type: "plain_text", text: `New Inquiry: ${serviceName}`, emoji: true },
+            },
+            {
+              type: "section",
+              fields: [
+                { type: "mrkdwn", text: `*Name:*\n${firstName} ${lastName}` },
+                { type: "mrkdwn", text: `*Email:*\n${email}` },
+                { type: "mrkdwn", text: `*Organization:*\n${organization}` },
+                { type: "mrkdwn", text: `*Service:*\n${serviceName}` },
+                ...(phone ? [{ type: "mrkdwn", text: `*Phone:*\n${phone}` }] : []),
+                ...(orgTypeVal ? [{ type: "mrkdwn", text: `*Org Type:*\n${orgTypeVal}` }] : []),
+                ...(budgetVal ? [{ type: "mrkdwn", text: `*Budget:*\n${budgetVal}` }] : []),
+                ...(website ? [{ type: "mrkdwn", text: `*Website:*\n${website}` }] : []),
+              ],
+            },
+            {
+              type: "section",
+              text: { type: "mrkdwn", text: `*Message:*\n${message}` },
+            },
+          ],
+        };
+
+        // Fire and forget — don't block the form on Slack delivery
+        fetch(slackWebhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(slackBlocks),
+        }).catch(() => {
+          // Slack failure is non-critical, silently ignore
+        });
+      }
+
+      const response = await formSubmitPromise;
 
       if (!response.ok) {
         throw new Error("Failed to send inquiry");
