@@ -2,6 +2,8 @@
 
 Marketing website for [Perspective Tester](https://perspectivetester.com) — a digital accessibility consultancy helping organizations achieve and maintain WCAG 2.2 compliance.
 
+**Live Site:** [https://a3s-app.github.io/Perspective-Tester/](https://a3s-app.github.io/Perspective-Tester/)
+
 ## Tech Stack
 
 - **Framework:** Next.js 15 (App Router, static export)
@@ -34,46 +36,83 @@ Marketing website for [Perspective Tester](https://perspectivetester.com) — a 
 ### Local Development
 
 ```bash
-# Install dependencies
+# 1. Clone the repository
+git clone https://github.com/a3s-app/Perspective-Tester.git
+cd Perspective-Tester
+
+# 2. Install dependencies
 npm install
 
-# Start dev server
+# 3. Start dev server
 npm run dev
 ```
 
 The site will be available at `http://localhost:3000`.
 
-### Production Build
+> **Note:** In local development, `basePath` is not applied (no `/Perspective-Tester` prefix). The subpath is only added during GitHub Pages builds via the `GITHUB_PAGES=true` environment variable.
+
+### Production Build (Local)
 
 ```bash
-# Build static export
+# Build static export (without GitHub Pages subpath)
 npm run build
 
 # The static files will be in the ./out directory
+# You can serve them locally with:
+npx serve out
 ```
 
-## Deployment to GitHub Pages
+### Production Build (GitHub Pages)
 
-This project uses GitHub Actions for automatic deployment. Every push to `main` triggers a build and deploy to GitHub Pages.
+```bash
+# Build with GitHub Pages subpath prefix
+GITHUB_PAGES=true npm run build
 
-### Setup Steps
+# The static files in ./out will have /Perspective-Tester prefix on all assets
+```
 
-1. **Push the code to GitHub:**
+## Deploying to GitHub Pages
+
+This project includes a GitHub Actions workflow that automatically builds and deploys to GitHub Pages on every push to `main`.
+
+### Step-by-Step Setup
+
+1. **Clone and push (if starting fresh):**
    ```bash
-   git remote add origin https://github.com/a3s-app/Perspective-Tester.git
-   git push -u origin main
+   git clone https://github.com/a3s-app/Perspective-Tester.git
+   cd Perspective-Tester
+   npm install
+   npm run build          # Verify it builds locally
+   git push origin main   # Triggers the deployment workflow
    ```
 
-2. **Enable GitHub Pages:**
-   - Go to your repository on GitHub
+2. **Enable GitHub Pages in the repository:**
+   - Go to your repository on GitHub: [github.com/a3s-app/Perspective-Tester](https://github.com/a3s-app/Perspective-Tester)
    - Navigate to **Settings** > **Pages**
-   - Under **Source**, select **GitHub Actions**
+   - Under **Build and deployment > Source**, select **GitHub Actions**
+   - Click **Save**
 
-3. **That's it.** The included workflow at `.github/workflows/deploy.yml` will automatically build and deploy on every push to `main`.
+3. **Trigger a deployment:**
+   - Push any commit to the `main` branch, OR
+   - Go to **Actions** tab > **Deploy to GitHub Pages** > **Run workflow**
 
-### Custom Domain
+4. **Verify the deployment:**
+   - Go to the **Actions** tab to see the build progress
+   - Once complete, visit [https://a3s-app.github.io/Perspective-Tester/](https://a3s-app.github.io/Perspective-Tester/)
 
-To use a custom domain (e.g., `perspectivetester.com`):
+### How It Works
+
+The deployment pipeline (`.github/workflows/deploy.yml`) does the following:
+
+1. Checks out the code
+2. Installs Node.js 20 and runs `npm ci`
+3. Runs `npm run build` with `GITHUB_PAGES=true` — this sets `basePath: "/Perspective-Tester"` and `assetPrefix: "/Perspective-Tester"` in `next.config.mjs` so all links, images, CSS, and JS files are served from the correct subpath
+4. Uploads the `./out` directory as a GitHub Pages artifact
+5. Deploys to GitHub Pages
+
+### Custom Domain (Optional)
+
+If you want to use a custom domain (e.g., `perspectivetester.com`) instead of `a3s-app.github.io/Perspective-Tester`:
 
 1. Go to **Settings** > **Pages** in your GitHub repository
 2. Under **Custom domain**, enter `perspectivetester.com`
@@ -88,6 +127,7 @@ To use a custom domain (e.g., `perspectivetester.com`):
    | CNAME | www | a3s-app.github.io |
 
 4. Check **Enforce HTTPS** once the certificate is provisioned
+5. Once a custom domain is active, you can remove the `basePath`/`assetPrefix` logic from `next.config.mjs` since the site will be served at the root (`/`)
 
 ## Contact Form
 
@@ -98,7 +138,14 @@ The contact form supports two modes:
    # Create a .env.local file
    NEXT_PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/your_form_id
    ```
-   For GitHub Pages, add this as a repository secret and update the workflow, or hardcode it in `.env.local` before building.
+   For GitHub Pages deployment, add `NEXT_PUBLIC_FORMSPREE_ENDPOINT` as a repository variable under **Settings > Secrets and variables > Actions > Variables**, then reference it in the workflow:
+   ```yaml
+   - name: Build
+     run: npm run build
+     env:
+       GITHUB_PAGES: "true"
+       NEXT_PUBLIC_FORMSPREE_ENDPOINT: ${{ vars.NEXT_PUBLIC_FORMSPREE_ENDPOINT }}
+   ```
 
 2. **Mailto fallback:** If no Formspree endpoint is configured, the form constructs a `mailto:` link to `Info@perspectivetester.com`.
 

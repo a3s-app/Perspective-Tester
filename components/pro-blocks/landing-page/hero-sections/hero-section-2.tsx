@@ -5,6 +5,7 @@ import { ArrowRight, Shield } from "lucide-react";
 import { Tagline } from "@/components/pro-blocks/landing-page/tagline";
 import Link from "next/link";
 import Image from "next/image";
+import { assetPath } from "@/lib/utils";
 
 export function HeroSection2() {
   return (
@@ -89,7 +90,7 @@ export function HeroSection2() {
               }}
             />
             <Image
-              src="/capitol-dome.png"
+              src={assetPath("/capitol-dome.png")}
               alt="Capitol dome illustration representing government-grade compliance"
               width={480}
               height={520}

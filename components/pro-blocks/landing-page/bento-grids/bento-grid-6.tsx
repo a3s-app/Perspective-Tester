@@ -3,6 +3,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { Tagline } from "@/components/pro-blocks/landing-page/tagline";
+import { assetPath } from "@/lib/utils";
 
 export function BentoGrid6() {
   return (
@@ -23,14 +24,14 @@ export function BentoGrid6() {
           {/* Wide Feature Card - Top Left */}
           <Card className="bg-muted/80 gap-0 overflow-hidden rounded-xl border-none p-0 shadow-none lg:col-span-2">
             <Image
-              src="/ai-meeting-notes.png"
+              src={assetPath("/ai-meeting-notes.png")}
               alt="AI Meeting Notes"
               width={813}
               height={332}
               className="hidden h-auto w-full object-cover md:block md:h-[332px]"
             />
             <Image
-              src="/ai-meeting-notes_mobile.png"
+              src={assetPath("/ai-meeting-notes_mobile.png")}
               alt="AI Meeting Notes"
               width={480}
               height={332}
@@ -48,7 +49,7 @@ export function BentoGrid6() {
           {/* Regular Feature Card - Top Right */}
           <Card className="bg-muted/80 gap-0 overflow-hidden rounded-xl border-none p-0 shadow-none lg:col-span-1">
             <Image
-              src="/universal-search.png"
+              src={assetPath("/universal-search.png")}
               alt="Universal Search"
               width={480}
               height={332}
@@ -66,7 +67,7 @@ export function BentoGrid6() {
           {/* Regular Feature Card - Bottom Left */}
           <Card className="bg-muted/80 gap-0 overflow-hidden rounded-xl border-none p-0 shadow-none lg:col-span-1">
             <Image
-              src="/smart-tags.png"
+              src={assetPath("/smart-tags.png")}
               alt="AI Meeting Notes"
               width={480}
               height={332}
@@ -84,14 +85,14 @@ export function BentoGrid6() {
           {/* Wide Feature Card - Bottom Right */}
           <Card className="bg-muted/80 gap-0 overflow-hidden rounded-xl border-none p-0 shadow-none lg:col-span-2">
             <Image
-              src="/team-insights.png"
+              src={assetPath("/team-insights.png")}
               alt="Team Insights"
               width={813}
               height={332}
               className="hidden h-[332px] w-full object-cover md:block"
             />
             <Image
-              src="/team-insights_mobile.png"
+              src={assetPath("/team-insights_mobile.png")}
               alt="Team Insights"
               width={480}
               height={332}
