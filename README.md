@@ -131,23 +131,15 @@ If you want to use a custom domain (e.g., `perspectivetester.com`) instead of `a
 
 ## Contact Form
 
-The contact form supports two modes:
+The contact form uses [FormSubmit](https://formsubmit.co) — a free service with **unlimited submissions** and no API key required. Form submissions are sent directly to `Info@perspectivetester.com`.
 
-1. **Formspree (recommended):** Create a free form at [formspree.io](https://formspree.io), then set the endpoint:
-   ```bash
-   # Create a .env.local file
-   NEXT_PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/your_form_id
-   ```
-   For GitHub Pages deployment, add `NEXT_PUBLIC_FORMSPREE_ENDPOINT` as a repository variable under **Settings > Secrets and variables > Actions > Variables**, then reference it in the workflow:
-   ```yaml
-   - name: Build
-     run: npm run build
-     env:
-       GITHUB_PAGES: "true"
-       NEXT_PUBLIC_FORMSPREE_ENDPOINT: ${{ vars.NEXT_PUBLIC_FORMSPREE_ENDPOINT }}
-   ```
+- No environment variables needed
+- No account or signup required
+- Works on static sites (GitHub Pages)
+- Submissions arrive as formatted HTML table emails
+- Built-in spam protection
 
-2. **Mailto fallback:** If no Formspree endpoint is configured, the form constructs a `mailto:` link to `Info@perspectivetester.com`.
+To change the recipient email, update the FormSubmit URL in `components/pro-blocks/landing-page/contact-page.tsx`.
 
 ## Project Structure
 
