@@ -134,7 +134,7 @@ If you want to use a custom domain (e.g., `perspectivetester.com`) instead of `a
 The contact form uses two channels for reliability:
 
 ### 1. FormSubmit (Email — always active)
-[FormSubmit](https://formsubmit.co) — free, **unlimited submissions**, no API key required. Submissions are sent directly to `Info@perspectivetester.com` as formatted HTML table emails with built-in spam protection.
+[FormSubmit](https://formsubmit.co) — free, **unlimited submissions**, no API key required. Submissions are sent directly to `kush@p15r.com` as formatted HTML table emails with built-in spam protection.
 
 To change the recipient email, update the FormSubmit URL in `components/pro-blocks/landing-page/contact-page.tsx`.
 

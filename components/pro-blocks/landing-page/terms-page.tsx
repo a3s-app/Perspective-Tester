@@ -178,10 +178,10 @@ export function TermsPage() {
                     If you have questions about these Terms, please contact us
                     at{" "}
                     <a
-                      href="mailto:Info@perspectivetester.com"
+                      href="mailto:kush@p15r.com"
                       className="font-medium text-foreground hover:text-primary transition-colors"
                     >
-                      Info@perspectivetester.com
+                      kush@p15r.com
                     </a>
                     .
                   </p>

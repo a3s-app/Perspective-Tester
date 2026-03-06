@@ -189,10 +189,10 @@ export function AccessibilityStatementPage() {
                       <Mail className="h-4 w-4 text-primary" />
                     </div>
                     <a
-                      href="mailto:Info@perspectivetester.com"
+                      href="mailto:kush@p15r.com"
                       className="text-sm font-medium text-foreground hover:text-primary transition-colors"
                     >
-                      Info@perspectivetester.com
+                      kush@p15r.com
                     </a>
                   </div>
                   <p className="text-sm leading-relaxed text-muted-foreground">
