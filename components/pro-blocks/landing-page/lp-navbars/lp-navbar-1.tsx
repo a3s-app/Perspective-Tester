@@ -3,7 +3,7 @@
 import { Logo } from "@/components/pro-blocks/logo";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 
 const MENU_ITEMS = [
@@ -13,18 +13,17 @@ const MENU_ITEMS = [
   { label: "About", href: "/about" },
 ] as const;
 
-interface NavMenuItemsProps {
-  className?: string;
-  compact?: boolean;
-}
-
-const NavMenuItems = ({ className, compact }: NavMenuItemsProps) => (
-  <div className={`flex flex-col gap-1 md:flex-row ${className ?? ""}`}>
+const NavMenuItems = ({ compact }: { compact?: boolean }) => (
+  <div className="flex items-center gap-0.5">
     {MENU_ITEMS.map(({ label, href }) => (
       <Link key={label} href={href}>
         <Button
           variant="ghost"
-          className={`w-full md:w-auto transition-all duration-500 ease-in-out ${compact ? "h-8 text-sm px-3" : "h-9 text-sm px-4"}`}
+          className={`rounded-lg font-medium transition-all duration-300 ease-out ${
+            compact
+              ? "h-8 px-3 text-[13px]"
+              : "h-9 px-3.5 text-sm"
+          }`}
         >
           {label}
         </Button>
@@ -35,93 +34,209 @@ const NavMenuItems = ({ className, compact }: NavMenuItemsProps) => (
 
 export function LpNavbar1() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  const handleScroll = useCallback(() => {
+    // Smooth interpolation: 0 at top, 1 at 80px scroll
+    const progress = Math.min(window.scrollY / 80, 1);
+    setScrollProgress(progress);
+  }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 60);
-    };
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [handleScroll]);
+
+  const scrolled = scrollProgress > 0.1;
+  const fullyScrolled = scrollProgress >= 1;
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
+  // Premium easing — Apple-style spring curve
+  const ease = "cubic-bezier(0.16, 1, 0.3, 1)";
+
   return (
-    <div
-      className={`sticky top-0 isolate z-50 transition-all duration-500 ease-in-out ${
-        scrolled ? "px-4 pt-3 md:px-6" : "px-0 pt-0"
-      }`}
-    >
-      <nav
-        className={`transition-all duration-500 ease-in-out ${
-          scrolled
-            ? "mx-auto max-w-5xl rounded-2xl border border-border/60 bg-background/80 shadow-lg shadow-black/5 backdrop-blur-xl py-2"
-            : "mx-auto max-w-none rounded-none border-b border-transparent bg-background shadow-none backdrop-blur-none py-3.5 md:py-4"
-        }`}
+    <div className="sticky top-0 isolate z-50">
+      {/* Outer wrapper — padding animates to create the floating inset */}
+      <div
+        style={{
+          paddingLeft: `${scrollProgress * 16}px`,
+          paddingRight: `${scrollProgress * 16}px`,
+          paddingTop: `${scrollProgress * 12}px`,
+          transition: `padding 700ms ${ease}`,
+        }}
       >
-        <div
-          className={`relative flex flex-col justify-between gap-4 md:flex-row md:items-center md:gap-6 transition-all duration-500 ease-in-out ${
-            scrolled
-              ? "container mx-auto px-5"
-              : "container mx-auto px-6"
-          }`}
+        <nav
+          style={{
+            maxWidth: fullyScrolled ? "56rem" : "100%",
+            marginLeft: "auto",
+            marginRight: "auto",
+            borderRadius: `${scrollProgress * 16}px`,
+            backgroundColor: fullyScrolled
+              ? "oklch(1 0 0 / 0.72)"
+              : "oklch(0.985 0.002 250)",
+            backdropFilter: fullyScrolled
+              ? "blur(20px) saturate(1.8)"
+              : "blur(0px) saturate(1)",
+            WebkitBackdropFilter: fullyScrolled
+              ? "blur(20px) saturate(1.8)"
+              : "blur(0px) saturate(1)",
+            boxShadow: fullyScrolled
+              ? "0 8px 32px -4px oklch(0.37 0.1 260 / 0.08), 0 2px 8px -2px oklch(0.37 0.1 260 / 0.05), inset 0 0.5px 0 oklch(1 0 0 / 0.5)"
+              : "0 1px 0 0 oklch(0.91 0.01 250)",
+            borderWidth: "1px",
+            borderStyle: "solid",
+            borderColor: fullyScrolled
+              ? "oklch(0.91 0.01 250 / 0.5)"
+              : "transparent",
+            borderBottomColor: fullyScrolled
+              ? "oklch(0.91 0.01 250 / 0.5)"
+              : "oklch(0.91 0.01 250)",
+            transition: `max-width 700ms ${ease}, border-radius 700ms ${ease}, background-color 500ms ${ease}, backdrop-filter 500ms ${ease}, -webkit-backdrop-filter 500ms ${ease}, box-shadow 500ms ${ease}, border-color 500ms ${ease}`,
+          }}
         >
-          <div className="flex items-center justify-between">
-            <Link href="/" className="transition-transform duration-300">
+          {/* Inner container — padding shrinks when compact */}
+          <div
+            className="relative flex items-center justify-between"
+            style={{
+              paddingTop: fullyScrolled ? "8px" : "14px",
+              paddingBottom: fullyScrolled ? "8px" : "14px",
+              paddingLeft: fullyScrolled ? "20px" : "24px",
+              paddingRight: fullyScrolled ? "20px" : "24px",
+              transition: `padding 700ms ${ease}`,
+            }}
+          >
+            {/* Logo */}
+            <Link
+              href="/"
+              className="transition-transform duration-300 ease-out hover:scale-[1.02] active:scale-[0.98]"
+            >
               <Logo />
             </Link>
+
+            {/* Desktop: nav items + CTAs */}
+            <div className="hidden md:flex md:items-center md:gap-1">
+              <NavMenuItems compact={fullyScrolled} />
+
+              {/* Subtle divider */}
+              <div
+                className="mx-2 h-5 w-px rounded-full"
+                style={{
+                  backgroundColor: "oklch(0.91 0.01 250)",
+                  transition: `background-color 500ms ${ease}`,
+                }}
+                aria-hidden="true"
+              />
+
+              {/* CTA buttons */}
+              <div className="flex items-center gap-2">
+                <Link href="/contact">
+                  <Button
+                    variant="outline"
+                    className={`rounded-lg font-medium transition-all duration-300 ease-out ${
+                      fullyScrolled
+                        ? "h-8 px-3 text-[13px]"
+                        : "h-9 px-3.5 text-sm"
+                    }`}
+                  >
+                    Talk to Sales
+                  </Button>
+                </Link>
+                <Link href="/#products">
+                  <Button
+                    className={`rounded-lg font-medium transition-all duration-300 ease-out ${
+                      fullyScrolled
+                        ? "h-8 px-3 text-[13px]"
+                        : "h-9 px-3.5 text-sm"
+                    }`}
+                  >
+                    View Products
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
+            {/* Mobile hamburger — animated icon rotation */}
             <Button
               variant="ghost"
-              className="flex size-9 items-center justify-center md:hidden"
+              className="flex size-9 items-center justify-center rounded-lg md:hidden"
               onClick={toggleMenu}
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             >
-              {isMenuOpen ? <X /> : <Menu />}
+              <div className="relative h-5 w-5">
+                <Menu
+                  className={`absolute inset-0 h-5 w-5 transition-all duration-300 ease-out ${
+                    isMenuOpen
+                      ? "rotate-90 scale-0 opacity-0"
+                      : "rotate-0 scale-100 opacity-100"
+                  }`}
+                  aria-hidden="true"
+                />
+                <X
+                  className={`absolute inset-0 h-5 w-5 transition-all duration-300 ease-out ${
+                    isMenuOpen
+                      ? "rotate-0 scale-100 opacity-100"
+                      : "-rotate-90 scale-0 opacity-0"
+                  }`}
+                  aria-hidden="true"
+                />
+              </div>
             </Button>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden w-full flex-row justify-end gap-3 md:flex md:items-center">
-            <NavMenuItems compact={scrolled} />
-            <Link href="/contact">
-              <Button
-                variant="outline"
-                className={`transition-all duration-500 ease-in-out ${
-                  scrolled ? "h-8 text-sm px-3" : "h-9 text-sm px-4"
-                }`}
-              >
-                Talk to Sales
-              </Button>
-            </Link>
-            <Link href="/#products">
-              <Button
-                className={`transition-all duration-500 ease-in-out ${
-                  scrolled ? "h-8 text-sm px-3" : "h-9 text-sm px-4"
-                }`}
-              >
-                View Products
-              </Button>
-            </Link>
-          </div>
-
-          {/* Mobile Navigation */}
-          {isMenuOpen && (
-            <div className="flex w-full flex-col justify-end gap-5 pb-2.5 md:hidden">
-              <NavMenuItems />
-              <Link href="/contact">
-                <Button variant="outline" className="w-full">
-                  Talk to Sales
-                </Button>
-              </Link>
-              <Link href="/#products">
-                <Button className="w-full">View Products</Button>
-              </Link>
+          {/* Mobile menu — animated grid collapse */}
+          <div
+            className="overflow-hidden md:hidden"
+            style={{
+              display: "grid",
+              gridTemplateRows: isMenuOpen ? "1fr" : "0fr",
+              opacity: isMenuOpen ? 1 : 0,
+              transition: `grid-template-rows 500ms ${ease}, opacity 400ms ${ease}`,
+            }}
+          >
+            <div className="min-h-0">
+              <div className="flex flex-col gap-1 border-t px-5 pb-5 pt-4">
+                {MENU_ITEMS.map(({ label, href }) => (
+                  <Link
+                    key={label}
+                    href={href}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <Button
+                      variant="ghost"
+                      className="h-11 w-full justify-start rounded-lg px-3 text-sm font-medium"
+                    >
+                      {label}
+                    </Button>
+                  </Link>
+                ))}
+                <div className="mt-3 flex flex-col gap-2">
+                  <Link
+                    href="/contact"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <Button
+                      variant="outline"
+                      className="h-11 w-full rounded-lg text-sm font-medium"
+                    >
+                      Talk to Sales
+                    </Button>
+                  </Link>
+                  <Link
+                    href="/#products"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <Button className="h-11 w-full rounded-lg text-sm font-medium">
+                      View Products
+                    </Button>
+                  </Link>
+                </div>
+              </div>
             </div>
-          )}
-        </div>
-      </nav>
+          </div>
+        </nav>
+      </div>
     </div>
   );
 }
