@@ -233,18 +233,25 @@ export function A3SPage() {
       {/* Pricing hint */}
       <section className="bg-secondary section-padding-y border-b">
         <div className="container-padding-x container mx-auto">
-          <div className="bg-card mx-auto flex max-w-3xl flex-col items-center gap-6 rounded-2xl border p-8 text-center sm:p-12">
-            <h2 className="heading-md text-foreground">Simple, Predictable Pricing</h2>
-            <div className="flex flex-col gap-2">
-              <p className="text-foreground text-3xl font-semibold">
-                $1,500<span className="text-muted-foreground text-base font-normal">/month</span>
+          <div className="bg-card mx-auto flex max-w-4xl flex-col gap-8 rounded-2xl border p-8 shadow-sm sm:p-12">
+            <div className="mx-auto flex max-w-2xl flex-col items-center gap-3 text-center">
+              <span className="bg-primary/10 text-primary inline-flex h-7 items-center rounded-full px-3 text-xs font-semibold tracking-wide uppercase">
+                A3S Pricing
+              </span>
+              <h2 className="heading-md text-foreground">Simple, Predictable Pricing</h2>
+              <p className="text-foreground text-3xl font-semibold sm:text-4xl">
+                $1,500
+                <span className="text-muted-foreground ml-1 text-base font-normal sm:text-lg">
+                  /month
+                </span>
               </p>
-              <p className="text-muted-foreground text-sm">
+              <p className="text-muted-foreground text-sm leading-relaxed sm:text-base">
                 For sites up to 25 pages. Enterprise plans available for larger
                 organizations.
               </p>
             </div>
-            <div className="flex flex-col gap-2.5 text-left">
+
+            <div className="grid grid-cols-1 gap-2.5 text-left sm:grid-cols-2">
               {[
                 "4-phase accessibility workflow",
                 "VPAT & legal documentation",
@@ -258,8 +265,14 @@ export function A3SPage() {
                 </div>
               ))}
             </div>
-            <Link href="https://a3s.app" target="_blank" rel="noopener noreferrer">
-              <Button size="lg">
+
+            <Link
+              href="https://a3s.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mx-auto"
+            >
+              <Button size="lg" className="min-w-56">
                 Get Started with A3S
                 <ArrowRight />
               </Button>

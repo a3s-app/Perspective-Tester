@@ -258,17 +258,24 @@ export function ManagePage() {
       {/* Pricing */}
       <section className="bg-background section-padding-y border-b">
         <div className="container-padding-x container mx-auto">
-          <div className="bg-secondary mx-auto flex max-w-3xl flex-col items-center gap-6 rounded-2xl border p-8 text-center sm:p-12">
-            <h2 className="heading-md text-foreground">One Plan. Everything Included.</h2>
-            <div className="flex flex-col gap-2">
-              <p className="text-foreground text-3xl font-semibold">
-                $99<span className="text-muted-foreground text-base font-normal">/month</span>
+          <div className="bg-secondary mx-auto flex max-w-4xl flex-col gap-8 rounded-2xl border p-8 shadow-sm sm:p-12">
+            <div className="mx-auto flex max-w-2xl flex-col items-center gap-3 text-center">
+              <span className="bg-primary/10 text-primary inline-flex h-7 items-center rounded-full px-3 text-xs font-semibold tracking-wide uppercase">
+                P15R Pricing
+              </span>
+              <h2 className="heading-md text-foreground">Simple, Transparent Pricing</h2>
+              <p className="text-foreground text-3xl font-semibold sm:text-4xl">
+                $99
+                <span className="text-muted-foreground ml-1 text-base font-normal sm:text-lg">
+                  /seat
+                </span>
               </p>
-              <p className="text-muted-foreground text-sm">
-                Set up in ~10 minutes. No per-seat charges.
+              <p className="text-muted-foreground text-sm leading-relaxed sm:text-base">
+                Per seat, billed monthly. Scale seats as your team grows.
               </p>
             </div>
-            <div className="flex flex-col gap-2.5 text-left">
+
+            <div className="grid grid-cols-1 gap-2.5 text-left sm:grid-cols-2">
               {[
                 "Unlimited audit uploads",
                 "Unlimited issues",
@@ -283,8 +290,14 @@ export function ManagePage() {
                 </div>
               ))}
             </div>
-            <Link href="https://p15r.com" target="_blank" rel="noopener noreferrer">
-              <Button size="lg">
+
+            <Link
+              href="https://p15r.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mx-auto"
+            >
+              <Button size="lg" className="min-w-56">
                 Start Using P15R
                 <ArrowRight />
               </Button>
