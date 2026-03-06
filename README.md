@@ -131,15 +131,34 @@ If you want to use a custom domain (e.g., `perspectivetester.com`) instead of `a
 
 ## Contact Form
 
-The contact form uses [FormSubmit](https://formsubmit.co) — a free service with **unlimited submissions** and no API key required. Form submissions are sent directly to `Info@perspectivetester.com`.
+The contact form uses two channels for reliability:
 
-- No environment variables needed
-- No account or signup required
-- Works on static sites (GitHub Pages)
-- Submissions arrive as formatted HTML table emails
-- Built-in spam protection
+### 1. FormSubmit (Email — always active)
+[FormSubmit](https://formsubmit.co) — free, **unlimited submissions**, no API key required. Submissions are sent directly to `Info@perspectivetester.com` as formatted HTML table emails with built-in spam protection.
 
 To change the recipient email, update the FormSubmit URL in `components/pro-blocks/landing-page/contact-page.tsx`.
+
+### 2. Slack Webhook (Optional — instant notifications)
+Get real-time Slack notifications when someone submits the contact form. The Slack message includes all form fields in a rich formatted layout.
+
+**Setup:**
+1. Go to [api.slack.com/messaging/webhooks](https://api.slack.com/messaging/webhooks) and create an incoming webhook for your channel
+2. Set the environment variable:
+   ```bash
+   NEXT_PUBLIC_SLACK_WEBHOOK_URL=https://hooks.slack.com/services/YOUR/WEBHOOK/URL
+   ```
+3. For GitHub Pages, add it to the workflow env in `.github/workflows/deploy.yml`:
+   ```yaml
+   - name: Build
+     run: npm run build
+     env:
+       GITHUB_PAGES: "true"
+       NEXT_PUBLIC_BASE_PATH: "/Perspective-Tester"
+       NEXT_PUBLIC_SLACK_WEBHOOK_URL: ${{ vars.NEXT_PUBLIC_SLACK_WEBHOOK_URL }}
+   ```
+4. Add `NEXT_PUBLIC_SLACK_WEBHOOK_URL` as a repository variable under **Settings > Secrets and variables > Actions > Variables**
+
+> **Note:** Slack delivery is fire-and-forget — if it fails, the form still submits successfully via FormSubmit. The user experience is never blocked by Slack.
 
 ## Project Structure
 
