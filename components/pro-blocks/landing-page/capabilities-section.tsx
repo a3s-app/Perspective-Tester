@@ -64,7 +64,7 @@ export function CapabilitiesSection() {
             Services We Offer
           </h2>
           <p className="text-muted-foreground text-base">
-            Beyond our A3S and Manage products, we provide hands-on
+            Beyond our A3S and P15R products, we provide hands-on
             accessibility services tailored to your needs.
           </p>
         </div>

@@ -6,7 +6,7 @@ import { TermsPage } from "@/components/pro-blocks/landing-page/terms-page";
 export const metadata: Metadata = {
   title: "Terms of Service",
   description:
-    "Read the Terms of Service for using the Perspective Tester website and accessibility services, including A3S and the Manage platform.",
+    "Read the Terms of Service for using the Perspective Tester website and accessibility services, including A3S and P15R.",
   openGraph: {
     title: "Terms of Service | Perspective Tester",
     description:
