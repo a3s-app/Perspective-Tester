@@ -258,8 +258,8 @@ export function ManagePage() {
       {/* Pricing */}
       <section className="bg-background section-padding-y border-b">
         <div className="container-padding-x container mx-auto">
-          <div className="bg-secondary mx-auto flex max-w-4xl flex-col gap-8 rounded-2xl border p-8 shadow-sm sm:p-12">
-            <div className="mx-auto flex max-w-2xl flex-col items-center gap-3 text-center">
+          <div className="bg-card mx-auto grid max-w-5xl gap-8 rounded-2xl border p-8 shadow-sm sm:p-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-center lg:gap-10">
+            <div className="flex flex-col items-start gap-4 text-left">
               <span className="bg-primary/10 text-primary inline-flex h-7 items-center rounded-full px-3 text-xs font-semibold tracking-wide uppercase">
                 P15R Pricing
               </span>
@@ -273,35 +273,34 @@ export function ManagePage() {
               <p className="text-muted-foreground text-sm leading-relaxed sm:text-base">
                 Per seat, billed monthly. Scale seats as your team grows.
               </p>
+              <Link href="https://p15r.com" target="_blank" rel="noopener noreferrer">
+                <Button size="lg" className="min-w-56">
+                  Start Using P15R
+                  <ArrowRight />
+                </Button>
+              </Link>
             </div>
 
-            <div className="grid grid-cols-1 gap-2.5 text-left sm:grid-cols-2">
-              {[
-                "Unlimited audit uploads",
-                "Unlimited issues",
-                "Team collaboration",
-                "Jira, Slack & Teams integrations",
-                "Public reporting",
-                "Priority support",
-              ].map((item) => (
-                <div key={item} className="flex items-center gap-2.5">
-                  <CheckCircle2 className="text-primary h-4 w-4 shrink-0" />
-                  <span className="text-foreground text-sm">{item}</span>
-                </div>
-              ))}
+            <div className="rounded-xl border bg-secondary/40 p-5 sm:p-6">
+              <p className="text-foreground mb-4 text-sm font-semibold uppercase tracking-wide">
+                Includes
+              </p>
+              <div className="flex flex-col gap-3">
+                {[
+                  "Unlimited audit uploads",
+                  "Unlimited issues",
+                  "Team collaboration",
+                  "Jira, Slack & Teams integrations",
+                  "Public reporting",
+                  "Priority support",
+                ].map((item) => (
+                  <div key={item} className="flex items-center gap-2.5">
+                    <CheckCircle2 className="text-primary h-4 w-4 shrink-0" />
+                    <span className="text-foreground text-sm">{item}</span>
+                  </div>
+                ))}
+              </div>
             </div>
-
-            <Link
-              href="https://p15r.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mx-auto"
-            >
-              <Button size="lg" className="min-w-56">
-                Start Using P15R
-                <ArrowRight />
-              </Button>
-            </Link>
           </div>
         </div>
       </section>
