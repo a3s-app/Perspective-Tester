@@ -30,9 +30,7 @@ export function HeroSection2() {
           <div className="flex max-w-xl flex-col items-center gap-8 text-center lg:items-start lg:text-left">
             <Tagline>
               <Shield className="h-3.5 w-3.5 text-primary" />
-              <span className="text-foreground">
-                Enterprise Accessibility Platform
-              </span>
+              <span className="text-foreground">Engineering Equity</span>
             </Tagline>
 
             <div className="section-title-gap-xl flex flex-col">
