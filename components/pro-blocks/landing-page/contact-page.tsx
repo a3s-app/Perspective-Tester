@@ -16,6 +16,9 @@ import { Mail, Send, ArrowRight, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
+const CONTACT_EMAIL =
+  process.env.NEXT_PUBLIC_CONTACT_EMAIL || "Info@perspectivetester.com";
+
 const budgetOptions = [
   { value: "under-5k", label: "Under $5,000" },
   { value: "5k-15k", label: "$5,000 - $15,000" },
@@ -49,8 +52,8 @@ const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "Info@perspectivetester.com",
-    href: "mailto:Info@perspectivetester.com",
+    value: CONTACT_EMAIL,
+    href: `mailto:${CONTACT_EMAIL}`,
   },
 ];
 
@@ -82,7 +85,7 @@ export function ContactPage() {
 
     try {
       // Send to FormSubmit (email)
-      const formSubmitPromise = fetch("https://formsubmit.co/ajax/Info@perspectivetester.com", {
+      const formSubmitPromise = fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
         method: "POST",
         body: formData,
         headers: { Accept: "application/json" },
@@ -148,7 +151,7 @@ export function ContactPage() {
       setSubmitted(true);
     } catch {
       setError(
-        "There was a problem sending your inquiry. Please try again or email us directly at Info@perspectivetester.com."
+        `There was a problem sending your inquiry. Please try again or email us directly at ${CONTACT_EMAIL}.`
       );
     } finally {
       setLoading(false);
