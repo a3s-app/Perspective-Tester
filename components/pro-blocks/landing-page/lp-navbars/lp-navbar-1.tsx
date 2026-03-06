@@ -72,12 +72,12 @@ export function LpNavbar1() {
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
-  // Premium easing — Apple-style spring curve
+  // Premium easing - Apple-style spring curve
   const ease = "cubic-bezier(0.16, 1, 0.3, 1)";
 
   return (
     <div className="sticky top-0 isolate z-50">
-      {/* Outer wrapper — padding animates to create the floating inset */}
+      {/* Outer wrapper - padding animates to create the floating inset */}
       <div
         style={{
           paddingLeft: isCompact ? "16px" : "0px",
@@ -115,7 +115,7 @@ export function LpNavbar1() {
             transition: `max-width 700ms ${ease}, border-radius 700ms ${ease}, background-color 500ms ${ease}, backdrop-filter 500ms ${ease}, -webkit-backdrop-filter 500ms ${ease}, box-shadow 500ms ${ease}, border-color 500ms ${ease}`,
           }}
         >
-          {/* Inner container — padding shrinks when compact */}
+          {/* Inner container - padding shrinks when compact */}
           <div
             className="relative flex items-center justify-between"
             style={{
@@ -176,7 +176,7 @@ export function LpNavbar1() {
               </div>
             </div>
 
-            {/* Mobile hamburger — animated icon rotation */}
+            {/* Mobile hamburger - animated icon rotation */}
             <Button
               variant="ghost"
               className="flex size-9 items-center justify-center rounded-lg md:hidden"
@@ -204,7 +204,7 @@ export function LpNavbar1() {
             </Button>
           </div>
 
-          {/* Mobile menu — animated grid collapse */}
+          {/* Mobile menu - animated grid collapse */}
           <div
             className="overflow-hidden md:hidden"
             style={{

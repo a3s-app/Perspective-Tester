@@ -56,11 +56,11 @@ export function TermsPage() {
                   </p>
                   <ul className="flex flex-col gap-2 pl-5 list-disc">
                     <li>
-                      A3S (Accessibility as a Service) — managed accessibility
+                      A3S (Accessibility as a Service) - managed accessibility
                       compliance
                     </li>
                     <li>
-                      P15R — accessibility ops without chaos
+                      P15R - accessibility ops without chaos
                     </li>
                     <li>
                       Accessibility audits and WCAG 2.2 compliance assessments

@@ -79,7 +79,7 @@ export function ContactPage() {
     if (budget) formData.set("budget", budget);
 
     // FormSubmit configuration
-    formData.set("_subject", `New Inquiry: ${service} — ${formData.get("firstName")} ${formData.get("lastName")} (${formData.get("organization")})`);
+    formData.set("_subject", `New Inquiry: ${service} - ${formData.get("firstName")} ${formData.get("lastName")} (${formData.get("organization")})`);
     formData.set("_captcha", "false");
     formData.set("_template", "table");
 
@@ -132,7 +132,7 @@ export function ContactPage() {
           ],
         };
 
-        // Fire and forget — don't block the form on Slack delivery
+        // Fire and forget - don't block the form on Slack delivery
         fetch(slackWebhookUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -316,7 +316,7 @@ export function ContactPage() {
                         onValueChange={setOrgType}
                         disabled={loading}
                       >
-                        <SelectTrigger className="w-full">
+                        <SelectTrigger className="w-full" aria-label="Organization type">
                           <SelectValue placeholder="Select type" />
                         </SelectTrigger>
                         <SelectContent>
@@ -344,7 +344,7 @@ export function ContactPage() {
                         required
                         disabled={loading}
                       >
-                        <SelectTrigger className="w-full">
+                        <SelectTrigger className="w-full" aria-label="Service interested in">
                           <SelectValue placeholder="Select a service" />
                         </SelectTrigger>
                         <SelectContent>
@@ -364,7 +364,7 @@ export function ContactPage() {
                         onValueChange={setBudget}
                         disabled={loading}
                       >
-                        <SelectTrigger className="w-full">
+                        <SelectTrigger className="w-full" aria-label="Project budget">
                           <SelectValue placeholder="Select budget range" />
                         </SelectTrigger>
                         <SelectContent>

@@ -150,15 +150,16 @@ export function ProductsSection() {
                 </div>
 
                 {/* CTA */}
-                <Link href={product.href}>
-                  <Button
-                    variant={product.highlighted ? "default" : "outline"}
-                    className="mt-2 w-full"
-                  >
+                <Button
+                  asChild
+                  variant={product.highlighted ? "default" : "outline"}
+                  className="mt-2 w-full"
+                >
+                  <Link href={product.href}>
                     {product.cta}
                     <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               </CardContent>
             </Card>
           ))}
