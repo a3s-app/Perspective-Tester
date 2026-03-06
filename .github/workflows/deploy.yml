@@ -35,6 +35,8 @@ jobs:
         env:
           GITHUB_PAGES: "true"
           NEXT_PUBLIC_BASE_PATH: "/Perspective-Tester"
+          NEXT_PUBLIC_CONTACT_EMAIL: ${{ vars.NEXT_PUBLIC_CONTACT_EMAIL }}
+          NEXT_PUBLIC_SLACK_WEBHOOK_URL: ${{ vars.NEXT_PUBLIC_SLACK_WEBHOOK_URL }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
