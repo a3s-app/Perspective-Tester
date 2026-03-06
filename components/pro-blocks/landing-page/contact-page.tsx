@@ -17,7 +17,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 const CONTACT_EMAIL =
-  process.env.NEXT_PUBLIC_CONTACT_EMAIL || "kush@p15r.com";
+  process.env.NEXT_PUBLIC_CONTACT_EMAIL || "Info@perspectivetester.com";
 
 const budgetOptions = [
   { value: "under-5k", label: "Under $5,000" },

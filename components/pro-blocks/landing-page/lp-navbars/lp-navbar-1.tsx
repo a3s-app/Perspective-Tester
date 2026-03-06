@@ -3,7 +3,7 @@
 import { Logo } from "@/components/pro-blocks/logo";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
 const MENU_ITEMS = [
@@ -34,22 +34,41 @@ const NavMenuItems = ({ compact }: { compact?: boolean }) => (
 
 export function LpNavbar1() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  const handleScroll = useCallback(() => {
-    // Smooth interpolation: 0 at top, 1 at 80px scroll
-    const progress = Math.min(window.scrollY / 80, 1);
-    setScrollProgress(progress);
-  }, []);
+  const [isCompact, setIsCompact] = useState(false);
+  const compactRef = useRef(false);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
+    let rafId = 0;
+    const ENTER_COMPACT_SCROLL_Y = 96;
+    const EXIT_COMPACT_SCROLL_Y = 56;
 
-  const scrolled = scrollProgress > 0.1;
-  const fullyScrolled = scrollProgress >= 1;
+    const updateCompactState = () => {
+      const y = window.scrollY;
+      const currentlyCompact = compactRef.current;
+      const nextCompact = currentlyCompact
+        ? y > EXIT_COMPACT_SCROLL_Y
+        : y > ENTER_COMPACT_SCROLL_Y;
+
+      if (nextCompact !== currentlyCompact) {
+        compactRef.current = nextCompact;
+        setIsCompact(nextCompact);
+      }
+      rafId = 0;
+    };
+
+    const onScroll = () => {
+      if (rafId !== 0) return;
+      rafId = window.requestAnimationFrame(updateCompactState);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    updateCompactState();
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (rafId !== 0) window.cancelAnimationFrame(rafId);
+    };
+  }, []);
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
@@ -61,36 +80,36 @@ export function LpNavbar1() {
       {/* Outer wrapper — padding animates to create the floating inset */}
       <div
         style={{
-          paddingLeft: `${scrollProgress * 16}px`,
-          paddingRight: `${scrollProgress * 16}px`,
-          paddingTop: `${scrollProgress * 12}px`,
+          paddingLeft: isCompact ? "16px" : "0px",
+          paddingRight: isCompact ? "16px" : "0px",
+          paddingTop: isCompact ? "12px" : "0px",
           transition: `padding 700ms ${ease}`,
         }}
       >
         <nav
           style={{
-            maxWidth: fullyScrolled ? "56rem" : "100%",
+            maxWidth: isCompact ? "56rem" : "100%",
             marginLeft: "auto",
             marginRight: "auto",
-            borderRadius: `${scrollProgress * 16}px`,
-            backgroundColor: fullyScrolled
+            borderRadius: isCompact ? "16px" : "0px",
+            backgroundColor: isCompact
               ? "oklch(1 0 0 / 0.72)"
               : "oklch(0.985 0.002 250)",
-            backdropFilter: fullyScrolled
+            backdropFilter: isCompact
               ? "blur(20px) saturate(1.8)"
               : "blur(0px) saturate(1)",
-            WebkitBackdropFilter: fullyScrolled
+            WebkitBackdropFilter: isCompact
               ? "blur(20px) saturate(1.8)"
               : "blur(0px) saturate(1)",
-            boxShadow: fullyScrolled
+            boxShadow: isCompact
               ? "0 8px 32px -4px oklch(0.37 0.1 260 / 0.08), 0 2px 8px -2px oklch(0.37 0.1 260 / 0.05), inset 0 0.5px 0 oklch(1 0 0 / 0.5)"
               : "0 1px 0 0 oklch(0.91 0.01 250)",
             borderWidth: "1px",
             borderStyle: "solid",
-            borderColor: fullyScrolled
+            borderColor: isCompact
               ? "oklch(0.91 0.01 250 / 0.5)"
               : "transparent",
-            borderBottomColor: fullyScrolled
+            borderBottomColor: isCompact
               ? "oklch(0.91 0.01 250 / 0.5)"
               : "oklch(0.91 0.01 250)",
             transition: `max-width 700ms ${ease}, border-radius 700ms ${ease}, background-color 500ms ${ease}, backdrop-filter 500ms ${ease}, -webkit-backdrop-filter 500ms ${ease}, box-shadow 500ms ${ease}, border-color 500ms ${ease}`,
@@ -100,10 +119,10 @@ export function LpNavbar1() {
           <div
             className="relative flex items-center justify-between"
             style={{
-              paddingTop: fullyScrolled ? "8px" : "14px",
-              paddingBottom: fullyScrolled ? "8px" : "14px",
-              paddingLeft: fullyScrolled ? "20px" : "24px",
-              paddingRight: fullyScrolled ? "20px" : "24px",
+              paddingTop: isCompact ? "8px" : "14px",
+              paddingBottom: isCompact ? "8px" : "14px",
+              paddingLeft: isCompact ? "20px" : "24px",
+              paddingRight: isCompact ? "20px" : "24px",
               transition: `padding 700ms ${ease}`,
             }}
           >
@@ -117,7 +136,7 @@ export function LpNavbar1() {
 
             {/* Desktop: nav items + CTAs */}
             <div className="hidden md:flex md:items-center md:gap-1">
-              <NavMenuItems compact={fullyScrolled} />
+              <NavMenuItems compact={isCompact} />
 
               {/* Subtle divider */}
               <div
@@ -135,7 +154,7 @@ export function LpNavbar1() {
                   <Button
                     variant="outline"
                     className={`rounded-lg font-medium transition-all duration-300 ease-out ${
-                      fullyScrolled
+                      isCompact
                         ? "h-8 px-3 text-[13px]"
                         : "h-9 px-3.5 text-sm"
                     }`}
@@ -146,7 +165,7 @@ export function LpNavbar1() {
                 <Link href="/#products">
                   <Button
                     className={`rounded-lg font-medium transition-all duration-300 ease-out ${
-                      fullyScrolled
+                      isCompact
                         ? "h-8 px-3 text-[13px]"
                         : "h-9 px-3.5 text-sm"
                     }`}
