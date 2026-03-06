@@ -68,7 +68,7 @@ const organizationJsonLd = {
   email: "kush@p15r.com",
   description:
     "Enterprise accessibility testing and compliance platform helping organizations achieve WCAG 2.2 compliance at scale.",
-  sameAs: ["https://a3s.app", "https://manage.p15r.com"],
+  sameAs: ["https://a3s.app", "https://p15r.com"],
   knowsAbout: [
     "Web Accessibility",
     "WCAG 2.2",

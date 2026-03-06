@@ -6,7 +6,7 @@ import { ContactPage } from "@/components/pro-blocks/landing-page/contact-page";
 export const metadata: Metadata = {
   title: "Contact Us - Get a Consultation",
   description:
-    "Get in touch with Perspective Tester to discuss your accessibility needs. Request a consultation for A3S managed services, the Manage platform, accessibility audits, remediation, or VPAT documentation.",
+    "Get in touch with Perspective Tester to discuss your accessibility needs. Request a consultation for A3S managed services, P15R, accessibility audits, remediation, or VPAT documentation.",
   keywords: [
     "contact accessibility experts",
     "accessibility consultation",

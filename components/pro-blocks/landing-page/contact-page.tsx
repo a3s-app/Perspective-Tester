@@ -30,7 +30,7 @@ const budgetOptions = [
 
 const serviceOptions = [
   { value: "a3s", label: "A3S - Accessibility as a Service" },
-  { value: "manage", label: "Manage Platform" },
+  { value: "p15r", label: "P15R Platform" },
   { value: "audit", label: "Accessibility Audit" },
   { value: "remediation", label: "Remediation Support" },
   { value: "vpat", label: "VPAT / ACR Documentation" },
@@ -211,7 +211,7 @@ export function ContactPage() {
                     </Link>
                     <Link href="/manage">
                       <Button variant="outline" size="sm">
-                        Explore Manage
+                        Explore P15R
                       </Button>
                     </Link>
                   </div>
@@ -488,10 +488,10 @@ export function ContactPage() {
                   >
                     <div>
                       <p className="text-sm font-medium text-foreground">
-                        Manage
+                        P15R
                       </p>
                       <p className="text-xs text-muted-foreground">
-                        Compliance tracking platform
+                        Accessibility Ops Without Chaos
                       </p>
                     </div>
                     <ArrowRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" />

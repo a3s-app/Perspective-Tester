@@ -18,7 +18,7 @@ Marketing website for [Perspective Tester](https://perspectivetester.com) — a 
 |-------|-------------|
 | `/` | Homepage with hero, products, services, enterprise, and CTA |
 | `/a3s` | A3S — Accessibility as a Service product page |
-| `/manage` | Manage — Accessibility management platform page |
+| `/manage` | P15R — Accessibility Ops Without Chaos |
 | `/clients` | Client logos and testimonials |
 | `/about` | Team, values, and company information |
 | `/contact` | Contact form with consultation request |

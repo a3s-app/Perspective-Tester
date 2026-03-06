@@ -45,10 +45,10 @@ const products = [
     highlighted: true,
   },
   {
-    name: "Manage Platform",
-    subtitle: "Accessibility Issue Management",
+    name: "P15R",
+    subtitle: "Accessibility Ops Without Chaos",
     description:
-      "An accessibility management platform that helps teams track, assign, and resolve accessibility issues across websites and applications with real-time collaboration and developer integrations.",
+      "An accessibility operations platform that helps teams track, assign, and resolve accessibility issues across websites and applications with real-time collaboration and developer integrations.",
     features: [
       {
         icon: ListChecks,
@@ -67,7 +67,7 @@ const products = [
         name: "Developer integrations",
       },
     ],
-    cta: "Explore Manage Platform",
+    cta: "Explore P15R",
     href: "/manage",
     highlighted: false,
   },

@@ -100,7 +100,7 @@ export function ManagePage() {
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-8 text-center">
             <Tagline>
               <LayoutDashboard className="h-3.5 w-3.5 text-primary" />
-              <span className="text-foreground">Accessibility Management Platform</span>
+              <span className="text-foreground">Accessibility Ops Without Chaos</span>
             </Tagline>
 
             <div className="section-title-gap-xl flex flex-col">
@@ -115,9 +115,9 @@ export function ManagePage() {
             </div>
 
             <div className="flex flex-col gap-3 sm:flex-row">
-              <Link href="https://manage.p15r.com" target="_blank" rel="noopener noreferrer">
+              <Link href="https://p15r.com" target="_blank" rel="noopener noreferrer">
                 <Button size="lg">
-                  Visit Manage Platform
+                  Visit P15R Platform
                   <ArrowRight />
                 </Button>
               </Link>
@@ -137,7 +137,7 @@ export function ManagePage() {
           <div className="section-title-gap-lg mx-auto flex max-w-xl flex-col items-center text-center">
             <Tagline>Features</Tagline>
             <h2 className="heading-lg text-foreground">
-              Everything You Need to Manage Accessibility
+              Everything You Need to Run Accessibility Ops
             </h2>
             <p className="text-muted-foreground text-base">
               From audit intake to remediation tracking, built for accessibility
@@ -265,9 +265,9 @@ export function ManagePage() {
                 </div>
               ))}
             </div>
-            <Link href="https://manage.p15r.com" target="_blank" rel="noopener noreferrer">
+            <Link href="https://p15r.com" target="_blank" rel="noopener noreferrer">
               <Button size="lg">
-                Start Using Manage
+                Start Using P15R
                 <ArrowRight />
               </Button>
             </Link>

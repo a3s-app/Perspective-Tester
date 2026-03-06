@@ -10,7 +10,7 @@ import { Footer1 } from "@/components/pro-blocks/landing-page/footers/footer-1";
 export const metadata: Metadata = {
   title: "Perspective Tester - Enterprise Accessibility Testing & Compliance",
   description:
-    "Test, monitor, and manage accessibility across your digital products. Perspective Tester helps enterprises achieve and maintain WCAG 2.2 compliance at scale with A3S and the Manage platform.",
+    "Test, monitor, and manage accessibility across your digital products. Perspective Tester helps enterprises achieve and maintain WCAG 2.2 compliance at scale with A3S and P15R.",
   openGraph: {
     title: "Perspective Tester - Enterprise Accessibility Testing & Compliance",
     description:

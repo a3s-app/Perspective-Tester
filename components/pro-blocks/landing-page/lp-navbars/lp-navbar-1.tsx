@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const MENU_ITEMS = [
   { label: "A3S", href: "/a3s" },
-  { label: "Manage", href: "/manage" },
+  { label: "P15R", href: "/manage" },
   { label: "Clients", href: "/clients" },
   { label: "About", href: "/about" },
 ] as const;

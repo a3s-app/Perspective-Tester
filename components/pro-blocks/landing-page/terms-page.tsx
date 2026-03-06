@@ -60,8 +60,7 @@ export function TermsPage() {
                       compliance
                     </li>
                     <li>
-                      Manage Platform — accessibility compliance tracking and
-                      reporting
+                      P15R — accessibility ops without chaos
                     </li>
                     <li>
                       Accessibility audits and WCAG 2.2 compliance assessments
