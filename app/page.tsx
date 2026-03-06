@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { LpNavbar1 } from "@/components/pro-blocks/landing-page/lp-navbars/lp-navbar-1";
 import { HeroSection2 } from "@/components/pro-blocks/landing-page/hero-sections/hero-section-2";
+import { VideoShowcaseSection } from "@/components/pro-blocks/landing-page/video-showcase-section";
 import { ProductsSection } from "@/components/pro-blocks/landing-page/products-section";
 import { EnterpriseSection } from "@/components/pro-blocks/landing-page/enterprise-section";
 import { CapabilitiesSection } from "@/components/pro-blocks/landing-page/capabilities-section";
@@ -24,6 +25,7 @@ export default function Page() {
     <main id="main-content">
       <LpNavbar1 />
       <HeroSection2 />
+      <VideoShowcaseSection />
       <ProductsSection />
       <EnterpriseSection />
       <CapabilitiesSection />
