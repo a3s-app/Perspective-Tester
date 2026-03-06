@@ -75,27 +75,13 @@ export function ContactPage() {
     if (orgType) formData.set("orgType", orgType);
     if (budget) formData.set("budget", budget);
 
-    const formspreeEndpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT;
-
-    if (!formspreeEndpoint) {
-      // Fallback: construct mailto link
-      const firstName = formData.get("firstName") as string;
-      const lastName = formData.get("lastName") as string;
-      const email = formData.get("email") as string;
-      const organization = formData.get("organization") as string;
-      const message = formData.get("message") as string;
-
-      const subject = encodeURIComponent(`New Inquiry: ${service} — ${firstName} ${lastName} (${organization})`);
-      const body = encodeURIComponent(
-        `Name: ${firstName} ${lastName}\nEmail: ${email}\nOrganization: ${organization}\nService: ${service}\n\n${message}`
-      );
-      window.location.href = `mailto:Info@perspectivetester.com?subject=${subject}&body=${body}`;
-      setLoading(false);
-      return;
-    }
+    // FormSubmit configuration
+    formData.set("_subject", `New Inquiry: ${service} — ${formData.get("firstName")} ${formData.get("lastName")} (${formData.get("organization")})`);
+    formData.set("_captcha", "false");
+    formData.set("_template", "table");
 
     try {
-      const response = await fetch(formspreeEndpoint, {
+      const response = await fetch("https://formsubmit.co/ajax/Info@perspectivetester.com", {
         method: "POST",
         body: formData,
         headers: { Accept: "application/json" },
