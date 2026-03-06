@@ -138,10 +138,10 @@ export function PrivacyPage() {
                   <p>
                     To exercise any of these rights, please contact us at{" "}
                     <a
-                      href="mailto:Info@perspectivetester.com"
+                      href="mailto:kush@p15r.com"
                       className="font-medium text-foreground hover:text-primary transition-colors"
                     >
-                      Info@perspectivetester.com
+                      kush@p15r.com
                     </a>
                     .
                   </p>
@@ -167,10 +167,10 @@ export function PrivacyPage() {
                     If you have questions or concerns about this Privacy Policy,
                     please contact us at{" "}
                     <a
-                      href="mailto:Info@perspectivetester.com"
+                      href="mailto:kush@p15r.com"
                       className="font-medium text-foreground hover:text-primary transition-colors"
                     >
-                      Info@perspectivetester.com
+                      kush@p15r.com
                     </a>
                     .
                   </p>

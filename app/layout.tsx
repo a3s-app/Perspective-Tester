@@ -65,7 +65,7 @@ const organizationJsonLd = {
   "@type": "Organization",
   name: "Perspective Tester",
   url: "https://perspectivetester.com",
-  email: "Info@perspectivetester.com",
+  email: "kush@p15r.com",
   description:
     "Enterprise accessibility testing and compliance platform helping organizations achieve WCAG 2.2 compliance at scale.",
   sameAs: ["https://a3s.app", "https://manage.p15r.com"],
