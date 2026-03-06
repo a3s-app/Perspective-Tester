@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Users, Globe, Shield, Heart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { assetPath } from "@/lib/utils";
 
 const teamMembers = [
   {
@@ -83,7 +84,7 @@ export function AboutPage() {
         <div className="container-padding-x container mx-auto py-10 lg:py-14">
           <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border">
             <Image
-              src="/team-photo.jpg"
+              src={assetPath("/team-photo.jpg")}
               alt="The Perspective Tester team"
               width={1000}
               height={800}
@@ -149,7 +150,7 @@ export function AboutPage() {
               >
                 <div className="h-28 w-28 overflow-hidden rounded-full border-2 border-primary/10">
                   <Image
-                    src={member.photo}
+                    src={assetPath(member.photo)}
                     alt={`${member.name}, ${member.role}`}
                     width={112}
                     height={112}

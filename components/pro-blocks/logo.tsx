@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { assetPath } from "@/lib/utils";
 
 interface LogoProps {
   width?: number;
@@ -14,7 +15,7 @@ export const Logo: React.FC<LogoProps> = ({
   return (
     <div className={`flex items-center gap-2.5 ${className ?? ""}`}>
       <Image
-        src="/pt-logo.png"
+        src={assetPath("/pt-logo.png")}
         alt="Perspective Tester logo"
         width={width}
         height={height}

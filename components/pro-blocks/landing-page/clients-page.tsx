@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Quote, Building2, GraduationCap, Home, Briefcase } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { assetPath } from "@/lib/utils";
 
 interface Client {
   name: string;
@@ -103,7 +104,7 @@ function ClientLogoGrid({ clients }: { clients: Client[] }) {
             }`}
           >
             <Image
-              src={client.logo}
+              src={assetPath(client.logo)}
               alt={`${client.name} logo`}
               width={160}
               height={80}
@@ -214,7 +215,7 @@ export function ClientsPage() {
                     }`}
                   >
                     <Image
-                      src={t.logo}
+                      src={assetPath(t.logo)}
                       alt={`${t.org} logo`}
                       width={32}
                       height={32}
