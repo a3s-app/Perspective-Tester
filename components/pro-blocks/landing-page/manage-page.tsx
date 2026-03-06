@@ -5,7 +5,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tagline } from "@/components/pro-blocks/landing-page/tagline";
 import {
   ArrowRight,
-  LayoutDashboard,
   Upload,
   ListChecks,
   GitBranch,
@@ -19,6 +18,8 @@ import {
   Shield,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
+import { assetPath } from "@/lib/utils";
 
 const coreFeatures = [
   {
@@ -99,9 +100,26 @@ export function ManagePage() {
         <div className="container-padding-x container mx-auto">
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-8 text-center">
             <Tagline>
-              <LayoutDashboard className="h-3.5 w-3.5 text-primary" />
+              <Image
+                src={assetPath("/p15r-logo.webp")}
+                alt="P15R logo"
+                width={16}
+                height={16}
+                className="h-3.5 w-3.5 object-contain"
+              />
               <span className="text-foreground">Accessibility Ops Without Chaos</span>
             </Tagline>
+
+            <div className="bg-card flex h-20 w-20 items-center justify-center rounded-2xl border p-2 shadow-sm">
+              <Image
+                src={assetPath("/p15r-logo.webp")}
+                alt="P15R logo"
+                width={72}
+                height={72}
+                className="h-full w-full object-contain"
+                priority
+              />
+            </div>
 
             <div className="section-title-gap-xl flex flex-col">
               <h1 className="heading-xl text-balance text-foreground">

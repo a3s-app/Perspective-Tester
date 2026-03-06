@@ -16,6 +16,8 @@ import {
   Eye,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
+import { assetPath } from "@/lib/utils";
 
 const phases = [
   {
@@ -93,6 +95,17 @@ export function A3SPage() {
               <Shield className="h-3.5 w-3.5 text-primary" />
               <span className="text-foreground">Accessibility as a Service</span>
             </Tagline>
+
+            <div className="bg-card flex h-20 w-20 items-center justify-center rounded-2xl border p-2 shadow-sm">
+              <Image
+                src={assetPath("/a3s-logo.png")}
+                alt="A3S logo"
+                width={72}
+                height={72}
+                className="h-full w-full object-contain"
+                priority
+              />
+            </div>
 
             <div className="section-title-gap-xl flex flex-col">
               <h1 className="heading-xl text-balance text-foreground">

@@ -15,10 +15,14 @@ import {
   ListChecks,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
+import { assetPath } from "@/lib/utils";
 
 const products = [
   {
     name: "A3S",
+    logo: "/a3s-logo.png",
+    logoAlt: "A3S product logo",
     subtitle: "Accessibility as a Service",
     description:
       "A managed accessibility service for local and county governments. We pair expert accessibility teams with public-sector workflows to help you reach and maintain WCAG 2.2 AA compliance with legal protection documentation.",
@@ -46,6 +50,8 @@ const products = [
   },
   {
     name: "P15R",
+    logo: "/p15r-logo.webp",
+    logoAlt: "P15R product logo",
     subtitle: "Accessibility Ops Without Chaos",
     description:
       "An accessibility operations platform that helps teams track, assign, and resolve accessibility issues across websites and applications with real-time collaboration and developer integrations.",
@@ -99,6 +105,15 @@ export function ProductsSection() {
               <CardContent className="flex flex-col gap-6 p-6 sm:p-8">
                 {/* Product Header */}
                 <div className="flex flex-col gap-3">
+                  <div className="bg-background flex h-16 w-16 items-center justify-center rounded-xl border p-2">
+                    <Image
+                      src={assetPath(product.logo)}
+                      alt={product.logoAlt}
+                      width={64}
+                      height={64}
+                      className="h-full w-full object-contain"
+                    />
+                  </div>
                   <div className="flex items-center gap-2">
                     <h3 className="text-foreground text-xl font-semibold">
                       {product.name}
