@@ -120,17 +120,17 @@ export function A3SPage() {
             </div>
 
             <div className="flex flex-col gap-3 sm:flex-row">
-              <Link href="https://a3s.app" target="_blank" rel="noopener noreferrer">
-                <Button size="lg">
+              <Button asChild size="lg">
+                <Link href="https://a3s.app" target="_blank" rel="noopener noreferrer">
                   Visit A3S
                   <ArrowRight />
-                </Button>
-              </Link>
-              <Link href="/contact">
-                <Button variant="outline" size="lg">
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <Link href="/contact">
                   Talk to Sales
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
 
             {/* Compliance badges */}
@@ -249,12 +249,12 @@ export function A3SPage() {
                 For sites up to 25 pages. Enterprise plans available for larger
                 organizations.
               </p>
-              <Link href="https://a3s.app" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" className="w-full sm:w-auto sm:min-w-56">
+              <Button asChild size="lg" className="w-full sm:w-auto sm:min-w-56">
+                <Link href="https://a3s.app" target="_blank" rel="noopener noreferrer">
                   Get Started with A3S
                   <ArrowRight />
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
 
             <div className="min-w-0 rounded-xl border bg-secondary/40 p-5 sm:p-6">

@@ -38,17 +38,22 @@ export function HeroSection2() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col gap-3 sm:flex-row">
-              <Link href="#products" className="w-full sm:w-auto">
-                <Button size="lg" className="w-full sm:w-auto">
+              <Button asChild size="lg" className="w-full sm:w-auto">
+                <Link href="#products" className="w-full sm:w-auto">
                   View Products
                   <ArrowRight />
-                </Button>
-              </Link>
-              <Link href="/contact" className="w-full sm:w-auto">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                </Link>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="w-full sm:w-auto"
+              >
+                <Link href="/contact" className="w-full sm:w-auto">
                   Talk to Sales
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
 
             {/* Compliance badges */}

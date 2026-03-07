@@ -20,7 +20,7 @@ const NavMenuItems = ({ compact }: { compact?: boolean }) => (
         key={label}
         asChild
         variant="ghost"
-        className={`rounded-lg font-medium transition-all duration-300 ease-out ${
+        className={`rounded-lg font-medium transition-[color,background-color,border-color,box-shadow,transform] duration-300 ease-out ${
           compact
             ? "h-8 px-3 text-[13px]"
             : "h-9 px-3.5 text-sm"
@@ -155,7 +155,7 @@ export function LpNavbar1() {
                 <Button
                   asChild
                   variant="outline"
-                  className={`rounded-lg font-medium transition-all duration-300 ease-out ${
+                  className={`rounded-lg font-medium transition-[color,background-color,border-color,box-shadow,transform] duration-300 ease-out ${
                     isCompact
                       ? "h-8 px-3 text-[13px]"
                       : "h-9 px-3.5 text-sm"
@@ -167,7 +167,7 @@ export function LpNavbar1() {
                 </Button>
                 <Button
                   asChild
-                  className={`rounded-lg font-medium transition-all duration-300 ease-out ${
+                  className={`rounded-lg font-medium transition-[color,background-color,border-color,box-shadow,transform] duration-300 ease-out ${
                     isCompact
                       ? "h-8 px-3 text-[13px]"
                       : "h-9 px-3.5 text-sm"

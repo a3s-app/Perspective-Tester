@@ -17,26 +17,28 @@ export function FinalCtaSection() {
             across your digital platforms, our team can help.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Link href="/contact">
-              <Button
-                size="lg"
-                variant="secondary"
-                className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
-              >
+            <Button
+              asChild
+              size="lg"
+              variant="secondary"
+              className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
+            >
+              <Link href="/contact">
                 Talk to Sales
                 <ArrowRight />
-              </Button>
-            </Link>
-            <Link href="/contact">
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 bg-transparent"
-              >
+              </Link>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 bg-transparent"
+            >
+              <Link href="/contact">
                 <Calendar />
                 Schedule Demo
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
         </div>
       </div>

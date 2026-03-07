@@ -286,25 +286,27 @@ export function ClientsPage() {
               Let&apos;s discuss how we can help your organization.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
-              <Link href="/contact">
-                <Button
-                  size="lg"
-                  variant="secondary"
-                  className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
-                >
+              <Button
+                asChild
+                size="lg"
+                variant="secondary"
+                className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
+              >
+                <Link href="/contact">
                   Get Started
                   <ArrowRight />
-                </Button>
-              </Link>
-              <Link href="/a3s">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 bg-transparent"
-                >
+                </Link>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 bg-transparent"
+              >
+                <Link href="/a3s">
                   Learn About A3S
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
           </div>
         </div>

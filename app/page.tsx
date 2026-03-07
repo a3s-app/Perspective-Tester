@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import { LpNavbar1 } from "@/components/pro-blocks/landing-page/lp-navbars/lp-navbar-1";
 import { HeroSection2 } from "@/components/pro-blocks/landing-page/hero-sections/hero-section-2";
 import { VideoShowcaseSection } from "@/components/pro-blocks/landing-page/video-showcase-section";
 import { ProductsSection } from "@/components/pro-blocks/landing-page/products-section";
 import { EnterpriseSection } from "@/components/pro-blocks/landing-page/enterprise-section";
 import { CapabilitiesSection } from "@/components/pro-blocks/landing-page/capabilities-section";
 import { FinalCtaSection } from "@/components/pro-blocks/landing-page/final-cta-section";
-import { Footer1 } from "@/components/pro-blocks/landing-page/footers/footer-1";
+import { SiteShell } from "@/components/pro-blocks/landing-page/site-shell";
 
 export const metadata: Metadata = {
   title: "Perspective Tester - Enterprise Accessibility Testing & Compliance",
@@ -22,15 +21,13 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <main id="main-content">
-      <LpNavbar1 />
+    <SiteShell>
       <HeroSection2 />
       <VideoShowcaseSection />
       <ProductsSection />
       <EnterpriseSection />
       <CapabilitiesSection />
       <FinalCtaSection />
-      <Footer1 />
-    </main>
+    </SiteShell>
   );
 }

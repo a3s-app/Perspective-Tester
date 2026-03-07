@@ -86,8 +86,8 @@
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.91 0.01 250);
   --input: oklch(0.91 0.01 250);
-  --ring: oklch(0.37 0.1 260 / 0.15);
-  --focus-outline: oklch(0.3 0.09 260);
+  --ring: oklch(0.18 0.02 260);
+  --focus-shadow: 0 0 0 3px oklch(0.18 0.02 260 / 0.38);
   --chart-1: oklch(0.37 0.1 260);
   --chart-2: oklch(0.5 0.12 260);
   --chart-3: oklch(0.6 0.08 220);
@@ -128,9 +128,15 @@
   textarea:focus {
     scroll-margin-top: 5rem;
   }
-  :where(a, button, input, select, textarea, summary, [role="button"], [tabindex]):focus-visible {
-    outline: 2px solid var(--focus-outline);
-    outline-offset: 2px;
+  :where(
+    a[href]:not([data-slot]),
+    summary,
+    [role="button"]:not([data-slot]),
+    [tabindex]:not([tabindex="-1"]):not([data-slot])
+  ):focus-visible {
+    outline: none;
+    box-shadow: var(--focus-shadow);
+    border-radius: calc(var(--radius) - 2px);
   }
   .heading-xl {
     font-family: Inter;

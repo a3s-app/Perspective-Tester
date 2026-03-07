@@ -225,12 +225,12 @@ export function AccessibilityStatementPage() {
               As accessibility experts, we can help your organization achieve and
               maintain WCAG 2.2 compliance across your digital properties.
             </p>
-            <Link href="/contact">
-              <Button size="lg">
+            <Button asChild size="lg">
+              <Link href="/contact">
                 Get a Consultation
                 <ArrowRight />
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
         </div>
       </section>

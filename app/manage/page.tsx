@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { LpNavbar1 } from "@/components/pro-blocks/landing-page/lp-navbars/lp-navbar-1";
-import { Footer1 } from "@/components/pro-blocks/landing-page/footers/footer-1";
 import { ManagePage } from "@/components/pro-blocks/landing-page/manage-page";
+import { SiteShell } from "@/components/pro-blocks/landing-page/site-shell";
 
 export const metadata: Metadata = {
   title: "P15R - Accessibility Ops Without Chaos",
@@ -25,10 +24,8 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <main id="main-content">
-      <LpNavbar1 />
+    <SiteShell>
       <ManagePage />
-      <Footer1 />
-    </main>
+    </SiteShell>
   );
 }
