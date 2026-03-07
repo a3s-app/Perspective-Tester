@@ -20,7 +20,7 @@ const NavMenuItems = ({ compact }: { compact?: boolean }) => (
         key={label}
         asChild
         variant="ghost"
-        className={`rounded-lg font-medium transition-[color,background-color,border-color,box-shadow,transform] duration-300 ease-out ${
+        className={`rounded-lg font-medium transition-[color,background-color,border-color,transform] duration-300 ease-out ${
           compact
             ? "h-8 px-3 text-[13px]"
             : "h-9 px-3.5 text-sm"
@@ -69,6 +69,23 @@ export function LpNavbar1() {
     return () => {
       window.removeEventListener("scroll", onScroll);
       if (rafId !== 0) window.cancelAnimationFrame(rafId);
+    };
+  }, []);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 768px)");
+
+    const closeMenuOnDesktop = (event: MediaQueryList | MediaQueryListEvent) => {
+      if (event.matches) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    closeMenuOnDesktop(mediaQuery);
+    mediaQuery.addEventListener("change", closeMenuOnDesktop);
+
+    return () => {
+      mediaQuery.removeEventListener("change", closeMenuOnDesktop);
     };
   }, []);
 
@@ -155,7 +172,7 @@ export function LpNavbar1() {
                 <Button
                   asChild
                   variant="outline"
-                  className={`rounded-lg font-medium transition-[color,background-color,border-color,box-shadow,transform] duration-300 ease-out ${
+                  className={`rounded-lg font-medium transition-[color,background-color,border-color,transform] duration-300 ease-out ${
                     isCompact
                       ? "h-8 px-3 text-[13px]"
                       : "h-9 px-3.5 text-sm"
@@ -167,7 +184,7 @@ export function LpNavbar1() {
                 </Button>
                 <Button
                   asChild
-                  className={`rounded-lg font-medium transition-[color,background-color,border-color,box-shadow,transform] duration-300 ease-out ${
+                  className={`rounded-lg font-medium transition-[color,background-color,border-color,transform] duration-300 ease-out ${
                     isCompact
                       ? "h-8 px-3 text-[13px]"
                       : "h-9 px-3.5 text-sm"
@@ -186,6 +203,8 @@ export function LpNavbar1() {
               className="flex size-9 items-center justify-center rounded-lg md:hidden"
               onClick={toggleMenu}
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-navigation-menu"
             >
               <div className="relative h-5 w-5">
                 <Menu
@@ -209,60 +228,63 @@ export function LpNavbar1() {
           </div>
 
           {/* Mobile menu - animated grid collapse */}
-          <div
-            className="overflow-hidden md:hidden"
-            style={{
-              display: "grid",
-              gridTemplateRows: isMenuOpen ? "1fr" : "0fr",
-              opacity: isMenuOpen ? 1 : 0,
-              transition: `grid-template-rows 500ms ${ease}, opacity 400ms ${ease}`,
-            }}
-          >
-            <div className="min-h-0">
-              <div className="flex flex-col gap-1 border-t px-5 pb-5 pt-4">
-                {MENU_ITEMS.map(({ label, href }) => (
-                  <Button
-                    key={label}
-                    asChild
-                    variant="ghost"
-                    className="h-11 w-full justify-start rounded-lg px-3 text-sm font-medium"
-                  >
-                    <Link
-                      href={href}
-                      prefetch
-                      onClick={() => setIsMenuOpen(false)}
+          {isMenuOpen ? (
+            <div
+              id="mobile-navigation-menu"
+              className="overflow-hidden md:hidden"
+              style={{
+                display: "grid",
+                gridTemplateRows: "1fr",
+                opacity: 1,
+                transition: `grid-template-rows 500ms ${ease}, opacity 400ms ${ease}`,
+              }}
+            >
+              <div className="min-h-0">
+                <div className="flex flex-col gap-1 border-t px-5 pb-5 pt-4">
+                  {MENU_ITEMS.map(({ label, href }) => (
+                    <Button
+                      key={label}
+                      asChild
+                      variant="ghost"
+                      className="h-11 w-full justify-start rounded-lg px-3 text-sm font-medium"
                     >
-                      {label}
-                    </Link>
-                  </Button>
-                ))}
-                <div className="mt-3 flex flex-col gap-2">
-                  <Button
-                    asChild
-                    variant="outline"
-                    className="h-11 w-full rounded-lg text-sm font-medium"
-                  >
-                    <Link
-                      href="/contact"
-                      prefetch
-                      onClick={() => setIsMenuOpen(false)}
+                      <Link
+                        href={href}
+                        prefetch
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {label}
+                      </Link>
+                    </Button>
+                  ))}
+                  <div className="mt-3 flex flex-col gap-2">
+                    <Button
+                      asChild
+                      variant="outline"
+                      className="h-11 w-full rounded-lg text-sm font-medium"
                     >
-                      Talk to Sales
-                    </Link>
-                  </Button>
-                  <Button asChild className="h-11 w-full rounded-lg text-sm font-medium">
-                    <Link
-                      href="/#products"
-                      prefetch
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      View Products
-                    </Link>
-                  </Button>
+                      <Link
+                        href="/contact"
+                        prefetch
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        Talk to Sales
+                      </Link>
+                    </Button>
+                    <Button asChild className="h-11 w-full rounded-lg text-sm font-medium">
+                      <Link
+                        href="/#products"
+                        prefetch
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        View Products
+                      </Link>
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          ) : null}
         </nav>
       </div>
     </div>
