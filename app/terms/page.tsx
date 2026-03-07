@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { LpNavbar1 } from "@/components/pro-blocks/landing-page/lp-navbars/lp-navbar-1";
-import { Footer1 } from "@/components/pro-blocks/landing-page/footers/footer-1";
 import { TermsPage } from "@/components/pro-blocks/landing-page/terms-page";
+import { SiteShell } from "@/components/pro-blocks/landing-page/site-shell";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
@@ -17,10 +16,8 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <main id="main-content">
-      <LpNavbar1 />
+    <SiteShell>
       <TermsPage />
-      <Footer1 />
-    </main>
+    </SiteShell>
   );
 }

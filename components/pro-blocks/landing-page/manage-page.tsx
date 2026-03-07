@@ -133,17 +133,17 @@ export function ManagePage() {
             </div>
 
             <div className="flex flex-col gap-3 sm:flex-row">
-              <Link href="https://p15r.com" target="_blank" rel="noopener noreferrer">
-                <Button size="lg">
+              <Button asChild size="lg">
+                <Link href="https://p15r.com" target="_blank" rel="noopener noreferrer">
                   Visit P15R Platform
                   <ArrowRight />
-                </Button>
-              </Link>
-              <Link href="/contact">
-                <Button variant="outline" size="lg">
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <Link href="/contact">
                   Talk to Sales
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
@@ -273,12 +273,12 @@ export function ManagePage() {
               <p className="text-muted-foreground text-sm leading-relaxed sm:text-base">
                 Per seat, billed monthly. Scale seats as your team grows.
               </p>
-              <Link href="https://p15r.com" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" className="w-full sm:w-auto sm:min-w-56">
+              <Button asChild size="lg" className="w-full sm:w-auto sm:min-w-56">
+                <Link href="https://p15r.com" target="_blank" rel="noopener noreferrer">
                   Start Using P15R
                   <ArrowRight />
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
 
             <div className="min-w-0 rounded-xl border bg-secondary/40 p-5 sm:p-6">

@@ -88,12 +88,12 @@ export function EnterpriseSection() {
 
             {/* CTA */}
             <div>
-              <Link href="/contact">
-                <Button size="lg">
+              <Button asChild size="lg">
+                <Link href="/contact">
                   Contact Enterprise Team
                   <ArrowRight aria-hidden="true" />
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
           </div>
 

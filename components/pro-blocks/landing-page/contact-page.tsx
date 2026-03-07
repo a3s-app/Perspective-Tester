@@ -204,16 +204,16 @@ export function ContactPage() {
                     explore our products.
                   </p>
                   <div className="flex gap-3 pt-2">
-                    <Link href="/a3s">
-                      <Button variant="outline" size="sm">
+                    <Button asChild variant="outline" size="sm">
+                      <Link href="/a3s">
                         Explore A3S
-                      </Button>
-                    </Link>
-                    <Link href="/manage">
-                      <Button variant="outline" size="sm">
+                      </Link>
+                    </Button>
+                    <Button asChild variant="outline" size="sm">
+                      <Link href="/manage">
                         Explore P15R
-                      </Button>
-                    </Link>
+                      </Link>
+                    </Button>
                   </div>
                 </div>
               ) : (
