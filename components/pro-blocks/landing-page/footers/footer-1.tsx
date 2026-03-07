@@ -7,7 +7,10 @@ import {
   ArrowUpRight,
   Building2,
   Clock,
+  Facebook,
   FileText,
+  Instagram,
+  Linkedin,
   Mail,
   Scale,
   ShieldCheck,
@@ -45,6 +48,24 @@ const PLATFORM_LINKS: FooterLink[] = [
   { label: "a3s.app", href: "https://a3s.app", icon: ArrowUpRight, external: true },
   { label: "p15r.com", href: "https://p15r.com", icon: ArrowUpRight, external: true },
 ];
+
+const SOCIAL_LINKS = [
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/perspective-tester",
+    icon: Linkedin,
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/perspectivetester/",
+    icon: Instagram,
+  },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/PerspectiveTester",
+    icon: Facebook,
+  },
+] as const;
 
 function FooterLinks({
   heading,
@@ -110,6 +131,27 @@ export function Footer1() {
                 <span>Typical response: within 1 business day</span>
               </p>
             </div>
+            <nav aria-label="Footer social links" className="flex flex-col gap-3">
+              <h3 className="text-foreground text-sm font-semibold tracking-wide">
+                Follow Us
+              </h3>
+              <div className="flex flex-wrap items-center gap-2">
+                {SOCIAL_LINKS.map(({ label, href, icon: Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    title={label}
+                    className="text-muted-foreground hover:text-foreground inline-flex h-10 w-10 items-center justify-center rounded-full border bg-card transition-colors"
+                  >
+                    <Icon className="h-4 w-4" aria-hidden="true" />
+                    <span className="sr-only">{label}</span>
+                  </a>
+                ))}
+              </div>
+            </nav>
           </div>
 
           <FooterLinks
