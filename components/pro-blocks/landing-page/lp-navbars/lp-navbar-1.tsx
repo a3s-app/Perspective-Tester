@@ -16,18 +16,20 @@ const MENU_ITEMS = [
 const NavMenuItems = ({ compact }: { compact?: boolean }) => (
   <div className="flex items-center gap-0.5">
     {MENU_ITEMS.map(({ label, href }) => (
-      <Link key={label} href={href}>
-        <Button
-          variant="ghost"
-          className={`rounded-lg font-medium transition-all duration-300 ease-out ${
-            compact
-              ? "h-8 px-3 text-[13px]"
-              : "h-9 px-3.5 text-sm"
-          }`}
-        >
+      <Button
+        key={label}
+        asChild
+        variant="ghost"
+        className={`rounded-lg font-medium transition-all duration-300 ease-out ${
+          compact
+            ? "h-8 px-3 text-[13px]"
+            : "h-9 px-3.5 text-sm"
+        }`}
+      >
+        <Link href={href} prefetch>
           {label}
-        </Button>
-      </Link>
+        </Link>
+      </Button>
     ))}
   </div>
 );
@@ -150,29 +152,31 @@ export function LpNavbar1() {
 
               {/* CTA buttons */}
               <div className="flex items-center gap-2">
-                <Link href="/contact">
-                  <Button
-                    variant="outline"
-                    className={`rounded-lg font-medium transition-all duration-300 ease-out ${
-                      isCompact
-                        ? "h-8 px-3 text-[13px]"
-                        : "h-9 px-3.5 text-sm"
-                    }`}
-                  >
+                <Button
+                  asChild
+                  variant="outline"
+                  className={`rounded-lg font-medium transition-all duration-300 ease-out ${
+                    isCompact
+                      ? "h-8 px-3 text-[13px]"
+                      : "h-9 px-3.5 text-sm"
+                  }`}
+                >
+                  <Link href="/contact" prefetch>
                     Talk to Sales
-                  </Button>
-                </Link>
-                <Link href="/#products">
-                  <Button
-                    className={`rounded-lg font-medium transition-all duration-300 ease-out ${
-                      isCompact
-                        ? "h-8 px-3 text-[13px]"
-                        : "h-9 px-3.5 text-sm"
-                    }`}
-                  >
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  className={`rounded-lg font-medium transition-all duration-300 ease-out ${
+                    isCompact
+                      ? "h-8 px-3 text-[13px]"
+                      : "h-9 px-3.5 text-sm"
+                  }`}
+                >
+                  <Link href="/#products" prefetch>
                     View Products
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               </div>
             </div>
 
@@ -217,39 +221,44 @@ export function LpNavbar1() {
             <div className="min-h-0">
               <div className="flex flex-col gap-1 border-t px-5 pb-5 pt-4">
                 {MENU_ITEMS.map(({ label, href }) => (
-                  <Link
+                  <Button
                     key={label}
-                    href={href}
-                    onClick={() => setIsMenuOpen(false)}
+                    asChild
+                    variant="ghost"
+                    className="h-11 w-full justify-start rounded-lg px-3 text-sm font-medium"
                   >
-                    <Button
-                      variant="ghost"
-                      className="h-11 w-full justify-start rounded-lg px-3 text-sm font-medium"
+                    <Link
+                      href={href}
+                      prefetch
+                      onClick={() => setIsMenuOpen(false)}
                     >
                       {label}
-                    </Button>
-                  </Link>
+                    </Link>
+                  </Button>
                 ))}
                 <div className="mt-3 flex flex-col gap-2">
-                  <Link
-                    href="/contact"
-                    onClick={() => setIsMenuOpen(false)}
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="h-11 w-full rounded-lg text-sm font-medium"
                   >
-                    <Button
-                      variant="outline"
-                      className="h-11 w-full rounded-lg text-sm font-medium"
+                    <Link
+                      href="/contact"
+                      prefetch
+                      onClick={() => setIsMenuOpen(false)}
                     >
                       Talk to Sales
-                    </Button>
-                  </Link>
-                  <Link
-                    href="/#products"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <Button className="h-11 w-full rounded-lg text-sm font-medium">
+                    </Link>
+                  </Button>
+                  <Button asChild className="h-11 w-full rounded-lg text-sm font-medium">
+                    <Link
+                      href="/#products"
+                      prefetch
+                      onClick={() => setIsMenuOpen(false)}
+                    >
                       View Products
-                    </Button>
-                  </Link>
+                    </Link>
+                  </Button>
                 </div>
               </div>
             </div>
