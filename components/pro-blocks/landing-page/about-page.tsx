@@ -1,5 +1,3 @@
-"use client";
-
 import { Tagline } from "@/components/pro-blocks/landing-page/tagline";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Users, Globe, Shield, Heart } from "lucide-react";
@@ -58,39 +56,63 @@ export function AboutPage() {
       {/* Hero */}
       <section className="bg-background section-padding-y border-b">
         <div className="container-padding-x container mx-auto">
-          <div className="mx-auto flex max-w-3xl flex-col items-center gap-8 text-center">
-            <Tagline>
-              <Users className="h-3.5 w-3.5 text-primary" />
-              <span className="text-foreground">About Us</span>
-            </Tagline>
+          <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
+            <div className="flex flex-col gap-6 text-left">
+              <Tagline>
+                <Users className="h-3.5 w-3.5 text-primary" />
+                <span className="text-foreground">About Us</span>
+              </Tagline>
 
-            <div className="section-title-gap-xl flex flex-col">
-              <h1 className="heading-xl text-balance text-foreground">
-                Engineering Equity for the Digital World
-              </h1>
-              <p className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground lg:text-lg">
-                Perspective Tester is a digital accessibility consultancy
-                helping organizations create inclusive digital experiences. We
-                work to ensure your online presence fosters inclusivity while
-                protecting you from legal liabilities.
+              <div className="section-title-gap-lg flex flex-col">
+                <h1 className="heading-xl text-balance text-foreground">
+                  Engineering Equity for the Digital World
+                </h1>
+                <p className="max-w-2xl text-base leading-relaxed text-muted-foreground lg:text-lg">
+                  Perspective Tester is a digital accessibility consultancy
+                  helping organizations create inclusive digital experiences. We
+                  work to ensure your online presence fosters inclusivity while
+                  protecting you from legal liabilities.
+                </p>
+              </div>
+
+              <div className="grid max-w-xl grid-cols-1 gap-3 sm:grid-cols-3">
+                <div className="rounded-xl border bg-card px-4 py-3">
+                  <p className="text-foreground text-sm font-semibold">2B+</p>
+                  <p className="text-muted-foreground text-xs">
+                    people impacted by digital accessibility
+                  </p>
+                </div>
+                <div className="rounded-xl border bg-card px-4 py-3">
+                  <p className="text-foreground text-sm font-semibold">WCAG 2.2 AA</p>
+                  <p className="text-muted-foreground text-xs">
+                    standards-first delivery model
+                  </p>
+                </div>
+                <div className="rounded-xl border bg-card px-4 py-3">
+                  <p className="text-foreground text-sm font-semibold">IAAP Team</p>
+                  <p className="text-muted-foreground text-xs">
+                    certified specialists and real-user testers
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="min-w-0">
+              <div className="overflow-hidden rounded-2xl border bg-secondary/40 shadow-sm">
+                <Image
+                  src={assetPath("/team-photo.jpg")}
+                  alt="The Perspective Tester team"
+                  width={1000}
+                  height={800}
+                  className="h-auto w-full object-cover"
+                  priority
+                />
+              </div>
+              <p className="text-muted-foreground mt-3 text-sm">
+                A multidisciplinary team focused on practical remediation, legal
+                compliance, and inclusive product delivery.
               </p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Team photo */}
-      <section className="bg-secondary border-b">
-        <div className="container-padding-x container mx-auto py-10 lg:py-14">
-          <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border">
-            <Image
-              src={assetPath("/team-photo.jpg")}
-              alt="The Perspective Tester team"
-              width={1000}
-              height={800}
-              className="h-auto w-full object-cover"
-              priority
-            />
           </div>
         </div>
       </section>
@@ -215,25 +237,27 @@ export function AboutPage() {
               your own remediation, we have a solution for you.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
-              <Link href="/contact">
-                <Button
-                  size="lg"
-                  variant="secondary"
-                  className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
-                >
+              <Button
+                asChild
+                size="lg"
+                variant="secondary"
+                className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
+              >
+                <Link href="/contact" prefetch>
                   Talk to Sales
                   <ArrowRight />
-                </Button>
-              </Link>
-              <Link href="/#products">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 bg-transparent"
-                >
+                </Link>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 bg-transparent"
+              >
+                <Link href="/#products" prefetch>
                   View Products
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
