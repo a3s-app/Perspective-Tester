@@ -21,7 +21,7 @@ export function FinalCtaSection() {
               asChild
               size="lg"
               variant="secondary"
-              className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
+              className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 focus-visible:ring-primary-foreground focus-visible:ring-offset-primary"
             >
               <Link href="/contact">
                 Talk to Sales
@@ -32,7 +32,7 @@ export function FinalCtaSection() {
               asChild
               size="lg"
               variant="outline"
-              className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 bg-transparent"
+              className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 bg-transparent focus-visible:ring-primary-foreground focus-visible:ring-offset-primary"
             >
               <Link href="/contact">
                 <Calendar />
