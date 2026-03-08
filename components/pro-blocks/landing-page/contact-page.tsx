@@ -226,6 +226,10 @@ export function ContactPage() {
                       Fill out the form below and our team will reach out to
                       discuss your accessibility goals.
                     </p>
+                    <p className="mt-2 text-xs text-muted-foreground">
+                      <span className="text-destructive font-semibold">*</span>{" "}
+                      indicates a required field.
+                    </p>
                   </div>
 
                   <div aria-live="assertive" aria-atomic="true">
