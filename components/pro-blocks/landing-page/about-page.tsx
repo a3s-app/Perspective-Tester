@@ -252,7 +252,7 @@ export function AboutPage() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 bg-transparent"
+                className="border-primary-foreground/40 bg-transparent text-primary-foreground hover:border-primary-foreground hover:bg-primary-foreground hover:text-primary"
               >
                 <Link href="/#products" prefetch>
                   View Products
