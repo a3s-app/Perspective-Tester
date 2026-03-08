@@ -178,11 +178,6 @@ export function ClientsPage() {
                 <span className="text-foreground text-lg font-semibold">6</span>{" "}
                 Industries
               </span>
-              <span className="hidden h-4 w-px bg-border sm:block" />
-              <span className="font-medium">
-                <span className="text-foreground text-lg font-semibold">100%</span>{" "}
-                Compliance Rate
-              </span>
             </div>
           </div>
         </div>

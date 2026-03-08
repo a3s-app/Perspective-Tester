@@ -32,7 +32,7 @@ export function FinalCtaSection() {
               asChild
               size="lg"
               variant="outline"
-              className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 bg-transparent focus-visible:ring-primary-foreground focus-visible:ring-offset-primary"
+              className="border-primary-foreground/40 bg-transparent text-primary-foreground hover:border-primary-foreground hover:bg-primary-foreground hover:text-primary focus-visible:ring-primary-foreground focus-visible:ring-offset-primary"
             >
               <Link href="/contact">
                 <Calendar />
