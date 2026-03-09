@@ -16,35 +16,36 @@ interface Client {
 
 interface Testimonial {
   quote: string;
+  name: string;
+  title: string;
   org: string;
-  logo: string;
-  darkBg?: boolean;
+  highlight: string;
 }
 
 const testimonials: Testimonial[] = [
   {
     quote:
-      "A3S has been instrumental in helping us achieve full WCAG 2.2 AA compliance across our county website. Their team is professional, knowledgeable, and responsive.",
-    org: "El Paso County",
-    logo: "/clients/elpasoco.png",
+      "The A3S program works like an extension of our team. They identify accessibility issues, fix them, retest, and monitor new releases. The monthly reports and expert support give us real confidence in compliance. We recommend Perspective Tester to any organization that needs a dependable accessibility system.",
+    name: "T. Holmes",
+    title: "Information Technology Director",
+    org: "Kit Carson County, CO",
+    highlight: "Continuous monitoring & compliance",
   },
   {
     quote:
-      "Working with A3S has transformed our approach to digital accessibility. Their comprehensive program ensures we meet all compliance requirements while providing excellent user experiences.",
-    org: "Portland State University",
-    logo: "/clients/pdx.svg",
+      "I would definitely recommend Perspective Tester to other government agencies, nonprofits, and corporations trying to make their website accessible and/or compliant with digital accessibility laws. They make me feel confident that our website will be accessible to all our residents and we have protection from potential lawsuits.",
+    name: "M. Bleyler",
+    title: "Community Engagement Officer",
+    org: "Gilpin County, CO",
+    highlight: "Legal protection & compliance",
   },
   {
     quote:
-      "The A3S team provided outstanding accessibility remediation services. Their expertise in WCAG standards and commitment to quality made our compliance journey seamless.",
-    org: "Concorde Career College",
-    logo: "/clients/concorde.png",
-  },
-  {
-    quote:
-      "A3S delivers exceptional accessibility solutions with legal protection guarantee. Their proactive approach and detailed reporting give us confidence in our compliance status.",
-    org: "Jackson Healthcare",
-    logo: "/clients/jacksonhealthcare.svg",
+      "This has been a positive experience. It has made a very large and overwhelming project manageable!",
+    name: "J. Stanley",
+    title: "Communications and Public Relations Manager",
+    org: "El Paso County, CO, Public Health",
+    highlight: "Complex PDF remediation",
   },
 ];
 
@@ -193,32 +194,30 @@ export function ClientsPage() {
             </h2>
           </div>
 
-          <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2">
+          <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 lg:grid-cols-3">
             {testimonials.map((t) => (
               <div
-                key={t.org}
+                key={t.name}
                 className="flex flex-col gap-5 rounded-xl border bg-card p-6 sm:p-8"
               >
                 <Quote className="h-5 w-5 text-primary/40" />
                 <p className="text-sm leading-relaxed text-foreground">
                   &ldquo;{t.quote}&rdquo;
                 </p>
-                <div className="mt-auto flex items-center gap-3 border-t pt-5">
-                  <div
-                    className={`flex h-10 w-10 items-center justify-center rounded-lg border p-1.5 ${
-                      t.darkBg ? "bg-slate-800 border-slate-700" : "bg-background"
-                    }`}
-                  >
-                    <Image
-                      src={assetPath(t.logo)}
-                      alt={`${t.org} logo`}
-                      width={32}
-                      height={32}
-                      className="h-6 w-auto object-contain"
-                    />
+                <div className="mt-auto flex flex-col gap-3 border-t pt-5">
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">
+                      {t.name}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {t.title}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {t.org}
+                    </p>
                   </div>
-                  <span className="text-sm font-medium text-foreground">
-                    {t.org}
+                  <span className="inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                    {t.highlight}
                   </span>
                 </div>
               </div>
