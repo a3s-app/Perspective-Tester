@@ -91,20 +91,40 @@ export function ContactPage() {
         headers: { Accept: "application/json" },
       });
 
+      const serviceName = formData.get("service") as string;
+      const firstName = formData.get("firstName") as string;
+      const lastName = formData.get("lastName") as string;
+      const email = formData.get("email") as string;
+      const organization = formData.get("organization") as string;
+      const phone = formData.get("phone") as string;
+      const orgTypeVal = formData.get("orgType") as string;
+      const budgetVal = formData.get("budget") as string;
+      const website = formData.get("website") as string;
+      const message = formData.get("message") as string;
+
+      // Send email via Resend (server-side, fire and forget)
+      fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          phone: phone || undefined,
+          organization,
+          orgType: orgTypeVal || undefined,
+          service: serviceName,
+          budget: budgetVal || undefined,
+          website: website || undefined,
+          message,
+        }),
+      }).catch(() => {
+        // Resend failure is non-critical, FormSubmit is the primary delivery
+      });
+
       // Send to Slack webhook (if configured)
       const slackWebhookUrl = process.env.NEXT_PUBLIC_SLACK_WEBHOOK_URL;
       if (slackWebhookUrl) {
-        const serviceName = formData.get("service") as string;
-        const firstName = formData.get("firstName") as string;
-        const lastName = formData.get("lastName") as string;
-        const email = formData.get("email") as string;
-        const organization = formData.get("organization") as string;
-        const phone = formData.get("phone") as string;
-        const orgTypeVal = formData.get("orgType") as string;
-        const budgetVal = formData.get("budget") as string;
-        const website = formData.get("website") as string;
-        const message = formData.get("message") as string;
-
         const slackBlocks = {
           text: `New inquiry from ${firstName} ${lastName} (${organization})`,
           blocks: [
@@ -132,14 +152,11 @@ export function ContactPage() {
           ],
         };
 
-        // Fire and forget - don't block the form on Slack delivery
         fetch(slackWebhookUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(slackBlocks),
-        }).catch(() => {
-          // Slack failure is non-critical, silently ignore
-        });
+        }).catch(() => {});
       }
 
       const response = await formSubmitPromise;
