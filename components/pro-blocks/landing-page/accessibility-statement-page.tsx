@@ -205,7 +205,7 @@ export function AccessibilityStatementPage() {
                 <div className="flex flex-col gap-3 border-t pt-6">
                   <p className="text-xs text-muted-foreground">
                     This statement was last updated on{" "}
-                    <time dateTime="2025-03-06">March 6, 2025</time>.
+                    <time dateTime="2025-03-06">March 31, 2026</time>.
                   </p>
                 </div>
               </div>
