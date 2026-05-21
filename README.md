@@ -1,7 +1,6 @@
 # Perspective Tester
 
 Marketing website for [Perspective Tester](https://perspectivetester.com) — a digital accessibility consultancy helping organizations achieve and maintain WCAG 2.2 compliance.
-
 **Live Site:** [https://a3s-app.github.io/Perspective-Tester/](https://a3s-app.github.io/Perspective-Tester/)
 
 ## Tech Stack
