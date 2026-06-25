@@ -21,6 +21,16 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://perspectivetester.com/blog</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://perspectivetester.com/blog/a-webinar-about-buildings-that-got-me-thinking-about-the-web</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://perspectivetester.com/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

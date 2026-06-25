@@ -12,6 +12,7 @@ import {
   Instagram,
   Linkedin,
   Mail,
+  Newspaper,
   Scale,
   ShieldCheck,
   Sparkles,
@@ -34,6 +35,7 @@ const PRODUCT_LINKS: FooterLink[] = [
 
 const COMPANY_LINKS: FooterLink[] = [
   { label: "Clients", href: "/clients", icon: Building2 },
+  { label: "Blog", href: "/blog", icon: Newspaper },
   { label: "About", href: "/about", icon: FileText },
   { label: "Contact", href: "/contact", icon: Mail },
 ];
