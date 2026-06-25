@@ -3,7 +3,7 @@ import { ArrowRight, CalendarDays, Clock, Newspaper } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { assetPath } from "@/lib/utils";
-import { getAllPosts } from "@/lib/blog";
+import { getAllPosts, getReadingTime } from "@/lib/blog";
 
 export function BlogIndexPage() {
   const posts = getAllPosts();
@@ -45,7 +45,7 @@ export function BlogIndexPage() {
               className="group block overflow-hidden rounded-2xl border bg-card shadow-sm transition-shadow hover:shadow-lg focus-visible:shadow-lg"
             >
               <article className="grid gap-0 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-secondary/40 lg:aspect-auto lg:h-full">
+                <div className="relative aspect-16/10 w-full overflow-hidden bg-secondary/40 lg:aspect-auto lg:h-full">
                   <Image
                     src={assetPath(featured.heroImage)}
                     alt={featured.heroAlt}
@@ -105,7 +105,7 @@ export function BlogIndexPage() {
                           className="h-3.5 w-3.5 text-primary"
                           aria-hidden="true"
                         />
-                        {featured.readingTime}
+                        {getReadingTime(featured)}
                       </span>
                     </div>
                     <span
@@ -135,7 +135,7 @@ export function BlogIndexPage() {
                   className="group flex flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-shadow hover:shadow-lg focus-visible:shadow-lg"
                 >
                   <article className="flex h-full flex-col">
-                    <div className="relative aspect-[16/10] w-full overflow-hidden bg-secondary/40">
+                    <div className="relative aspect-16/10 w-full overflow-hidden bg-secondary/40">
                       <Image
                         src={assetPath(post.heroImage)}
                         alt={post.heroAlt}
@@ -160,7 +160,7 @@ export function BlogIndexPage() {
                             className="h-3.5 w-3.5 text-primary"
                             aria-hidden="true"
                           />
-                          {post.readingTime}
+                          {getReadingTime(post)}
                         </span>
                       </div>
                     </div>

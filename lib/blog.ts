@@ -13,7 +13,6 @@ export interface BlogPost {
   };
   date: string;
   dateLabel: string;
-  readingTime: string;
   heroImage: string;
   heroAlt: string;
   heroCredit?: string;
@@ -34,7 +33,6 @@ export const blogPosts: BlogPost[] = [
     },
     date: "2026-06-25",
     dateLabel: "June 25, 2026",
-    readingTime: "4 min read",
     heroImage: "/blog/neuroinclusive-design.jpg",
     heroAlt:
       "The vaulted glass-and-iron ceiling and arched stone galleries of a grand museum hall, light pouring through the skylights.",
@@ -113,4 +111,24 @@ export function getAllPosts(): BlogPost[] {
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
   return blogPosts.find((post) => post.slug === slug);
+}
+
+/** Estimated reading time, derived from word count (~200 wpm). */
+export function getReadingTime(post: BlogPost): string {
+  const words = [post.title, ...post.content.map((block) => block.text)]
+    .join(" ")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean).length;
+  const minutes = Math.max(1, Math.round(words / 200));
+  return `${minutes} min read`;
+}
+
+/** URL-safe id for a heading, used for in-page anchors. */
+export function slugifyHeading(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-");
 }

@@ -5,11 +5,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { assetPath } from "@/lib/utils";
 import { BlogShare } from "@/components/pro-blocks/landing-page/blog-share";
-import type { BlogPost } from "@/lib/blog";
+import { BlogAudioReader } from "@/components/pro-blocks/landing-page/blog-audio-reader";
+import { ReadingProgress } from "@/components/pro-blocks/landing-page/reading-progress";
+import { getReadingTime, slugifyHeading, type BlogPost } from "@/lib/blog";
 
 export function BlogPostPage({ post }: { post: BlogPost }) {
+  const audioText = [post.title, ...post.content.map((block) => block.text)].join(
+    "\n\n",
+  );
+
   return (
     <>
+      <ReadingProgress />
+
       {/* Header */}
       <article className="bg-background">
         <header className="section-padding-y border-b">
@@ -76,10 +84,12 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
                       className="h-3.5 w-3.5 text-primary"
                       aria-hidden="true"
                     />
-                    {post.readingTime}
+                    {getReadingTime(post)}
                   </span>
                 </div>
               </div>
+
+              <BlogAudioReader text={audioText} />
             </div>
           </div>
         </header>
@@ -114,7 +124,8 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
               block.type === "heading" ? (
                 <h2
                   key={index}
-                  className="heading-sm mt-6 text-balance text-foreground"
+                  id={slugifyHeading(block.text)}
+                  className="heading-sm mt-6 scroll-mt-24 text-balance text-foreground"
                 >
                   {block.text}
                 </h2>
