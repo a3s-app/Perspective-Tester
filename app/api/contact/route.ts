@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 const CONTACT_EMAIL =
   process.env.NEXT_PUBLIC_CONTACT_EMAIL || "Info@perspectivetester.com";
 const FROM_EMAIL =
@@ -70,6 +68,18 @@ export async function POST(request: NextRequest) {
     }
 
     const subject = `New Inquiry: ${body.service} — ${body.firstName} ${body.lastName} (${body.organization})`;
+
+    // Instantiate lazily so a missing key doesn't crash at module load / build
+    // time (the static-export CI build has no RESEND_API_KEY).
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      console.error("[contact/resend] RESEND_API_KEY is not set");
+      return NextResponse.json(
+        { error: "Email service not configured" },
+        { status: 500 }
+      );
+    }
+    const resend = new Resend(apiKey);
 
     const { error } = await resend.emails.send({
       from: FROM_EMAIL,
