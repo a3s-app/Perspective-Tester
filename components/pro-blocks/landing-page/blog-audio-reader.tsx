@@ -41,6 +41,36 @@ const SPEED_OPTIONS = [0.75, 1, 1.25, 1.5, 2] as const;
 // the progress bar, since the SpeechSynthesis `boundary` event is unreliable
 // across browsers (Safari and some Chrome voices never fire it).
 const BASE_WPM = 165;
+// Max characters per utterance. Chrome silently fails to speak (or cuts off)
+// long single utterances, so the article is spoken as a queue of short chunks.
+const MAX_CHUNK_CHARS = 220;
+
+/**
+ * Break the article into short, sentence-aligned chunks. Speaking many small
+ * utterances back-to-back is the reliable way around Chrome's long-utterance
+ * bug, where a single multi-thousand-character utterance never starts.
+ */
+function chunkText(text: string): string[] {
+  const normalized = text.replace(/\s+/g, " ").trim();
+  if (!normalized) return [];
+
+  const sentences = normalized.match(/[^.!?]+[.!?]*\s*/g) ?? [normalized];
+  const chunks: string[] = [];
+  let current = "";
+
+  for (const raw of sentences) {
+    const sentence = raw.trim();
+    if (!sentence) continue;
+    if (current && current.length + sentence.length + 1 > MAX_CHUNK_CHARS) {
+      chunks.push(current);
+      current = sentence;
+    } else {
+      current = current ? `${current} ${sentence}` : sentence;
+    }
+  }
+  if (current) chunks.push(current);
+  return chunks;
+}
 
 export function BlogAudioReader({ text }: { text: string }) {
   const [mounted, setMounted] = useState(false);
@@ -52,25 +82,24 @@ export function BlogAudioReader({ text }: { text: string }) {
 
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
   const voicesRef = useRef<SpeechSynthesisVoice[]>([]);
-  const keepAliveRef = useRef<number | null>(null);
 
-  // Time-based progress tracking.
-  const wordCountRef = useRef(0);
+  // The article split into short utterances, plus where we are in the queue.
+  const chunksRef = useRef<string[]>([]);
+  const chunkIndexRef = useRef(0);
+  const totalCharsRef = useRef(1);
+  const completedCharsRef = useRef(0);
+
+  // Time-based progress tracking within the current chunk.
   const durationMsRef = useRef(1);
-  const elapsedMsRef = useRef(0);
   const segmentStartRef = useRef(0);
+  const segmentElapsedRef = useRef(0);
   const progressTimerRef = useRef<number | null>(null);
 
-  if (wordCountRef.current === 0) {
-    wordCountRef.current = text.trim().split(/\s+/).filter(Boolean).length;
+  if (chunksRef.current.length === 0) {
+    chunksRef.current = chunkText(text);
+    totalCharsRef.current =
+      chunksRef.current.reduce((sum, chunk) => sum + chunk.length + 1, 0) || 1;
   }
-
-  const stopKeepAlive = useCallback(() => {
-    if (keepAliveRef.current !== null) {
-      window.clearInterval(keepAliveRef.current);
-      keepAliveRef.current = null;
-    }
-  }, []);
 
   // Remove handlers from the active utterance so a subsequent cancel() can't
   // fire its onend/onerror and clobber the player state asynchronously.
@@ -93,24 +122,22 @@ export function BlogAudioReader({ text }: { text: string }) {
   const startProgressTimer = useCallback(() => {
     stopProgressTimer();
     progressTimerRef.current = window.setInterval(() => {
-      const total = elapsedMsRef.current + (Date.now() - segmentStartRef.current);
-      const pct = durationMsRef.current > 0 ? (total / durationMsRef.current) * 100 : 0;
-      // Cap below 100 until the utterance actually ends.
+      const withinChunk =
+        durationMsRef.current > 0
+          ? Math.min(
+              1,
+              (segmentElapsedRef.current + (Date.now() - segmentStartRef.current)) /
+                durationMsRef.current,
+            )
+          : 0;
+      const currentChunkChars =
+        chunksRef.current[chunkIndexRef.current]?.length ?? 0;
+      const spoken = completedCharsRef.current + withinChunk * currentChunkChars;
+      const pct = (spoken / totalCharsRef.current) * 100;
+      // Cap below 100 until the final utterance actually ends.
       setProgress(Math.min(99, Math.max(0, pct)));
     }, 200);
   }, [stopProgressTimer]);
-
-  // Chrome stops long utterances after ~15s; pausing/resuming keeps it alive.
-  const startKeepAlive = useCallback(() => {
-    stopKeepAlive();
-    keepAliveRef.current = window.setInterval(() => {
-      const synth = window.speechSynthesis;
-      if (synth.speaking && !synth.paused) {
-        synth.pause();
-        synth.resume();
-      }
-    }, 12000);
-  }, [stopKeepAlive]);
 
   useEffect(() => {
     setMounted(true);
@@ -131,18 +158,20 @@ export function BlogAudioReader({ text }: { text: string }) {
 
   useEffect(() => {
     return () => {
-      stopKeepAlive();
       stopProgressTimer();
       detachCurrent();
       if (typeof window !== "undefined" && "speechSynthesis" in window) {
         window.speechSynthesis.cancel();
       }
     };
-  }, [stopKeepAlive, stopProgressTimer, detachCurrent]);
+  }, [stopProgressTimer, detachCurrent]);
 
-  const speakFromStart = useCallback(
-    (selectedRate: number) => {
+  // Speak the queue starting at `startIndex`, chaining each chunk to the next.
+  const speakFromChunk = useCallback(
+    (startIndex: number, selectedRate: number) => {
       const synth = window.speechSynthesis;
+      const chunks = chunksRef.current;
+      if (chunks.length === 0) return;
 
       // Detach the previous utterance's handlers before cancelling, otherwise
       // cancel() fires its onend/onerror asynchronously and resets our state
@@ -150,42 +179,58 @@ export function BlogAudioReader({ text }: { text: string }) {
       detachCurrent();
       synth.cancel();
 
-      const utterance = new SpeechSynthesisUtterance(text);
       const voice = pickBestVoice(voicesRef.current);
-      if (voice) utterance.voice = voice;
-      utterance.lang = voice?.lang ?? "en-US";
-      utterance.rate = selectedRate;
-      utterance.pitch = 1;
+      completedCharsRef.current = chunks
+        .slice(0, startIndex)
+        .reduce((sum, chunk) => sum + chunk.length + 1, 0);
 
-      utterance.onend = () => {
-        setStatus("idle");
-        setProgress(0);
-        setAnnouncement("Finished reading the article");
-        stopKeepAlive();
-        stopProgressTimer();
+      const speakChunk = (index: number) => {
+        if (index >= chunks.length) {
+          setStatus("idle");
+          setProgress(0);
+          completedCharsRef.current = 0;
+          chunkIndexRef.current = 0;
+          setAnnouncement("Finished reading the article");
+          stopProgressTimer();
+          return;
+        }
+
+        chunkIndexRef.current = index;
+        const chunk = chunks[index];
+        const utterance = new SpeechSynthesisUtterance(chunk);
+        if (voice) utterance.voice = voice;
+        utterance.lang = voice?.lang ?? "en-US";
+        utterance.rate = selectedRate;
+        utterance.pitch = 1;
+
+        const words = chunk.split(/\s+/).filter(Boolean).length;
+        durationMsRef.current = (words / (BASE_WPM * selectedRate)) * 60000;
+        segmentElapsedRef.current = 0;
+        segmentStartRef.current = Date.now();
+
+        utterance.onend = () => {
+          completedCharsRef.current += chunk.length + 1;
+          speakChunk(index + 1);
+        };
+        utterance.onerror = (event) => {
+          // Our own cancel()/restart shows up as interrupted/canceled; ignore.
+          if (event.error === "interrupted" || event.error === "canceled") {
+            return;
+          }
+          setStatus("idle");
+          setProgress(0);
+          stopProgressTimer();
+        };
+
+        utteranceRef.current = utterance;
+        synth.speak(utterance);
       };
-      utterance.onerror = () => {
-        setStatus("idle");
-        setProgress(0);
-        stopKeepAlive();
-        stopProgressTimer();
-      };
 
-      utteranceRef.current = utterance;
-
-      // Reset and start the time-based progress estimate for this run.
-      durationMsRef.current =
-        (wordCountRef.current / (BASE_WPM * selectedRate)) * 60000;
-      elapsedMsRef.current = 0;
-      segmentStartRef.current = Date.now();
-      setProgress(0);
-
-      synth.speak(utterance);
+      speakChunk(startIndex);
       setStatus("playing");
-      startKeepAlive();
       startProgressTimer();
     },
-    [text, detachCurrent, startKeepAlive, stopKeepAlive, startProgressTimer, stopProgressTimer],
+    [detachCurrent, startProgressTimer, stopProgressTimer],
   );
 
   const handlePlay = useCallback(() => {
@@ -194,45 +239,44 @@ export function BlogAudioReader({ text }: { text: string }) {
       segmentStartRef.current = Date.now();
       setStatus("playing");
       setAnnouncement("Resumed playing the article");
-      startKeepAlive();
       startProgressTimer();
       return;
     }
-    speakFromStart(rate);
+    speakFromChunk(0, rate);
     setAnnouncement("Playing the article");
-  }, [status, rate, speakFromStart, startKeepAlive, startProgressTimer]);
+  }, [status, rate, speakFromChunk, startProgressTimer]);
 
   const handlePause = useCallback(() => {
     window.speechSynthesis.pause();
-    elapsedMsRef.current += Date.now() - segmentStartRef.current;
+    segmentElapsedRef.current += Date.now() - segmentStartRef.current;
     setStatus("paused");
     setAnnouncement("Paused");
-    stopKeepAlive();
     stopProgressTimer();
-  }, [stopKeepAlive, stopProgressTimer]);
+  }, [stopProgressTimer]);
 
   const handleStop = useCallback(() => {
     detachCurrent();
     window.speechSynthesis.cancel();
-    elapsedMsRef.current = 0;
+    completedCharsRef.current = 0;
+    chunkIndexRef.current = 0;
+    segmentElapsedRef.current = 0;
     setStatus("idle");
     setProgress(0);
     setAnnouncement("Stopped");
-    stopKeepAlive();
     stopProgressTimer();
-  }, [detachCurrent, stopKeepAlive, stopProgressTimer]);
+  }, [detachCurrent, stopProgressTimer]);
 
   const handleSpeedChange = useCallback(
     (nextRate: number) => {
       setRate(nextRate);
       setAnnouncement(`Speed set to ${nextRate} times`);
-      // The Web Speech API can't change rate mid-utterance, so restart if the
-      // article is currently playing or paused.
+      // The Web Speech API can't change rate mid-utterance, so restart from the
+      // current chunk if the article is currently playing or paused.
       if (status !== "idle") {
-        speakFromStart(nextRate);
+        speakFromChunk(chunkIndexRef.current, nextRate);
       }
     },
-    [status, speakFromStart],
+    [status, speakFromChunk],
   );
 
   if (!mounted || !supported) {

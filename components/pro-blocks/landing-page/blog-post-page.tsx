@@ -7,7 +7,12 @@ import { assetPath } from "@/lib/utils";
 import { BlogShare } from "@/components/pro-blocks/landing-page/blog-share";
 import { BlogAudioReader } from "@/components/pro-blocks/landing-page/blog-audio-reader";
 import { ReadingProgress } from "@/components/pro-blocks/landing-page/reading-progress";
-import { getReadingTime, slugifyHeading, type BlogPost } from "@/lib/blog";
+import {
+  getReadingTime,
+  slugifyHeading,
+  toSegments,
+  type BlogPost,
+} from "@/lib/blog";
 
 export function BlogPostPage({ post }: { post: BlogPost }) {
   const audioText = [post.title, ...post.content.map((block) => block.text)].join(
@@ -134,7 +139,21 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
                   key={index}
                   className="text-base leading-relaxed text-muted-foreground lg:text-lg"
                 >
-                  {block.text}
+                  {toSegments(block.text, block.links).map((segment, i) =>
+                    typeof segment === "string" ? (
+                      segment
+                    ) : (
+                      <a
+                        key={i}
+                        href={segment.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-medium text-primary underline underline-offset-4 transition-colors hover:text-primary/80"
+                      >
+                        {segment.text}
+                      </a>
+                    ),
+                  )}
                 </p>
               ),
             )}

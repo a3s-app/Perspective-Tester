@@ -1,6 +1,12 @@
+export interface BlogLink {
+  /** Exact substring of the paragraph text to turn into a link. */
+  text: string;
+  href: string;
+}
+
 export type BlogContentBlock =
   | { type: "heading"; text: string }
-  | { type: "paragraph"; text: string };
+  | { type: "paragraph"; text: string; links?: BlogLink[] };
 
 export interface BlogPost {
   slug: string;
@@ -41,6 +47,16 @@ export const blogPosts: BlogPost[] = [
       {
         type: "paragraph",
         text: "The Texas State Library and Archives Commission hosted a webinar last week that walked a roomful of public librarians through the operational realities of ADA Title II compliance. Marie Cohan, the digital accessibility officer at the Texas Department of Information Resources, reviewed the pre-submitted questions and addressed them one by one. The audience was librarians. Every answer applies to any public entity running a website with documents on it. By the end of the hour, all of it pointed in one direction: compliance is a program you run, not a project you finish.",
+        links: [
+          {
+            text: "The Texas State Library and Archives Commission",
+            href: "https://www.tsl.texas.gov/",
+          },
+          {
+            text: "Texas Department of Information Resources",
+            href: "https://dir.texas.gov/",
+          },
+        ],
       },
       {
         type: "heading",
@@ -73,6 +89,12 @@ export const blogPosts: BlogPost[] = [
       {
         type: "paragraph",
         text: "The exemptions are real, but they do not work the way most people assume. The rule lists them under 28 CFR 35.201. None of them apply to whole groups of files. Each document must pass the full test on its own, and the decision must be written down. An exemption without supporting documentation will not hold up.",
+        links: [
+          {
+            text: "28 CFR 35.201",
+            href: "https://www.federalregister.gov/documents/2024/04/24/2024-07758/nondiscrimination-on-the-basis-of-disability-accessibility-of-web-information-and-services-of-state",
+          },
+        ],
       },
       {
         type: "paragraph",
@@ -105,6 +127,12 @@ export const blogPosts: BlogPost[] = [
       {
         type: "paragraph",
         text: "The DOJ published an interim final rule on April 20, 2026 pushing the compliance deadlines out a year. Governments serving 50,000 people or more now have until April 26, 2027. Smaller entities and special districts have until April 26, 2028.",
+        links: [
+          {
+            text: "interim final rule on April 20, 2026",
+            href: "https://www.federalregister.gov/documents/2026/04/20/2026-07663/extension-of-compliance-dates-for-nondiscrimination-on-the-basis-of-disability-accessibility-of-web",
+          },
+        ],
       },
       {
         type: "paragraph",
@@ -113,10 +141,22 @@ export const blogPosts: BlogPost[] = [
       {
         type: "paragraph",
         text: "On May 21, 2026, the National Federation of the Blind filed suit against DOJ and HHS in the U.S. District Court for the District of Maryland, represented by Democracy Forward and Brown, Goldstein & Levy. The case is National Federation of the Blind v. DOJ et al. NFB argues the agencies bypassed required public notice-and-comment procedures and acted arbitrarily. They want the court to vacate the extensions and restore the original deadlines from the 2024 final rules.",
+        links: [
+          {
+            text: "National Federation of the Blind filed suit against DOJ and HHS",
+            href: "https://nfb.org/about-us/press-room/national-federation-blind-sues-government-over-delay-accessibility-rules",
+          },
+        ],
       },
       {
         type: "paragraph",
         text: "The complaint names real people harmed by the delay. NFB members were unable to complete unemployment applications, register businesses, enroll in classes, or access telehealth because the websites they needed were not accessible. Not hypothetical. People are waiting for the access they were promised.",
+        links: [
+          {
+            text: "complaint names real people",
+            href: "https://www.adatitleiii.com/2026/06/national-federation-of-the-blind-challenges-last-minute-deadline-extensions-for-website-and-mobile-app-accessibility/",
+          },
+        ],
       },
       {
         type: "paragraph",
@@ -245,6 +285,34 @@ export function getReadingTime(post: BlogPost): string {
     .filter(Boolean).length;
   const minutes = Math.max(1, Math.round(words / 200));
   return `${minutes} min read`;
+}
+
+/**
+ * Split paragraph text into plain strings and link segments, so inline links
+ * can be rendered without storing markup in the content. Anchors are matched
+ * on their first occurrence, in the order they appear in the text.
+ */
+export function toSegments(
+  text: string,
+  links?: BlogLink[],
+): Array<string | BlogLink> {
+  if (!links || links.length === 0) return [text];
+
+  const matches = links
+    .map((link) => ({ link, index: text.indexOf(link.text) }))
+    .filter((match) => match.index >= 0)
+    .sort((a, b) => a.index - b.index);
+
+  const segments: Array<string | BlogLink> = [];
+  let cursor = 0;
+  for (const { link, index } of matches) {
+    if (index < cursor) continue; // overlaps a previous link, skip
+    if (index > cursor) segments.push(text.slice(cursor, index));
+    segments.push(link);
+    cursor = index + link.text.length;
+  }
+  if (cursor < text.length) segments.push(text.slice(cursor));
+  return segments;
 }
 
 /** URL-safe id for a heading, used for in-page anchors. */
