@@ -36,10 +36,25 @@ function pickBestVoice(
   );
 }
 
+// The multipliers shown to the user. These are the *perceived* speeds.
 const SPEED_OPTIONS = [0.75, 1, 1.25, 1.5, 2] as const;
-// Approximate words-per-minute for a synthesized voice at rate 1. Used to drive
-// the progress bar, since the SpeechSynthesis `boundary` event is unreliable
-// across browsers (Safari and some Chrome voices never fire it).
+// The Web Speech API's `rate` is not linear: Chrome's Google voices scale it
+// roughly as rate^1.5, so utterance.rate = 2 sounds ~3x, not 2x (measured on
+// Google US English). Map each labelled multiplier to the synthesis rate that
+// actually lands near it (rate = label^(1/1.5)), so the labels tell the truth.
+const SYNTH_RATE: Record<number, number> = {
+  0.75: 0.82,
+  1: 1,
+  1.25: 1.15,
+  1.5: 1.31,
+  2: 1.59,
+};
+function synthRateFor(label: number): number {
+  return SYNTH_RATE[label] ?? label;
+}
+// Approximate words-per-minute at 1x, used to drive the progress bar since the
+// SpeechSynthesis `boundary` event is unreliable across browsers (Safari and
+// some Chrome voices never fire it). Progress is keyed to the labelled speed.
 const BASE_WPM = 165;
 // Max characters per utterance. Chrome silently fails to speak (or cuts off)
 // long single utterances, so the article is spoken as a queue of short chunks.
@@ -167,8 +182,10 @@ export function BlogAudioReader({ text }: { text: string }) {
   }, [stopProgressTimer, detachCurrent]);
 
   // Speak the queue starting at `startIndex`, chaining each chunk to the next.
+  // `selectedLabel` is the multiplier shown to the user (0.75x .. 2x); the
+  // actual synthesis rate is calibrated so the perceived speed matches.
   const speakFromChunk = useCallback(
-    (startIndex: number, selectedRate: number) => {
+    (startIndex: number, selectedLabel: number) => {
       const synth = window.speechSynthesis;
       const chunks = chunksRef.current;
       if (chunks.length === 0) return;
@@ -200,11 +217,12 @@ export function BlogAudioReader({ text }: { text: string }) {
         const utterance = new SpeechSynthesisUtterance(chunk);
         if (voice) utterance.voice = voice;
         utterance.lang = voice?.lang ?? "en-US";
-        utterance.rate = selectedRate;
+        utterance.rate = synthRateFor(selectedLabel);
         utterance.pitch = 1;
 
         const words = chunk.split(/\s+/).filter(Boolean).length;
-        durationMsRef.current = (words / (BASE_WPM * selectedRate)) * 60000;
+        // Progress tracks the labelled (perceived) speed, not the synth rate.
+        durationMsRef.current = (words / (BASE_WPM * selectedLabel)) * 60000;
         segmentElapsedRef.current = 0;
         segmentStartRef.current = Date.now();
 
