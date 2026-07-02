@@ -102,7 +102,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        text: "Archived web content under 35.201(a) is narrower still. Four conditions, all required: the content pre-dates the compliance deadline, exists solely for reference or recordkeeping, has never been altered after archiving, and sits in a clearly labeled archive area. Marie confirmed this and added a detail she received directly from the ADA Southwest Region office. Digitizing old material, such as yearbooks, qualifies for the exception as long as you leave the content untouched. Metadata is fine. Edit the actual content, and it becomes a new document subject to WCAG 2.1 AA.",
+        text: "Archived web content under 35.201(a) is narrower still. Four conditions, all required: the content pre-dates the compliance deadline, exists solely for reference, research, or recordkeeping, has never been altered after archiving, and sits in a clearly labeled archive area. Marie confirmed this and added a detail she received directly from the ADA Southwest Region office. Digitizing old material, such as yearbooks, qualifies for the exception as long as you leave the content untouched. Metadata is fine. Edit the actual content, and it becomes a new document subject to WCAG 2.1 AA.",
       },
       {
         type: "paragraph",
