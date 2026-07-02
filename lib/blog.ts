@@ -31,7 +31,7 @@ export const blogPosts: BlogPost[] = [
     slug: "what-title-ii-compliance-looks-like-in-practice",
     title: "What Title II Compliance Looks Like in Practice",
     description:
-      "A Texas State Library webinar on ADA Title II compliance made one thing clear: compliance is a program you run, not a project you finish. Notes on who owns the risk, why PDFs are the highest-cost area, how the 35.201 exemptions really work, and the lawsuit that could reinstate the original 2026 deadline.",
+      "A Texas State Library webinar on ADA Title II compliance made one thing clear: compliance is a program you run, not a project you finish. Notes on who owns the risk, why PDFs are the highest-cost area, how the 35.201 exceptions really work, and the lawsuit that could reinstate the original 2026 deadline.",
     author: {
       name: "Justin Sales",
       role: "Accounts Manager",
@@ -84,29 +84,29 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        text: "For the documents already on the site, her guidance was practical. Pull your analytics. Ask IT which pages and documents get the most hits. Start there. Library card instructions, fee structures, room reservations, registration forms. Those are what people open, and almost none of them will qualify for an exemption.",
+        text: "For the documents already on the site, her guidance was practical. Pull your analytics. Ask IT which pages and documents get the most hits. Start there. Library card instructions, fee structures, room reservations, registration forms. Those are what people open, and almost none of them will qualify for an exception.",
       },
       {
         type: "paragraph",
-        text: "The exemptions are real, but they do not work the way most people assume. The rule lists them under 28 CFR 35.201. None of them apply to whole groups of files. Each document must pass the full test on its own, and the decision must be written down. An exemption without supporting documentation will not hold up.",
+        text: "The exceptions are real, but they do not work the way most people assume. The rule lists them under 28 CFR 35.201. Each one applies to a specific category of content, not a whole library of files. A document either fits the category or it does not, and that determination has to be made file by file and written down. An exception without supporting documentation will not hold up.",
         links: [
           {
             text: "28 CFR 35.201",
-            href: "https://www.federalregister.gov/documents/2024/04/24/2024-07758/nondiscrimination-on-the-basis-of-disability-accessibility-of-web-information-and-services-of-state",
+            href: "https://www.federalregister.gov/documents/2024/04/24/2024-07758/nondiscrimination-on-the-basis-of-disability-accessibility-of-web-information-and-services-of-state#sectno-reference-35.201:~:text=The%20requirements%20of%20%C2%A7%E2%80%8935.200%20do%20not%20apply%20to%20the%20following%3A",
           },
         ],
       },
       {
         type: "paragraph",
-        text: "Pre-existing conventional electronic documents under 35.201(b) are the ones most entities reach for first. A pre-deadline PDF qualifies here only if it is not currently used to apply for, access, or participate in a government service. A library card application or a fee schedule is an active service document. It does not qualify no matter how old it is. Marie told the audience to prioritize exactly these kinds of files, which means the exemption does not cover most of the work.",
+        text: "Pre-existing conventional electronic documents under 35.201(b) are the ones most entities reach for first. A pre-deadline PDF qualifies here only if it is not currently used to apply for, access, or participate in a government service. A library card application or a fee schedule is an active service document. It does not qualify no matter how old it is. Marie told the audience to prioritize exactly these kinds of files, which means the exception does not cover most of the work.",
       },
       {
         type: "paragraph",
-        text: "Archived web content under 35.201(a) is narrower still. Four conditions, all required: the content pre-dates the compliance deadline, exists solely for reference or recordkeeping, has never been altered after archiving, and sits in a clearly labeled archive area. Marie confirmed this and added a detail she received directly from the ADA Southwest Region office. Digitizing old material, such as yearbooks, qualifies for the exemption as long as you leave the content untouched. Metadata is fine. Edit the actual content, and it becomes a new document subject to WCAG 2.1 AA.",
+        text: "Archived web content under 35.201(a) is narrower still. Four conditions, all required: the content pre-dates the compliance deadline, exists solely for reference or recordkeeping, has never been altered after archiving, and sits in a clearly labeled archive area. Marie confirmed this and added a detail she received directly from the ADA Southwest Region office. Digitizing old material, such as yearbooks, qualifies for the exception as long as you leave the content untouched. Metadata is fine. Edit the actual content, and it becomes a new document subject to WCAG 2.1 AA.",
       },
       {
         type: "paragraph",
-        text: "Other exemptions cover third-party content, individualized secured documents, and pre-existing social media posts. One rule overrides all of them. A person with a disability requests an accessible version; the entity provides one. No discretion. The exemption is a deferral that can be called in at any time.",
+        text: "Other exceptions cover third-party content, individualized secured documents, and pre-existing social media posts. One rule overrides all of them. A person with a disability requests an accessible version; the entity provides one. No discretion. The exception is a deferral that can be called in at any time.",
       },
       {
         type: "heading",
