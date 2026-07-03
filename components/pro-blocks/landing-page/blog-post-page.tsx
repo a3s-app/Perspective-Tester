@@ -179,7 +179,7 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
                 asChild
                 size="lg"
                 variant="secondary"
-                className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
+                className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 focus-visible:ring-primary-foreground focus-visible:ring-offset-primary"
               >
                 <Link href="/contact" prefetch>
                   Talk to Sales
@@ -190,7 +190,7 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-primary-foreground/40 bg-transparent text-primary-foreground hover:border-primary-foreground hover:bg-primary-foreground hover:text-primary"
+                className="border-primary-foreground/40 bg-transparent text-primary-foreground hover:border-primary-foreground hover:bg-primary-foreground hover:text-primary focus-visible:ring-primary-foreground focus-visible:ring-offset-primary"
               >
                 <Link href="/blog" prefetch>
                   Read more articles
