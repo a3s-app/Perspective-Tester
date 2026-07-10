@@ -14,6 +14,7 @@ import {
   Mail,
   Newspaper,
   Scale,
+  ShieldAlert,
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
@@ -35,6 +36,7 @@ const PRODUCT_LINKS: FooterLink[] = [
 
 const COMPANY_LINKS: FooterLink[] = [
   { label: "Clients", href: "/clients", icon: Building2 },
+  { label: "Overlay Widgets", href: "/overlay-widgets", icon: ShieldAlert },
   { label: "Blog", href: "/blog", icon: Newspaper },
   { label: "About", href: "/about", icon: FileText },
   { label: "Contact", href: "/contact", icon: Mail },
