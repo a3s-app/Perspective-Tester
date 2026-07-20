@@ -1,6 +1,12 @@
 import { Tagline } from "@/components/pro-blocks/landing-page/tagline";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight, CalendarDays, Clock } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  CalendarDays,
+  Clock,
+  ExternalLink,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { assetPath } from "@/lib/utils";
@@ -11,13 +17,38 @@ import {
   getReadingTime,
   slugifyHeading,
   toSegments,
+  type BlogLink,
   type BlogPost,
 } from "@/lib/blog";
 
 export function BlogPostPage({ post }: { post: BlogPost }) {
-  const audioText = [post.title, ...post.content.map((block) => block.text)].join(
-    "\n\n",
-  );
+  const audioText = [
+    post.title,
+    post.description,
+    ...post.content.map((block) => block.text),
+  ].join("\n\n");
+
+  const renderText = (text: string, links?: BlogLink[]) =>
+    toSegments(text, links).map((segment, index) =>
+      typeof segment === "string" ? (
+        segment
+      ) : (
+        <a
+          key={`${segment.href}-${index}`}
+          href={segment.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-medium text-primary underline underline-offset-4 transition-colors hover:text-primary/80"
+        >
+          {segment.text}
+          <ExternalLink
+            className="ml-1 inline h-3.5 w-3.5 align-[-0.125em]"
+            aria-hidden="true"
+          />
+          <span className="sr-only"> (opens in a new tab)</span>
+        </a>
+      ),
+    );
 
   return (
     <>
@@ -125,38 +156,28 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
         {/* Body */}
         <div className="container-padding-x container mx-auto pb-16 lg:pb-24">
           <div className="mx-auto flex max-w-3xl flex-col gap-6">
-            {post.content.map((block, index) =>
-              block.type === "heading" ? (
-                <h2
-                  key={index}
-                  id={slugifyHeading(block.text)}
-                  className="heading-sm mt-6 scroll-mt-24 text-balance text-foreground"
-                >
-                  {block.text}
-                </h2>
-              ) : (
+            {post.content.map((block, index) => {
+              if (block.type === "heading") {
+                return (
+                  <h2
+                    key={index}
+                    id={slugifyHeading(block.text)}
+                    className="heading-sm mt-6 scroll-mt-24 text-balance text-foreground"
+                  >
+                    {block.text}
+                  </h2>
+                );
+              }
+
+              return (
                 <p
                   key={index}
                   className="text-base leading-relaxed text-muted-foreground lg:text-lg"
                 >
-                  {toSegments(block.text, block.links).map((segment, i) =>
-                    typeof segment === "string" ? (
-                      segment
-                    ) : (
-                      <a
-                        key={i}
-                        href={segment.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-medium text-primary underline underline-offset-4 transition-colors hover:text-primary/80"
-                      >
-                        {segment.text}
-                      </a>
-                    ),
-                  )}
+                  {renderText(block.text, block.links)}
                 </p>
-              ),
-            )}
+              );
+            })}
 
             <BlogShare title={post.title} slug={post.slug} />
           </div>

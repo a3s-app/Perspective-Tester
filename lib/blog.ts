@@ -28,6 +28,91 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "accessible-documents-and-doing-business-with-public-agencies",
+    title: "Accessible Documents And Doing Business With Public Agencies.",
+    description:
+      "If you bid on government work, accessibility isn't just about what you build. It's about every document you hand over in the submission process. That can be easy to forget when you're heads-down, ensuring every requirement is met during your response, and it's exactly where great vendors lose points.",
+    author: {
+      name: "Justin Sales",
+      role: "Accounts Manager",
+      photo: "/justin-sales.jpg",
+    },
+    date: "2026-07-21",
+    dateLabel: "July 21, 2026",
+    heroImage: "/blog/accessible-documents-public-agencies.jpg",
+    heroAlt:
+      "A professional reviews a braille document beside a laptop and an assistive technology device, with a public building in the background.",
+    tags: ["Accessible Documents", "Public Procurement", "ADA Title II"],
+    content: [
+      {
+        type: "paragraph",
+        text: "We were reminded of this at a recent vendor education session hosted by Marie Cohan, the Statewide Digital Accessibility Officer at the Texas Department of Information Resources (DIR). Her team runs these sessions to help vendors partner more effectively with the state. The topic this time was simple on its face and easy to underestimate in practice: how to submit accessible electronic documents to a public agency.",
+      },
+      {
+        type: "paragraph",
+        text: "And this is bigger than Texas. The 2024 Department of Justice rule under the ADA sets a clear standard for state and local governments: their web content, which the rule defines as including documents, must meet WCAG 2.1 Level AA. The deadlines are April 2027 for larger governments and April 2028 for smaller ones. Once the deadlines are met, every document an agency touches has to be accessible going forward. The smart move is to get ahead of it now rather than scramble later.",
+      },
+      {
+        type: "paragraph",
+        text: "You don't have to wait for a deadline to see this, either. Agencies across the country are also already writing accessibility into their solicitations and into the requirements for what they buy under new contracts. If your documentation isn't accessible, you're at risk of having your bid score lower, or worse, being marked as non-responsive. Treat accessible documents as table stakes for public sector work, wherever you're bidding.",
+      },
+      {
+        type: "paragraph",
+        text: "It's important not to assume that an automated checker is sufficient. Marie's team defines testing in three steps, with the scanner as only the first step. Automated tools catch the obvious stuff, but they find maybe 30% to 35% of issues, and even with AI in the mix, you'd be lucky to hit 50.  The second step is manual testing, during which the remaining issues are identified.  The third is to have a repeatable protocol, so you can spot patterns and track progress instead of starting from scratch each time.",
+      },
+      {
+        type: "paragraph",
+        text: "The things machines miss are the things a disabled user notices first. Alt text that describes an image without conveying its context and meaning. Links that say \"click here\" instead of what they are, or where they take you. Reading order that jumps around. Headings that are not nested correctly, or faked with bold text instead of real styles. Catching those means navigating with a keyboard only, using Tab and Enter, and running a screen reader like JAWS or NVDA.",
+      },
+      {
+        type: "heading",
+        text: "A few standards are worth committing to memory ",
+      },
+      {
+        type: "paragraph",
+        text: "Ensure that real heading styles are used in a logical order, levels are not skipped, and avoid using the Microsoft Word 'Title' style for your title, since screen readers skip right past it; instead, use an H1 heading at the beginning. Stick to sans-serif fonts, with an 11-point minimum in documents and 18-point in slides, and try to avoid italics, script fonts, and all caps, which can be challenging for people with disabilities to read or interact with using assistive technology.",
+      },
+      {
+        type: "paragraph",
+        text: "Keep color contrast at 4.5:1 for normal text and 3:1 for large text. Write link text that leads with a verb and tells the reader where they're going, and flag links that open a new window or start a download; you also don’t need to use the word “link” in your hyperlink as this gets announced by screen readers. For alt text, describe what the image means in context, not just what it shows, and skip \"image of\" since the screen reader already announces it. Give tables a true header row and skip merged cells. And never lean on color alone to signal status, because red, yellow, and green mean nothing to someone who can't tell them apart.",
+      },
+      {
+        type: "heading",
+        text: "PDFs",
+      },
+      {
+        type: "paragraph",
+        text: "You might want to ask yourself whether it needs to be a PDF at all. A locked Word document is often easier to make accessible and just as secure. But some solicitations require a PDF, and in that case, the PDF itself must be remediated before you submit. Making the source file accessible is necessary, but it doesn't guarantee the document will remain accessible once it's converted. ",
+      },
+      {
+        type: "paragraph",
+        text: "Tag order, tag types, and alt text often break during export, so run the accessibility checker in the native app first, then run it again after exporting the PDF to fix any issues. Scanned documents will also need to undergo the same process, as a scanned page is just an image, and an image is useless to a screen reader.",
+      },
+      {
+        type: "paragraph",
+        text: "Our thanks to Marie Cohan and the DIR team for the reminder that accessibility follows through to every file you submit.",
+      },
+      {
+        type: "paragraph",
+        text: "If you want to know more about the Texas DIR requirements specifically, you can find them on its Procurement and Vendor Resources page, and the exact language shows up in the Electronic Information Resources (EIR) section of each solicitation. For the broader federal picture, the DOJ's Title II web rule fact sheet at ada.gov is the place to start.",
+        links: [
+          {
+            text: "Procurement and Vendor Resources page,",
+            href: "https://dir.texas.gov/digital-accessibility/procurement-and-vendor-resources",
+          },
+          {
+            text: "DOJ's Title II web rule fact sheet at ada.gov",
+            href: "https://www.ada.gov/resources/2024-03-08-web-rule/",
+          },
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "If your team is preparing a public sector bid and wants a second set of eyes on the documents before they go out, we're happy to help.",
+      },
+    ],
+  },
+  {
     slug: "what-title-ii-compliance-looks-like-in-practice",
     title: "What Title II Compliance Looks Like in Practice",
     description:
@@ -278,7 +363,7 @@ export function getPostBySlug(slug: string): BlogPost | undefined {
 
 /** Estimated reading time, derived from word count (~200 wpm). */
 export function getReadingTime(post: BlogPost): string {
-  const words = [post.title, ...post.content.map((block) => block.text)]
+  const words = [post.title, post.description, ...post.content.map((block) => block.text)]
     .join(" ")
     .trim()
     .split(/\s+/)

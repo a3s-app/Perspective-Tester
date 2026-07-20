@@ -65,6 +65,7 @@ export default async function Page({
     "@type": "BlogPosting",
     headline: post.title,
     description: post.description,
+    image: `https://perspectivetester.com${post.heroImage}`,
     datePublished: post.date,
     author: {
       "@type": "Person",

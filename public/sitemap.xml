@@ -26,6 +26,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://perspectivetester.com/blog/accessible-documents-and-doing-business-with-public-agencies</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://perspectivetester.com/blog/what-title-ii-compliance-looks-like-in-practice</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
