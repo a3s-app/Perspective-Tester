@@ -83,7 +83,6 @@ const realEstateClients: Client[] = [
 
 const businessClients: Client[] = [
   { name: "EdCount", logo: "/clients/edcount.jpg", category: "business" },
-  { name: "Jackson Healthcare", logo: "/clients/jacksonhealthcare.svg", category: "business" },
   { name: "MRO Corp", logo: "/clients/mrocorp.png", category: "business" },
   { name: "SubItUp", logo: "/clients/subitup.png", category: "business" },
   { name: "Visability", logo: "/clients/visability.png", category: "business" },

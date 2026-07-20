@@ -209,7 +209,6 @@ export function AboutPage() {
                 "Mercer",
                 "Oprah Winfrey Charitable Foundation",
                 "Fordham University",
-                "Jackson Healthcare",
                 "El Paso County",
                 "Portland State University",
               ].map((client) => (
