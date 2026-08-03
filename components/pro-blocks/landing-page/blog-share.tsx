@@ -23,6 +23,7 @@ export function BlogShare({ title, slug }: { title: string; slug: string }) {
   const canonicalUrl = `${SITE_URL}/blog/${slug}`;
   const [shareUrl, setShareUrl] = useState(canonicalUrl);
   const [copied, setCopied] = useState(false);
+  const [copyFailed, setCopyFailed] = useState(false);
   const [canNativeShare, setCanNativeShare] = useState(false);
 
   useEffect(() => {
@@ -65,8 +66,12 @@ export function BlogShare({ title, slug }: { title: string; slug: string }) {
     try {
       await navigator.clipboard.writeText(shareUrl);
       setCopied(true);
+      setCopyFailed(false);
     } catch {
+      // Clipboard writes are refused in insecure contexts and when the
+      // permission is denied. Say so rather than appearing to do nothing.
       setCopied(false);
+      setCopyFailed(true);
     }
   };
 
@@ -89,12 +94,11 @@ export function BlogShare({ title, slug }: { title: string; slug: string }) {
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={label}
             title={label}
-            className="text-muted-foreground hover:text-foreground inline-flex h-10 w-10 items-center justify-center rounded-full border bg-card transition-colors"
+            className="text-muted-foreground hover:text-foreground inline-flex h-10 w-10 items-center justify-center rounded-full border border-input bg-card transition-colors"
           >
             <Icon className="h-4 w-4" aria-hidden="true" />
-            <span className="sr-only">{label}</span>
+            <span className="sr-only">{label} (opens in a new tab)</span>
           </a>
         ))}
 
@@ -104,7 +108,7 @@ export function BlogShare({ title, slug }: { title: string; slug: string }) {
             onClick={handleNativeShare}
             aria-label="Share via your device"
             title="Share"
-            className="text-muted-foreground hover:text-foreground inline-flex h-10 w-10 items-center justify-center rounded-full border bg-card transition-colors"
+            className="text-muted-foreground hover:text-foreground inline-flex h-10 w-10 items-center justify-center rounded-full border border-input bg-card transition-colors"
           >
             <Share2 className="h-4 w-4" aria-hidden="true" />
             <span className="sr-only">Share via your device</span>
@@ -114,7 +118,7 @@ export function BlogShare({ title, slug }: { title: string; slug: string }) {
         <button
           type="button"
           onClick={handleCopy}
-          className="text-foreground inline-flex h-10 items-center gap-2 rounded-full border bg-card px-4 text-sm font-medium transition-colors hover:bg-accent"
+          className="text-foreground inline-flex h-10 items-center gap-2 rounded-full border border-input bg-card px-4 text-sm font-medium transition-colors hover:bg-accent"
         >
           {copied ? (
             <Check className="h-4 w-4 text-primary" aria-hidden="true" />
@@ -123,10 +127,19 @@ export function BlogShare({ title, slug }: { title: string; slug: string }) {
           )}
           <span>{copied ? "Link copied" : "Copy link"}</span>
         </button>
+
+        {copyFailed ? (
+          <p className="text-destructive w-full text-xs sm:w-auto">
+            Copying failed. You can copy the address from your browser bar.
+          </p>
+        ) : null}
       </div>
 
       <p role="status" aria-live="polite" className="sr-only">
         {copied ? "Link copied to clipboard" : ""}
+        {copyFailed
+          ? "Copying failed. You can copy the address from your browser bar."
+          : ""}
       </p>
     </div>
   );

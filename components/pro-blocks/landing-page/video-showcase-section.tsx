@@ -55,7 +55,7 @@ export function VideoShowcaseSection() {
       <div className="container-padding-x container mx-auto flex flex-col gap-10 md:gap-12">
         <div className="section-title-gap-lg mx-auto flex max-w-3xl flex-col items-center text-center">
           <Tagline>
-            <PlayCircle className="h-3.5 w-3.5 text-primary" />
+            <PlayCircle className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
             <span className="text-foreground">Video Library</span>
           </Tagline>
           <h2 className="heading-lg text-foreground">
@@ -86,8 +86,9 @@ export function VideoShowcaseSection() {
                 rel="noopener noreferrer"
                 className="text-primary mt-1 inline-flex w-full items-center gap-1.5 text-sm font-medium hover:underline sm:w-fit"
               >
-                <FileText className="h-4 w-4" />
+                <FileText className="h-4 w-4" aria-hidden="true" />
                 Download Story Video Text Alternative
+                <span className="sr-only"> (Word document, opens in a new tab)</span>
               </Link>
             </div>
           </article>

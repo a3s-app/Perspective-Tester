@@ -22,7 +22,7 @@ const products = [
   {
     name: "A3S",
     logo: "/a3s-logo.png",
-    logoAlt: "A3S product logo",
+    logoAlt: "",
     subtitle: "Accessibility as a Service",
     description:
       "A managed accessibility service for local and county governments. We pair expert accessibility teams with public-sector workflows to help you reach and maintain WCAG 2.2 AA compliance with legal protection documentation.",
@@ -51,7 +51,7 @@ const products = [
   {
     name: "P15R",
     logo: "/p15r-logo.webp",
-    logoAlt: "P15R product logo",
+    logoAlt: "",
     subtitle: "Accessibility Ops Without Chaos",
     description:
       "An accessibility operations platform that helps teams track, assign, and resolve accessibility issues across websites and applications with real-time collaboration and developer integrations.",
@@ -157,7 +157,7 @@ export function ProductsSection() {
                 >
                   <Link href={product.href}>
                     {product.cta}
-                    <ArrowRight className="h-4 w-4" />
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </Link>
                 </Button>
               </CardContent>

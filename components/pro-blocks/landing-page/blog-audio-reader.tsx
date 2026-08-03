@@ -318,7 +318,7 @@ export function BlogAudioReader({ text }: { text: string }) {
           className="bg-primary/10 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
           aria-hidden="true"
         >
-          <Headphones className="h-4 w-4 text-primary" />
+          <Headphones className="h-4 w-4 text-primary" aria-hidden="true" />
         </span>
         <div className="flex flex-col">
           <span className="text-sm font-semibold text-foreground">
@@ -353,7 +353,7 @@ export function BlogAudioReader({ text }: { text: string }) {
           id="tts-speed"
           value={rate}
           onChange={(event) => handleSpeedChange(Number(event.target.value))}
-          className="text-foreground hover:bg-accent focus-visible:ring-ring focus-visible:ring-offset-background h-10 shrink-0 rounded-full border bg-card px-2.5 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+          className="text-foreground hover:bg-accent focus-visible:ring-ring focus-visible:ring-offset-background h-10 shrink-0 rounded-full border border-input bg-card px-2.5 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
         >
           {SPEED_OPTIONS.map((option) => (
             <option key={option} value={option}>
@@ -382,7 +382,7 @@ export function BlogAudioReader({ text }: { text: string }) {
           disabled={status === "idle"}
           aria-label="Stop"
           title="Stop"
-          className="text-muted-foreground hover:text-foreground focus-visible:ring-ring focus-visible:ring-offset-background inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border bg-card transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:text-muted-foreground"
+          className="text-muted-foreground hover:text-foreground focus-visible:ring-ring focus-visible:ring-offset-background inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-input bg-card transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:text-muted-foreground"
         >
           <Square className="h-3.5 w-3.5" aria-hidden="true" />
         </button>

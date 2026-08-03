@@ -59,7 +59,7 @@ export function AboutPage() {
           <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
             <div className="flex flex-col gap-6 text-left">
               <Tagline>
-                <Users className="h-3.5 w-3.5 text-primary" />
+                <Users className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
                 <span className="text-foreground">About Us</span>
               </Tagline>
 
@@ -173,7 +173,7 @@ export function AboutPage() {
                 <div className="h-28 w-28 overflow-hidden rounded-full border-2 border-primary/10">
                   <Image
                     src={assetPath(member.photo)}
-                    alt={`${member.name}, ${member.role}`}
+                    alt=""
                     width={112}
                     height={112}
                     className="h-full w-full object-cover"
@@ -240,18 +240,18 @@ export function AboutPage() {
                 asChild
                 size="lg"
                 variant="secondary"
-                className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
+                className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 focus-visible:ring-primary-foreground focus-visible:ring-offset-primary"
               >
                 <Link href="/contact" prefetch>
                   Talk to Sales
-                  <ArrowRight />
+                  <ArrowRight aria-hidden="true" />
                 </Link>
               </Button>
               <Button
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-primary-foreground/40 bg-transparent text-primary-foreground hover:border-primary-foreground hover:bg-primary-foreground hover:text-primary"
+                className="border-primary-foreground/40 bg-transparent text-primary-foreground hover:border-primary-foreground hover:bg-primary-foreground hover:text-primary focus-visible:ring-primary-foreground focus-visible:ring-offset-primary"
               >
                 <Link href="/#products" prefetch>
                   View Products

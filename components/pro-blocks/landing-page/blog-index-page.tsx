@@ -16,7 +16,7 @@ export function BlogIndexPage() {
         <div className="container-padding-x container mx-auto">
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
             <Tagline>
-              <Newspaper className="h-3.5 w-3.5 text-primary" />
+              <Newspaper className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
               <span className="text-foreground">Blog</span>
             </Tagline>
 
@@ -77,7 +77,7 @@ export function BlogIndexPage() {
                       <div className="h-10 w-10 overflow-hidden rounded-full border-2 border-primary/10">
                         <Image
                           src={assetPath(featured.author.photo)}
-                          alt={featured.author.name}
+                          alt=""
                           width={40}
                           height={40}
                           className="h-full w-full object-cover"

@@ -25,7 +25,7 @@ export function FinalCtaSection() {
             >
               <Link href="/contact">
                 Talk to Sales
-                <ArrowRight />
+                <ArrowRight aria-hidden="true" />
               </Link>
             </Button>
             <Button
@@ -35,7 +35,7 @@ export function FinalCtaSection() {
               className="border-primary-foreground/40 bg-transparent text-primary-foreground hover:border-primary-foreground hover:bg-primary-foreground hover:text-primary focus-visible:ring-primary-foreground focus-visible:ring-offset-primary"
             >
               <Link href="/contact">
-                <Calendar />
+                <Calendar aria-hidden="true" />
                 Schedule Demo
               </Link>
             </Button>

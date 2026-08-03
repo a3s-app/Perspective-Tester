@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/select";
 import { Mail, Send, ArrowRight, Loader2 } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const CONTACT_EMAIL =
   process.env.NEXT_PUBLIC_CONTACT_EMAIL || "Info@perspectivetester.com";
@@ -64,11 +64,21 @@ export function ContactPage() {
   const [service, setService] = useState("");
   const [orgType, setOrgType] = useState("");
   const [budget, setBudget] = useState("");
+  const [status, setStatus] = useState("");
+  const successHeadingRef = useRef<HTMLHeadingElement>(null);
+
+  // Submitting swaps the whole form out for the confirmation panel, which
+  // would otherwise drop focus to <body> silently. Move focus to the
+  // confirmation heading so keyboard and screen reader users land on it.
+  useEffect(() => {
+    if (submitted) successHeadingRef.current?.focus();
+  }, [submitted]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    setStatus("Sending your inquiry, please wait.");
 
     const form = e.currentTarget;
     const formData = new FormData(form);
@@ -166,10 +176,17 @@ export function ContactPage() {
       }
 
       setSubmitted(true);
+      setStatus(
+        "Thank you for reaching out. Your inquiry was sent and we will get back to you within one business day."
+      );
     } catch {
+      // The failure is announced by the assertive alert rendered in the form,
+      // which survives this path. Clearing the polite region avoids the same
+      // message being read out twice.
       setError(
         `There was a problem sending your inquiry. Please try again or email us directly at ${CONTACT_EMAIL}.`
       );
+      setStatus("");
     } finally {
       setLoading(false);
     }
@@ -182,7 +199,7 @@ export function ContactPage() {
         <div className="container-padding-x container mx-auto">
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
             <Tagline>
-              <Mail className="h-3.5 w-3.5 text-primary" />
+              <Mail className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
               <span className="text-foreground">Contact Us</span>
             </Tagline>
 
@@ -207,12 +224,22 @@ export function ContactPage() {
           <div className="mx-auto grid max-w-5xl grid-cols-1 gap-10 lg:grid-cols-[1fr_320px] lg:gap-14">
             {/* Form */}
             <div className="rounded-xl border bg-card p-6 sm:p-8">
+              {/* Mounted for the lifetime of the page: the form below is
+                  replaced wholesale on success, so a live region rendered
+                  inside it would be removed before it could announce. */}
+              <p role="status" aria-live="polite" className="sr-only">
+                {status}
+              </p>
               {submitted ? (
                 <div className="flex min-h-[400px] flex-col items-center justify-center gap-4 text-center">
                   <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
-                    <Send className="h-6 w-6 text-primary" />
+                    <Send className="h-6 w-6 text-primary" aria-hidden="true" />
                   </div>
-                  <h2 className="text-xl font-semibold text-foreground">
+                  <h2
+                    ref={successHeadingRef}
+                    tabIndex={-1}
+                    className="text-xl font-semibold text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+                  >
                     Thank you for reaching out
                   </h2>
                   <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
@@ -249,12 +276,13 @@ export function ContactPage() {
                     </p>
                   </div>
 
+                  {/* One live region, mounted up front so the insertion is
+                      detected. role="alert" on the inner node as well would
+                      nest a second region inside this one, which some screen
+                      readers read out twice. */}
                   <div aria-live="assertive" aria-atomic="true">
                     {error && (
-                      <div
-                        role="alert"
-                        className="rounded-lg border border-destructive/20 bg-destructive/5 px-4 py-3 text-sm text-destructive"
-                      >
+                      <div className="rounded-lg border border-destructive/20 bg-destructive/5 px-4 py-3 text-sm text-destructive">
                         {error}
                       </div>
                     )}
@@ -269,6 +297,7 @@ export function ContactPage() {
                       <Input
                         id="firstName"
                         name="firstName"
+                        autoComplete="given-name"
                         placeholder="Jane"
                         required
                         disabled={loading}
@@ -281,6 +310,7 @@ export function ContactPage() {
                       <Input
                         id="lastName"
                         name="lastName"
+                        autoComplete="family-name"
                         placeholder="Smith"
                         required
                         disabled={loading}
@@ -298,6 +328,7 @@ export function ContactPage() {
                         id="email"
                         name="email"
                         type="email"
+                        autoComplete="email"
                         placeholder="jane@organization.gov"
                         required
                         disabled={loading}
@@ -309,6 +340,7 @@ export function ContactPage() {
                         id="phone"
                         name="phone"
                         type="tel"
+                        autoComplete="tel"
                         placeholder="(555) 123-4567"
                         disabled={loading}
                       />
@@ -324,6 +356,7 @@ export function ContactPage() {
                       <Input
                         id="organization"
                         name="organization"
+                        autoComplete="organization"
                         placeholder="City of Springfield"
                         required
                         disabled={loading}
@@ -337,7 +370,11 @@ export function ContactPage() {
                         onValueChange={setOrgType}
                         disabled={loading}
                       >
-                        <SelectTrigger className="w-full" aria-label="Organization type">
+                        <SelectTrigger
+                          id="orgType"
+                          className="w-full"
+                          aria-label="Organization type"
+                        >
                           <SelectValue placeholder="Select type" />
                         </SelectTrigger>
                         <SelectContent>
@@ -365,7 +402,11 @@ export function ContactPage() {
                         required
                         disabled={loading}
                       >
-                        <SelectTrigger className="w-full" aria-label="Service interested in">
+                        <SelectTrigger
+                          id="service"
+                          className="w-full"
+                          aria-label="Service interested in"
+                        >
                           <SelectValue placeholder="Select a service" />
                         </SelectTrigger>
                         <SelectContent>
@@ -385,7 +426,11 @@ export function ContactPage() {
                         onValueChange={setBudget}
                         disabled={loading}
                       >
-                        <SelectTrigger className="w-full" aria-label="Project budget">
+                        <SelectTrigger
+                          id="budget"
+                          className="w-full"
+                          aria-label="Project budget"
+                        >
                           <SelectValue placeholder="Select budget range" />
                         </SelectTrigger>
                         <SelectContent>
@@ -406,6 +451,7 @@ export function ContactPage() {
                       id="website"
                       name="website"
                       type="url"
+                      autoComplete="url"
                       placeholder="https://www.example.gov"
                       disabled={loading}
                     />
@@ -447,9 +493,6 @@ export function ContactPage() {
                         </>
                       )}
                     </Button>
-                    <div aria-live="polite" className="sr-only">
-                      {loading ? "Sending your inquiry, please wait." : ""}
-                    </div>
                   </div>
                 </form>
               )}
@@ -501,7 +544,7 @@ export function ContactPage() {
                         Managed accessibility service
                       </p>
                     </div>
-                    <ArrowRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" />
+                    <ArrowRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" aria-hidden="true" />
                   </Link>
                   <Link
                     href="/manage"
@@ -515,7 +558,7 @@ export function ContactPage() {
                         Accessibility Ops Without Chaos
                       </p>
                     </div>
-                    <ArrowRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" />
+                    <ArrowRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" aria-hidden="true" />
                   </Link>
                 </div>
               </div>

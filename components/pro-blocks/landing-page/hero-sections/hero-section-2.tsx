@@ -18,7 +18,7 @@ export function HeroSection2() {
           {/* Left content */}
           <div className="flex max-w-xl flex-col items-center gap-8 text-center lg:items-start lg:text-left">
             <Tagline>
-              <Shield className="h-3.5 w-3.5 text-primary" />
+              <Shield className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
               <span className="text-foreground">Engineering Equity</span>
             </Tagline>
 
@@ -41,7 +41,7 @@ export function HeroSection2() {
               <Button asChild size="lg" className="w-full sm:w-auto">
                 <Link href="#products" className="w-full sm:w-auto">
                   View Products
-                  <ArrowRight />
+                  <ArrowRight aria-hidden="true" />
                 </Link>
               </Button>
               <Button

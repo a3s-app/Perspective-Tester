@@ -92,7 +92,7 @@ export function A3SPage() {
         <div className="container-padding-x container mx-auto">
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-8 text-center">
             <Tagline>
-              <Shield className="h-3.5 w-3.5 text-primary" />
+              <Shield className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
               <span className="text-foreground">Accessibility as a Service</span>
             </Tagline>
 
@@ -123,7 +123,8 @@ export function A3SPage() {
               <Button asChild size="lg">
                 <Link href="https://a3s.app" target="_blank" rel="noopener noreferrer">
                   Visit A3S
-                  <ArrowRight />
+                  <span className="sr-only"> (opens in a new tab)</span>
+                  <ArrowRight aria-hidden="true" />
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg">
@@ -252,7 +253,8 @@ export function A3SPage() {
               <Button asChild size="lg" className="w-full sm:w-auto sm:min-w-56">
                 <Link href="https://a3s.app" target="_blank" rel="noopener noreferrer">
                   Get Started with A3S
-                  <ArrowRight />
+                  <span className="sr-only"> (opens in a new tab)</span>
+                  <ArrowRight aria-hidden="true" />
                 </Link>
               </Button>
             </div>
@@ -270,7 +272,7 @@ export function A3SPage() {
                   "IAAP-certified specialists",
                 ].map((item) => (
                   <div key={item} className="flex items-center gap-2.5">
-                    <CheckCircle2 className="text-primary h-4 w-4 shrink-0" />
+                    <CheckCircle2 className="text-primary h-4 w-4 shrink-0" aria-hidden="true" />
                     <span className="text-foreground text-sm">{item}</span>
                   </div>
                 ))}

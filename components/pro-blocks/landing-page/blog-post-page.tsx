@@ -204,7 +204,7 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
               >
                 <Link href="/contact" prefetch>
                   Talk to Sales
-                  <ArrowRight />
+                  <ArrowRight aria-hidden="true" />
                 </Link>
               </Button>
               <Button

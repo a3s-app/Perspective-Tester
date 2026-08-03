@@ -102,7 +102,7 @@ export function ManagePage() {
             <Tagline>
               <Image
                 src={assetPath("/p15r-logo.webp")}
-                alt="P15R logo"
+                alt=""
                 width={16}
                 height={16}
                 className="h-3.5 w-3.5 object-contain"
@@ -136,7 +136,8 @@ export function ManagePage() {
               <Button asChild size="lg">
                 <Link href="https://p15r.com" target="_blank" rel="noopener noreferrer">
                   Visit P15R Platform
-                  <ArrowRight />
+                  <span className="sr-only"> (opens in a new tab)</span>
+                  <ArrowRight aria-hidden="true" />
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg">
@@ -276,7 +277,8 @@ export function ManagePage() {
               <Button asChild size="lg" className="w-full sm:w-auto sm:min-w-56">
                 <Link href="https://p15r.com" target="_blank" rel="noopener noreferrer">
                   Start Using P15R
-                  <ArrowRight />
+                  <span className="sr-only"> (opens in a new tab)</span>
+                  <ArrowRight aria-hidden="true" />
                 </Link>
               </Button>
             </div>
@@ -295,7 +297,7 @@ export function ManagePage() {
                   "Priority support",
                 ].map((item) => (
                   <div key={item} className="flex items-center gap-2.5">
-                    <CheckCircle2 className="text-primary h-4 w-4 shrink-0" />
+                    <CheckCircle2 className="text-primary h-4 w-4 shrink-0" aria-hidden="true" />
                     <span className="text-foreground text-sm">{item}</span>
                   </div>
                 ))}

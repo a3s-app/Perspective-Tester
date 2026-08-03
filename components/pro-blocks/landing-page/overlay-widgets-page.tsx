@@ -135,7 +135,7 @@ export function OverlayWidgetsPage() {
         <div className="container-padding-x container mx-auto">
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-8 text-center">
             <Tagline>
-              <ShieldAlert className="h-3.5 w-3.5 text-primary" />
+              <ShieldAlert className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
               <span className="text-foreground">The Overlay Record</span>
             </Tagline>
 
@@ -155,7 +155,7 @@ export function OverlayWidgetsPage() {
               <Button asChild size="lg">
                 <Link href="/a3s">
                   See the Real Fix
-                  <ArrowRight />
+                  <ArrowRight aria-hidden="true" />
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg">
@@ -221,8 +221,11 @@ export function OverlayWidgetsPage() {
                         rel="noopener noreferrer"
                         className="text-muted-foreground hover:text-primary inline-flex items-center gap-1 text-xs transition-colors"
                       >
-                        <ExternalLink className="h-3 w-3" />
+                        <ExternalLink className="h-3 w-3" aria-hidden="true" />
                         {source.label}
+                        <span className="sr-only">
+                          {` — source for ${record.caseName} (opens in a new tab)`}
+                        </span>
                       </a>
                     ))}
                   </div>
@@ -274,16 +277,21 @@ export function OverlayWidgetsPage() {
                   "VPAT & legal documentation",
                 ].map((item) => (
                   <div key={item} className="flex items-center gap-2">
-                    <CheckCircle2 className="text-background/80 h-4 w-4 shrink-0" />
+                    <CheckCircle2 className="text-background/80 h-4 w-4 shrink-0" aria-hidden="true" />
                     <span className="text-background/80 text-sm">{item}</span>
                   </div>
                 ))}
               </div>
             </div>
-            <Button asChild size="lg" variant="secondary" className="shrink-0">
+            <Button
+              asChild
+              size="lg"
+              variant="secondary"
+              className="shrink-0 focus-visible:ring-background focus-visible:ring-offset-foreground"
+            >
               <Link href="/a3s">
                 Explore A3S
-                <ArrowRight />
+                <ArrowRight aria-hidden="true" />
               </Link>
             </Button>
           </div>

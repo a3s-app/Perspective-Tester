@@ -11,7 +11,7 @@ export function TermsPage() {
         <div className="container-padding-x container mx-auto">
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
             <Tagline>
-              <Shield className="h-3.5 w-3.5 text-primary" />
+              <Shield className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
               <span className="text-foreground">Legal</span>
             </Tagline>
             <div className="section-title-gap-xl flex flex-col">

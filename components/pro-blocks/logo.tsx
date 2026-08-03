@@ -14,9 +14,11 @@ export const Logo: React.FC<LogoProps> = ({
 }) => {
   return (
     <div className={`flex items-center gap-2.5 ${className ?? ""}`}>
+      {/* Decorative: the wordmark beside it already carries the name, so
+          alt text here would just be announced twice. */}
       <Image
         src={assetPath("/pt-logo.png")}
-        alt="Perspective Tester logo"
+        alt=""
         width={width}
         height={height}
         className="rounded-md"

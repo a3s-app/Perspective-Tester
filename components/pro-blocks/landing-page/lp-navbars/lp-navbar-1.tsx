@@ -38,7 +38,21 @@ const NavMenuItems = ({ compact }: { compact?: boolean }) => (
 export function LpNavbar1() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCompact, setIsCompact] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const compactRef = useRef(false);
+
+  // The navbar animates through inline styles, which a `prefers-reduced-motion`
+  // media query cannot override, so the preference is read in JS instead.
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = (event: MediaQueryList | MediaQueryListEvent) =>
+      setPrefersReducedMotion(event.matches);
+
+    sync(mediaQuery);
+    mediaQuery.addEventListener("change", sync);
+
+    return () => mediaQuery.removeEventListener("change", sync);
+  }, []);
 
   useEffect(() => {
     let rafId = 0;
@@ -94,19 +108,27 @@ export function LpNavbar1() {
 
   // Premium easing - Apple-style spring curve
   const ease = "cubic-bezier(0.16, 1, 0.3, 1)";
+  /** Build a transition string, or disable it entirely for reduced motion. */
+  const motion = (value: string) => (prefersReducedMotion ? "none" : value);
 
   return (
-    <div className="sticky top-0 isolate z-50">
+    <header
+      className="sticky top-0 isolate z-50"
+      onKeyDown={(event) => {
+        if (event.key === "Escape" && isMenuOpen) setIsMenuOpen(false);
+      }}
+    >
       {/* Outer wrapper - padding animates to create the floating inset */}
       <div
         style={{
           paddingLeft: isCompact ? "16px" : "0px",
           paddingRight: isCompact ? "16px" : "0px",
           paddingTop: isCompact ? "12px" : "0px",
-          transition: `padding 700ms ${ease}`,
+          transition: motion(`padding 700ms ${ease}`),
         }}
       >
         <nav
+          aria-label="Main"
           style={{
             maxWidth: isCompact ? "56rem" : "100%",
             marginLeft: "auto",
@@ -132,7 +154,9 @@ export function LpNavbar1() {
             borderBottomColor: isCompact
               ? "oklch(0.91 0.01 250 / 0.5)"
               : "oklch(0.91 0.01 250)",
-            transition: `max-width 700ms ${ease}, border-radius 700ms ${ease}, background-color 500ms ${ease}, backdrop-filter 500ms ${ease}, -webkit-backdrop-filter 500ms ${ease}, box-shadow 500ms ${ease}, border-color 500ms ${ease}`,
+            transition: motion(
+              `max-width 700ms ${ease}, border-radius 700ms ${ease}, background-color 500ms ${ease}, backdrop-filter 500ms ${ease}, -webkit-backdrop-filter 500ms ${ease}, box-shadow 500ms ${ease}, border-color 500ms ${ease}`,
+            ),
           }}
         >
           {/* Inner container - padding shrinks when compact */}
@@ -143,7 +167,7 @@ export function LpNavbar1() {
               paddingBottom: isCompact ? "8px" : "14px",
               paddingLeft: isCompact ? "20px" : "24px",
               paddingRight: isCompact ? "20px" : "24px",
-              transition: `padding 700ms ${ease}`,
+              transition: motion(`padding 700ms ${ease}`),
             }}
           >
             {/* Logo */}
@@ -163,7 +187,7 @@ export function LpNavbar1() {
                 className="mx-2 h-5 w-px rounded-full"
                 style={{
                   backgroundColor: "oklch(0.91 0.01 250)",
-                  transition: `background-color 500ms ${ease}`,
+                  transition: motion(`background-color 500ms ${ease}`),
                 }}
                 aria-hidden="true"
               />
@@ -228,66 +252,70 @@ export function LpNavbar1() {
             </Button>
           </div>
 
-          {/* Mobile menu - animated grid collapse */}
-          {isMenuOpen ? (
-            <div
-              id="mobile-navigation-menu"
-              className="overflow-hidden md:hidden"
-              style={{
-                display: "grid",
-                gridTemplateRows: "1fr",
-                opacity: 1,
-                transition: `grid-template-rows 500ms ${ease}, opacity 400ms ${ease}`,
-              }}
-            >
-              <div className="min-h-0">
-                <div className="flex flex-col gap-1 border-t px-5 pb-5 pt-4">
-                  {MENU_ITEMS.map(({ label, href }) => (
-                    <Button
-                      key={label}
-                      asChild
-                      variant="ghost"
-                      className="h-11 w-full justify-start rounded-lg px-3 text-sm font-medium"
+          {/* Mobile menu - animated grid collapse. Kept mounted so the
+              hamburger's aria-controls always resolves and so the collapse
+              can animate; `inert` keeps it out of the tab order and the
+              accessibility tree while it is closed. */}
+          <div
+            id="mobile-navigation-menu"
+            className="overflow-hidden md:hidden"
+            inert={!isMenuOpen}
+            style={{
+              display: "grid",
+              gridTemplateRows: isMenuOpen ? "1fr" : "0fr",
+              opacity: isMenuOpen ? 1 : 0,
+              transition: motion(
+                `grid-template-rows 500ms ${ease}, opacity 400ms ${ease}`,
+              ),
+            }}
+          >
+            <div className="min-h-0">
+              <div className="flex flex-col gap-1 border-t px-5 pb-5 pt-4">
+                {MENU_ITEMS.map(({ label, href }) => (
+                  <Button
+                    key={label}
+                    asChild
+                    variant="ghost"
+                    className="h-11 w-full justify-start rounded-lg px-3 text-sm font-medium"
+                  >
+                    <Link
+                      href={href}
+                      prefetch
+                      onClick={() => setIsMenuOpen(false)}
                     >
-                      <Link
-                        href={href}
-                        prefetch
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        {label}
-                      </Link>
-                    </Button>
-                  ))}
-                  <div className="mt-3 flex flex-col gap-2">
-                    <Button
-                      asChild
-                      variant="outline"
-                      className="h-11 w-full rounded-lg text-sm font-medium"
+                      {label}
+                    </Link>
+                  </Button>
+                ))}
+                <div className="mt-3 flex flex-col gap-2">
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="h-11 w-full rounded-lg text-sm font-medium"
+                  >
+                    <Link
+                      href="/contact"
+                      prefetch
+                      onClick={() => setIsMenuOpen(false)}
                     >
-                      <Link
-                        href="/contact"
-                        prefetch
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        Talk to Sales
-                      </Link>
-                    </Button>
-                    <Button asChild className="h-11 w-full rounded-lg text-sm font-medium">
-                      <Link
-                        href="/#products"
-                        prefetch
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        View Products
-                      </Link>
-                    </Button>
-                  </div>
+                      Talk to Sales
+                    </Link>
+                  </Button>
+                  <Button asChild className="h-11 w-full rounded-lg text-sm font-medium">
+                    <Link
+                      href="/#products"
+                      prefetch
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      View Products
+                    </Link>
+                  </Button>
                 </div>
               </div>
             </div>
-          ) : null}
+          </div>
         </nav>
       </div>
-    </div>
+    </header>
   );
 }

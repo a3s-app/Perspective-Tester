@@ -105,7 +105,7 @@ function ClientLogoGrid({ clients }: { clients: Client[] }) {
           >
             <Image
               src={assetPath(client.logo)}
-              alt={`${client.name} logo`}
+              alt=""
               width={160}
               height={80}
               className="h-10 w-auto max-w-[130px] object-contain"
@@ -153,7 +153,7 @@ export function ClientsPage() {
         <div className="container-padding-x container mx-auto">
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
             <Tagline>
-              <Building2 className="h-3.5 w-3.5 text-primary" />
+              <Building2 className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
               <span className="text-foreground">Our Clients</span>
             </Tagline>
 
@@ -199,7 +199,7 @@ export function ClientsPage() {
                 key={t.name}
                 className="flex flex-col gap-5 rounded-xl border bg-card p-6 sm:p-8"
               >
-                <Quote className="h-5 w-5 text-primary/40" />
+                <Quote className="h-5 w-5 text-primary/40" aria-hidden="true" />
                 <p className="text-sm leading-relaxed text-foreground">
                   &ldquo;{t.quote}&rdquo;
                 </p>
@@ -283,18 +283,18 @@ export function ClientsPage() {
                 asChild
                 size="lg"
                 variant="secondary"
-                className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
+                className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 focus-visible:ring-primary-foreground focus-visible:ring-offset-primary"
               >
                 <Link href="/contact">
                   Get Started
-                  <ArrowRight />
+                  <ArrowRight aria-hidden="true" />
                 </Link>
               </Button>
               <Button
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-primary-foreground/40 bg-transparent text-primary-foreground hover:border-primary-foreground hover:bg-primary-foreground hover:text-primary"
+                className="border-primary-foreground/40 bg-transparent text-primary-foreground hover:border-primary-foreground hover:bg-primary-foreground hover:text-primary focus-visible:ring-primary-foreground focus-visible:ring-offset-primary"
               >
                 <Link href="/a3s">
                   Learn About A3S

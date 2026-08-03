@@ -13,7 +13,7 @@ export function AccessibilityStatementPage() {
         <div className="container-padding-x container mx-auto">
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
             <Tagline>
-              <Shield className="h-3.5 w-3.5 text-primary" />
+              <Shield className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
               <span className="text-foreground">Accessibility</span>
             </Tagline>
 
@@ -186,7 +186,7 @@ export function AccessibilityStatementPage() {
                   </p>
                   <div className="mt-2 flex items-center gap-3">
                     <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                      <Mail className="h-4 w-4 text-primary" />
+                      <Mail className="h-4 w-4 text-primary" aria-hidden="true" />
                     </div>
                     <a
                       href="mailto:Info@perspectivetester.com"
@@ -205,7 +205,7 @@ export function AccessibilityStatementPage() {
                 <div className="flex flex-col gap-3 border-t pt-6">
                   <p className="text-xs text-muted-foreground">
                     This statement was last updated on{" "}
-                    <time dateTime="2025-03-06">March 31, 2026</time>.
+                    <time dateTime="2026-03-31">March 31, 2026</time>.
                   </p>
                 </div>
               </div>
@@ -228,7 +228,7 @@ export function AccessibilityStatementPage() {
             <Button asChild size="lg">
               <Link href="/contact">
                 Get a Consultation
-                <ArrowRight />
+                <ArrowRight aria-hidden="true" />
               </Link>
             </Button>
           </div>

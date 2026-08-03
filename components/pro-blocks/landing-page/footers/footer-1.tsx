@@ -97,6 +97,9 @@ function FooterLinks({
           >
             <Icon className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
             <span>{label}</span>
+            {external ? (
+              <span className="sr-only"> (opens in a new tab)</span>
+            ) : null}
           </Link>
         ))}
       </div>
@@ -114,7 +117,9 @@ export function Footer1() {
       <div className="container-padding-x container mx-auto py-12 lg:py-16">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1fr] lg:gap-8">
           <div className="flex flex-col gap-5">
-            <Link href="/" aria-label="Go to homepage" className="w-fit">
+            {/* No aria-label here: it would replace the visible "Perspective
+                Tester" wordmark as the accessible name and fail WCAG 2.5.3. */}
+            <Link href="/" className="w-fit">
               <Logo />
             </Link>
             <p className="text-muted-foreground max-w-sm text-sm leading-relaxed">
@@ -146,12 +151,11 @@ export function Footer1() {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={label}
                     title={label}
-                    className="text-muted-foreground hover:text-foreground inline-flex h-10 w-10 items-center justify-center rounded-full border bg-card transition-colors"
+                    className="text-muted-foreground hover:text-foreground inline-flex h-10 w-10 items-center justify-center rounded-full border border-input bg-card transition-colors"
                   >
                     <Icon className="h-4 w-4" aria-hidden="true" />
-                    <span className="sr-only">{label}</span>
+                    <span className="sr-only">{label} (opens in a new tab)</span>
                   </a>
                 ))}
               </div>

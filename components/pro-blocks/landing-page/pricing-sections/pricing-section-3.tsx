@@ -138,7 +138,7 @@ export function PricingSection3() {
                     <div className="flex flex-col gap-4">
                       {plan.features.map((feature, i) => (
                         <div key={i} className="flex items-center gap-3">
-                          <Check className="text-primary h-5 w-5" />
+                          <Check className="text-primary h-5 w-5" aria-hidden="true" />
                           <span className="text-muted-foreground flex-1 text-sm">
                             {feature.name}
                           </span>
