@@ -378,10 +378,10 @@ export function AuditMethodExplorer() {
               tabIndex={isActive ? 0 : -1}
               onClick={() => setActive(index)}
               onKeyDown={(event) => handleMethodKeyDown(event, index)}
-              className={`group relative flex min-h-[5.5rem] items-center gap-3 border-b border-r border-[oklch(0.88_0.012_245)] px-3 py-4 text-left transition-colors duration-300 last:border-r-0 focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[oklch(0.48_0.13_42)] sm:px-4 lg:border-b-0 ${
+              className={`group relative flex min-h-[5.5rem] items-center gap-3 border-b border-r border-[oklch(0.88_0.012_245)] px-3 py-4 text-left transition-colors duration-300 last:border-r-0 focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-[-2px] sm:px-4 lg:border-b-0 ${
                 isActive
-                  ? "bg-white text-foreground"
-                  : "text-muted-foreground hover:bg-white/70 hover:text-foreground"
+                  ? "bg-[oklch(0.18_0.035_255)] text-white focus-visible:outline-[oklch(0.78_0.12_52)]"
+                  : "text-muted-foreground hover:bg-white/70 hover:text-foreground focus-visible:outline-[oklch(0.48_0.13_42)]"
               }`}
             >
               {isActive && (
@@ -391,11 +391,11 @@ export function AuditMethodExplorer() {
                   transition={{ duration: reduce ? 0 : 0.35, ease }}
                 />
               )}
-              <span className={`flex size-9 shrink-0 items-center justify-center rounded-lg ${isActive ? "bg-[oklch(0.94_0.035_48)] text-[oklch(0.48_0.13_42)]" : "bg-[oklch(0.93_0.01_245)] text-foreground"}`}>
+              <span className={`flex size-9 shrink-0 items-center justify-center rounded-lg ${isActive ? "bg-white/10 text-[oklch(0.78_0.12_52)]" : "bg-[oklch(0.93_0.01_245)] text-foreground"}`}>
                 <Icon className="size-4" aria-hidden="true" />
               </span>
               <span className="min-w-0">
-                <span className="block text-[9px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                <span className={`block text-[9px] font-semibold uppercase tracking-[0.14em] ${isActive ? "text-white/64" : "text-muted-foreground"}`}>
                   {method.recorded} findings
                 </span>
                 <span className="mt-1 block text-xs font-semibold leading-tight sm:text-[13px]">
@@ -427,9 +427,14 @@ export function AuditMethodExplorer() {
                 <span className="flex size-11 items-center justify-center rounded-xl bg-white/10 text-[oklch(0.78_0.12_52)]">
                   <SelectedIcon className="size-5" aria-hidden="true" />
                 </span>
-                <p className="text-xs font-semibold uppercase tracking-[0.15em] text-white/48">
-                  {selected.recorded} findings in the audit record
-                </p>
+                <div>
+                  <p className="text-sm font-semibold text-white">
+                    {selected.name}
+                  </p>
+                  <p className="mt-0.5 text-xs font-semibold uppercase tracking-[0.15em] text-white/64">
+                    {selected.recorded} findings in the audit record
+                  </p>
+                </div>
               </div>
               <p className="mt-8 max-w-md text-2xl font-semibold leading-tight tracking-[-0.025em] sm:text-3xl">
                 {selected.question}
@@ -695,7 +700,7 @@ export function DocumentDecisionArt() {
         <div>
           <div className="mb-3 flex items-center gap-2 text-[oklch(0.78_0.12_52)]">
             <FileText className="size-5" aria-hidden="true" />
-            <span className="text-sm font-semibold">Long-form code</span>
+            <span className="text-sm font-semibold">Long documents</span>
           </div>
           <p className="text-xl font-semibold">PDF becomes a web page</p>
           <p className="mt-3 text-sm leading-relaxed text-white/70">
@@ -1063,10 +1068,6 @@ export function ProgramLoop() {
           <p className="mt-2 max-w-xl text-balance text-2xl font-semibold tracking-[-0.02em] sm:text-3xl">
             Every cycle closes. The evidence stays.
           </p>
-        </div>
-        <div className="flex items-center gap-3 text-sm font-medium text-white/68">
-          <ShieldCheck className="size-5 text-[oklch(0.78_0.12_52)]" aria-hidden="true" />
-          <span>No handoff back to Todd</span>
         </div>
       </div>
 

@@ -230,8 +230,8 @@ export function KitCarsonCountyCaseStudy() {
                 </h3>
                 <p className="mt-4 text-base leading-relaxed text-muted-foreground">
                   The current workbook contains 340 findings across six testing
-                  methods. Select one to see what it reveals and the evidence
-                  the county keeps.
+                  methods. Select a method below to see what it reveals and the
+                  evidence the county keeps.
                 </p>
               </div>
               <AuditMethodExplorer />
