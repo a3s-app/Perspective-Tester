@@ -87,7 +87,7 @@ export function KitCarsonCountyCaseStudy() {
         <div className="container-padding-x container mx-auto grid gap-12 lg:grid-cols-[.82fr_1.18fr] lg:items-center lg:gap-20">
           <div className="max-w-xl">
             <h2 className="text-balance text-3xl font-semibold tracking-[-0.025em] text-foreground sm:text-4xl lg:text-5xl">
-              When the law changed, one more system landed on Todd.
+              When the law changed, one more responsibility landed on Todd.
             </h2>
             <div className="mt-7 space-y-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
               <p>
