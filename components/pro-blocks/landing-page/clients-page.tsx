@@ -20,6 +20,7 @@ interface Testimonial {
   title: string;
   org: string;
   highlight: string;
+  caseStudyHref?: string;
 }
 
 const testimonials: Testimonial[] = [
@@ -30,6 +31,7 @@ const testimonials: Testimonial[] = [
     title: "Information Technology Director",
     org: "Kit Carson County, CO",
     highlight: "Continuous monitoring & compliance",
+    caseStudyHref: "/case-studies/kit-carson-county",
   },
   {
     quote:
@@ -218,6 +220,15 @@ export function ClientsPage() {
                   <span className="inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
                     {t.highlight}
                   </span>
+                  {t.caseStudyHref ? (
+                    <Link
+                      href={t.caseStudyHref}
+                      className="inline-flex min-h-10 items-center gap-2 self-start rounded-md text-sm font-semibold text-primary underline decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
+                    >
+                      Read the case study
+                      <ArrowRight className="size-4" aria-hidden="true" />
+                    </Link>
+                  ) : null}
                 </div>
               </div>
             ))}

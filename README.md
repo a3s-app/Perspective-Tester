@@ -19,6 +19,7 @@ Marketing website for [Perspective Tester](https://perspectivetester.com) — a 
 | `/a3s` | A3S — Accessibility as a Service product page |
 | `/manage` | P15R — Accessibility Ops Without Chaos |
 | `/clients` | Client logos and testimonials |
+| `/case-studies/kit-carson-county` | Kit Carson County accessibility case study |
 | `/about` | Team, values, and company information |
 | `/contact` | Contact form with consultation request |
 | `/accessibility` | Accessibility statement |
