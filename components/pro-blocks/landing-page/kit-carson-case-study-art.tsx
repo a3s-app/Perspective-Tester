@@ -174,7 +174,7 @@ export function WorkloadNetwork() {
             viewport={{ once: true, amount: 0.8 }}
             transition={{ duration: 0.5, delay: 0.35, ease }}
           >
-            Then website accessibility became one more system to carry.
+            Then website accessibility became one more responsibility to carry.
           </motion.p>
         </div>
       </div>
