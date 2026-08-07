@@ -760,8 +760,8 @@ const auditEvidence = [
   },
   {
     label: "WCAG matrix",
-    value: "3,355 results",
-    detail: "61 pages × 55 criteria",
+    value: "3,410 results",
+    detail: "62 pages × 55 criteria",
   },
   {
     label: "Finding record",
