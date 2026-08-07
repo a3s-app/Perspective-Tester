@@ -941,8 +941,8 @@ export function CriticalIssueLedger() {
           Critical barriers were prioritized.
         </p>
         <p className="mt-4 max-w-lg text-sm leading-relaxed text-white/66 sm:text-base">
-          The ten-month record now shows 33 completed fixes, with nearly all
-          critical violations addressed. Every critical barrier remains named
+          Over ten months, we completed 33 fixes and resolved nearly every
+          critical violation. Each barrier, fixed or still open, stays named
           in the evidence trail.
         </p>
         <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm">
