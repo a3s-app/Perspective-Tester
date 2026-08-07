@@ -264,7 +264,7 @@ export function KitCarsonCountyCaseStudy() {
 
             <div className="mt-7 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
               <p className="max-w-3xl text-base leading-relaxed text-muted-foreground">
-                We flagged the image-only schedule critical, added the complete
+                We flagged the image-only schedule as critical, added the complete
                 text version that same month, and retested the page to confirm
                 the details and reading order held.
               </p>
