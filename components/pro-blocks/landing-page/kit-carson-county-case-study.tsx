@@ -345,6 +345,18 @@ export function KitCarsonCountyCaseStudy() {
               It is an ongoing, defensible program, and it does not stop.
             </p>
           </blockquote>
+
+          <figure className="relative mx-auto mt-14 aspect-[16/9] max-w-6xl overflow-hidden rounded-2xl sm:aspect-[5/2] lg:aspect-[3/1]">
+            <Image
+              src={assetPath(
+                "/case-studies/kit-carson-county/county-sunset-prairie.webp",
+              )}
+              alt="Sunset over an open prairie of wild sunflowers"
+              fill
+              sizes="(min-width: 1200px) 1152px, 100vw"
+              className="object-cover object-center"
+            />
+          </figure>
         </div>
       </section>
 
