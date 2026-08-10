@@ -264,25 +264,13 @@ export function KitCarsonCountyCaseStudy() {
             <figure className="relative aspect-[16/9] overflow-hidden sm:aspect-[5/2] lg:aspect-[3/1]">
               <Image
                 src={assetPath(
-                  "/case-studies/kit-carson-county/county-carousel.webp",
+                  "/case-studies/kit-carson-county/county-sunset-prairie.webp",
                 )}
-                alt="Historic carousel horses in Kit Carson County"
+                alt="Sunset over an open prairie of wild sunflowers"
                 fill
                 sizes="(min-width: 1200px) 1152px, 100vw"
-                className="object-cover object-[44%_50%] transition-transform duration-700 hover:scale-[1.025]"
+                className="object-cover object-center transition-transform duration-700 hover:scale-[1.025]"
               />
-              <figcaption className="absolute bottom-4 left-4 rounded-md bg-[oklch(0.12_0.03_255/.82)] px-3 py-2 text-xs text-white/82 backdrop-blur-sm sm:bottom-6 sm:left-6">
-                Historic carousel. Photo from the{" "}
-                <a
-                  href="https://kitcarsoncounty.colorado.gov/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-medium text-white underline decoration-white/40 underline-offset-4 hover:decoration-white"
-                >
-                  county website
-                </a>
-                .
-              </figcaption>
             </figure>
 
             <blockquote className="p-7 sm:p-10 lg:p-12">
@@ -345,18 +333,6 @@ export function KitCarsonCountyCaseStudy() {
               It is an ongoing, defensible program, and it does not stop.
             </p>
           </blockquote>
-
-          <figure className="relative mx-auto mt-14 aspect-[16/9] max-w-6xl overflow-hidden rounded-2xl sm:aspect-[5/2] lg:aspect-[3/1]">
-            <Image
-              src={assetPath(
-                "/case-studies/kit-carson-county/county-sunset-prairie.webp",
-              )}
-              alt="Sunset over an open prairie of wild sunflowers"
-              fill
-              sizes="(min-width: 1200px) 1152px, 100vw"
-              className="object-cover object-center"
-            />
-          </figure>
         </div>
       </section>
 
