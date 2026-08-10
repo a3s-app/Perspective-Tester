@@ -550,8 +550,8 @@ const auditMonths = [
 const auditEvidence = [
   {
     label: "Coverage",
-    value: "Every public page",
-    detail: "tested and dated in the record",
+    value: "Priority pages tested",
+    detail: "and recorded each cycle",
   },
   {
     label: "WCAG matrix",
@@ -567,29 +567,6 @@ const auditEvidence = [
     label: "Repairs",
     value: "Critical issues addressed",
     detail: "retested before the cycle closes",
-  },
-] as const;
-
-const criticalFindings = [
-  {
-    area: "County fair schedule",
-    issue: "The informative image had no meaningful text alternative.",
-    method: "Screen reader",
-  },
-  {
-    area: "BOCC meeting minutes",
-    issue: "Disclosure controls were announced without role or state.",
-    method: "Screen reader",
-  },
-  {
-    area: "BOCC meeting minutes",
-    issue: "Tabs were announced without role, state, or position.",
-    method: "Screen reader",
-  },
-  {
-    area: "BOCC meeting minutes",
-    issue: "Pagination actions could not receive keyboard focus.",
-    method: "Keyboard navigation",
   },
 ] as const;
 
@@ -730,42 +707,22 @@ export function CriticalIssueLedger() {
   const reduce = useReducedMotion();
 
   return (
-    <div className="grid gap-8 border-t border-white/14 pt-8 lg:grid-cols-[.85fr_1.15fr] lg:gap-16">
-      <div>
-        <p className="text-2xl font-semibold tracking-[-0.02em] text-white sm:text-3xl">
-          Critical barriers were prioritized.
-        </p>
-        <p className="mt-4 max-w-lg text-sm leading-relaxed text-white/66 sm:text-base">
-          The barriers that shut residents out entirely go to the front of the
-          queue, and every one of them has been repaired and retested. Each one
-          stays named in the evidence trail, with the fix recorded beside it.
-        </p>
-      </div>
-
-      <ol className="divide-y divide-white/12 border-y border-white/14">
-        {criticalFindings.map((finding, index) => (
-          <motion.li
-            key={`${finding.area}-${finding.issue}`}
-            className="py-4"
-            initial={reduce ? false : { opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.7 }}
-            transition={{ duration: 0.4, delay: index * 0.05, ease }}
-          >
-            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
-              <span className="font-semibold text-[oklch(0.78_0.12_52)]">
-                {finding.area}
-              </span>
-              <span className="text-white/36" aria-hidden="true">·</span>
-              <span className="text-white/48">{finding.method}</span>
-            </div>
-            <p className="mt-1.5 text-sm leading-relaxed text-white/84">
-              {finding.issue}
-            </p>
-          </motion.li>
-        ))}
-      </ol>
-    </div>
+    <motion.div
+      className="border-t border-white/14 pt-8"
+      initial={reduce ? false : { opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.6 }}
+      transition={{ duration: 0.5, ease }}
+    >
+      <p className="text-2xl font-semibold tracking-[-0.02em] text-white sm:text-3xl">
+        Critical barriers were prioritized.
+      </p>
+      <p className="mt-4 max-w-3xl text-sm leading-relaxed text-white/66 sm:text-base">
+        The barriers that shut residents out entirely go to the front of the
+        queue, and every one of them has been repaired and retested. Each one
+        stays named in the evidence trail, with the fix recorded beside it.
+      </p>
+    </motion.div>
   );
 }
 
