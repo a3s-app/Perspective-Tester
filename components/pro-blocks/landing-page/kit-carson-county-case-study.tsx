@@ -279,7 +279,7 @@ export function KitCarsonCountyCaseStudy() {
                 aria-hidden="true"
               />
               <p className="mt-6 text-sm font-semibold uppercase tracking-[0.12em] text-white/58">
-                After nearly a year working together
+                In his own words
               </p>
               <p className="mt-4 max-w-3xl text-balance text-3xl font-semibold leading-tight tracking-[-0.025em] sm:text-4xl">
                 “Don&apos;t know where I would be without you.”
