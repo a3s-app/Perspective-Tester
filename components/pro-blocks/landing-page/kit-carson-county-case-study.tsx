@@ -13,7 +13,6 @@ import {
   AuditMethodExplorer,
   BudgetLoopArtwork,
   CriticalIssueLedger,
-  CriticalFixDemo,
   DeadlineTimeline,
   DocumentDecisionArt,
   EvidenceTrail,
@@ -229,9 +228,9 @@ export function KitCarsonCountyCaseStudy() {
                   Six ways of testing, not one score
                 </h3>
                 <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-                  The current workbook contains 340 findings across six testing
-                  methods. Select a method below to see what it reveals and the
-                  evidence the county keeps.
+                  Every method catches barriers the others miss, so the site is
+                  checked six different ways. Select one to see what it reveals
+                  and the evidence the county keeps.
                 </p>
               </div>
               <AuditMethodExplorer />
@@ -240,49 +239,7 @@ export function KitCarsonCountyCaseStudy() {
         </div>
       </section>
 
-      <section className="border-b bg-background py-16 sm:py-20 lg:py-24">
-        <div className="container-padding-x container mx-auto">
-          <div className="mx-auto max-w-6xl">
-            <div className="max-w-4xl">
-              <p className="text-sm font-semibold text-[oklch(0.48_0.13_42)]">
-                A critical issue from June
-              </p>
-              <h2 className="mt-3 text-balance text-3xl font-semibold tracking-[-0.025em] text-foreground sm:text-4xl">
-                The county fair schedule was a picture.
-              </h2>
-              <p className="mt-5 max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-                The county page relied on one poster for most of its event
-                information. The repair was not a generic caption: we analyzed
-                the artwork and rewrote every date, performer, showtime, and
-                supporting event as structured text immediately after the image.
-              </p>
-            </div>
-
-            <div className="mt-10">
-              <CriticalFixDemo />
-            </div>
-
-            <div className="mt-7 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
-              <p className="max-w-3xl text-base leading-relaxed text-muted-foreground">
-                We flagged the image-only schedule as critical, added the complete
-                text version that same month, and retested the page to confirm
-                the details and reading order held.
-              </p>
-              <a
-                href="https://kitcarsoncounty.colorado.gov/fair-grounds/county-fair"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="shrink-0 text-sm font-semibold text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground"
-              >
-                View the county fair page
-                <span className="sr-only"> (opens in a new tab)</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-b bg-secondary py-20 sm:py-24 lg:py-28">
+      <section className="border-b bg-background py-20 sm:py-24 lg:py-28">
         <div className="container-padding-x container mx-auto">
           <div className="mx-auto max-w-6xl">
             <div className="max-w-3xl">
@@ -303,15 +260,15 @@ export function KitCarsonCountyCaseStudy() {
 
       <section className="border-b bg-background py-16 sm:py-20 lg:py-24">
         <div className="container-padding-x container mx-auto">
-          <div className="mx-auto grid max-w-6xl overflow-hidden rounded-2xl bg-[oklch(0.18_0.035_255)] text-white lg:grid-cols-[1.08fr_.92fr]">
-            <figure className="relative min-h-72 overflow-hidden sm:min-h-96 lg:min-h-[31rem]">
+          <div className="mx-auto max-w-6xl overflow-hidden rounded-2xl bg-[oklch(0.18_0.035_255)] text-white">
+            <figure className="relative aspect-[16/9] overflow-hidden sm:aspect-[5/2] lg:aspect-[3/1]">
               <Image
                 src={assetPath(
                   "/case-studies/kit-carson-county/county-carousel.webp",
                 )}
                 alt="Historic carousel horses in Kit Carson County"
                 fill
-                sizes="(min-width: 1024px) 55vw, 100vw"
+                sizes="(min-width: 1200px) 1152px, 100vw"
                 className="object-cover object-[44%_50%] transition-transform duration-700 hover:scale-[1.025]"
               />
               <figcaption className="absolute bottom-4 left-4 rounded-md bg-[oklch(0.12_0.03_255/.82)] px-3 py-2 text-xs text-white/82 backdrop-blur-sm sm:bottom-6 sm:left-6">
@@ -328,7 +285,7 @@ export function KitCarsonCountyCaseStudy() {
               </figcaption>
             </figure>
 
-            <blockquote className="flex flex-col justify-center p-7 sm:p-10 lg:p-12">
+            <blockquote className="p-7 sm:p-10 lg:p-12">
               <Quote
                 className="size-8 text-[oklch(0.78_0.12_52)]"
                 aria-hidden="true"
@@ -336,7 +293,7 @@ export function KitCarsonCountyCaseStudy() {
               <p className="mt-6 text-sm font-semibold uppercase tracking-[0.12em] text-white/58">
                 After nearly a year working together
               </p>
-              <p className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-[-0.025em] sm:text-4xl">
+              <p className="mt-4 max-w-3xl text-balance text-3xl font-semibold leading-tight tracking-[-0.025em] sm:text-4xl">
                 “Don&apos;t know where I would be without you.”
               </p>
               <footer className="mt-7 text-sm font-medium text-white/68">

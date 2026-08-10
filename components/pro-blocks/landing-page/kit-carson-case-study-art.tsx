@@ -260,7 +260,6 @@ const auditMethods = [
   {
     id: "automated",
     name: "Automated inspection",
-    recorded: 17,
     icon: Search,
     question: "Does the code expose the right meaning?",
     detail: "Scans every page for repeatable code and markup failures.",
@@ -270,7 +269,6 @@ const auditMethods = [
   {
     id: "screen-reader",
     name: "Screen readers",
-    recorded: 255,
     icon: MonitorCheck,
     question: "Does the page still make sense when it is heard?",
     detail: "A person listens for clear meaning, order, and control names.",
@@ -280,7 +278,6 @@ const auditMethods = [
   {
     id: "keyboard",
     name: "Keyboard navigation",
-    recorded: 8,
     icon: Keyboard,
     question: "Can every task be completed without a mouse?",
     detail: "Tests focus order, visibility, menus, forms, and escape routes.",
@@ -290,7 +287,6 @@ const auditMethods = [
   {
     id: "contrast",
     name: "Color contrast",
-    recorded: 13,
     icon: Contrast,
     question: "Can residents read every word and control state?",
     detail: "Measures text, icons, and controls against their backgrounds.",
@@ -300,7 +296,6 @@ const auditMethods = [
   {
     id: "zoom",
     name: "Browser zoom",
-    recorded: 44,
     icon: ZoomIn,
     question: "Does the page hold together when it is enlarged?",
     detail: "Checks reflow, overlap, and task completion at high zoom.",
@@ -310,7 +305,6 @@ const auditMethods = [
   {
     id: "spacing",
     name: "Text spacing",
-    recorded: 3,
     icon: TextCursorInput,
     question: "Can residents change spacing without losing content?",
     detail: "Applies larger line, word, letter, and paragraph spacing.",
@@ -395,10 +389,7 @@ export function AuditMethodExplorer() {
                 <Icon className="size-4" aria-hidden="true" />
               </span>
               <span className="min-w-0">
-                <span className={`block text-[9px] font-semibold uppercase tracking-[0.14em] ${isActive ? "text-white/64" : "text-muted-foreground"}`}>
-                  {method.recorded} findings
-                </span>
-                <span className="mt-1 block text-xs font-semibold leading-tight sm:text-[13px]">
+                <span className="block text-xs font-semibold leading-tight sm:text-[13px]">
                   {method.name}
                 </span>
               </span>
@@ -432,7 +423,7 @@ export function AuditMethodExplorer() {
                     {selected.name}
                   </p>
                   <p className="mt-0.5 text-xs font-semibold uppercase tracking-[0.15em] text-white/64">
-                    {selected.recorded} findings in the audit record
+                    Run in every monthly cycle
                   </p>
                 </div>
               </div>
@@ -469,202 +460,6 @@ export function AuditMethodExplorer() {
           <Check className="size-4 text-[oklch(0.72_0.12_150)]" aria-hidden="true" />
           Human testing confirms the experience. A3S keeps the record.
         </p>
-      </div>
-    </div>
-  );
-}
-
-const fairTextDetails = [
-  {
-    label: "When and where",
-    detail:
-      "Burlington, Colorado, from July 25 through August 1.",
-  },
-  {
-    label: "Saturday concert",
-    detail:
-      "The Kentucky Headhunters perform immediately after the rodeo on August 1.",
-  },
-  {
-    label: "Rodeo times",
-    detail:
-      "Thursday, July 30 at 8:00 p.m.; Friday, July 31 at 8:00 p.m.; Saturday, August 1 at 7:30 p.m.",
-  },
-  {
-    label: "More fair events",
-    detail:
-      "Allan Dessell, a Thursday drone show, amusement entertainment, and the Pink Chaps auction during the rodeo.",
-  },
-] as const;
-
-export function CriticalFixDemo() {
-  const [state, setState] = useState<"before" | "after">("before");
-  const reduce = useReducedMotion();
-
-  return (
-    <div className="overflow-hidden rounded-2xl bg-[oklch(0.18_0.035_255)] text-white">
-      <div className="flex items-center justify-between gap-5 border-b border-white/12 p-5 max-sm:flex-col max-sm:items-start sm:p-6">
-        <div>
-          <p className="text-sm font-semibold">County fair concert schedule</p>
-          <p className="mt-1 text-xs text-white/56">
-            The same source image, two very different resident experiences
-          </p>
-        </div>
-        <div
-          className="flex rounded-lg bg-white/10 p-1"
-          aria-label="Choose remediation state"
-        >
-          {(["before", "after"] as const).map((value) => (
-            <button
-              key={value}
-              type="button"
-              aria-pressed={state === value}
-              onClick={() => setState(value)}
-              className={`min-h-10 rounded-md px-3.5 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
-                state === value
-                  ? "bg-white text-[oklch(0.18_0.035_255)]"
-                  : "text-white/72 hover:text-white"
-              }`}
-            >
-              {value === "before" ? "Before: image only" : "After: image + text"}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div
-        className="min-h-[31rem] bg-[oklch(0.96_0.006_250)] p-5 text-[oklch(0.17_0.03_255)] sm:p-8"
-        aria-live="polite"
-      >
-        <AnimatePresence mode="wait" initial={false}>
-          {state === "before" ? (
-            <motion.div
-              key="before"
-              initial={reduce ? false : { opacity: 0, x: -12 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={reduce ? undefined : { opacity: 0, x: -8 }}
-              transition={{ duration: 0.38, ease }}
-              className="grid gap-8 lg:grid-cols-[.82fr_1.18fr] lg:items-center"
-            >
-              <figure>
-                <div
-                  className="relative mx-auto aspect-square w-full max-w-[25rem] overflow-hidden rounded-xl bg-[oklch(0.18_0.035_255)] shadow-[0_8px_0_oklch(0.14_0.03_255/.18)]"
-                  role="img"
-                  aria-label="The original image-only county fair concert flyer"
-                >
-                  <Image
-                    src={assetPath(
-                      "/case-studies/kit-carson-county/county-fair-poster.webp",
-                    )}
-                    alt=""
-                    fill
-                    sizes="(min-width: 1024px) 25rem, 86vw"
-                    className="object-cover"
-                  />
-                </div>
-                <figcaption className="mt-3 text-center text-xs text-muted-foreground">
-                  The source poster contained most of the event information.
-                </figcaption>
-              </figure>
-
-              <div className="max-w-xl">
-                <p className="text-sm font-semibold text-[oklch(0.48_0.13_42)]">
-                  Critical: information only existed as pixels
-                </p>
-                <h3 className="mt-3 text-balance text-2xl font-semibold tracking-[-0.02em] sm:text-3xl">
-                  The poster carried the schedule. The page did not.
-                </h3>
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
-                  A sighted visitor could scan the artwork for dates, performers,
-                  and showtimes. Assistive technology encountered one image with
-                  no structured event content or reading order.
-                </p>
-
-                <div className="mt-7 border-y border-[oklch(0.78_0.08_28)] bg-[oklch(0.93_0.025_28)] py-5 text-[oklch(0.31_0.09_28)]">
-                  <p className="text-xs font-semibold">Screen reader announced</p>
-                  <p className="mt-2 text-3xl font-semibold tracking-[-0.02em]">
-                    “image”
-                  </p>
-                </div>
-                <p className="mt-5 text-sm font-medium text-foreground">
-                  No fair dates. No performer. No rodeo times. No event order.
-                </p>
-              </div>
-            </motion.div>
-          ) : (
-            <motion.div
-              key="after"
-              initial={reduce ? false : { opacity: 0, x: 12 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={reduce ? undefined : { opacity: 0, x: 8 }}
-              transition={{ duration: 0.38, ease }}
-              className="grid gap-8 lg:grid-cols-[.7fr_1.3fr] lg:items-start"
-            >
-              <figure>
-                <div className="relative mx-auto aspect-square w-full max-w-80 overflow-hidden rounded-xl bg-[oklch(0.18_0.035_255)]">
-                  <Image
-                    src={assetPath(
-                      "/case-studies/kit-carson-county/county-fair-poster.webp",
-                    )}
-                    alt="Original Kit Carson County Fair and Rodeo concert poster"
-                    fill
-                    sizes="(min-width: 1024px) 20rem, 80vw"
-                    className="object-cover"
-                  />
-                </div>
-                <figcaption className="mt-3 text-center text-xs text-muted-foreground">
-                  The original image remains on the page.
-                </figcaption>
-              </figure>
-
-              <article>
-                <div className="flex items-center gap-3 text-[oklch(0.31_0.1_145)]">
-                  <motion.span
-                    className="flex size-9 items-center justify-center rounded-full bg-[oklch(0.9_0.05_145)]"
-                    initial={reduce ? false : { scale: 0.7 }}
-                    animate={{ scale: 1 }}
-                    transition={{ duration: 0.45, ease }}
-                  >
-                    <Check className="size-5" aria-hidden="true" />
-                  </motion.span>
-                  <p className="text-sm font-semibold">
-                    Accessible text placed directly after the image
-                  </p>
-                </div>
-
-                <h3 className="mt-5 text-balance text-2xl font-semibold tracking-[-0.02em] sm:text-3xl">
-                  2026 Kit Carson County Fair &amp; Rodeo
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  The graphic was analyzed and every meaningful event detail was
-                  rewritten into a clear text reading order.
-                </p>
-
-                <dl className="mt-6 divide-y border-y border-border">
-                  {fairTextDetails.map((item) => (
-                    <div
-                      key={item.label}
-                      className="grid gap-1 py-4 sm:grid-cols-[8.5rem_1fr] sm:gap-5"
-                    >
-                      <dt className="text-sm font-semibold text-foreground">
-                        {item.label}
-                      </dt>
-                      <dd className="text-sm leading-relaxed text-muted-foreground">
-                        {item.detail}
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
-
-                <p className="mt-5 flex items-start gap-3 text-sm font-semibold leading-relaxed text-[oklch(0.31_0.1_145)]">
-                  <Check className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
-                  The image stays. Access to its meaning no longer depends on
-                  seeing it.
-                </p>
-              </article>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
     </div>
   );
@@ -755,23 +550,23 @@ const auditMonths = [
 const auditEvidence = [
   {
     label: "Coverage",
-    value: "62 URLs",
-    detail: "marked Tested through July",
+    value: "Every public page",
+    detail: "tested and dated in the record",
   },
   {
     label: "WCAG matrix",
-    value: "3,410 results",
-    detail: "62 pages × 55 criteria",
+    value: "Every applicable criterion",
+    detail: "checked page by page",
   },
   {
     label: "Finding record",
-    value: "310 findings",
-    detail: "logged through July",
+    value: "Every barrier named",
+    detail: "with the page and the method that caught it",
   },
   {
-    label: "Repairs completed",
-    value: "33 fixes",
-    detail: "nearly all critical violations addressed",
+    label: "Repairs",
+    value: "Fixes verified",
+    detail: "retested before the cycle closes",
   },
 ] as const;
 
@@ -924,7 +719,7 @@ export function EvidenceTrail() {
         </dl>
 
         <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-          Results from the county audit workbook through July 2026.
+          Drawn from the county&apos;s audit record through July 2026.
         </p>
       </div>
     </div>
@@ -941,16 +736,10 @@ export function CriticalIssueLedger() {
           Critical barriers were prioritized.
         </p>
         <p className="mt-4 max-w-lg text-sm leading-relaxed text-white/66 sm:text-base">
-          Over ten months, we completed 33 fixes and resolved nearly every
-          critical violation. Each barrier, fixed or still open, stays named
-          in the evidence trail.
+          The barriers that shut residents out entirely go to the front of the
+          queue, and nearly all of them have been repaired and retested. Each
+          one, fixed or still open, stays named in the evidence trail.
         </p>
-        <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm">
-          <span className="flex items-center gap-2 text-[oklch(0.79_0.11_145)]">
-            <Check className="size-4" aria-hidden="true" />
-            33 fixes completed
-          </span>
-        </div>
       </div>
 
       <ol className="divide-y divide-white/12 border-y border-white/14">
