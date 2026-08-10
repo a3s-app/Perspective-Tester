@@ -534,19 +534,6 @@ export function DocumentDecisionArt() {
   );
 }
 
-const auditMonths = [
-  { label: "Oct", state: "complete" },
-  { label: "Nov", state: "complete" },
-  { label: "Dec", state: "complete" },
-  { label: "Jan", state: "complete" },
-  { label: "Feb", state: "complete" },
-  { label: "Mar", state: "complete" },
-  { label: "Apr", state: "complete" },
-  { label: "May", state: "complete" },
-  { label: "Jun", state: "complete" },
-  { label: "Jul", state: "complete" },
-] as const;
-
 const auditEvidence = [
   {
     label: "Coverage",
@@ -625,43 +612,12 @@ export function EvidenceTrail() {
 
       <div className="p-5 sm:p-8">
         <div>
-          <div>
-            <p className="text-sm font-semibold text-[oklch(0.48_0.13_42)]">
-              October 2025 to July 2026
-            </p>
-            <p className="mt-1 text-2xl font-semibold tracking-[-0.02em] text-foreground">
-              What ten cycles produced.
-            </p>
-          </div>
-        </div>
-
-        <div className="relative mt-6">
-          <span
-            className="absolute left-[5%] right-[5%] top-4 hidden h-px bg-border lg:block"
-            aria-hidden="true"
-          />
-          <ol className="grid grid-cols-5 gap-x-2 gap-y-4 lg:grid-cols-10">
-            {auditMonths.map((month, index) => (
-              <li
-                key={month.label}
-                className="relative flex flex-col items-center gap-2 text-center"
-              >
-                <motion.span
-                  className="relative z-10 flex size-8 items-center justify-center rounded-full bg-[oklch(0.9_0.05_145)] text-[oklch(0.31_0.1_145)]"
-                  initial={reduce ? false : { opacity: 0, scale: 0.55 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true, amount: 0.8 }}
-                  transition={{ duration: 0.4, delay: index * 0.06, ease }}
-                  aria-label="Audit cycle completed"
-                >
-                  <Check className="size-4" aria-hidden="true" />
-                </motion.span>
-                <span className="text-xs font-semibold text-muted-foreground">
-                  {month.label}
-                </span>
-              </li>
-            ))}
-          </ol>
+          <p className="text-sm font-semibold text-[oklch(0.48_0.13_42)]">
+            The ongoing record
+          </p>
+          <p className="mt-1 text-2xl font-semibold tracking-[-0.02em] text-foreground">
+            What every cycle produces.
+          </p>
         </div>
 
         <dl className="mt-6 grid border-y sm:grid-cols-2">
@@ -696,7 +652,7 @@ export function EvidenceTrail() {
         </dl>
 
         <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-          Drawn from the county&apos;s audit record through July 2026.
+          Drawn from the county&apos;s live accessibility record.
         </p>
       </div>
     </div>

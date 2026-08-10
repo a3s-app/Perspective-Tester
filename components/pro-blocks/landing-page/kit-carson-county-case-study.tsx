@@ -297,12 +297,12 @@ export function KitCarsonCountyCaseStudy() {
           <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[.85fr_1.15fr] lg:items-center lg:gap-16">
             <div>
               <h2 className="text-balance text-3xl font-semibold tracking-[-0.025em] sm:text-4xl lg:text-5xl">
-                Ten months of work. One clear record.
+                Continuous work. One clear record.
               </h2>
               <p className="mt-6 text-base leading-relaxed text-white/70 sm:text-lg">
-                From October 2025 through July 2026, the county completed ten
-                monthly audit cycles. Each cycle added coverage, findings,
-                repairs, and QA evidence without resetting the record.
+                We run the county&apos;s audit cycle every month, without a gap.
+                Each cycle adds coverage, findings, repairs, and QA evidence to
+                the same record instead of resetting it.
               </p>
               <p className="mt-6 text-base font-semibold leading-relaxed text-[oklch(0.78_0.12_52)]">
                 Colorado&apos;s rule does not ask you to be perfect. It asks you

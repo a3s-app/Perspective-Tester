@@ -14,7 +14,7 @@ const evidence = [
   {
     label: "Cadence",
     value: "Monthly audit cycles",
-    detail: "run without a gap from October 2025 through July 2026",
+    detail: "run without a gap",
   },
   {
     label: "Coverage",

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Kit Carson County, CO Accessibility Case Study",
     description:
-      "Ten months of uninterrupted audits, practical remediation, and one defensible accessibility record.",
+      "Uninterrupted monthly audits, practical remediation, and one defensible accessibility record.",
     url: "/case-studies/kit-carson-county",
     type: "article",
     images: [
