@@ -565,7 +565,7 @@ const auditEvidence = [
   },
   {
     label: "Repairs",
-    value: "Fixes verified",
+    value: "Critical issues addressed",
     detail: "retested before the cycle closes",
   },
 ] as const;
@@ -737,8 +737,8 @@ export function CriticalIssueLedger() {
         </p>
         <p className="mt-4 max-w-lg text-sm leading-relaxed text-white/66 sm:text-base">
           The barriers that shut residents out entirely go to the front of the
-          queue, and nearly all of them have been repaired and retested. Each
-          one, fixed or still open, stays named in the evidence trail.
+          queue, and every one of them has been repaired and retested. Each one
+          stays named in the evidence trail, with the fix recorded beside it.
         </p>
       </div>
 

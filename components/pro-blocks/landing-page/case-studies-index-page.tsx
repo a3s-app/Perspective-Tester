@@ -12,19 +12,19 @@ import { assetPath } from "@/lib/utils";
 
 const evidence = [
   {
-    value: "10",
-    label: "monthly audit cycles",
-    detail: "Completed without a gap from October 2025 through July 2026.",
+    label: "Cadence",
+    value: "Monthly audit cycles",
+    detail: "run without a gap from October 2025 through July 2026",
   },
   {
-    value: "33",
-    label: "completed fixes",
-    detail: "With nearly all critical violations addressed.",
+    label: "Coverage",
+    value: "Public Pages",
+    detail: "tested and dated in the record",
   },
   {
-    value: "62",
-    label: "URLs tested",
-    detail: "Each tied to the criteria, finding, and current status.",
+    label: "Repairs",
+    value: "Critical issues addressed",
+    detail: "retested before the cycle closes",
   },
 ] as const;
 
@@ -164,18 +164,18 @@ export function CaseStudiesIndexPage() {
                   {evidence.map((item) => (
                     <div
                       key={item.label}
-                      className="grid gap-2 py-5 sm:grid-cols-[5rem_1fr] sm:gap-5"
+                      className="grid gap-1 py-5 sm:grid-cols-[6rem_1fr] sm:gap-5"
                     >
-                      <dt className="flex items-baseline gap-2 sm:block">
-                        <span className="text-3xl font-semibold tracking-[-0.025em] text-white">
+                      <dt className="text-sm font-semibold text-white/82">
+                        {item.label}
+                      </dt>
+                      <dd className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                        <span className="text-lg font-semibold tracking-[-0.015em] text-white">
                           {item.value}
                         </span>
-                        <span className="text-sm font-semibold text-white/82 sm:mt-1 sm:block">
-                          {item.label}
+                        <span className="text-sm text-white/66">
+                          {item.detail}
                         </span>
-                      </dt>
-                      <dd className="text-sm leading-relaxed text-white/66 sm:pt-1.5">
-                        {item.detail}
                       </dd>
                     </div>
                   ))}
