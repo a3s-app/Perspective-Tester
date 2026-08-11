@@ -9,27 +9,13 @@ import {
   HeroArtwork,
 } from "@/components/pro-blocks/landing-page/kit-carson-case-study-art";
 
-const options = [
-  {
-    label: "Option A",
-    title: "A whole-site audit and remediation, $30K and up.",
-    detail:
-      "But that is a snapshot. The site keeps changing. A year later, the same question comes back.",
-  },
-  {
-    label: "Option B",
-    title: "A monthly service that actually keeps pace with the work.",
-    detail:
-      "But most options cost more than the county's monthly IT budget.",
-  },
-] as const;
-
 const outcomes = [
   "Compliance demonstrated every month",
   "No more guessing whether the work is good enough",
   "Continuous documented record of progress",
   "Accessibility no longer Todd's solo burden",
-  "Defensible against Colorado's requirement",
+  "Meets or exceeds Colorado's state accessibility requirements",
+  "Critical barriers fixed first, everything else follows",
 ] as const;
 
 export function KitCarsonCountyCaseStudy() {
@@ -124,27 +110,21 @@ export function KitCarsonCountyCaseStudy() {
           <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1.08fr_.92fr] lg:items-start lg:gap-16">
             <div>
               <h2 className="text-balance text-3xl font-semibold tracking-[-0.025em] text-foreground sm:text-4xl lg:text-5xl">
-                The options were bad.
+                Why he was stuck
               </h2>
 
-              <div className="mt-10 space-y-8">
-                {options.map((option) => (
-                  <div
-                    key={option.label}
-                    className="border-l-2 border-[oklch(0.48_0.13_42)] pl-6"
-                  >
-                    <p className="text-sm font-semibold text-[oklch(0.48_0.13_42)]">
-                      {option.label}
-                    </p>
-                    <p className="mt-2 text-xl font-semibold leading-snug text-foreground sm:text-2xl">
-                      {option.title}
-                    </p>
-                    <p className="mt-3 text-base leading-relaxed text-muted-foreground">
-                      {option.detail}
-                    </p>
-                  </div>
-                ))}
-              </div>
+              <p className="mt-7 max-w-2xl text-xl font-semibold leading-snug text-foreground sm:text-2xl">
+                An audit costs tens of thousands of dollars. Remediation costs
+                too much on top of that.
+              </p>
+              <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+                But websites change. New content gets added. Pages get updated.
+                So you don&apos;t just audit and remediate once. You have to do
+                it continuously.
+              </p>
+              <p className="mt-7 text-2xl font-semibold tracking-[-0.02em] text-foreground sm:text-3xl">
+                He couldn&apos;t afford that cycle.
+              </p>
 
               <blockquote className="mt-10 rounded-2xl border border-border bg-secondary p-6 sm:p-8">
                 <p className="text-xl font-semibold leading-snug text-foreground sm:text-2xl">
@@ -152,9 +132,23 @@ export function KitCarsonCountyCaseStudy() {
                   that point, it&apos;s cheaper to pay the fine.”
                 </p>
                 <footer className="mt-4 text-sm text-muted-foreground">
-                  Todd, after pricing traditional audits
+                  Todd, after pricing traditional solutions
                 </footer>
               </blockquote>
+
+              <div className="mt-14 border-t-2 border-[oklch(0.48_0.13_42)] pt-8">
+                <h3 className="text-2xl font-semibold tracking-[-0.025em] text-foreground sm:text-3xl">
+                  The shift
+                </h3>
+                <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+                  A3S is a monthly program that handles continuous auditing,
+                  remediating, and validating. Every month. Built into the
+                  operating budget.
+                </p>
+                <p className="mt-6 max-w-2xl text-xl font-semibold leading-snug text-foreground sm:text-2xl">
+                  Todd got continuous compliance without breaking the bank.
+                </p>
+              </div>
             </div>
 
             <div className="lg:sticky lg:top-28">
@@ -263,7 +257,7 @@ export function KitCarsonCountyCaseStudy() {
                 Where your county stands
               </h2>
               <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
-                Colorado&apos;s accessibility deadline is real. Most counties
+                Colorado&apos;s accessibility penalties are real. Most counties
                 are doing the work but lack proof they&apos;re doing it.
               </p>
             </div>
