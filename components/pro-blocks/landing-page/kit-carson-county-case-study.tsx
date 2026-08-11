@@ -268,7 +268,7 @@ export function KitCarsonCountyCaseStudy() {
                   We&apos;ll spend an hour looking at your site, at no cost.
                 </p>
                 <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/70">
-                  You will see exactly where you stand before the deadline hits.
+                  You will see exactly where you stand.
                 </p>
               </div>
               <Button
