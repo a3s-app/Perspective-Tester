@@ -119,7 +119,7 @@ export function KitCarsonCountyCaseStudy() {
               </p>
               <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
                 Websites change. New content gets added. Pages get updated.
-                Every change can introduce a new barrier, so the work has to
+                Every change has the potential to introduce a new barrier, so the work has to 
                 keep going.
               </p>
               <p className="mt-7 text-2xl font-semibold tracking-[-0.02em] text-foreground sm:text-3xl">
