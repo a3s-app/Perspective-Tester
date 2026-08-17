@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
+import { getAllResearch } from "@/lib/research";
 
 // Regenerates when the Sanity cache tag is revalidated, hourly at the latest.
 export const revalidate = 3600;
@@ -18,6 +19,7 @@ const staticRoutes: MetadataRoute.Sitemap = [
     priority: 0.8,
   },
   { url: `${SITE_URL}/overlay-widgets`, changeFrequency: "monthly", priority: 0.7 },
+  { url: `${SITE_URL}/research`, changeFrequency: "monthly", priority: 0.8 },
   { url: `${SITE_URL}/blog`, changeFrequency: "weekly", priority: 0.7 },
   { url: `${SITE_URL}/about`, changeFrequency: "monthly", priority: 0.7 },
   { url: `${SITE_URL}/contact`, changeFrequency: "yearly", priority: 0.8 },
@@ -31,6 +33,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     ...staticRoutes,
+    ...getAllResearch().map((piece) => ({
+      url: `${SITE_URL}/research/${piece.slug}`,
+      lastModified: piece.lastReviewed,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
     ...posts.map((post) => ({
       url: `${SITE_URL}/blog/${post.slug}`,
       lastModified: post.date,

@@ -114,13 +114,13 @@ export function KitCarsonCountyCaseStudy() {
               </h2>
 
               <p className="mt-7 max-w-2xl text-xl font-semibold leading-snug text-foreground sm:text-2xl">
-                An audit costs tens of thousands of dollars. Remediation costs
-                too much on top of that.
+                Auditing a site and fixing what it finds is expensive. And it
+                is never a one-time job.
               </p>
               <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-                But websites change. New content gets added. Pages get updated.
-                So you don&apos;t just audit and remediate once. You have to do
-                it continuously.
+                Websites change. New content gets added. Pages get updated.
+                Every change can introduce a new barrier, so the work has to
+                keep going.
               </p>
               <p className="mt-7 text-2xl font-semibold tracking-[-0.02em] text-foreground sm:text-3xl">
                 He couldn&apos;t afford that cycle.
