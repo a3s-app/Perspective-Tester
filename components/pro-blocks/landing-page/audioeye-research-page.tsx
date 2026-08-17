@@ -1,7 +1,6 @@
 import { Tagline } from "@/components/pro-blocks/landing-page/tagline";
 import {
   BookOpen,
-  Building2,
   CircleCheck,
   ExternalLink,
   FlaskConical,
@@ -51,7 +50,7 @@ const references: Reference[] = [
   {
     id: 2,
     citation:
-      "Disability Rights Advocates, “LightHouse for the Blind and Visually Impaired v. ADP TotalSource” — case record.",
+      "Disability Rights Advocates, “LightHouse for the Blind and Visually Impaired v. ADP TotalSource” case record.",
     href: "https://dralegal.org/case/lighthouse-for-the-blind-and-visually-impaired-v-adp-totalsource/",
     kind: "Court document",
   },
@@ -100,7 +99,7 @@ const references: Reference[] = [
   },
   {
     id: 9,
-    citation: "AudioEye, “AudioEye Assurance” — product page.",
+    citation: "AudioEye, “AudioEye Assurance” product page.",
     href: "https://www.audioeye.com/solution/audioeye-assurance/",
     kind: "AudioEye document",
     note: "Retrieved 17 August 2026.",
@@ -297,7 +296,6 @@ function Section({
 
 const contents = [
   { href: "#what", label: "What an overlay is" },
-  { href: "#company", label: "AudioEye: company profile" },
   { href: "#own-documents", label: "What AudioEye’s own documents say" },
   { href: "#evidence", label: "Evidence on effectiveness" },
   { href: "#useful", label: "Where overlays do help" },
@@ -305,17 +303,6 @@ const contents = [
   { href: "#not-supported", label: "Claims that do not hold up" },
   { href: "#deadlines", label: "Title II compliance dates" },
   { href: "#references", label: "References" },
-];
-
-const companyFacts = [
-  { label: "Legal entity", value: "AudioEye, Inc., a Delaware corporation formed 20 May 2005" },
-  { label: "Listing", value: "Nasdaq Capital Market (AEYE), listed since 4 September 2018" },
-  { label: "FY2025 revenue", value: "$40.311m, up 15% from $35.201m in FY2024" },
-  { label: "FY2025 net loss", value: "$3.077m, narrowed from $4.254m in FY2024" },
-  { label: "Accumulated deficit", value: "$103.398m as of 31 December 2025" },
-  { label: "Customers", value: "Approximately 131,000, up from 127,000 in FY2024" },
-  { label: "Revenue mix", value: "Partner and Marketplace 58% of ARR; Enterprise 42%" },
-  { label: "Intellectual property", value: "26 issued US patents and 3 pending applications" },
 ];
 
 /** Barriers reported by blind and low-vision users on sites that had adopted an overlay. */
@@ -347,7 +334,7 @@ export function AudioEyeResearchPage() {
               </h1>
               <p className="text-muted-foreground max-w-2xl text-base leading-relaxed lg:text-lg">
                 A sourced review of what can be established about accessibility
-                overlay products and about AudioEye specifically &mdash; drawn
+                overlay products and about AudioEye specifically, drawn
                 from peer-reviewed research, court filings, SEC disclosures,
                 federal regulatory orders, disability-community resolutions and
                 AudioEye&rsquo;s own published documentation.
@@ -441,8 +428,7 @@ export function AudioEyeResearchPage() {
           markup and accessibility tree.
         </p>
         <p className="text-muted-foreground text-base leading-relaxed">
-          The defining characteristic &mdash; and the origin of most of the debate
-          &mdash; is that the underlying source code is left unchanged. AudioEye
+          The defining characteristic, and the origin of most of the debate, is that the underlying source code is left unchanged. AudioEye
           states this plainly as a design choice and a competitive advantage:
         </p>
         <Verbatim
@@ -460,45 +446,6 @@ export function AudioEyeResearchPage() {
         <p className="text-muted-foreground text-sm leading-relaxed">
           Whether that is a strength or a weakness is the substance of the
           disagreement, and both readings are set out below.
-        </p>
-      </Section>
-
-      {/* ------------------------------------------------- Company profile */}
-      <Section
-        id="company"
-        eyebrow="The company"
-        icon={Building2}
-        heading="AudioEye: company profile"
-        intro={
-          <>
-            Figures are taken from AudioEye&rsquo;s most recent annual report on
-            Form 10-K.
-            <Cite ids={[3]} />
-          </>
-        }
-      >
-        <dl className="grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
-          {companyFacts.map((fact) => (
-            <div key={fact.label} className="flex flex-col gap-1 border-t pt-3">
-              <dt className="text-muted-foreground text-xs tracking-wide uppercase">
-                {fact.label}
-              </dt>
-              <dd className="text-foreground text-sm leading-relaxed">{fact.value}</dd>
-            </div>
-          ))}
-        </dl>
-        <p className="text-muted-foreground text-sm leading-relaxed">
-          The 10-K names Samsung, Landry&rsquo;s and Calvin Klein among its
-          customers and states that government agencies including the Federal
-          Communications Commission use its software.
-          <Cite ids={[3]} /> AudioEye has also grown by acquisition, buying the
-          Bureau of Internet Accessibility in 2022 and ADA Site Compliance in
-          September 2024 &mdash; both human-delivered auditing businesses rather
-          than automation vendors.
-          <Cite ids={[3, 22]} /> Item 3 of the 10-K discloses no material pending
-          legal proceedings, stating only that the company is subject to
-          proceedings and claims &ldquo;in the normal course of business.&rdquo;
-          <Cite ids={[3]} />
         </p>
       </Section>
 
@@ -549,9 +496,9 @@ export function AudioEyeResearchPage() {
               stating that even the best automated tools detect about two-thirds
               of accessibility barriers and can fix about half of those.
               <Cite ids={[10]} /> On what automation does handle well, AudioEye
-              points to pattern-based defects &mdash; heading elements out of
+              points to pattern-based defects such as heading elements out of
               order, fields lacking labels, links missing destination
-              descriptions &mdash; and reports delivering &ldquo;more than a
+              descriptions. It reports delivering &ldquo;more than a
               billion remediations daily&rdquo; from &ldquo;more than 70
               thoroughly tested auto remediations.&rdquo;
               <Cite ids={[7]} />
@@ -595,7 +542,7 @@ export function AudioEyeResearchPage() {
             </h3>
             <p className="text-muted-foreground text-sm leading-relaxed">
               AudioEye&rsquo;s Service Level Agreement commits to availability
-              and support responsiveness &mdash; 99.9% uptime, and defined
+              and support responsiveness: 99.9% uptime, and defined
               response windows from one to two hours for fatal issues to 24&ndash;72
               hours for minimal ones. It does not commit to accessibility
               outcomes or WCAG conformance.
@@ -798,7 +745,7 @@ export function AudioEyeResearchPage() {
               standards.&rdquo;
               <Cite ids={[12]} />{" "}
               <span className="text-foreground font-medium">
-                The products tested were accessiBe, EqualWeb and UserWay &mdash;
+                The products tested were accessiBe, EqualWeb and UserWay,
                 not AudioEye
               </span>
               , so the findings bear on the category rather than on AudioEye
@@ -954,7 +901,7 @@ export function AudioEyeResearchPage() {
             </h3>
             <p className="text-muted-foreground text-sm leading-relaxed">
               Automated repair works where defects follow recognisable patterns
-              &mdash; headings out of sequence, unlabelled form fields, links
+              such as headings out of sequence, unlabelled form fields, links
               without discernible destinations.
               <Cite ids={[7]} /> The NFB resolution concedes the same point,
               recording that while overlays cannot guarantee full nonvisual
@@ -1038,8 +985,7 @@ export function AudioEyeResearchPage() {
               </span>
               , expressly scoped &ldquo;for the purpose of this Agreement.&rdquo;
               No judge ruled on overlay efficacy. What it does establish is that
-              counsel on both sides &mdash; including ADP&rsquo;s own &mdash;
-              signed language naming AudioEye as a category of solution that would
+              counsel on both sides, including ADP&rsquo;s own, signed language naming AudioEye as a category of solution that would
               not satisfy the obligation being agreed. The remedy chosen is
               equally instructive: ADP agreed to retain an independent web
               accessibility expert, named in the agreement as{" "}
@@ -1065,7 +1011,7 @@ export function AudioEyeResearchPage() {
 
           <div className="flex flex-col gap-4 border-t pt-8">
             <h3 className="text-foreground text-base font-semibold">
-              The FTC action &mdash; against accessiBe, not AudioEye
+              The FTC action, against accessiBe rather than AudioEye
             </h3>
             <div className="border-primary bg-secondary rounded-xl border border-l-4 p-5">
               <p className="text-foreground text-sm leading-relaxed">
@@ -1102,7 +1048,7 @@ export function AudioEyeResearchPage() {
               products can make any website WCAG-compliant, or keep it compliant
               over time, without evidence.
               <Cite ids={[18]} /> Its significance for the category is not that
-              every vendor has been penalised &mdash; they have not &mdash; but
+              every vendor has been penalised, because they have not, but
               that a federal regulator has articulated an evidentiary standard for
               this kind of marketing claim.
             </p>
@@ -1170,7 +1116,7 @@ export function AudioEyeResearchPage() {
                   has acquired two human-services accessibility firms.
                   <Cite ids={[3, 22]} /> The substantive question is not whether
                   human expertise exists within the company but where remediation
-                  is applied &mdash; and AudioEye states that its custom fixes go
+                  is applied, and AudioEye states that its custom fixes go
                   into the automation layer &ldquo;without affecting the source
                   code.&rdquo;
                   <Cite ids={[6]} />
@@ -1207,7 +1153,9 @@ export function AudioEyeResearchPage() {
               response: (
                 <>
                   In 2023 AudioEye sued accessibility engineer Adrian Roselli for
-                  defamation over his published criticism. The matter was resolved
+                  defamation over his published criticism, which included
+                  hands-on testing of the AudioEye toolkit on a customer site.
+                  <Cite ids={[20]} /> The matter was resolved
                   by agreement and dismissed with prejudice in January 2024. In a
                   joint statement the parties recorded that Roselli&rsquo;s
                   statements were expressions of opinion rather than statements of
@@ -1249,7 +1197,7 @@ export function AudioEyeResearchPage() {
           until <span className="text-foreground font-medium">26 April 2027</span>
           ; smaller entities and special district governments until{" "}
           <span className="text-foreground font-medium">26 April 2028</span>. The
-          technical standard was unchanged &mdash; only the timing.
+          technical standard was unchanged. Only the timing moved.
           <Cite ids={[19]} />
         </p>
         <p className="text-muted-foreground text-sm leading-relaxed">

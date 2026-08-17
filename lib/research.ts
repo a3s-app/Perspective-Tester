@@ -39,7 +39,7 @@ export const researchPieces: ResearchPiece[] = [
     slug: "audioeye",
     title: "AudioEye and Accessibility Overlays: The Documentary Record",
     summary:
-      "What can actually be established about accessibility overlay products, and about AudioEye specifically — including where the research finds overlays genuinely help, and which widely repeated criticisms do not survive checking.",
+      "What can actually be established about accessibility overlay products, and about AudioEye specifically, including where the research finds overlays genuinely help, and which widely repeated criticisms do not survive checking.",
     question:
       "Do accessibility overlays deliver conformance with accessibility standards, and what does the documentary record show about AudioEye in particular?",
     published: "2026-08-17",

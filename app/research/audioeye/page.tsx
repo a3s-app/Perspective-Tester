@@ -4,7 +4,7 @@ import { SiteShell } from "@/components/pro-blocks/landing-page/site-shell";
 
 const TITLE = "AudioEye and Accessibility Overlays: The Documentary Record";
 const DESCRIPTION =
-  "A sourced review of AudioEye and accessibility overlays: peer-reviewed research, court filings, SEC disclosures, FTC orders, NFB resolutions and AudioEye's own documentation — including where overlays do help. Every claim cited.";
+  "A sourced review of AudioEye and accessibility overlays: peer-reviewed research, court filings, SEC disclosures, FTC orders, NFB resolutions and AudioEye's own documentation, including where overlays do help. Every claim cited.";
 
 export const metadata: Metadata = {
   title: TITLE,

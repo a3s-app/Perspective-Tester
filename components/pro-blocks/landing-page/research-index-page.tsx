@@ -17,7 +17,7 @@ const standards = [
   {
     icon: ShieldQuestion,
     title: "Corrections run against our own interest",
-    body: "Each piece carries a section listing claims that do not hold up — including popular criticisms that would favour us commercially if we repeated them.",
+    body: "Each piece carries a section listing claims that do not hold up, including popular criticisms that would favour us commercially if we repeated them.",
   },
 ];
 
