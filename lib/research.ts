@@ -36,16 +36,16 @@ export interface ResearchPiece {
 
 export const researchPieces: ResearchPiece[] = [
   {
-    slug: "audioeye",
-    title: "AudioEye and Accessibility Overlays: The Documentary Record",
+    slug: "accessibility-overlays",
+    title: "Accessibility Overlays: The Documentary Record",
     summary:
-      "What can actually be established about accessibility overlay products, and about AudioEye specifically, including where the research finds overlays genuinely help, and which widely repeated criticisms do not survive checking.",
+      "What can actually be established about accessibility overlay products, and about the two most widely deployed vendors, AudioEye and UserWay. Covers what each company's own contracts and filings say, the litigation each faces, where the research finds overlays genuinely help, and which widely repeated criticisms do not survive checking.",
     question:
-      "Do accessibility overlays deliver conformance with accessibility standards, and what does the documentary record show about AudioEye in particular?",
+      "Do accessibility overlays deliver conformance with accessibility standards, and what does the documentary record show about AudioEye and UserWay in particular?",
     published: "2026-08-17",
     lastReviewed: "2026-08-17",
     lastReviewedLabel: "17 August 2026",
-    referenceCount: 22,
+    referenceCount: 24,
     sourceKinds: [
       "Peer-reviewed research",
       "Court documents",
@@ -55,7 +55,7 @@ export const researchPieces: ResearchPiece[] = [
       "Vendor documentation",
       "Community resolutions",
     ],
-    subject: "AudioEye, Inc. (Nasdaq: AEYE) and the overlay category",
+    subject: "AudioEye, Inc. (Nasdaq: AEYE), UserWay Inc. and the overlay category",
   },
 ];
 
