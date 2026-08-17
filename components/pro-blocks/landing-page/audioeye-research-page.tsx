@@ -9,7 +9,6 @@ import {
   Layers,
   Quote,
   ScrollText,
-  Users,
 } from "lucide-react";
 
 /* ------------------------------------------------------------------ *
@@ -253,6 +252,7 @@ function Section({
   heading,
   intro,
   tinted,
+  layout = "reading",
   children,
 }: {
   id: string;
@@ -261,8 +261,11 @@ function Section({
   heading: string;
   intro?: React.ReactNode;
   tinted?: boolean;
+  layout?: "reading" | "split";
   children: React.ReactNode;
 }) {
+  const isSplit = layout === "split";
+
   return (
     <section
       id={id}
@@ -270,8 +273,16 @@ function Section({
       className={`${tinted ? "bg-secondary" : "bg-background"} section-padding-y scroll-mt-20 border-b`}
     >
       <div className="container-padding-x container mx-auto">
-        <div className="mx-auto flex max-w-3xl flex-col gap-6">
-          <div className="section-title-gap-lg flex flex-col">
+        <div
+          className={
+            isSplit
+              ? "mx-auto grid max-w-6xl gap-10 lg:grid-cols-[minmax(0,18rem)_minmax(0,1fr)] lg:items-start lg:gap-16"
+              : "mx-auto flex max-w-3xl flex-col gap-6"
+          }
+        >
+          <div
+            className={`section-title-gap-lg flex flex-col ${isSplit ? "lg:sticky lg:top-28" : ""}`}
+          >
             {eyebrow ? (
               <Tagline variant="ghost">
                 {Icon ? <Icon className="h-3.5 w-3.5" aria-hidden="true" /> : null}
@@ -282,7 +293,7 @@ function Section({
               {heading}
             </h2>
             {intro ? (
-              <p className="text-muted-foreground text-base leading-relaxed">
+              <p className="text-muted-foreground text-pretty text-base leading-relaxed">
                 {intro}
               </p>
             ) : null}
@@ -1079,103 +1090,122 @@ export function AudioEyeResearchPage() {
       <Section
         id="not-supported"
         eyebrow="Corrections"
-        icon={Users}
+        icon={CircleCheck}
         heading="Claims that do not hold up"
         tinted
+        layout="split"
         intro="Several assertions about AudioEye circulate widely and are inaccurate or overstated. They are listed here because accuracy cuts both ways."
       >
-        <div className="flex flex-col gap-5">
-          {[
-            {
-              claim: "“AudioEye was fined $1 million by the FTC.”",
-              response: (
-                <>
-                  Incorrect. That order was against accessiBe, a different
-                  company.
-                  <Cite ids={[17, 18]} />
-                </>
-              ),
-            },
-            {
-              claim: "“A court ruled that AudioEye does not work.”",
-              response: (
-                <>
-                  No court has so ruled. The ADP language is a definition
-                  negotiated between settling parties and expressly limited to
-                  that agreement.
-                  <Cite ids={[1]} />
-                </>
-              ),
-            },
-            {
-              claim: "“AudioEye is only a widget.”",
-              response: (
-                <>
-                  Not accurate as stated. AudioEye employs certified accessibility
-                  specialists, sells expert audit and remediation services, and
-                  has acquired two human-services accessibility firms.
-                  <Cite ids={[3, 22]} /> The substantive question is not whether
-                  human expertise exists within the company but where remediation
-                  is applied, and AudioEye states that its custom fixes go
-                  into the automation layer &ldquo;without affecting the source
-                  code.&rdquo;
-                  <Cite ids={[6]} />
-                </>
-              ),
-            },
-            {
-              claim: "“Overlays are illegal.”",
-              response: (
-                <>
-                  No law prohibits them. The supportable claim is narrower: they
-                  do not by themselves discharge an accessibility obligation, and
-                  their presence has not reliably prevented litigation.
-                  <Cite ids={[10, 14]} />
-                </>
-              ),
-            },
-            {
-              claim: "“AudioEye has a history of securities fraud.”",
-              response: (
-                <>
-                  Misleading. A shareholder class action followed a restatement of
-                  AudioEye&rsquo;s 2014 quarterly results and settled in 2017 for
-                  $1.525m paid by the company&rsquo;s insurer, with no admission of
-                  liability. It concerned historical accounting rather than
-                  product efficacy and is more than a decade old. The FY2025 10-K
-                  discloses no material pending legal proceedings.
-                  <Cite ids={[3]} />
-                </>
-              ),
-            },
-            {
-              claim: "On AudioEye’s defamation suit against a critic",
-              response: (
-                <>
-                  In 2023 AudioEye sued accessibility engineer Adrian Roselli for
-                  defamation over his published criticism, which included
-                  hands-on testing of the AudioEye toolkit on a customer site.
-                  <Cite ids={[20]} /> The matter was resolved
-                  by agreement and dismissed with prejudice in January 2024. In a
-                  joint statement the parties recorded that Roselli&rsquo;s
-                  statements were expressions of opinion rather than statements of
-                  fact about AudioEye&rsquo;s products, and AudioEye agreed to
-                  donate no less than $10,000 to the National Federation of the
-                  Blind. Full terms are confidential.
-                  <Cite ids={[21]} /> This is part of the public record, but it
-                  bears on conduct toward critics, not on whether the product
-                  works.
-                </>
-              ),
-            },
-          ].map((item) => (
-            <div key={item.claim} className="flex flex-col gap-2 border-t pt-5">
-              <h3 className="text-foreground text-base font-semibold">{item.claim}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                {item.response}
-              </p>
-            </div>
-          ))}
+        <div className="min-w-0">
+          <div
+            aria-hidden="true"
+            className="text-muted-foreground hidden grid-cols-[minmax(0,14rem)_minmax(0,1fr)] gap-8 pb-3 text-xs font-semibold sm:grid"
+          >
+            <span>Claim</span>
+            <span>What the record shows</span>
+          </div>
+          <dl className="divide-y border-y">
+            {[
+              {
+                claim: "“AudioEye was fined $1 million by the FTC.”",
+                response: (
+                  <>
+                    Incorrect. That order was against accessiBe, a different
+                    company.
+                    <Cite ids={[17, 18]} />
+                  </>
+                ),
+              },
+              {
+                claim: "“A court ruled that AudioEye does not work.”",
+                response: (
+                  <>
+                    No court has so ruled. The ADP language is a definition
+                    negotiated between settling parties and expressly limited to
+                    that agreement.
+                    <Cite ids={[1]} />
+                  </>
+                ),
+              },
+              {
+                claim: "“AudioEye is only a widget.”",
+                response: (
+                  <>
+                    Not accurate as stated. AudioEye employs certified accessibility
+                    specialists, sells expert audit and remediation services, and
+                    has acquired two human-services accessibility firms.
+                    <Cite ids={[3, 22]} /> The substantive question is not whether
+                    human expertise exists within the company but where remediation
+                    is applied, and AudioEye states that its custom fixes go
+                    into the automation layer &ldquo;without affecting the source
+                    code.&rdquo;
+                    <Cite ids={[6]} />
+                  </>
+                ),
+              },
+              {
+                claim: "“Overlays are illegal.”",
+                response: (
+                  <>
+                    No law prohibits them. The supportable claim is narrower: they
+                    do not by themselves discharge an accessibility obligation, and
+                    their presence has not reliably prevented litigation.
+                    <Cite ids={[10, 14]} />
+                  </>
+                ),
+              },
+              {
+                claim: "“AudioEye has a history of securities fraud.”",
+                response: (
+                  <>
+                    Misleading. A shareholder class action followed a restatement of
+                    AudioEye&rsquo;s 2014 quarterly results and settled in 2017 for
+                    $1.525m paid by the company&rsquo;s insurer, with no admission of
+                    liability. It concerned historical accounting rather than
+                    product efficacy and is more than a decade old. The FY2025 10-K
+                    discloses no material pending legal proceedings.
+                    <Cite ids={[3]} />
+                  </>
+                ),
+              },
+              {
+                claim: "On AudioEye’s defamation suit against a critic",
+                response: (
+                  <>
+                    In 2023 AudioEye sued accessibility engineer Adrian Roselli for
+                    defamation over his published criticism, which included
+                    hands-on testing of the AudioEye toolkit on a customer site.
+                    <Cite ids={[20]} /> The matter was resolved
+                    by agreement and dismissed with prejudice in January 2024. In a
+                    joint statement the parties recorded that Roselli&rsquo;s
+                    statements were expressions of opinion rather than statements of
+                    fact about AudioEye&rsquo;s products, and AudioEye agreed to
+                    donate no less than $10,000 to the National Federation of the
+                    Blind. Full terms are confidential.
+                    <Cite ids={[21]} /> This is part of the public record, but it
+                    bears on conduct toward critics, not on whether the product
+                    works.
+                  </>
+                ),
+              },
+            ].map((item) => (
+              <div
+                key={item.claim}
+                className="grid gap-3 py-6 sm:grid-cols-[minmax(0,14rem)_minmax(0,1fr)] sm:gap-8"
+              >
+                <dt>
+                  <h3 className="text-foreground text-pretty text-base font-semibold">
+                    {item.claim}
+                  </h3>
+                </dt>
+                <dd>
+                  <p className="text-muted-foreground text-pretty text-sm leading-relaxed">
+                    {item.response}
+                  </p>
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </Section>
 
