@@ -1264,8 +1264,8 @@ export function OverlayResearchPage() {
               attribution="Participant P10, quoted in Makati, Tigwell & Shinohara, ASSETS ’24"
               refs={[17]}
             >
-              &ldquo;[I]f I were a person that, maybe a senior that was starting to
-              have some vision loss, if I could just change the font size or the colour
+              &ldquo;[I]f I were a person that - maybe a senior that was starting to
+              have some vision loss, if I could just change the font size or the color
               contrast &hellip; small tools like that &hellip; I think are beneficial
               to some people that have reduced vision.&rdquo;
             </Verbatim>
@@ -1308,8 +1308,8 @@ export function OverlayResearchPage() {
               attribution="Participant P8, quoted in Makati, Tigwell & Shinohara, ASSETS ’24"
               refs={[17]}
             >
-              &ldquo;[T]hey&rsquo;re kind of cosmetic or superficial, changing the font
-              size, or switching the background colours &hellip; A lot of those
+              &ldquo;[T]hey&rsquo;re kind of cosmetic or superficial - changing the
+              font size, or switching the background colors &hellip; A lot of those
               settings can be done at the browser level &hellip; So there&rsquo;s all
               these native things that people can do with their own browsers or
               operating systems that usually are what the overlay is offering.&rdquo;
