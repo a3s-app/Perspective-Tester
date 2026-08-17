@@ -5,7 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { assetPath } from "@/lib/utils";
 
-const teamMembers = [
+const teamMembers: {
+  name: string;
+  role: string;
+  credential?: string;
+  photo: string;
+}[] = [
   {
     name: "Jason McKee",
     role: "Managing Director, CEO & Founder",
@@ -19,6 +24,7 @@ const teamMembers = [
   {
     name: "Khushwant Parihar",
     role: "Web Accessibility Specialist",
+    credential: "CPACC Certified (IAAP)",
     photo: "/khushwant-parihar.jpg",
   },
 ];
@@ -186,6 +192,11 @@ export function AboutPage() {
                   <p className="text-muted-foreground text-sm">
                     {member.role}
                   </p>
+                  {member.credential ? (
+                    <p className="text-primary text-sm font-medium">
+                      {member.credential}
+                    </p>
+                  ) : null}
                 </div>
               </div>
             ))}
