@@ -21,6 +21,16 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://perspectivetester.com/case-studies</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://perspectivetester.com/case-studies/kit-carson-county</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://perspectivetester.com/blog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
