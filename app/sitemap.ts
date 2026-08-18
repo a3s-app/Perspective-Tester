@@ -11,6 +11,12 @@ const staticRoutes: MetadataRoute.Sitemap = [
   { url: `${SITE_URL}/a3s`, changeFrequency: "monthly", priority: 0.9 },
   { url: `${SITE_URL}/manage`, changeFrequency: "monthly", priority: 0.9 },
   { url: `${SITE_URL}/clients`, changeFrequency: "monthly", priority: 0.8 },
+  { url: `${SITE_URL}/case-studies`, changeFrequency: "monthly", priority: 0.8 },
+  {
+    url: `${SITE_URL}/case-studies/kit-carson-county`,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
   { url: `${SITE_URL}/overlay-widgets`, changeFrequency: "monthly", priority: 0.7 },
   { url: `${SITE_URL}/blog`, changeFrequency: "weekly", priority: 0.7 },
   { url: `${SITE_URL}/about`, changeFrequency: "monthly", priority: 0.7 },

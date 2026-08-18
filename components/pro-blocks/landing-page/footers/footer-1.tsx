@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { LucideIcon } from "lucide-react";
 import {
   ArrowUpRight,
+  BookOpen,
   Building2,
   Clock,
   Facebook,
@@ -36,6 +37,7 @@ const PRODUCT_LINKS: FooterLink[] = [
 
 const COMPANY_LINKS: FooterLink[] = [
   { label: "Clients", href: "/clients", icon: Building2 },
+  { label: "Case Studies", href: "/case-studies", icon: BookOpen },
   { label: "Overlay Widgets", href: "/overlay-widgets", icon: ShieldAlert },
   { label: "Blog", href: "/blog", icon: Newspaper },
   { label: "About", href: "/about", icon: FileText },
