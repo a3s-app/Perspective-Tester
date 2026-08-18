@@ -18,6 +18,11 @@ const staticRoutes: MetadataRoute.Sitemap = [
     changeFrequency: "monthly",
     priority: 0.8,
   },
+  {
+    url: `${SITE_URL}/case-studies/st-marys-county`,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
   { url: `${SITE_URL}/overlay-widgets`, changeFrequency: "monthly", priority: 0.7 },
   { url: `${SITE_URL}/research`, changeFrequency: "monthly", priority: 0.8 },
   { url: `${SITE_URL}/blog`, changeFrequency: "weekly", priority: 0.7 },

@@ -222,6 +222,14 @@ const references: Reference[] = [
     href: "https://www.federalregister.gov/documents/2026/04/20/2026-07663/extension-of-compliance-dates-for-nondiscrimination-on-the-basis-of-disability-accessibility-of-web",
     kind: "Regulatory",
   },
+  {
+    id: 25,
+    citation:
+      "Law Office of Lainey Feingold, “Case is Over! New Low in the Accessibility ‘Industry:’ Overlay Company Sues Globally-Recognized Accessibility Expert.” Posted July 2023, updated 29 January 2024.",
+    href: "https://www.lflegal.com/2023/07/adrian-roselli-slapp-lawsuit/",
+    kind: "Court document",
+    note: "Independent corroboration that AudioEye dropped the suit on 3 January 2024. This source does not state whether the dismissal was with or without prejudice.",
+  },
 ];
 
 /** Superscript citation linking to the reference list. */
@@ -880,15 +888,16 @@ export function OverlayResearchPage() {
               rather than a controlled study, and the product has changed since.
             </p>
             <p className="text-muted-foreground max-w-4xl text-sm leading-relaxed">
-              In 2023 AudioEye sued Roselli for defamation over that published
-              criticism. The matter was resolved by agreement and dismissed with
-              prejudice in January 2024. In a joint statement the parties recorded
-              that Roselli&rsquo;s statements were expressions of opinion rather than
+              In May 2023 AudioEye sued Roselli for defamation over that published
+              criticism. AudioEye dropped the suit on 3 January 2024 as part of a
+              settlement. In a joint statement the parties recorded that
+              Roselli&rsquo;s statements were expressions of opinion rather than
               statements of fact about AudioEye&rsquo;s products, and AudioEye agreed
-              to donate no less than $10,000 to the National Federation of the Blind.
-              Full terms are confidential.
-              <Cite ids={[13]} /> This is part of the public record, and it bears on
-              conduct toward critics rather than on whether the product works.
+              to contribute no less than $10,000 to the National Federation of the
+              Blind. The full terms are confidential, and we have not been able to
+              establish whether the dismissal was with or without prejudice.
+              <Cite ids={[13, 25]} /> This is part of the public record, and it bears
+              on conduct toward critics rather than on whether the product works.
             </p>
           </div>
         </div>
@@ -959,7 +968,7 @@ export function OverlayResearchPage() {
               still requires approval by the district judge.
               <Cite ids={[3]} />
             </p>
-            <Callout title="Read this precisely." tinted>
+            <Callout title="What the recommendation does and does not establish." tinted>
               These are allegations that have survived an early procedural test. A
               Magistrate&rsquo;s recommendation that a claim may proceed is not a
               finding that the claim is true, and no court has ruled on the merits.
@@ -1358,7 +1367,7 @@ export function OverlayResearchPage() {
               AccessiBe will not suffice to achieve Accessibility.&rdquo;
             </Verbatim>
             <p className="text-muted-foreground max-w-4xl text-sm leading-relaxed">
-              Read this precisely. It is a definition negotiated between private
+              It is a definition negotiated between private
               parties and expressly scoped &ldquo;for the purpose of this
               Agreement.&rdquo; No judge ruled on overlay efficacy. What it does
               establish is that counsel on both sides, including ADP&rsquo;s own,
@@ -1388,7 +1397,7 @@ export function OverlayResearchPage() {
             <h3 className="text-foreground text-base font-semibold">
               The FTC action reached accessiBe, not these two vendors
             </h3>
-            <Callout title="Read this before citing it.">
+            <Callout title="The order names accessiBe, not either vendor here.">
               The $1,000,000 federal penalty frequently invoked in discussions of
               accessibility widgets was imposed on{" "}
               <span className="font-semibold">accessiBe</span>, a different company.
@@ -1591,7 +1600,7 @@ export function OverlayResearchPage() {
               id={`ref-${reference.id}`}
               className="flex scroll-mt-24 gap-4 border-t pt-4"
             >
-              <span className="text-primary shrink-0 text-sm font-semibold tabular-nums">
+              <span className="text-primary w-7 shrink-0 text-sm font-semibold tabular-nums">
                 {reference.id}.
               </span>
               <div className="flex flex-col gap-1.5">

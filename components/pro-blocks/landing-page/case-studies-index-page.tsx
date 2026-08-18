@@ -28,6 +28,24 @@ const evidence = [
   },
 ] as const;
 
+const stMarysFacts = [
+  {
+    label: "Scale",
+    value: "4,000+ pages",
+    detail: "across the county website",
+  },
+  {
+    label: "Team",
+    value: "3 developers",
+    detail: "carrying the remediation work",
+  },
+  {
+    label: "Deadline",
+    value: "April 2027",
+    detail: "ADA Title II, populations of 50,000 or more",
+  },
+] as const;
+
 const storyStructure = [
   {
     title: "The constraint",
@@ -191,6 +209,91 @@ export function CaseStudiesIndexPage() {
                   </Link>
                 </Button>
               </div>
+            </article>
+
+            <article className="mt-8 overflow-hidden rounded-2xl bg-[oklch(0.18_0.035_255)] text-white lg:grid lg:grid-cols-[.92fr_1.08fr]">
+              <div className="flex flex-col p-6 sm:p-9 lg:p-10 xl:p-12">
+                <p className="text-sm font-semibold text-[oklch(0.82_0.11_55)]">
+                  Local government &middot; Maryland
+                </p>
+                <h3 className="mt-4 text-balance text-3xl font-semibold tracking-[-0.025em] sm:text-4xl">
+                  St. Mary&apos;s County
+                </h3>
+                <blockquote className="mt-7 border-y border-white/16 py-6">
+                  <p className="text-pretty text-xl font-semibold leading-snug text-white sm:text-2xl">
+                    &ldquo;You guys give us a list and we crank out the
+                    changes.&rdquo;
+                  </p>
+                  <footer className="mt-3 text-sm text-white/66">
+                    Robert Horner, Senior Software Developer
+                  </footer>
+                </blockquote>
+
+                <dl className="mt-2 divide-y divide-white/14">
+                  {stMarysFacts.map((item) => (
+                    <div
+                      key={item.label}
+                      className="grid gap-1 py-5 sm:grid-cols-[6rem_1fr] sm:gap-5"
+                    >
+                      <dt className="text-sm font-semibold text-white/82">
+                        {item.label}
+                      </dt>
+                      <dd className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                        <span className="text-lg font-semibold tracking-[-0.015em] text-white">
+                          {item.value}
+                        </span>
+                        <span className="text-sm text-white/66">
+                          {item.detail}
+                        </span>
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+
+                <Button
+                  asChild
+                  className="mt-5 min-h-11 w-full justify-between bg-white px-5 text-[oklch(0.18_0.035_255)] hover:bg-[oklch(0.93_0.02_55)] focus-visible:ring-white focus-visible:ring-offset-[oklch(0.18_0.035_255)] sm:w-fit"
+                >
+                  <Link href="/case-studies/st-marys-county" prefetch>
+                    Read the St. Mary&apos;s County case study
+                    <ArrowRight className="size-4" aria-hidden="true" />
+                  </Link>
+                </Button>
+              </div>
+
+              <figure className="relative order-first min-h-64 overflow-hidden lg:order-last lg:min-h-full">
+                <Image
+                  src={assetPath(
+                    "/case-studies/st-marys-county/county-elms-beach.webp",
+                  )}
+                  alt="Tidal water fringed with reeds and woodland at Elms Beach, St. Mary&apos;s County, Maryland"
+                  fill
+                  sizes="(min-width: 1024px) 54vw, 100vw"
+                  className="object-cover object-center transition-transform duration-700 ease-out motion-reduce:transition-none"
+                />
+                <div
+                  className="absolute inset-0 bg-[linear-gradient(180deg,transparent_48%,oklch(0.1_0.03_255/.8)_100%)]"
+                  aria-hidden="true"
+                />
+                <figcaption className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-5 p-6 sm:p-8">
+                  <p className="max-w-sm text-sm font-medium leading-relaxed text-white/84">
+                    A Maryland county working towards the April 2027 federal
+                    deadline with a three-person team and a documented monthly
+                    cycle.
+                  </p>
+                  <div className="shrink-0 rounded-lg bg-white p-1.5">
+                    <Image
+                      src={assetPath(
+                        "/case-studies/st-marys-county/county-seal.png",
+                      )}
+                      alt="St. Mary&apos;s County, Maryland official seal"
+                      width={288}
+                      height={288}
+                      className="h-11 w-auto rounded-sm sm:h-12"
+                    />
+                  </div>
+                </figcaption>
+              </figure>
             </article>
           </div>
         </section>

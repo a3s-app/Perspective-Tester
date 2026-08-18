@@ -36,6 +36,26 @@ export interface ResearchPiece {
 
 export const researchPieces: ResearchPiece[] = [
   {
+    slug: "acquia",
+    title: "Acquia and Web Governance: The Documentary Record",
+    summary:
+      "Acquia is routinely grouped with overlay vendors and does not belong there. What its accessibility product actually does, what it gets right, what its subscription agreement and accessibility statement say, where PageAssist sits, and the limits that remain.",
+    question:
+      "What is Acquia's accessibility product, what does it genuinely get right, and what are its real limits?",
+    published: "2026-08-18",
+    lastReviewed: "2026-08-18",
+    lastReviewedLabel: "18 August 2026",
+    referenceCount: 21,
+    sourceKinds: [
+      "Vendor documentation",
+      "Peer-reviewed research",
+      "Federal regulatory orders",
+      "Survey data",
+      "Community resolutions",
+    ],
+    subject: "Acquia, Inc. and Acquia Web Governance (formerly Monsido / Acquia Optimize)",
+  },
+  {
     slug: "accessibility-overlays",
     title: "Accessibility Overlays: The Documentary Record",
     summary:
@@ -45,7 +65,7 @@ export const researchPieces: ResearchPiece[] = [
     published: "2026-08-17",
     lastReviewed: "2026-08-17",
     lastReviewedLabel: "17 August 2026",
-    referenceCount: 24,
+    referenceCount: 25,
     sourceKinds: [
       "Peer-reviewed research",
       "Court documents",
