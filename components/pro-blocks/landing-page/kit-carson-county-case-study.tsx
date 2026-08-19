@@ -14,7 +14,7 @@ const outcomes = [
   "No more guessing whether the work is good enough",
   "Continuous documented record of progress",
   "Accessibility no longer Todd's solo burden",
-  "Meets or exceeds Colorado's state accessibility requirements",
+  "Compliant with Colorado's accessibility law and federal Title II requirements",
   "Critical barriers fixed first, everything else follows",
 ] as const;
 
@@ -224,10 +224,10 @@ export function KitCarsonCountyCaseStudy() {
                 Continuous compliance. One clear record.
               </h2>
               <p className="mt-6 text-base leading-relaxed text-muted-foreground sm:text-lg">
-                Colorado&apos;s rule doesn&apos;t ask you to be perfect. It asks
-                you to show what you&apos;re doing. Most counties are doing the
-                work but can&apos;t prove it. Kit Carson County now proves it
-                every month.
+                Colorado and Title II both require continuous compliance and
+                documented proof. Most counties are doing the work but
+                struggling to prove it meets either standard. Kit Carson County
+                now has evidence every month.
               </p>
             </div>
 
@@ -257,8 +257,10 @@ export function KitCarsonCountyCaseStudy() {
                 Where your county stands
               </h2>
               <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
-                Colorado&apos;s accessibility penalties are real. Most counties
-                are doing the work but lack proof they&apos;re doing it.
+                Both Colorado penalties and Title II violations carry real
+                costs. Most counties are caught between doing the work and
+                proving they&apos;re compliant. Kit Carson County demonstrates
+                compliance to both.
               </p>
             </div>
 
