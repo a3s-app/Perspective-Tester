@@ -83,7 +83,7 @@ export function HeroSection2() {
             />
             <Image
               src={assetPath("/capitol-dome.png")}
-              alt="Capitol dome illustration representing government-grade compliance"
+              alt=""
               width={480}
               height={520}
               className="relative z-10 h-auto w-full max-w-[340px] object-contain lg:max-w-[420px]"

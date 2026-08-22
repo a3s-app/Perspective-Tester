@@ -68,13 +68,19 @@ export function VideoShowcaseSection() {
         </div>
 
         <div className="mx-auto grid w-full max-w-6xl gap-6 lg:grid-cols-[1.45fr_1fr]">
-          <article className="min-w-0 rounded-2xl border bg-card p-4 shadow-sm sm:p-5">
+          <article
+            aria-labelledby={`video-card-${featuredVideo.id}`}
+            className="min-w-0 rounded-2xl border bg-card p-4 shadow-sm sm:p-5"
+          >
             <VideoEmbed id={featuredVideo.id} title={featuredVideo.title} />
             <div className="mt-4 flex flex-col gap-2">
               <p className="text-primary text-xs font-semibold tracking-wide uppercase">
                 Main Video
               </p>
-              <h3 className="text-foreground text-lg font-semibold">
+              <h3
+                id={`video-card-${featuredVideo.id}`}
+                className="text-foreground text-lg font-semibold"
+              >
                 {featuredVideo.title}
               </h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
@@ -97,11 +103,15 @@ export function VideoShowcaseSection() {
             {secondaryVideos.map((video) => (
               <article
                 key={video.id}
+                aria-labelledby={`video-card-${video.id}`}
                 className="min-w-0 rounded-2xl border bg-card p-3.5 shadow-sm"
               >
                 <VideoEmbed id={video.id} title={video.title} />
                 <div className="mt-3 flex flex-col gap-1.5">
-                  <h3 className="text-foreground text-base font-semibold">
+                  <h3
+                    id={`video-card-${video.id}`}
+                    className="text-foreground text-base font-semibold"
+                  >
                     {video.title}
                   </h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">

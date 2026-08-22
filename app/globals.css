@@ -80,7 +80,14 @@
   --secondary: oklch(0.965 0.005 250);
   --secondary-foreground: oklch(0.145 0.03 260);
   --muted: oklch(0.955 0.005 250);
-  --muted-foreground: oklch(0.5 0.03 260);
+  /*
+   * WCAG 1.4.3. At L=0.5 this token renders #596475, which is 6.00:1 on pure
+   * white but only 4.31:1 once a field sits on the grey input fill (#D8DBDE)
+   * that production renders -- exactly the ratio axe DevTools reported for the
+   * "Select a service" combobox placeholder. L=0.46 renders #4E5969: 5.13:1 on
+   * that grey and 7.12:1 on white, so the placeholder passes on either surface.
+   */
+  --muted-foreground: oklch(0.46 0.03 260);
   --accent: oklch(0.94 0.008 250);
   --accent-foreground: oklch(0.145 0.03 260);
   --destructive: oklch(0.577 0.245 27.325);

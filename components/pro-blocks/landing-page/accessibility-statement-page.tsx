@@ -192,6 +192,7 @@ export function AccessibilityStatementPage() {
                       href="mailto:Info@perspectivetester.com"
                       className="text-sm font-medium text-foreground hover:text-primary transition-colors"
                     >
+                      <span className="sr-only">Email: </span>
                       Info@perspectivetester.com
                     </a>
                   </div>

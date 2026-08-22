@@ -99,7 +99,11 @@ export function A3SPage() {
             <div className="bg-card flex h-20 w-20 items-center justify-center rounded-2xl border p-2 shadow-sm">
               <Image
                 src={assetPath("/a3s-logo.png")}
-                alt="A3S logo"
+                /* WCAG 1.1.1: the audit noted NVDA still announced this as
+                   "unlabelled graphics" even though alt="A3S logo" was present,
+                   because the string was too short to register. The auditor
+                   asked for a longer, descriptive alternative. */
+                alt="A3S Accessibility as a Service logo"
                 width={72}
                 height={72}
                 className="h-full w-full object-contain"
@@ -211,10 +215,11 @@ export function A3SPage() {
             </p>
           </div>
 
-          <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2">
+          {/* WCAG 1.3.1: parallel feature entries, so a list programmatically. */}
+          <ul className="mx-auto grid max-w-5xl list-none grid-cols-1 gap-6 md:grid-cols-2">
             {features.map((feature) => (
-              <div key={feature.title} className="flex gap-4">
-                <div className="bg-primary/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
+              <li key={feature.title} className="flex gap-4">
+                <div className="bg-primary/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl" aria-hidden="true">
                   <feature.icon className="text-primary h-5 w-5" />
                 </div>
                 <div className="flex flex-col gap-1.5">
@@ -225,9 +230,9 @@ export function A3SPage() {
                     {feature.description}
                   </p>
                 </div>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
@@ -263,7 +268,9 @@ export function A3SPage() {
               <p className="text-foreground mb-4 text-sm font-semibold uppercase tracking-wide">
                 Includes
               </p>
-              <div className="flex flex-col gap-3">
+              {/* WCAG 1.3.1: an "Includes" checklist must be a list so AT
+                  announces "list, 5 items" and each item's position. */}
+              <ul className="flex list-none flex-col gap-3">
                 {[
                   "4-phase accessibility workflow",
                   "VPAT & legal documentation",
@@ -271,12 +278,12 @@ export function A3SPage() {
                   "Continuous monitoring",
                   "IAAP-certified specialists",
                 ].map((item) => (
-                  <div key={item} className="flex items-center gap-2.5">
+                  <li key={item} className="flex items-center gap-2.5">
                     <CheckCircle2 className="text-primary h-4 w-4 shrink-0" aria-hidden="true" />
                     <span className="text-foreground text-sm">{item}</span>
-                  </div>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
           </div>
         </div>

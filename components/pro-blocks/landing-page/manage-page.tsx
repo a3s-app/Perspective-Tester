@@ -287,7 +287,9 @@ export function ManagePage() {
               <p className="text-foreground mb-4 text-sm font-semibold uppercase tracking-wide">
                 Includes
               </p>
-              <div className="flex flex-col gap-3">
+              {/* WCAG 1.3.1: an "Includes" checklist must be a list so AT
+                  announces "list, 6 items" and each item's position. */}
+              <ul className="flex list-none flex-col gap-3">
                 {[
                   "Unlimited audit uploads",
                   "Unlimited issues",
@@ -296,12 +298,12 @@ export function ManagePage() {
                   "Public reporting",
                   "Priority support",
                 ].map((item) => (
-                  <div key={item} className="flex items-center gap-2.5">
+                  <li key={item} className="flex items-center gap-2.5">
                     <CheckCircle2 className="text-primary h-4 w-4 shrink-0" aria-hidden="true" />
                     <span className="text-foreground text-sm">{item}</span>
-                  </div>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
           </div>
         </div>

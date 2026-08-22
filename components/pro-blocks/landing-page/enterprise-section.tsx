@@ -72,19 +72,21 @@ export function EnterpriseSection() {
               </p>
             </div>
 
-            {/* Bullet Points */}
-            <div className="flex flex-col gap-3">
+            {/* Bullet Points
+                WCAG 1.3.1: a visual bullet list must be a list programmatically
+                so AT announces "list, N items" and each item's position. */}
+            <ul className="flex list-none flex-col gap-3">
               {bulletPoints.map((point) => (
-                <div key={point} className="flex items-start gap-3">
-                  <div className="bg-primary/10 mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full">
+                <li key={point} className="flex items-start gap-3">
+                  <div className="bg-primary/10 mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full" aria-hidden="true">
                     <Check className="text-primary h-3 w-3" aria-hidden="true" />
                   </div>
                   <span className="text-foreground text-base font-medium">
                     {point}
                   </span>
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
 
             {/* CTA */}
             <div>
@@ -99,9 +101,11 @@ export function EnterpriseSection() {
 
           {/* Right Column - Process Visual */}
           <div className="flex flex-1 items-center justify-center">
-            <div className="flex w-full flex-col gap-0">
+            {/* WCAG 1.3.1: the four numbered steps are an ordered sequence, so
+                <ol> conveys both the grouping and the order to AT. */}
+            <ol className="flex w-full list-none flex-col gap-0">
               {processSteps.map((step, index) => (
-                <div key={step.label} className="relative flex gap-4">
+                <li key={step.label} className="relative flex gap-4">
                   {/* Vertical connector line */}
                   <div className="flex flex-col items-center">
                     <div
@@ -128,9 +132,9 @@ export function EnterpriseSection() {
                       {step.description}
                     </p>
                   </div>
-                </div>
+                </li>
               ))}
-            </div>
+            </ol>
           </div>
         </div>
       </div>

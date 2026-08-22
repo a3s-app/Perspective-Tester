@@ -135,6 +135,7 @@ export function Footer1() {
                 className="text-muted-foreground hover:text-foreground inline-flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors sm:w-fit"
               >
                 <Mail className="h-4 w-4 text-primary" aria-hidden="true" />
+                <span className="sr-only">Email: </span>
                 <span className="break-all sm:break-normal">{CONTACT_EMAIL}</span>
               </a>
               <p className="text-muted-foreground inline-flex items-center gap-2 px-2 py-1.5 text-sm">
