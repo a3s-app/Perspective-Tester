@@ -256,3 +256,16 @@
     font-weight: 600;
   }
 }
+
+/*
+ * WCAG 2.4.11 (Focus Not Obscured). The site header is `sticky top-0` and 66px
+ * tall. Without scroll padding, Shift+Tabbing backwards scrolls the focused
+ * control flush to the top of the viewport, where the header covers it — the
+ * audited failure on the contact page. Reserving the header height keeps a
+ * backward-focused control fully visible. Over-reserving is harmless (focus
+ * lands lower); under-reserving reintroduces the bug, so this leaves headroom
+ * above the measured 66px.
+ */
+html {
+  scroll-padding-top: 5rem;
+}
