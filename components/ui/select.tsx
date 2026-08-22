@@ -103,11 +103,42 @@ function SelectItem({
   children,
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Item>) {
+  /*
+   * WCAG 4.1.2 (Name, Role, Value). @radix-ui/react-select 2.1.4 only sets
+   * aria-selected when an option is BOTH checked and focused, so the chosen
+   * option carried data-state="checked" and a visible tick while still
+   * reporting aria-selected="false" -- the visual state and the accessible
+   * state disagreed and screen readers never announced "selected". Mirroring
+   * data-state onto aria-selected keeps them in step for every option,
+   * whichever one currently has focus.
+   */
+  const itemRef = React.useRef<HTMLDivElement>(null)
+  React.useEffect(() => {
+    const node = itemRef.current
+    if (!node) return
+    const sync = () =>
+      node.setAttribute(
+        'aria-selected',
+        node.getAttribute('data-state') === 'checked' ? 'true' : 'false',
+      )
+    sync()
+    const observer = new MutationObserver(sync)
+    observer.observe(node, { attributes: true, attributeFilter: ['data-state', 'aria-selected'] })
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <SelectPrimitive.Item
+      ref={itemRef}
       data-slot="select-item"
       className={cn(
-        "focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
+        /*
+         * WCAG 1.4.11: the focused option was indicated by --accent alone
+         * (#E7ECF0), which is 1.19:1 against the white listbox -- far under the
+         * 3:1 a focus indicator needs. The tint stays as a secondary cue, but
+         * the outline in --ring (20.3:1) is what actually marks focus.
+         */
+        "data-[highlighted]:[outline-style:solid] data-[highlighted]:outline-2 data-[highlighted]:-outline-offset-2 data-[highlighted]:outline-ring focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
         className,
       )}
       {...props}
