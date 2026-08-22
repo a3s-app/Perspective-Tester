@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const MENU_ITEMS = [
   { label: "A3S", href: "/a3s" },
@@ -14,7 +15,21 @@ const MENU_ITEMS = [
   { label: "About", href: "/about" },
 ] as const;
 
-const NavMenuItems = ({ compact }: { compact?: boolean }) => (
+/*
+ * WCAG 1.3.1: the navigation gave no indication of which page you were on --
+ * neither visually nor to a screen reader. `aria-current="page"` supplies the
+ * semantics ("A3S, link, current page") and the underline/foreground treatment
+ * supplies the visual cue, so it is not carried by colour alone.
+ */
+const useIsCurrent = () => {
+  const pathname = usePathname();
+  return (href: string) =>
+    href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
+};
+
+const NavMenuItems = ({ compact }: { compact?: boolean }) => {
+  const isCurrent = useIsCurrent();
+  return (
   <div className="flex items-center gap-0.5">
     {MENU_ITEMS.map(({ label, href }) => (
       <Button
@@ -25,17 +40,19 @@ const NavMenuItems = ({ compact }: { compact?: boolean }) => (
           compact
             ? "h-8 px-3 text-[13px]"
             : "h-9 px-3.5 text-sm"
-        }`}
+        } ${isCurrent(href) ? "text-foreground underline underline-offset-8 decoration-2" : ""}`}
       >
-        <Link href={href} prefetch>
+        <Link href={href} prefetch aria-current={isCurrent(href) ? "page" : undefined}>
           {label}
         </Link>
       </Button>
     ))}
   </div>
-);
+  );
+};
 
 export function LpNavbar1() {
+  const isCurrentPage = useIsCurrent();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCompact, setIsCompact] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
@@ -269,19 +286,35 @@ export function LpNavbar1() {
               ),
             }}
           >
-            <div className="min-h-0">
+            {/*
+              * WCAG 1.4.4 / 1.4.10. This panel lives inside a `sticky top-0`
+              * header, so it stays pinned as the page scrolls -- anything taller
+              * than the viewport is simply unreachable, and page scrolling
+              * cannot bring it back. At 200% zoom (a ~342px tall viewport) the
+              * menu ran to 430px and the "Talk to Sales" and "View Products"
+              * calls to action fell off the bottom with no way to get to them.
+              * Capping to the space below the header bar and scrolling inside
+              * keeps every item reachable at any zoom level.
+              */}
+            <div
+              className="min-h-0 overflow-y-auto overscroll-contain"
+              style={{ maxHeight: "calc(100dvh - 5rem)" }}
+            >
               <div className="flex flex-col gap-1 border-t px-5 pb-5 pt-4">
                 {MENU_ITEMS.map(({ label, href }) => (
                   <Button
                     key={label}
                     asChild
                     variant="ghost"
-                    className="h-11 w-full justify-start rounded-lg px-3 text-sm font-medium"
+                    className={`h-11 w-full justify-start rounded-lg px-3 text-sm font-medium ${
+                      isCurrentPage(href) ? "text-foreground underline underline-offset-4 decoration-2" : ""
+                    }`}
                   >
                     <Link
                       href={href}
                       prefetch
                       onClick={() => setIsMenuOpen(false)}
+                      aria-current={isCurrentPage(href) ? "page" : undefined}
                     >
                       {label}
                     </Link>

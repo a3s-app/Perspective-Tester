@@ -81,7 +81,19 @@ const products = [
 
 export function ProductsSection() {
   return (
-    <section className="bg-secondary section-padding-y border-b" id="products">
+    /*
+     * WCAG 2.4.3. "View Products" is a same-page link. Without a tabindex the
+     * target is not focusable, so activating it scrolled the viewport but left
+     * focus back in the header -- the next Tab resumed from the nav instead of
+     * the products section, and screen reader users were dropped somewhere
+     * unrelated. tabIndex={-1} lets the browser move focus here on activation
+     * without adding the section to the tab sequence.
+     */
+    <section
+      className="bg-secondary section-padding-y border-b focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+      id="products"
+      tabIndex={-1}
+    >
       <div className="container-padding-x container mx-auto flex flex-col gap-10 md:gap-12">
         {/* Section Title */}
         <div className="section-title-gap-lg mx-auto flex max-w-xl flex-col items-center text-center">
@@ -132,22 +144,25 @@ export function ProductsSection() {
                   </p>
                 </div>
 
-                {/* Features */}
-                <div className="flex flex-col gap-3">
+                {/* Features
+                    WCAG 1.3.1: these rows read as a list visually, so AT must be
+                    told the count and position ("1 of 4"). The icon is decorative
+                    once the adjacent text carries the meaning. */}
+                <ul className="flex list-none flex-col gap-3">
                   {product.features.map((feature) => (
-                    <div
+                    <li
                       key={feature.name}
                       className="flex items-center gap-3"
                     >
-                      <div className="bg-primary/10 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg">
+                      <div className="bg-primary/10 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg" aria-hidden="true">
                         <feature.icon className="text-primary h-4 w-4" />
                       </div>
                       <span className="text-foreground text-sm font-medium">
                         {feature.name}
                       </span>
-                    </div>
+                    </li>
                   ))}
-                </div>
+                </ul>
 
                 {/* CTA */}
                 <Button
