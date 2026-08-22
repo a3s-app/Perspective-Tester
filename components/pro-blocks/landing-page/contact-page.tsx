@@ -67,6 +67,35 @@ export function ContactPage() {
   const [status, setStatus] = useState("");
   const successHeadingRef = useRef<HTMLHeadingElement>(null);
 
+  /*
+   * WCAG 3.3.1 / 2.4.3. The form relied on native `required`, so an invalid
+   * submit produced a transient browser tooltip on the first bad field: not an
+   * inline message, not programmatically associated, and gone on the next
+   * keystroke. `noValidate` on the form hands validation here instead, so each
+   * field gets a persistent inline message wired up with aria-describedby, and
+   * focus is moved to the first field in error rather than left where it was.
+   */
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+
+  const REQUIRED_FIELDS: { name: string; label: string; hint: string }[] = [
+    { name: "firstName", label: "First name", hint: "Enter your first name." },
+    { name: "lastName", label: "Last name", hint: "Enter your last name." },
+    { name: "email", label: "Work email", hint: "Enter a work email address in the format name@organization.gov." },
+    { name: "organization", label: "Organization", hint: "Enter the name of your organization." },
+    { name: "service", label: "Service interested in", hint: "Choose the service you are interested in." },
+    { name: "message", label: "Tell us about your project", hint: "Tell us briefly about your project so we can route your inquiry." },
+  ];
+
+  const describedBy = (name: string) => (fieldErrors[name] ? `${name}-error` : undefined);
+  const invalid = (name: string) => (fieldErrors[name] ? true : undefined);
+
+  const FieldError = ({ name }: { name: string }) =>
+    fieldErrors[name] ? (
+      <p id={`${name}-error`} className="text-destructive text-sm" role="alert">
+        {fieldErrors[name]}
+      </p>
+    ) : null;
+
   // Submitting swaps the whole form out for the confirmation panel, which
   // would otherwise drop focus to <body> silently. Move focus to the
   // confirmation heading so keyboard and screen reader users land on it.
@@ -81,6 +110,32 @@ export function ContactPage() {
     setStatus("Sending your inquiry, please wait.");
 
     const form = e.currentTarget;
+
+    const nextErrors: Record<string, string> = {};
+    for (const field of REQUIRED_FIELDS) {
+      const value =
+        field.name === "service"
+          ? service
+          : ((form.elements.namedItem(field.name) as HTMLInputElement | null)?.value ?? "");
+      if (!value.trim()) {
+        nextErrors[field.name] = `${field.label} is required. ${field.hint}`;
+      } else if (field.name === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value.trim())) {
+        nextErrors[field.name] = `Enter a valid work email address in the format name@organization.gov.`;
+      }
+    }
+    if (Object.keys(nextErrors).length > 0) {
+      setFieldErrors(nextErrors);
+      setLoading(false);
+      setStatus("");
+      const firstBad = REQUIRED_FIELDS.find((f) => nextErrors[f.name]);
+      if (firstBad) {
+        const el = form.querySelector<HTMLElement>(`#${firstBad.name}`);
+        el?.focus();
+      }
+      return;
+    }
+    setFieldErrors({});
+
     const formData = new FormData(form);
 
     // Add select values that aren't captured by native form data
@@ -176,9 +231,10 @@ export function ContactPage() {
       }
 
       setSubmitted(true);
-      setStatus(
-        "Thank you for reaching out. Your inquiry was sent and we will get back to you within one business day."
-      );
+      // WCAG 1.3.2: the confirmation panel below is visible and receives focus,
+      // so repeating the same sentence in the off-screen live region meant
+      // screen reader users heard it twice. Clear the region instead.
+      setStatus("");
     } catch {
       // The failure is announced by the assertive alert rendered in the form,
       // which survives this path. Clearing the polite region avoids the same
@@ -261,7 +317,7 @@ export function ContactPage() {
                   </div>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+                <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-6">
                   <div>
                     <h2 className="text-lg font-semibold text-foreground">
                       Request a Consultation
@@ -300,8 +356,11 @@ export function ContactPage() {
                         autoComplete="given-name"
                         placeholder="Jane"
                         required
+                        aria-invalid={invalid("firstName")}
+                        aria-describedby={describedBy("firstName")}
                         disabled={loading}
                       />
+                      <FieldError name="firstName" />
                     </div>
                     <div className="flex flex-col gap-2">
                       <Label htmlFor="lastName">
@@ -313,8 +372,11 @@ export function ContactPage() {
                         autoComplete="family-name"
                         placeholder="Smith"
                         required
+                        aria-invalid={invalid("lastName")}
+                        aria-describedby={describedBy("lastName")}
                         disabled={loading}
                       />
+                      <FieldError name="lastName" />
                     </div>
                   </div>
 
@@ -331,8 +393,11 @@ export function ContactPage() {
                         autoComplete="email"
                         placeholder="jane@organization.gov"
                         required
+                        aria-invalid={invalid("email")}
+                        aria-describedby={describedBy("email")}
                         disabled={loading}
                       />
+                      <FieldError name="email" />
                     </div>
                     <div className="flex flex-col gap-2">
                       <Label htmlFor="phone">Phone number <span className="text-muted-foreground font-normal">(optional)</span></Label>
@@ -359,8 +424,11 @@ export function ContactPage() {
                         autoComplete="organization"
                         placeholder="City of Springfield"
                         required
+                        aria-invalid={invalid("organization")}
+                        aria-describedby={describedBy("organization")}
                         disabled={loading}
                       />
+                      <FieldError name="organization" />
                     </div>
                     <div className="flex flex-col gap-2">
                       <Label htmlFor="orgType">Organization type <span className="text-muted-foreground font-normal">(optional)</span></Label>
@@ -406,6 +474,8 @@ export function ContactPage() {
                           id="service"
                           className="w-full"
                           aria-label="Service interested in"
+                          aria-invalid={invalid("service")}
+                          aria-describedby={describedBy("service")}
                         >
                           <SelectValue placeholder="Select a service" />
                         </SelectTrigger>
@@ -417,6 +487,7 @@ export function ContactPage() {
                           ))}
                         </SelectContent>
                       </Select>
+                      <FieldError name="service" />
                     </div>
                     <div className="flex flex-col gap-2">
                       <Label htmlFor="budget">Project budget <span className="text-muted-foreground font-normal">(optional)</span></Label>
@@ -469,8 +540,11 @@ export function ContactPage() {
                       placeholder="Describe your accessibility needs, timeline, number of pages/applications, or any specific compliance requirements..."
                       className="min-h-[120px]"
                       required
+                      aria-invalid={invalid("message")}
+                      aria-describedby={describedBy("message")}
                       disabled={loading}
                     />
+                    <FieldError name="message" />
                   </div>
 
                   {/* Submit */}
