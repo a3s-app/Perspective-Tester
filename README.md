@@ -20,6 +20,8 @@ Marketing website for [Perspective Tester](https://perspectivetester.com) — a 
 | `/manage` | P15R — Accessibility Ops Without Chaos |
 | `/clients` | Client logos and testimonials |
 | `/case-studies/kit-carson-county` | Kit Carson County accessibility case study |
+| `/news` | News and announcements index |
+| `/news/[slug]` | Individual announcement, e.g. the Colorado Digital Government Summit sponsorship |
 | `/about` | Team, values, and company information |
 | `/contact` | Contact form with consultation request |
 | `/accessibility` | Accessibility statement |

@@ -13,6 +13,7 @@ import {
   Instagram,
   Linkedin,
   Mail,
+  Megaphone,
   Newspaper,
   Scale,
   ShieldAlert,
@@ -40,6 +41,7 @@ const COMPANY_LINKS: FooterLink[] = [
   { label: "Case Studies", href: "/case-studies", icon: BookOpen },
   { label: "Overlay Widgets", href: "/overlay-widgets", icon: ShieldAlert },
   { label: "Blog", href: "/blog", icon: Newspaper },
+  { label: "News", href: "/news", icon: Megaphone },
   { label: "About", href: "/about", icon: FileText },
   { label: "Contact", href: "/contact", icon: Mail },
 ];

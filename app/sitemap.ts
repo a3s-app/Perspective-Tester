@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
+import { getAllNews } from "@/lib/news";
 
 // Regenerates when the Sanity cache tag is revalidated, hourly at the latest.
 export const revalidate = 3600;
@@ -19,6 +20,7 @@ const staticRoutes: MetadataRoute.Sitemap = [
   },
   { url: `${SITE_URL}/overlay-widgets`, changeFrequency: "monthly", priority: 0.7 },
   { url: `${SITE_URL}/blog`, changeFrequency: "weekly", priority: 0.7 },
+  { url: `${SITE_URL}/news`, changeFrequency: "weekly", priority: 0.7 },
   { url: `${SITE_URL}/about`, changeFrequency: "monthly", priority: 0.7 },
   { url: `${SITE_URL}/contact`, changeFrequency: "yearly", priority: 0.8 },
   { url: `${SITE_URL}/accessibility`, changeFrequency: "yearly", priority: 0.5 },
@@ -28,12 +30,19 @@ const staticRoutes: MetadataRoute.Sitemap = [
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getAllPosts();
+  const news = getAllNews();
 
   return [
     ...staticRoutes,
     ...posts.map((post) => ({
       url: `${SITE_URL}/blog/${post.slug}`,
       lastModified: post.date,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
+    ...news.map((item) => ({
+      url: `${SITE_URL}/news/${item.slug}`,
+      lastModified: item.date,
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),

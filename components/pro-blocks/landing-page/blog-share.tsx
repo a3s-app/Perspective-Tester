@@ -19,8 +19,17 @@ function XIcon({ className }: { className?: string }) {
   );
 }
 
-export function BlogShare({ title, slug }: { title: string; slug: string }) {
-  const canonicalUrl = `${SITE_URL}/blog/${slug}`;
+export function BlogShare({
+  title,
+  slug,
+  basePath = "/blog",
+}: {
+  title: string;
+  slug: string;
+  /** Section the article lives under, e.g. "/blog" or "/news". */
+  basePath?: string;
+}) {
+  const canonicalUrl = `${SITE_URL}${basePath}/${slug}`;
   const [shareUrl, setShareUrl] = useState(canonicalUrl);
   const [copied, setCopied] = useState(false);
   const [copyFailed, setCopyFailed] = useState(false);

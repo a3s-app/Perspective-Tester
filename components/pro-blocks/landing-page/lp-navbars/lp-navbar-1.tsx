@@ -7,11 +7,14 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+// Six items plus both CTAs only just fit a 768px viewport, so the item and
+// CTA padding is tightened between md and lg and restored from lg up.
 const MENU_ITEMS = [
   { label: "A3S", href: "/a3s" },
   { label: "P15R", href: "/manage" },
   { label: "Clients", href: "/clients" },
   { label: "Blog", href: "/blog" },
+  { label: "News", href: "/news" },
   { label: "About", href: "/about" },
 ] as const;
 
@@ -38,8 +41,8 @@ const NavMenuItems = ({ compact }: { compact?: boolean }) => {
         variant="ghost"
         className={`rounded-lg font-medium transition-[color,background-color,border-color,transform] duration-300 ease-out ${
           compact
-            ? "h-8 px-3 text-[13px]"
-            : "h-9 px-3.5 text-sm"
+            ? "h-8 px-2 text-[13px] lg:px-3"
+            : "h-9 px-2.5 text-sm lg:px-3.5"
         } ${isCurrent(href) ? "text-foreground underline underline-offset-8 decoration-2" : ""}`}
       >
         <Link href={href} prefetch aria-current={isCurrent(href) ? "page" : undefined}>
@@ -216,8 +219,8 @@ export function LpNavbar1() {
                   variant="outline"
                   className={`rounded-lg font-medium transition-[color,background-color,border-color,transform] duration-300 ease-out ${
                     isCompact
-                      ? "h-8 px-3 text-[13px]"
-                      : "h-9 px-3.5 text-sm"
+                      ? "h-8 px-2.5 text-[13px] lg:px-3"
+                      : "h-9 px-3 text-sm lg:px-3.5"
                   }`}
                 >
                   <Link href="/contact" prefetch>
@@ -228,8 +231,8 @@ export function LpNavbar1() {
                   asChild
                   className={`rounded-lg font-medium transition-[color,background-color,border-color,transform] duration-300 ease-out ${
                     isCompact
-                      ? "h-8 px-3 text-[13px]"
-                      : "h-9 px-3.5 text-sm"
+                      ? "h-8 px-2.5 text-[13px] lg:px-3"
+                      : "h-9 px-3 text-sm lg:px-3.5"
                   }`}
                 >
                   <Link href="/#products" prefetch>
