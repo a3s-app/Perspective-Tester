@@ -3,7 +3,20 @@ import { ArrowRight, CalendarDays, Clock, Megaphone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { assetPath } from "@/lib/utils";
-import { getAllNews, getNewsReadingTime } from "@/lib/news";
+import { getAllNews, getNewsReadingTime, type NewsItem } from "@/lib/news";
+
+/**
+ * Photography fills its card; a designed graphic is matted on its own backdrop
+ * instead, so the card never crops the artwork.
+ */
+function heroCell(item: NewsItem) {
+  return {
+    style: item.heroMatte
+      ? { backgroundColor: item.heroMatte.background }
+      : undefined,
+    fit: item.heroMatte ? "object-contain" : "object-cover",
+  };
+}
 
 export function NewsIndexPage() {
   const items = getAllNews();
@@ -51,13 +64,16 @@ export function NewsIndexPage() {
               className="group block overflow-hidden rounded-2xl border bg-card shadow-sm transition-shadow hover:shadow-lg focus-visible:shadow-lg"
             >
               <article className="grid gap-0 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
-                <div className="relative aspect-16/10 w-full overflow-hidden bg-secondary/40 lg:aspect-auto lg:h-full">
+                <div
+                  className="relative aspect-16/10 w-full overflow-hidden bg-secondary/40 lg:aspect-auto lg:h-full"
+                  style={heroCell(featured).style}
+                >
                   <Image
                     src={assetPath(featured.heroImage)}
                     alt={featured.heroAlt}
                     fill
                     sizes="(min-width: 1024px) 50vw, 100vw"
-                    className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                    className={`${heroCell(featured).fit} transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100`}
                     priority
                   />
                 </div>
@@ -129,13 +145,16 @@ export function NewsIndexPage() {
                   className="group flex flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-shadow hover:shadow-lg focus-visible:shadow-lg"
                 >
                   <article className="flex h-full flex-col">
-                    <div className="relative aspect-16/10 w-full overflow-hidden bg-secondary/40">
+                    <div
+                      className="relative aspect-16/10 w-full overflow-hidden bg-secondary/40"
+                      style={heroCell(item).style}
+                    >
                       <Image
                         src={assetPath(item.heroImage)}
                         alt={item.heroAlt}
                         fill
                         sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                        className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                        className={`${heroCell(item).fit} transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100`}
                       />
                     </div>
                     <div className="flex flex-1 flex-col gap-3 p-6">

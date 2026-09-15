@@ -69,73 +69,104 @@ export function NewsArticlePage({ item }: { item: NewsItem }) {
       );
     });
 
+  const titleBlock = (
+    <div className="flex max-w-3xl flex-col gap-6">
+      <div>
+        <Button
+          asChild
+          variant="ghost"
+          className="h-8 -ml-2 rounded-lg px-2 text-sm font-medium text-white/85 hover:bg-white/10 hover:text-white focus-visible:ring-white focus-visible:ring-offset-[oklch(0.13_0.035_255)]"
+        >
+          <Link href="/news" prefetch>
+            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+            All news
+          </Link>
+        </Button>
+      </div>
+
+      <div className="flex flex-wrap items-center gap-2">
+        {item.tags.map((tag) => (
+          <span
+            key={tag}
+            className="rounded-full border border-white/30 bg-white/10 px-2.5 py-0.5 text-xs font-medium text-white"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+
+      <h1 className="max-w-[20ch] text-balance text-[clamp(2.25rem,5vw,4.25rem)] font-semibold leading-[1.02] tracking-[-0.03em]">
+        {item.title}
+      </h1>
+
+      <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-white/85">
+        <span className="inline-flex items-center gap-1.5">
+          <CalendarDays className="h-4 w-4" aria-hidden="true" />
+          <span>
+            Published <time dateTime={item.date}>{item.dateLabel}</time>
+          </span>
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <Clock className="h-4 w-4" aria-hidden="true" />
+          {getNewsReadingTime(item)}
+        </span>
+      </div>
+    </div>
+  );
+
   return (
     <>
       <ReadingProgress />
 
       <article className="bg-background">
-        {/*
-          * Full-bleed header photo. The gradient keeps the white text on the
-          * dark end of the image on every viewport: left-to-right on desktop,
-          * top-to-bottom on mobile where the copy sits at the bottom.
-          */}
         <header className="relative isolate overflow-hidden bg-[oklch(0.13_0.035_255)] text-white">
-          <Image
-            src={assetPath(item.heroImage)}
-            alt={item.heroAlt}
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-[50%_60%]"
-          />
-          <div
-            className="absolute inset-0 bg-[linear-gradient(90deg,oklch(0.13_0.035_255/.97)_0%,oklch(0.13_0.035_255/.88)_44%,oklch(0.13_0.035_255/.42)_76%,oklch(0.13_0.035_255/.22)_100%)] max-md:bg-[linear-gradient(180deg,oklch(0.13_0.035_255/.7)_0%,oklch(0.13_0.035_255/.6)_35%,oklch(0.13_0.035_255/.95)_100%)]"
-            aria-hidden="true"
-          />
-          <div className="container-padding-x container relative z-10 mx-auto flex min-h-[32rem] flex-col justify-end pb-12 pt-24 sm:min-h-[36rem] sm:pb-16 lg:pb-20">
-            <div className="flex max-w-3xl flex-col gap-6">
-              <div>
-                <Button
-                  asChild
-                  variant="ghost"
-                  className="h-8 -ml-2 rounded-lg px-2 text-sm font-medium text-white/85 hover:bg-white/10 hover:text-white focus-visible:ring-white focus-visible:ring-offset-[oklch(0.13_0.035_255)]"
-                >
-                  <Link href="/news" prefetch>
-                    <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-                    All news
-                  </Link>
-                </Button>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-2">
-                {item.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full border border-white/30 bg-white/10 px-2.5 py-0.5 text-xs font-medium text-white"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              <h1 className="max-w-[20ch] text-balance text-[clamp(2.25rem,5vw,4.25rem)] font-semibold leading-[1.02] tracking-[-0.03em]">
-                {item.title}
-              </h1>
-
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-white/85">
-                <span className="inline-flex items-center gap-1.5">
-                  <CalendarDays className="h-4 w-4" aria-hidden="true" />
-                  <span>
-                    Published <time dateTime={item.date}>{item.dateLabel}</time>
-                  </span>
-                </span>
-                <span className="inline-flex items-center gap-1.5">
-                  <Clock className="h-4 w-4" aria-hidden="true" />
-                  {getNewsReadingTime(item)}
-                </span>
+          {item.heroMatte ? (
+            /*
+              * A matted hero is a designed graphic, not photography, so it sits
+              * beside the title at its own aspect ratio rather than being
+              * cropped behind it.
+              */
+            <div className="container-padding-x container relative z-10 mx-auto grid items-center gap-10 pb-12 pt-24 sm:pb-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:gap-16 lg:pb-20">
+              {titleBlock}
+              <div
+                className="mx-auto w-full max-w-sm overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/15 lg:max-w-none"
+                style={{ backgroundColor: item.heroMatte.background }}
+              >
+                <Image
+                  src={assetPath(item.heroImage)}
+                  alt={item.heroAlt}
+                  width={item.heroSize.width}
+                  height={item.heroSize.height}
+                  priority
+                  sizes="(min-width: 1024px) 26rem, (min-width: 640px) 24rem, 100vw"
+                  className="h-auto w-full"
+                />
               </div>
             </div>
-          </div>
+          ) : (
+            /*
+              * Full-bleed header photo. The gradient keeps the white text on the
+              * dark end of the image on every viewport: left-to-right on desktop,
+              * top-to-bottom on mobile where the copy sits at the bottom.
+              */
+            <>
+              <Image
+                src={assetPath(item.heroImage)}
+                alt={item.heroAlt}
+                fill
+                priority
+                sizes="100vw"
+                className="object-cover object-[50%_60%]"
+              />
+              <div
+                className="absolute inset-0 bg-[linear-gradient(90deg,oklch(0.13_0.035_255/.97)_0%,oklch(0.13_0.035_255/.88)_44%,oklch(0.13_0.035_255/.42)_76%,oklch(0.13_0.035_255/.22)_100%)] max-md:bg-[linear-gradient(180deg,oklch(0.13_0.035_255/.7)_0%,oklch(0.13_0.035_255/.6)_35%,oklch(0.13_0.035_255/.95)_100%)]"
+                aria-hidden="true"
+              />
+              <div className="container-padding-x container relative z-10 mx-auto flex min-h-[32rem] flex-col justify-end pb-12 pt-24 sm:min-h-[36rem] sm:pb-16 lg:pb-20">
+                {titleBlock}
+              </div>
+            </>
+          )}
         </header>
 
         {/* Body */}
@@ -160,14 +191,19 @@ export function NewsArticlePage({ item }: { item: NewsItem }) {
 
             {item.content.map((block, index) => {
               if (block.type === "heading") {
+                const Heading = block.level === 3 ? "h3" : "h2";
                 return (
-                  <h2
+                  <Heading
                     key={index}
                     id={slugifyHeading(block.text)}
-                    className="heading-sm mt-6 scroll-mt-24 text-balance text-foreground"
+                    className={
+                      block.level === 3
+                        ? "mt-2 scroll-mt-24 text-balance text-xl font-semibold text-foreground"
+                        : "heading-sm mt-6 scroll-mt-24 text-balance text-foreground"
+                    }
                   >
                     {block.text}
-                  </h2>
+                  </Heading>
                 );
               }
 

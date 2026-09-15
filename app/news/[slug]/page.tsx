@@ -24,6 +24,10 @@ export async function generateMetadata({
     return { title: "Announcement Not Found" };
   }
 
+  // A wide photo earns the large social card; a square graphic would only get
+  // cropped by it, so it gets the thumbnail card instead.
+  const isWideHero = item.heroSize.width / item.heroSize.height >= 1.6;
+
   return {
     title: item.title,
     description: item.description,
@@ -40,14 +44,14 @@ export async function generateMetadata({
       images: [
         {
           url: item.heroImage,
-          width: 1600,
-          height: 920,
+          width: item.heroSize.width,
+          height: item.heroSize.height,
           alt: item.heroAlt,
         },
       ],
     },
     twitter: {
-      card: "summary_large_image",
+      card: isWideHero ? "summary_large_image" : "summary",
       title: item.title,
       description: item.description,
       images: [item.heroImage],

@@ -8,10 +8,12 @@ const SITE_URL = "https://perspectivetester.com";
 export const metadata: Metadata = {
   title: "News and Announcements",
   description:
-    "Announcements, sponsorships, and company updates from Perspective Tester, including the Colorado Digital Government Summit sponsorship.",
+    "Announcements, sponsorships, and company updates from Perspective Tester, including the Utah Association of Counties Annual Convention and the Colorado Digital Government Summit.",
   keywords: [
     "Perspective Tester news",
     "accessibility announcements",
+    "Utah Association of Counties",
+    "UAC Annual Convention",
     "Colorado Digital Government Summit",
     "government technology summit",
     "digital accessibility announcements",

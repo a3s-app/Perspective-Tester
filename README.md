@@ -21,7 +21,7 @@ Marketing website for [Perspective Tester](https://perspectivetester.com) — a 
 | `/clients` | Client logos and testimonials |
 | `/case-studies/kit-carson-county` | Kit Carson County accessibility case study |
 | `/news` | News and announcements index |
-| `/news/[slug]` | Individual announcement, e.g. the Colorado Digital Government Summit sponsorship |
+| `/news/[slug]` | Individual announcement, e.g. notes from the 2026 UAC Annual Convention |
 | `/about` | Team, values, and company information |
 | `/contact` | Contact form with consultation request |
 | `/accessibility` | Accessibility statement |
