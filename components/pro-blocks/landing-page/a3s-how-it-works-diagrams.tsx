@@ -199,7 +199,7 @@ const overviewStages = [
   { num: "05", lines: ["Track and", "report"], line: "Track and report" },
 ] as const;
 
-export function ProcessOverviewDiagram() {
+export function ProcessOverviewDiagram({ uid = "" }: { uid?: string }) {
   return (
     <Responsive
       breakpoint="lg"
@@ -208,7 +208,7 @@ export function ProcessOverviewDiagram() {
         viewBox: "0 0 864 158",
         body: (
           <>
-            <Markers id="ov-w" />
+            <Markers id={`ov-w${uid}`} />
             <Panel x={0} y={0} w={464} h={158} label="Getting compliant" />
             <Panel x={552} y={0} w={312} h={158} label="Every month after" />
 
@@ -218,13 +218,13 @@ export function ProcessOverviewDiagram() {
             })}
 
             {[144, 296, 696].map((x) => (
-              <path key={x} d={`M${x} 82H${x + 23}`} className={connector} strokeWidth="1.25" markerEnd="url(#ov-w-a)" />
+              <path key={x} d={`M${x} 82H${x + 23}`} className={connector} strokeWidth="1.25" markerEnd={`url(#ov-w${uid}-a)`} />
             ))}
 
-            <path d="M448 82H567" className="fill-none stroke-primary" strokeWidth="1.5" markerEnd="url(#ov-w-p)" />
+            <path d="M448 82H567" className="fill-none stroke-primary" strokeWidth="1.5" markerEnd={`url(#ov-w${uid}-p)`} />
             <LineLabel x={508} y={82} text="WCAG 2.2 AA" strong />
 
-            <path d="M784 120V142H632V121" className={connector} strokeWidth="1.25" markerEnd="url(#ov-w-a)" />
+            <path d="M784 120V142H632V121" className={connector} strokeWidth="1.25" markerEnd={`url(#ov-w${uid}-a)`} />
             <LineLabel x={708} y={142} text="Repeats monthly" bg="fill-secondary" />
           </>
         ),
@@ -233,7 +233,7 @@ export function ProcessOverviewDiagram() {
         viewBox: "0 0 340 500",
         body: (
           <>
-            <Markers id="ov-n" />
+            <Markers id={`ov-n${uid}`} />
             <Panel x={0} y={0} w={340} h={256} label="Getting compliant" />
             <Panel x={0} y={316} w={340} h={184} label="Every month after" />
 
@@ -243,13 +243,13 @@ export function ProcessOverviewDiagram() {
             })}
 
             {[96, 168, 412].map((y) => (
-              <path key={y} d={`M162 ${y}V${y + 15}`} className={connector} strokeWidth="1.25" markerEnd="url(#ov-n-a)" />
+              <path key={y} d={`M162 ${y}V${y + 15}`} className={connector} strokeWidth="1.25" markerEnd={`url(#ov-n${uid}-a)`} />
             ))}
 
-            <path d="M162 240V355" className="fill-none stroke-primary" strokeWidth="1.5" markerEnd="url(#ov-n-p)" />
+            <path d="M162 240V355" className="fill-none stroke-primary" strokeWidth="1.5" markerEnd={`url(#ov-n${uid}-p)`} />
             <LineLabel x={162} y={286} text="WCAG 2.2 AA" strong />
 
-            <path d="M308 456H324V384H309" className={connector} strokeWidth="1.25" markerEnd="url(#ov-n-a)" />
+            <path d="M308 456H324V384H309" className={connector} strokeWidth="1.25" markerEnd={`url(#ov-n${uid}-a)`} />
           </>
         ),
       }}
@@ -267,7 +267,7 @@ const loopSteps = [
   { title: "Fix", sub: "Or route to its owner" },
 ] as const;
 
-export function AuditLoopDiagram() {
+export function AuditLoopDiagram({ uid = "" }: { uid?: string }) {
   return (
     <Responsive
       label="Audit and remediation run as one loop: find a barrier by scanning and testing by hand, rank it by its impact on residents, fix it or route it to its owner, then repeat for the next barrier."
@@ -275,13 +275,13 @@ export function AuditLoopDiagram() {
         viewBox: "0 0 622 114",
         body: (
           <>
-            <Markers id="loop-w" />
+            <Markers id={`loop-w${uid}`} />
             {loopSteps.map((step, i) => (
               <Card key={step.title} x={1 + i * 220} y={1} w={180} h={68} title={step.title} sub={step.sub} />
             ))}
-            <path d="M185 35H216" className={connector} strokeWidth="1.25" markerEnd="url(#loop-w-a)" />
-            <path d="M405 35H436" className={connector} strokeWidth="1.25" markerEnd="url(#loop-w-a)" />
-            <path d="M531 69V100H91V74" className={connector} strokeWidth="1.25" markerEnd="url(#loop-w-a)" />
+            <path d="M185 35H216" className={connector} strokeWidth="1.25" markerEnd={`url(#loop-w${uid}-a)`} />
+            <path d="M405 35H436" className={connector} strokeWidth="1.25" markerEnd={`url(#loop-w${uid}-a)`} />
+            <path d="M531 69V100H91V74" className={connector} strokeWidth="1.25" markerEnd={`url(#loop-w${uid}-a)`} />
             <LineLabel x={311} y={100} text="Repeat for the next barrier" />
           </>
         ),
@@ -290,13 +290,13 @@ export function AuditLoopDiagram() {
         viewBox: "0 0 340 252",
         body: (
           <>
-            <Markers id="loop-n" />
+            <Markers id={`loop-n${uid}`} />
             {loopSteps.map((step, i) => (
               <Card key={step.title} x={1} y={1 + i * 92} w={290} h={64} title={step.title} sub={step.sub} />
             ))}
-            <path d="M146 69V88" className={connector} strokeWidth="1.25" markerEnd="url(#loop-n-a)" />
-            <path d="M146 161V180" className={connector} strokeWidth="1.25" markerEnd="url(#loop-n-a)" />
-            <path d="M291 217H318V33H296" className={connector} strokeWidth="1.25" markerEnd="url(#loop-n-a)" />
+            <path d="M146 69V88" className={connector} strokeWidth="1.25" markerEnd={`url(#loop-n${uid}-a)`} />
+            <path d="M146 161V180" className={connector} strokeWidth="1.25" markerEnd={`url(#loop-n${uid}-a)`} />
+            <path d="M291 217H318V33H296" className={connector} strokeWidth="1.25" markerEnd={`url(#loop-n${uid}-a)`} />
           </>
         ),
       }}
@@ -305,25 +305,25 @@ export function AuditLoopDiagram() {
 }
 
 /* ------------------------------------------------------------------ */
-/* 03 Verify: a VPAT is accurate on the day it is issued              */
+/* An ACR is accurate on the day it is issued                         */
 /* ------------------------------------------------------------------ */
 
 const changes = ["New page", "PDF upload", "CMS update"] as const;
 
-export function VpatValidityDiagram() {
+export function VpatValidityDiagram({ uid = "" }: { uid?: string }) {
   return (
     <Responsive
-      label="A VPAT is accurate on the date it is issued and matches the site as tested. After the first change, such as a new page, a PDF upload or a CMS update, it may no longer match the site."
+      label="An ACR is accurate on the date it is issued and matches the site as tested. After the first change, such as a new page, a PDF upload or a CMS update, it may no longer match the site."
       wide={{
         viewBox: "0 0 780 124",
         body: (
           <>
-            <Markers id="vpat-w" />
-            <text x="0" y="36" fontSize="14" className="fill-foreground font-semibold">VPAT issued</text>
+            <Markers id={`vpat-w${uid}`} />
+            <text x="0" y="36" fontSize="14" className="fill-foreground font-semibold">ACR issued</text>
             <text x="0" y="55" fontSize="12" className="fill-muted-foreground">Accurate on this date</text>
 
             <path d="M14 84H300" className="fill-none stroke-primary" strokeWidth="3" />
-            <path d="M300 84H772" className={connector} strokeWidth="1.5" strokeDasharray="5 5" markerEnd="url(#vpat-w-a)" />
+            <path d="M300 84H772" className={connector} strokeWidth="1.5" strokeDasharray="5 5" markerEnd={`url(#vpat-w${uid}-a)`} />
             <circle cx="12" cy="84" r="6" className="fill-primary" />
 
             {changes.map((change, i) => {
@@ -345,11 +345,11 @@ export function VpatValidityDiagram() {
         viewBox: "0 0 340 318",
         body: (
           <>
-            <Markers id="vpat-n" />
+            <Markers id={`vpat-n${uid}`} />
             <path d="M16 18V120" className="fill-none stroke-primary" strokeWidth="3" />
-            <path d="M16 120V312" className={connector} strokeWidth="1.5" strokeDasharray="5 5" markerEnd="url(#vpat-n-a)" />
+            <path d="M16 120V312" className={connector} strokeWidth="1.5" strokeDasharray="5 5" markerEnd={`url(#vpat-n${uid}-a)`} />
             <circle cx="16" cy="14" r="6" className="fill-primary" />
-            <text x="40" y="19" fontSize="14" className="fill-foreground font-semibold">VPAT issued</text>
+            <text x="40" y="19" fontSize="14" className="fill-foreground font-semibold">ACR issued</text>
             <text x="40" y="37" fontSize="12" className="fill-muted-foreground">Accurate on this date</text>
             <text x="40" y="80" fontSize="12" className="fill-primary font-medium">Matches the site as tested</text>
 
@@ -401,7 +401,7 @@ function SourcesList({ x, y, w }: { x: number; y: number; w: number }) {
   );
 }
 
-export function MonitoringDiagram() {
+export function MonitoringDiagram({ uid = "" }: { uid?: string }) {
   return (
     <Responsive
       label="How changes are caught. New pages, uploaded PDFs, CMS and plugin updates, content edits by staff and redesigns all change your site. The monthly monitor compares it with the last cycle, and anything that broke is fixed ahead of new work."
@@ -409,13 +409,13 @@ export function MonitoringDiagram() {
         viewBox: "0 0 781 190",
         body: (
           <>
-            <Markers id="mon-w" />
+            <Markers id={`mon-w${uid}`} />
             <SourcesList x={1} y={1} w={220} />
-            <path d="M221 95H257" className={connector} strokeWidth="1.25" markerEnd="url(#mon-w-a)" />
+            <path d="M221 95H257" className={connector} strokeWidth="1.25" markerEnd={`url(#mon-w${uid}-a)`} />
             <Card x={262} y={63} w={140} h={64} title="Your site" />
-            <path d="M402 95H437" className={connector} strokeWidth="1.25" markerEnd="url(#mon-w-a)" />
+            <path d="M402 95H437" className={connector} strokeWidth="1.25" markerEnd={`url(#mon-w${uid}-a)`} />
             <Card x={442} y={63} w={160} h={64} title="Monthly monitor" sub="Vs. the last cycle" />
-            <path d="M602 95H637" className={connector} strokeWidth="1.25" markerEnd="url(#mon-w-a)" />
+            <path d="M602 95H637" className={connector} strokeWidth="1.25" markerEnd={`url(#mon-w${uid}-a)`} />
             <Card x={642} y={63} w={138} h={64} title="Fixed first" sub="Ahead of new work" strong />
           </>
         ),
@@ -424,13 +424,13 @@ export function MonitoringDiagram() {
         viewBox: "0 0 340 456",
         body: (
           <>
-            <Markers id="mon-n" />
+            <Markers id={`mon-n${uid}`} />
             <SourcesList x={1} y={1} w={338} />
-            <path d="M170 189V212" className={connector} strokeWidth="1.25" markerEnd="url(#mon-n-a)" />
+            <path d="M170 189V212" className={connector} strokeWidth="1.25" markerEnd={`url(#mon-n${uid}-a)`} />
             <Card x={60} y={217} w={220} h={60} title="Your site" />
-            <path d="M170 277V300" className={connector} strokeWidth="1.25" markerEnd="url(#mon-n-a)" />
+            <path d="M170 277V300" className={connector} strokeWidth="1.25" markerEnd={`url(#mon-n${uid}-a)`} />
             <Card x={60} y={305} w={220} h={60} title="Monthly monitor" sub="Vs. the last cycle" />
-            <path d="M170 365V388" className={connector} strokeWidth="1.25" markerEnd="url(#mon-n-a)" />
+            <path d="M170 365V388" className={connector} strokeWidth="1.25" markerEnd={`url(#mon-n${uid}-a)`} />
             <Card x={60} y={393} w={220} h={60} title="Fixed first" sub="Ahead of new work" strong />
           </>
         ),
@@ -443,7 +443,7 @@ export function MonitoringDiagram() {
 /* 05 Coordinate with vendors                                          */
 /* ------------------------------------------------------------------ */
 
-export function VendorHubDiagram() {
+export function VendorHubDiagram({ uid = "" }: { uid?: string }) {
   return (
     <Responsive
       label="One shared issue record connects everyone. On your side: your team and content editors. Vendor: your developer or CMS vendor. A3S specialists work from the same record."
@@ -501,7 +501,7 @@ export function VendorHubDiagram() {
 
 const statuses = ["Found", "Assigned", "In progress", "Fixed", "Verified"] as const;
 
-export function IssueLifecycleDiagram() {
+export function IssueLifecycleDiagram({ uid = "" }: { uid?: string }) {
   return (
     <Responsive
       label="Issue statuses in order: found, assigned, in progress, fixed, verified. A specialist retests every fix before it is verified; a fix that fails the retest goes back to assigned."
@@ -509,18 +509,18 @@ export function IssueLifecycleDiagram() {
         viewBox: "0 0 782 128",
         body: (
           <>
-            <Markers id="life-w" />
+            <Markers id={`life-w${uid}`} />
             {statuses.map((status, i) => (
               <Card key={status} x={1 + i * 163} y={28} w={128} h={48} title={status} align="center" strong={i === statuses.length - 1} />
             ))}
             {[0, 1, 2, 3].map((i) => {
               const x = 129 + i * 163;
-              return <path key={i} d={`M${x + 4} 52H${x + 30}`} className={connector} strokeWidth="1.25" markerEnd="url(#life-w-a)" />;
+              return <path key={i} d={`M${x + 4} 52H${x + 30}`} className={connector} strokeWidth="1.25" markerEnd={`url(#life-w${uid}-a)`} />;
             })}
             <text x="636" y="16" fontSize="11" textAnchor="middle" className="fill-muted-foreground font-medium">
               Specialist retest
             </text>
-            <path d="M555 76V112H229V78" className={connector} strokeWidth="1.25" strokeDasharray="4 4" markerEnd="url(#life-w-a)" />
+            <path d="M555 76V112H229V78" className={connector} strokeWidth="1.25" strokeDasharray="4 4" markerEnd={`url(#life-w${uid}-a)`} />
             <LineLabel x={392} y={112} text="Fails retest" />
           </>
         ),
@@ -529,18 +529,18 @@ export function IssueLifecycleDiagram() {
         viewBox: "0 0 340 302",
         body: (
           <>
-            <Markers id="life-n" />
+            <Markers id={`life-n${uid}`} />
             {statuses.map((status, i) => (
               <Card key={status} x={1} y={1 + i * 64} w={220} h={44} title={status} align="center" strong={i === statuses.length - 1} />
             ))}
             {[0, 1, 2, 3].map((i) => {
               const y = 45 + i * 64;
-              return <path key={i} d={`M111 ${y + 3}V${y + 19}`} className={connector} strokeWidth="1.25" markerEnd="url(#life-n-a)" />;
+              return <path key={i} d={`M111 ${y + 3}V${y + 19}`} className={connector} strokeWidth="1.25" markerEnd={`url(#life-n${uid}-a)`} />;
             })}
             <text x="120" y="248" fontSize="11" className="fill-muted-foreground font-medium">
               Specialist retest
             </text>
-            <path d="M221 215H268V87H226" className={connector} strokeWidth="1.25" strokeDasharray="4 4" markerEnd="url(#life-n-a)" />
+            <path d="M221 215H268V87H226" className={connector} strokeWidth="1.25" strokeDasharray="4 4" markerEnd={`url(#life-n${uid}-a)`} />
             <text x="278" y="147" fontSize="11" className="fill-muted-foreground font-medium">
               <tspan x="278">Fails</tspan>
               <tspan x="278" dy="15">retest</tspan>

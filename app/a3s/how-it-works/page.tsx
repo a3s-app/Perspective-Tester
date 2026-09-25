@@ -3,9 +3,9 @@ import { A3SHowItWorksPage } from "@/components/pro-blocks/landing-page/a3s-how-
 import { SiteShell } from "@/components/pro-blocks/landing-page/site-shell";
 
 export const metadata: Metadata = {
-  title: "How A3S Works - Audit, Monitor, Verify",
+  title: "How A3S Works - From Where You Are to Compliant",
   description:
-    "How A3S keeps your site accessible: a monthly audit, fix and verify cycle, monitoring for regressions after you're compliant, vendor coordination and a dated record of every issue.",
+    "Already doing accessibility work? Start with one question: do you have an ACR? See how A3S brings an existing ACR up to date, or takes your site from a baseline audit to WCAG 2.2 AA, then keeps it there every month.",
   keywords: [
     "accessibility monitoring",
     "accessibility regression testing",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "How A3S Works | Perspective Tester",
     description:
-      "A monthly audit, fix and verify cycle, regression monitoring, vendor coordination and a dated record of every accessibility issue.",
+      "Do you have an ACR? See how A3S brings it up to date, or takes your site from a baseline audit to WCAG 2.2 AA and keeps it there.",
     url: "/a3s/how-it-works",
   },
 };
