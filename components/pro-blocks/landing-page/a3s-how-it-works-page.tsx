@@ -32,7 +32,7 @@ const vendorSection: Stage = {
   id: "vendors",
   title: "We handle the contact with your vendors",
   intro:
-    "Many barriers sit in code or products you don't control: like your CMS or your theme. Instead of handing you a list to chase, we contact the vendor, give them what they need to fix it, and follow it through to a verified fix.",
+    "Many barriers sit in code or products you don't control, like your CMS or your theme. Instead of handing you a list to chase, we contact the vendor, give them what they need to fix it, and follow it through to a verified fix.",
   when: [
     {
       label: "Stage 02",
@@ -265,10 +265,12 @@ export function A3SHowItWorksPage() {
       >
         <div className="container-padding-x container mx-auto">
           <div className="mx-auto max-w-5xl">
-            <p className="pt-10 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground sm:pt-14">
-              Working with vendors
+            <p className="pt-10 sm:pt-14">
+              <span className="inline-flex h-8 items-center rounded-full bg-primary px-4 text-xs font-semibold uppercase tracking-[0.14em] text-primary-foreground">
+                Working with vendors
+              </span>
             </p>
-            <StageBlock stage={vendorSection} kicker="Alongside stages 02 to 05" />
+            <StageBlock stage={vendorSection} />
           </div>
         </div>
       </section>
@@ -350,7 +352,7 @@ function ComplianceBreak() {
   );
 }
 
-function StageBlock({ stage, kicker }: { stage: Stage; kicker: string }) {
+function StageBlock({ stage, kicker }: { stage: Stage; kicker?: string }) {
   const headingId = `${stage.id}-heading`;
 
   return (
@@ -361,12 +363,14 @@ function StageBlock({ stage, kicker }: { stage: Stage; kicker: string }) {
       className="grid scroll-mt-24 gap-8 py-12 sm:py-16 lg:grid-cols-[14rem_1fr] lg:gap-16"
     >
       <div className="lg:sticky lg:top-28 lg:self-start">
-        <p className="text-sm font-semibold tabular-nums text-primary">
-          {kicker}
-        </p>
+        {kicker && (
+          <p className="mb-2 text-sm font-semibold tabular-nums text-primary">
+            {kicker}
+          </p>
+        )}
         <h2
           id={headingId}
-          className="mt-2 text-2xl font-semibold tracking-[-0.02em] text-foreground sm:text-3xl"
+          className="text-2xl font-semibold tracking-[-0.02em] text-foreground sm:text-3xl"
         >
           {stage.title}
         </h2>
