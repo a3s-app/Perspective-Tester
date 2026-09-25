@@ -198,6 +198,15 @@ export function A3SPage() {
               </Card>
             ))}
           </div>
+
+          <div className="flex justify-center">
+            <Button asChild variant="outline" size="lg">
+              <Link href="/a3s/how-it-works">
+                See how A3S works in detail
+                <ArrowRight aria-hidden="true" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
 

@@ -10,6 +10,7 @@ const SITE_URL = "https://perspectivetester.com";
 const staticRoutes: MetadataRoute.Sitemap = [
   { url: `${SITE_URL}`, changeFrequency: "weekly", priority: 1.0 },
   { url: `${SITE_URL}/a3s`, changeFrequency: "monthly", priority: 0.9 },
+  { url: `${SITE_URL}/a3s/how-it-works`, changeFrequency: "monthly", priority: 0.8 },
   { url: `${SITE_URL}/manage`, changeFrequency: "monthly", priority: 0.9 },
   { url: `${SITE_URL}/clients`, changeFrequency: "monthly", priority: 0.8 },
   { url: `${SITE_URL}/case-studies`, changeFrequency: "monthly", priority: 0.8 },

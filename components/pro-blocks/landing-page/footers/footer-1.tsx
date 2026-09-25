@@ -15,6 +15,7 @@ import {
   Mail,
   Megaphone,
   Newspaper,
+  RefreshCw,
   Scale,
   ShieldAlert,
   ShieldCheck,
@@ -33,6 +34,7 @@ type FooterLink = {
 
 const PRODUCT_LINKS: FooterLink[] = [
   { label: "A3S", href: "/a3s", icon: ShieldCheck },
+  { label: "How A3S Works", href: "/a3s/how-it-works", icon: RefreshCw },
   { label: "P15R", href: "/manage", icon: Sparkles },
 ];
 
