@@ -1,35 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import { Tagline } from "@/components/pro-blocks/landing-page/tagline";
 import { FileText, PlayCircle } from "lucide-react";
-
-type VideoItem = {
-  id: string;
-  title: string;
-  description: string;
-};
-
-const videos: VideoItem[] = [
-  {
-    id: "aR2hLNmyT9U",
-    title: "Justin's Perspective on Blindness",
-    description:
-      "Justin Salas, our Accessibility Champion at Perspective Tester, guides us through his world of web navigation.",
-  },
-  {
-    id: "usiTK_CvwkA",
-    title: "About Perspective Tester",
-    description:
-      "Hear the story about the inspiration behind Perspective Tester.",
-  },
-  {
-    id: "vhHr1a8bEMc",
-    title: "What Makes the Web Inaccessible?",
-    description:
-      "Justin Salas shares one key reason digital experiences become inaccessible.",
-  },
-];
+import {
+  homepageVideos as videos,
+  type HomepageVideo,
+} from "@/lib/video-alternatives";
 
 function VideoEmbed({ id, title }: { id: string; title: string }) {
   return (
@@ -44,6 +20,37 @@ function VideoEmbed({ id, title }: { id: string; title: string }) {
         allowFullScreen
       />
     </div>
+  );
+}
+
+function TextAlternative({ video }: { video: HomepageVideo }) {
+  if (!video.alternative) return null;
+
+  return (
+    <details
+      id={`transcript-${video.id}`}
+      className="mt-1 rounded-lg border bg-background text-sm"
+    >
+      <summary className="text-primary flex cursor-pointer items-center gap-1.5 px-3 py-2 font-medium hover:underline">
+        <FileText className="h-4 w-4 shrink-0" aria-hidden="true" />
+        Transcript and visual description
+        <span className="sr-only">: {video.title}</span>
+      </summary>
+      <div className="text-muted-foreground flex flex-col gap-2 border-t px-3 py-3 leading-relaxed">
+        {video.alternative.map((line, index) =>
+          line.kind === "speech" ? (
+            <p key={index}>
+              <span className="text-foreground font-semibold">{line.speaker}:</span>{" "}
+              {line.text}
+            </p>
+          ) : (
+            <p key={index} className="italic">
+              [{line.text}]
+            </p>
+          ),
+        )}
+      </div>
+    </details>
   );
 }
 
@@ -86,20 +93,11 @@ export function VideoShowcaseSection() {
               <p className="text-muted-foreground text-sm leading-relaxed">
                 {featuredVideo.description}
               </p>
-              <Link
-                href="https://p15r.com/wp-content/uploads/2024/03/Our-Story-Video-Alternative-Text-1.docx"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary mt-1 inline-flex w-full items-center gap-1.5 text-sm font-medium hover:underline sm:w-fit"
-              >
-                <FileText className="h-4 w-4" aria-hidden="true" />
-                Download Story Video Text Alternative
-                <span className="sr-only"> (Word document, opens in a new tab)</span>
-              </Link>
+              <TextAlternative video={featuredVideo} />
             </div>
           </article>
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+          <div className="grid items-start gap-4 sm:grid-cols-2 lg:grid-cols-1">
             {secondaryVideos.map((video) => (
               <article
                 key={video.id}
@@ -117,6 +115,7 @@ export function VideoShowcaseSection() {
                   <p className="text-muted-foreground text-sm leading-relaxed">
                     {video.description}
                   </p>
+                  <TextAlternative video={video} />
                 </div>
               </article>
             ))}
