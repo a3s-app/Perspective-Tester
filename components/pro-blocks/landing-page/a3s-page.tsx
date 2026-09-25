@@ -253,21 +253,18 @@ export function A3SPage() {
               <span className="bg-primary/10 text-primary inline-flex h-7 items-center rounded-full px-3 text-xs font-semibold tracking-wide uppercase">
                 A3S Pricing
               </span>
-              <h2 className="heading-md text-foreground">Simple, Predictable Pricing</h2>
-              <p className="text-foreground text-3xl font-semibold sm:text-4xl">
-                $1,500
-                <span className="text-muted-foreground ml-1 text-base font-normal sm:text-lg">
-                  /month
-                </span>
-              </p>
+              <h2 className="heading-md text-foreground">
+                Pricing that fits your site
+              </h2>
               <p className="text-muted-foreground text-sm leading-relaxed sm:text-base">
-                For sites up to 25 pages. Enterprise plans available for larger
-                organizations.
+                Every site is different. Pricing depends on its size and
+                complexity: the number of pages and documents, the templates
+                it uses, and the tools built into it. Tell us about your site
+                and we&apos;ll put together a quote.
               </p>
               <Button asChild size="lg" className="w-full sm:w-auto sm:min-w-56">
-                <Link href="https://a3s.app" target="_blank" rel="noopener noreferrer">
-                  Get Started with A3S
-                  <span className="sr-only"> (opens in a new tab)</span>
+                <Link href="/contact">
+                  Contact us for pricing
                   <ArrowRight aria-hidden="true" />
                 </Link>
               </Button>

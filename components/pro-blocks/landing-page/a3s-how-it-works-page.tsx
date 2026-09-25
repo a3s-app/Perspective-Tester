@@ -301,7 +301,7 @@ export function A3SHowItWorksPage() {
                 variant="outline"
                 className="whitespace-nowrap border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white focus-visible:ring-white"
               >
-                <Link href="/a3s">A3S plans and pricing</Link>
+                <Link href="/a3s">About A3S</Link>
               </Button>
             </div>
           </div>
