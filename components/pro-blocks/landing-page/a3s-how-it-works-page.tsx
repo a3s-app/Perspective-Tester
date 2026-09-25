@@ -1,14 +1,12 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import {
-  ArrowRight,
   ArrowUpRight,
   Check,
   CircleHelp,
   FileCheck,
   FilePlus,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 const startingPoints = [
   {
@@ -147,9 +145,11 @@ export function A3SHowItWorksPage() {
 
       <Section id="process" title="Our process">
         <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Every A3S engagement follows the same four phases: initial
-          assessment, audit and remediation, validation and ACR, and ongoing
-          monitoring.
+          We start by reviewing your site and agreeing on what is in scope.
+          Certified specialists then manually test it with assistive
+          technology, and we fix the issues we find, most serious first. Once every fix has been retested, we document your
+          site&apos;s conformance in an ACR. From then on, we monitor your
+          site every month so it stays that way.
         </p>
         <p>
           <a
@@ -191,30 +191,6 @@ export function A3SHowItWorksPage() {
         <CheckList items={tracking} />
       </Section>
 
-      <section className="py-20 sm:py-24">
-        <div className="container-padding-x container mx-auto">
-          <div className="mx-auto flex max-w-4xl flex-col gap-8 rounded-2xl bg-[oklch(0.18_0.035_255)] p-8 text-white sm:p-10 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-              <p className="text-2xl font-semibold tracking-[-0.02em] sm:text-3xl">
-                We&apos;ll spend an hour looking at your site, at no cost.
-              </p>
-              <p className="mt-4 text-base text-white/70">
-                You will see exactly where you stand.
-              </p>
-            </div>
-            <Button
-              asChild
-              size="lg"
-              className="whitespace-nowrap bg-white text-[oklch(0.18_0.035_255)] hover:bg-white/90 focus-visible:ring-white"
-            >
-              <Link href="/contact">
-                Check my site
-                <ArrowRight aria-hidden="true" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
     </article>
   );
 }
