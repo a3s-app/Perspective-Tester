@@ -1,0 +1,36 @@
+{
+  "stats": [
+    {
+      "value": "$1,000,000",
+      "label": "FTC penalty against a leading overlay vendor"
+    },
+    {
+      "value": "~600",
+      "label": "Companies running widgets still sued in 2022 alone"
+    },
+    {
+      "value": "1,000+",
+      "label": "Accessibility professionals who signed against overlays"
+    }
+  ],
+  "text_1": "The Overlay Record",
+  "heading_2": "Accessibility Widgets Do Not Deliver Compliance",
+  "paragraph_3": "Overlay widgets, including AudioEye, accessiBe, and UserWay, add a toolbar over a website. They do not fix the code underneath, and courts and federal regulators treat them accordingly. Here is what the record actually says.",
+  "href_4": "/a3s",
+  "text_5": "See the Real Fix",
+  "href_6": "/contact",
+  "text_7": "Talk to Sales",
+  "text_8": "What Courts & Regulators Said",
+  "heading_9": "Four Things Every Website Owner Should Know",
+  "paragraph_10": "A widget is a subscription, not a shield. Every one of these involved a site that was running an overlay.",
+  "text_11": "Record ",
+  "heading_12": "The law measures your actual website, not your vendor invoice.",
+  "paragraph_13": "Compliance requires human testing by accessibility specialists and fixes to the underlying code. That is exactly what Perspective Tester’s A3S program provides.",
+  "items_14": [
+    "IAAP-certified manual testing",
+    "Real code remediation",
+    "VPAT & legal documentation"
+  ],
+  "href_15": "/a3s",
+  "text_16": "Explore A3S"
+}

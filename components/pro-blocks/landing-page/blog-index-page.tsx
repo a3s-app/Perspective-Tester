@@ -1,12 +1,18 @@
+"use client";
+
+import { useSection } from "@/components/cms/content-provider";
+import defaults from "@/cms/content/blog-index-page.json";
+
 import { Tagline } from "@/components/pro-blocks/landing-page/tagline";
 import { ArrowRight, CalendarDays, Clock, Newspaper } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { assetPath } from "@/lib/utils";
-import { getAllPosts, getReadingTime } from "@/lib/blog";
+import { getReadingTime, type BlogPost } from "@/lib/blog";
 
-export function BlogIndexPage() {
-  const posts = getAllPosts();
+export function BlogIndexPage({ posts }: { posts: BlogPost[] }) {
+  const content = useSection("blog-index-page", defaults);
+
   const [featured, ...rest] = posts;
 
   return (
@@ -16,18 +22,19 @@ export function BlogIndexPage() {
         <div className="container-padding-x container mx-auto">
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
             <Tagline>
-              <Newspaper className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
-              <span className="text-foreground">Blog</span>
+              <Newspaper
+                className="h-3.5 w-3.5 text-primary"
+                aria-hidden="true"
+              />
+              <span className="text-foreground">{content.text_1}</span>
             </Tagline>
 
             <div className="section-title-gap-xl flex flex-col">
               <h1 className="heading-xl text-balance text-foreground">
-                Notes on Accessibility, in Practice
+                {content.heading_2}
               </h1>
               <p className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground lg:text-lg">
-                Field notes from our team on WCAG 2.2, remediation, and what it
-                actually takes to build digital experiences that work for real
-                users.
+                {content.paragraph_3}
               </p>
             </div>
           </div>
@@ -77,7 +84,7 @@ export function BlogIndexPage() {
                       <div className="h-10 w-10 overflow-hidden rounded-full border-2 border-primary/10">
                         <Image
                           src={assetPath(featured.author.photo)}
-                          alt=""
+                          alt={content.alt_4}
                           width={40}
                           height={40}
                           className="h-full w-full object-cover"
@@ -112,7 +119,7 @@ export function BlogIndexPage() {
                       className="inline-flex items-center gap-1.5 text-sm font-medium text-primary"
                       aria-hidden="true"
                     >
-                      Read article
+                      {content.text_5}
                       <ArrowRight
                         className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0"
                         aria-hidden="true"

@@ -1,0 +1,101 @@
+{
+  "coreFeatures": [
+    {
+      "icon": "Upload",
+      "title": "Audit Import & Auto-Mapping",
+      "description": "Upload Excel audit reports and let the platform auto-map columns, parse findings, and structure issues in seconds. Supports .xlsx, .xls, and .csv formats."
+    },
+    {
+      "icon": "ListChecks",
+      "title": "Issue Tracking & Assignment",
+      "description": "Track issues with severity levels, WCAG criteria mapping, ownership assignment, and due dates. Every issue is 100% traceable."
+    },
+    {
+      "icon": "BarChart3",
+      "title": "Real-Time Dashboards",
+      "description": "Live dashboards displaying remediation progress, risk distribution, and status trends across your entire accessibility program."
+    },
+    {
+      "icon": "Users",
+      "title": "Team Collaboration",
+      "description": "Role-based access controls, saved views, and team workflows that keep everyone aligned on remediation priorities."
+    }
+  ],
+  "integrations": [
+    {
+      "icon": "GitBranch",
+      "name": "Jira",
+      "description": "Bidirectional sync with webhook-driven real-time updates."
+    },
+    {
+      "icon": "Bell",
+      "name": "Slack",
+      "description": "Instant alerts when issues escalate or SLAs breach."
+    },
+    {
+      "icon": "MessageSquare",
+      "name": "Microsoft Teams",
+      "description": "Rich notification cards for channel routing."
+    },
+    {
+      "icon": "Link2",
+      "name": "Custom Webhooks",
+      "description": "Event-driven architecture for custom triggers across platforms."
+    }
+  ],
+  "vendorFeatures": [
+    {
+      "icon": "Shield",
+      "title": "Secure Share Links",
+      "description": "Tokenized share links with controlled permissions and expiration dates for vendor collaboration."
+    },
+    {
+      "icon": "MessageSquare",
+      "title": "Threaded Discussions",
+      "description": "Issue-level conversation threads maintaining full remediation context between teams."
+    },
+    {
+      "icon": "Clock",
+      "title": "SLA Tracking",
+      "description": "Submission tracking with complete version history, approval workflows, and escalation monitoring."
+    }
+  ],
+  "image_1": "/p15r-logo.webp",
+  "alt_2": "",
+  "text_3": "Accessibility Ops Without Chaos",
+  "image_4": "/p15r-logo.webp",
+  "alt_5": "P15R logo",
+  "heading_6": "Your Accessibility Operations Command Center",
+  "paragraph_7": "Replace spreadsheets with a centralized platform for managing accessibility compliance workflows from audit intake through remediation and reporting.",
+  "href_8": "https://p15r.com",
+  "text_9": "Visit P15R Platform",
+  "text_10": "(opens in a new tab)",
+  "href_11": "/contact",
+  "text_12": "Talk to Sales",
+  "text_13": "Features",
+  "heading_14": "Everything You Need to Run Accessibility Ops",
+  "paragraph_15": "From audit intake to remediation tracking, built for accessibility teams and compliance workflows.",
+  "text_16": "Integrations",
+  "heading_17": "Connects to Your Existing Tools",
+  "paragraph_18": "Integrate with the tools your team already uses for seamless accessibility workflows.",
+  "text_19": "Vendor Collaboration",
+  "heading_20": "Streamline Vendor Handoffs",
+  "paragraph_21": "Share findings with vendors securely and track remediation progress with full accountability.",
+  "text_22": "P15R Pricing",
+  "heading_23": "Simple, Transparent Pricing",
+  "paragraph_24": "$99",
+  "text_25": "/seat",
+  "paragraph_26": "Per seat, billed monthly. Scale seats as your team grows.",
+  "href_27": "https://p15r.com",
+  "text_28": "Start Using P15R",
+  "text_29": "(opens in a new tab)",
+  "paragraph_30": "Includes",
+  "items_31": [
+    "Unlimited audit uploads",
+    "Unlimited issues",
+    "Team collaboration",
+    "Jira, Slack & Teams integrations",
+    "Public reporting",
+    "Priority support"
+  ]
+}

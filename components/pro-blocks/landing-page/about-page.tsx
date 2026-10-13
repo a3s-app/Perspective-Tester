@@ -1,3 +1,8 @@
+"use client";
+
+import { useSection } from "@/components/cms/content-provider";
+import defaults from "@/cms/content/about-page.json";
+
 import { Tagline } from "@/components/pro-blocks/landing-page/tagline";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Users, Globe, Shield, Heart } from "lucide-react";
@@ -5,58 +10,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { assetPath } from "@/lib/utils";
 
-const teamMembers: {
-  name: string;
-  role: string;
-  credential?: string;
-  photo: string;
-}[] = [
-  {
-    name: "Jason McKee",
-    role: "Managing Director, CEO & Founder",
-    photo: "/jason-mckee.jpg",
-  },
-  {
-    name: "Justin Sales",
-    role: "Accounts Manager",
-    photo: "/justin-sales.jpg",
-  },
-  {
-    name: "Khushwant Parihar",
-    role: "Web Accessibility Specialist",
-    credential: "CPACC Certified (IAAP)",
-    photo: "/khushwant-parihar.jpg",
-  },
-];
-
-const values = [
-  {
-    icon: Globe,
-    title: "Accessibility for Everyone",
-    description:
-      "We build for the 2 billion people around the world who need some level of support when accessing the web.",
-  },
-  {
-    icon: Users,
-    title: "Real-User Testing",
-    description:
-      "Our team includes native assistive technology users who test against real-world usage patterns, not just automated checklists.",
-  },
-  {
-    icon: Shield,
-    title: "WCAG 2.2 AA Standards",
-    description:
-      "We test against WCAG 2.2 AA standards with manual testing as our primary approach, backed by IAAP-certified professionals.",
-  },
-  {
-    icon: Heart,
-    title: "Building for the Real User",
-    description:
-      "We focus on building the web for real disabled users, maintaining relationships with accessibility attorneys and advocacy groups.",
-  },
-];
+const contentIcons = { Globe, Users, Shield, Heart };
 
 export function AboutPage() {
+  const content = useSection("about-page", defaults, contentIcons);
+  const teamMembers: {
+    name: string;
+    role: string;
+    credential?: string;
+    photo: string;
+  }[] = content.teamMembers;
+  const values = content.values;
+
   return (
     <>
       {/* Hero */}
@@ -65,39 +30,45 @@ export function AboutPage() {
           <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
             <div className="flex flex-col gap-6 text-left">
               <Tagline>
-                <Users className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
-                <span className="text-foreground">About Us</span>
+                <Users
+                  className="h-3.5 w-3.5 text-primary"
+                  aria-hidden="true"
+                />
+                <span className="text-foreground">{content.text_1}</span>
               </Tagline>
 
               <div className="section-title-gap-lg flex flex-col">
                 <h1 className="heading-xl text-balance text-foreground">
-                  Engineering Equity for the Digital World
+                  {content.heading_2}
                 </h1>
                 <p className="max-w-2xl text-base leading-relaxed text-muted-foreground lg:text-lg">
-                  Perspective Tester is a digital accessibility consultancy
-                  helping organizations create inclusive digital experiences. We
-                  work to ensure your online presence fosters inclusivity while
-                  protecting you from legal liabilities.
+                  {content.paragraph_3}
                 </p>
               </div>
 
               <div className="grid max-w-xl grid-cols-1 gap-3 sm:grid-cols-3">
                 <div className="rounded-xl border bg-card px-4 py-3">
-                  <p className="text-foreground text-sm font-semibold">2B+</p>
+                  <p className="text-foreground text-sm font-semibold">
+                    {content.paragraph_4}
+                  </p>
                   <p className="text-muted-foreground text-xs">
-                    people impacted by digital accessibility
+                    {content.paragraph_5}
                   </p>
                 </div>
                 <div className="rounded-xl border bg-card px-4 py-3">
-                  <p className="text-foreground text-sm font-semibold">WCAG 2.2 AA</p>
+                  <p className="text-foreground text-sm font-semibold">
+                    {content.paragraph_6}
+                  </p>
                   <p className="text-muted-foreground text-xs">
-                    standards-first delivery model
+                    {content.paragraph_7}
                   </p>
                 </div>
                 <div className="rounded-xl border bg-card px-4 py-3">
-                  <p className="text-foreground text-sm font-semibold">IAAP Team</p>
+                  <p className="text-foreground text-sm font-semibold">
+                    {content.paragraph_8}
+                  </p>
                   <p className="text-muted-foreground text-xs">
-                    certified specialists and real-user testers
+                    {content.paragraph_9}
                   </p>
                 </div>
               </div>
@@ -106,8 +77,8 @@ export function AboutPage() {
             <div className="min-w-0">
               <div className="overflow-hidden rounded-2xl border bg-secondary/40 shadow-sm">
                 <Image
-                  src={assetPath("/team-photo.jpg")}
-                  alt="The Perspective Tester team"
+                  src={assetPath(content.image_10)}
+                  alt={content.alt_11}
                   width={1000}
                   height={800}
                   className="h-auto w-full object-cover"
@@ -115,8 +86,7 @@ export function AboutPage() {
                 />
               </div>
               <p className="text-muted-foreground mt-3 text-sm">
-                A multidisciplinary team focused on practical remediation, legal
-                compliance, and inclusive product delivery.
+                {content.paragraph_12}
               </p>
             </div>
           </div>
@@ -127,12 +97,10 @@ export function AboutPage() {
       <section className="bg-background section-padding-y border-b">
         <div className="container-padding-x container mx-auto flex flex-col gap-10 md:gap-12">
           <div className="section-title-gap-lg mx-auto flex max-w-xl flex-col items-center text-center">
-            <Tagline>Our Approach</Tagline>
-            <h2 className="heading-lg text-foreground">
-              What Drives Us
-            </h2>
+            <Tagline>{content.text_13}</Tagline>
+            <h2 className="heading-lg text-foreground">{content.heading_14}</h2>
             <p className="text-muted-foreground text-base">
-              We believe accessibility is a fundamental right, not an afterthought.
+              {content.paragraph_15}
             </p>
           </div>
 
@@ -160,13 +128,10 @@ export function AboutPage() {
       <section className="bg-secondary section-padding-y border-b">
         <div className="container-padding-x container mx-auto flex flex-col gap-10 md:gap-12">
           <div className="section-title-gap-lg mx-auto flex max-w-xl flex-col items-center text-center">
-            <Tagline>Our Team</Tagline>
-            <h2 className="heading-lg text-foreground">
-              Meet the People Behind Perspective Tester
-            </h2>
+            <Tagline>{content.text_16}</Tagline>
+            <h2 className="heading-lg text-foreground">{content.heading_17}</h2>
             <p className="text-muted-foreground text-base">
-              IAAP-certified accessibility experts and senior-level programmers
-              with proven experience in accessibility implementation.
+              {content.paragraph_18}
             </p>
           </div>
 
@@ -179,7 +144,7 @@ export function AboutPage() {
                 <div className="h-28 w-28 overflow-hidden rounded-full border-2 border-primary/10">
                   <Image
                     src={assetPath(member.photo)}
-                    alt=""
+                    alt={content.alt_19}
                     width={112}
                     height={112}
                     className="h-full w-full object-cover"
@@ -189,9 +154,7 @@ export function AboutPage() {
                   <h3 className="text-foreground text-base font-semibold">
                     {member.name}
                   </h3>
-                  <p className="text-muted-foreground text-sm">
-                    {member.role}
-                  </p>
+                  <p className="text-muted-foreground text-sm">{member.role}</p>
                   {member.credential ? (
                     <p className="text-primary text-sm font-medium">
                       {member.credential}
@@ -209,20 +172,13 @@ export function AboutPage() {
         <div className="container-padding-x container mx-auto">
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-8 text-center">
             <div className="section-title-gap-lg flex flex-col items-center">
-              <Tagline>Trusted By</Tagline>
+              <Tagline>{content.text_20}</Tagline>
               <h2 className="heading-lg text-foreground">
-                Organizations We Work With
+                {content.heading_21}
               </h2>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
-              {[
-                "State of Colorado",
-                "Mercer",
-                "Oprah Winfrey Charitable Foundation",
-                "Fordham University",
-                "El Paso County",
-                "Portland State University",
-              ].map((client) => (
+              {content.items_22.map((client) => (
                 <span
                   key={client}
                   className="text-muted-foreground text-sm font-medium"
@@ -240,11 +196,10 @@ export function AboutPage() {
         <div className="container-padding-x container mx-auto">
           <div className="bg-primary mx-auto flex max-w-4xl flex-col items-center gap-6 rounded-2xl px-6 py-12 text-center sm:px-12 sm:py-16">
             <h2 className="text-primary-foreground text-2xl font-semibold text-balance sm:text-3xl">
-              Ready to Make Your Digital Products Accessible?
+              {content.heading_23}
             </h2>
             <p className="text-primary-foreground/80 max-w-xl text-base leading-relaxed">
-              Whether you need a full managed service or a platform to track
-              your own remediation, we have a solution for you.
+              {content.paragraph_24}
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
               <Button
@@ -253,8 +208,8 @@ export function AboutPage() {
                 variant="secondary"
                 className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 focus-visible:ring-primary-foreground focus-visible:ring-offset-primary"
               >
-                <Link href="/contact" prefetch>
-                  Talk to Sales
+                <Link href={content.href_25} prefetch>
+                  {content.text_26}
                   <ArrowRight aria-hidden="true" />
                 </Link>
               </Button>
@@ -264,8 +219,8 @@ export function AboutPage() {
                 variant="outline"
                 className="border-primary-foreground/40 bg-transparent text-primary-foreground hover:border-primary-foreground hover:bg-primary-foreground hover:text-primary focus-visible:ring-primary-foreground focus-visible:ring-offset-primary"
               >
-                <Link href="/#products" prefetch>
-                  View Products
+                <Link href={content.href_27} prefetch>
+                  {content.text_28}
                 </Link>
               </Button>
             </div>

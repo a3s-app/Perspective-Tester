@@ -1,8 +1,9 @@
-import { getAllPosts } from "@/lib/blog";
+import { getSettings } from "@/cms/server";
+import { getAllPosts } from "@/cms/articles";
 
 export const dynamic = "force-static";
 
-const SITE_URL = "https://perspectivetester.com";
+export const revalidate = 3600;
 
 function escapeXml(value: string): string {
   return value
@@ -13,8 +14,10 @@ function escapeXml(value: string): string {
     .replace(/'/g, "&apos;");
 }
 
-export function GET() {
-  const posts = getAllPosts();
+export async function GET() {
+  const settings = await getSettings();
+  const SITE_URL = settings.siteURL || "https://perspectivetester.com";
+  const posts = await getAllPosts();
   const lastBuildDate = new Date().toUTCString();
 
   const items = posts
@@ -36,10 +39,10 @@ ${post.tags.map((tag) => `      <category>${escapeXml(tag)}</category>`).join("\
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Perspective Tester Blog</title>
+    <title>${escapeXml(settings.name || "Perspective Tester")} Blog</title>
     <link>${SITE_URL}/blog</link>
     <atom:link href="${SITE_URL}/blog/feed.xml" rel="self" type="application/rss+xml" />
-    <description>Field notes on WCAG 2.2, accessibility remediation, and inclusive digital experiences.</description>
+    <description>${escapeXml(settings.description || "")}</description>
     <language>en-US</language>
     <lastBuildDate>${lastBuildDate}</lastBuildDate>
 ${items}

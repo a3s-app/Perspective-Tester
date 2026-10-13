@@ -1,5 +1,8 @@
 "use client";
 
+import { useSection } from "@/components/cms/content-provider";
+import defaults from "@/cms/content/manage-page.json";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tagline } from "@/components/pro-blocks/landing-page/tagline";
@@ -21,78 +24,25 @@ import Link from "next/link";
 import Image from "next/image";
 import { assetPath } from "@/lib/utils";
 
-const coreFeatures = [
-  {
-    icon: Upload,
-    title: "Audit Import & Auto-Mapping",
-    description:
-      "Upload Excel audit reports and let the platform auto-map columns, parse findings, and structure issues in seconds. Supports .xlsx, .xls, and .csv formats.",
-  },
-  {
-    icon: ListChecks,
-    title: "Issue Tracking & Assignment",
-    description:
-      "Track issues with severity levels, WCAG criteria mapping, ownership assignment, and due dates. Every issue is 100% traceable.",
-  },
-  {
-    icon: BarChart3,
-    title: "Real-Time Dashboards",
-    description:
-      "Live dashboards displaying remediation progress, risk distribution, and status trends across your entire accessibility program.",
-  },
-  {
-    icon: Users,
-    title: "Team Collaboration",
-    description:
-      "Role-based access controls, saved views, and team workflows that keep everyone aligned on remediation priorities.",
-  },
-];
-
-const integrations = [
-  {
-    icon: GitBranch,
-    name: "Jira",
-    description: "Bidirectional sync with webhook-driven real-time updates.",
-  },
-  {
-    icon: Bell,
-    name: "Slack",
-    description: "Instant alerts when issues escalate or SLAs breach.",
-  },
-  {
-    icon: MessageSquare,
-    name: "Microsoft Teams",
-    description: "Rich notification cards for channel routing.",
-  },
-  {
-    icon: Link2,
-    name: "Custom Webhooks",
-    description: "Event-driven architecture for custom triggers across platforms.",
-  },
-];
-
-const vendorFeatures = [
-  {
-    icon: Shield,
-    title: "Secure Share Links",
-    description:
-      "Tokenized share links with controlled permissions and expiration dates for vendor collaboration.",
-  },
-  {
-    icon: MessageSquare,
-    title: "Threaded Discussions",
-    description:
-      "Issue-level conversation threads maintaining full remediation context between teams.",
-  },
-  {
-    icon: Clock,
-    title: "SLA Tracking",
-    description:
-      "Submission tracking with complete version history, approval workflows, and escalation monitoring.",
-  },
-];
+const contentIcons = {
+  Upload,
+  ListChecks,
+  BarChart3,
+  Users,
+  GitBranch,
+  Bell,
+  MessageSquare,
+  Link2,
+  Shield,
+  Clock,
+};
 
 export function ManagePage() {
+  const content = useSection("manage-page", defaults, contentIcons);
+  const coreFeatures = content.coreFeatures;
+  const integrations = content.integrations;
+  const vendorFeatures = content.vendorFeatures;
+
   return (
     <>
       {/* Hero */}
@@ -101,19 +51,19 @@ export function ManagePage() {
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-8 text-center">
             <Tagline>
               <Image
-                src={assetPath("/p15r-logo.webp")}
-                alt=""
+                src={assetPath(content.image_1)}
+                alt={content.alt_2}
                 width={16}
                 height={16}
                 className="h-3.5 w-3.5 object-contain"
               />
-              <span className="text-foreground">Accessibility Ops Without Chaos</span>
+              <span className="text-foreground">{content.text_3}</span>
             </Tagline>
 
             <div className="bg-card flex h-20 w-20 items-center justify-center rounded-2xl border p-2 shadow-sm">
               <Image
-                src={assetPath("/p15r-logo.webp")}
-                alt="P15R logo"
+                src={assetPath(content.image_4)}
+                alt={content.alt_5}
                 width={72}
                 height={72}
                 className="h-full w-full object-contain"
@@ -123,27 +73,27 @@ export function ManagePage() {
 
             <div className="section-title-gap-xl flex flex-col">
               <h1 className="heading-xl text-balance text-foreground">
-                Your Accessibility Operations Command Center
+                {content.heading_6}
               </h1>
               <p className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground lg:text-lg">
-                Replace spreadsheets with a centralized platform for managing
-                accessibility compliance workflows from audit intake through
-                remediation and reporting.
+                {content.paragraph_7}
               </p>
             </div>
 
             <div className="flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg">
-                <Link href="https://p15r.com" target="_blank" rel="noopener noreferrer">
-                  Visit P15R Platform
-                  <span className="sr-only"> (opens in a new tab)</span>
+                <Link
+                  href={content.href_8}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {content.text_9}
+                  <span className="sr-only"> {content.text_10}</span>
                   <ArrowRight aria-hidden="true" />
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <Link href="/contact">
-                  Talk to Sales
-                </Link>
+                <Link href={content.href_11}>{content.text_12}</Link>
               </Button>
             </div>
           </div>
@@ -154,13 +104,10 @@ export function ManagePage() {
       <section className="bg-secondary section-padding-y border-b">
         <div className="container-padding-x container mx-auto flex flex-col gap-10 md:gap-12">
           <div className="section-title-gap-lg mx-auto flex max-w-xl flex-col items-center text-center">
-            <Tagline>Features</Tagline>
-            <h2 className="heading-lg text-foreground">
-              Everything You Need to Run Accessibility Ops
-            </h2>
+            <Tagline>{content.text_13}</Tagline>
+            <h2 className="heading-lg text-foreground">{content.heading_14}</h2>
             <p className="text-muted-foreground text-base">
-              From audit intake to remediation tracking, built for accessibility
-              teams and compliance workflows.
+              {content.paragraph_15}
             </p>
           </div>
 
@@ -193,13 +140,10 @@ export function ManagePage() {
       <section className="bg-background section-padding-y border-b">
         <div className="container-padding-x container mx-auto flex flex-col gap-10 md:gap-12">
           <div className="section-title-gap-lg mx-auto flex max-w-xl flex-col items-center text-center">
-            <Tagline>Integrations</Tagline>
-            <h2 className="heading-lg text-foreground">
-              Connects to Your Existing Tools
-            </h2>
+            <Tagline>{content.text_16}</Tagline>
+            <h2 className="heading-lg text-foreground">{content.heading_17}</h2>
             <p className="text-muted-foreground text-base">
-              Integrate with the tools your team already uses for seamless
-              accessibility workflows.
+              {content.paragraph_18}
             </p>
           </div>
 
@@ -228,13 +172,10 @@ export function ManagePage() {
       <section className="bg-secondary section-padding-y border-b">
         <div className="container-padding-x container mx-auto flex flex-col gap-10 md:gap-12">
           <div className="section-title-gap-lg mx-auto flex max-w-xl flex-col items-center text-center">
-            <Tagline>Vendor Collaboration</Tagline>
-            <h2 className="heading-lg text-foreground">
-              Streamline Vendor Handoffs
-            </h2>
+            <Tagline>{content.text_19}</Tagline>
+            <h2 className="heading-lg text-foreground">{content.heading_20}</h2>
             <p className="text-muted-foreground text-base">
-              Share findings with vendors securely and track remediation
-              progress with full accountability.
+              {content.paragraph_21}
             </p>
           </div>
 
@@ -262,22 +203,32 @@ export function ManagePage() {
           <div className="bg-card mx-auto grid max-w-5xl gap-8 rounded-2xl border p-8 shadow-sm sm:p-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-center lg:gap-10">
             <div className="min-w-0 flex flex-col items-start gap-4 text-left">
               <span className="bg-primary/10 text-primary inline-flex h-7 items-center rounded-full px-3 text-xs font-semibold tracking-wide uppercase">
-                P15R Pricing
+                {content.text_22}
               </span>
-              <h2 className="heading-md text-foreground">Simple, Transparent Pricing</h2>
+              <h2 className="heading-md text-foreground">
+                {content.heading_23}
+              </h2>
               <p className="text-foreground text-3xl font-semibold sm:text-4xl">
-                $99
+                {content.paragraph_24}
                 <span className="text-muted-foreground ml-1 text-base font-normal sm:text-lg">
-                  /seat
+                  {content.text_25}
                 </span>
               </p>
               <p className="text-muted-foreground text-sm leading-relaxed sm:text-base">
-                Per seat, billed monthly. Scale seats as your team grows.
+                {content.paragraph_26}
               </p>
-              <Button asChild size="lg" className="w-full sm:w-auto sm:min-w-56">
-                <Link href="https://p15r.com" target="_blank" rel="noopener noreferrer">
-                  Start Using P15R
-                  <span className="sr-only"> (opens in a new tab)</span>
+              <Button
+                asChild
+                size="lg"
+                className="w-full sm:w-auto sm:min-w-56"
+              >
+                <Link
+                  href={content.href_27}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {content.text_28}
+                  <span className="sr-only"> {content.text_29}</span>
                   <ArrowRight aria-hidden="true" />
                 </Link>
               </Button>
@@ -285,21 +236,17 @@ export function ManagePage() {
 
             <div className="min-w-0 rounded-xl border bg-secondary/40 p-5 sm:p-6">
               <p className="text-foreground mb-4 text-sm font-semibold uppercase tracking-wide">
-                Includes
+                {content.paragraph_30}
               </p>
               {/* WCAG 1.3.1: an "Includes" checklist must be a list so AT
                   announces "list, 6 items" and each item's position. */}
               <ul className="flex list-none flex-col gap-3">
-                {[
-                  "Unlimited audit uploads",
-                  "Unlimited issues",
-                  "Team collaboration",
-                  "Jira, Slack & Teams integrations",
-                  "Public reporting",
-                  "Priority support",
-                ].map((item) => (
+                {content.items_31.map((item) => (
                   <li key={item} className="flex items-center gap-2.5">
-                    <CheckCircle2 className="text-primary h-4 w-4 shrink-0" aria-hidden="true" />
+                    <CheckCircle2
+                      className="text-primary h-4 w-4 shrink-0"
+                      aria-hidden="true"
+                    />
                     <span className="text-foreground text-sm">{item}</span>
                   </li>
                 ))}

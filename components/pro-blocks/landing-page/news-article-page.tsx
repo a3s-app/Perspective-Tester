@@ -1,3 +1,9 @@
+"use client";
+
+import { ArticleBody } from '@/components/cms/article-body';
+import { useSection } from "@/components/cms/content-provider";
+import defaults from "@/cms/content/news-article-page.json";
+
 import { Button } from "@/components/ui/button";
 import {
   ArrowLeft,
@@ -27,6 +33,8 @@ function ExternalAnchor({
   className: string;
   children: React.ReactNode;
 }) {
+  const content = useSection("news-article-page", defaults);
+
   return (
     <a
       href={href}
@@ -39,12 +47,14 @@ function ExternalAnchor({
         className="ml-1 inline h-3.5 w-3.5 align-[-0.125em]"
         aria-hidden="true"
       />
-      <span className="sr-only"> (opens in a new tab)</span>
+      <span className="sr-only"> {content.text_1}</span>
     </a>
   );
 }
 
 export function NewsArticlePage({ item }: { item: NewsItem }) {
+  const content = useSection("news-article-page", defaults);
+
   const audioText = [
     item.title,
     item.description,
@@ -77,9 +87,9 @@ export function NewsArticlePage({ item }: { item: NewsItem }) {
           variant="ghost"
           className="h-8 -ml-2 rounded-lg px-2 text-sm font-medium text-white/85 hover:bg-white/10 hover:text-white focus-visible:ring-white focus-visible:ring-offset-[oklch(0.13_0.035_255)]"
         >
-          <Link href="/news" prefetch>
+          <Link href={content.href_2} prefetch>
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-            All news
+            {content.text_3}
           </Link>
         </Button>
       </div>
@@ -103,7 +113,8 @@ export function NewsArticlePage({ item }: { item: NewsItem }) {
         <span className="inline-flex items-center gap-1.5">
           <CalendarDays className="h-4 w-4" aria-hidden="true" />
           <span>
-            Published <time dateTime={item.date}>{item.dateLabel}</time>
+            {content.text_4}
+            <time dateTime={item.date}>{item.dateLabel}</time>
           </span>
         </span>
         <span className="inline-flex items-center gap-1.5">
@@ -122,10 +133,10 @@ export function NewsArticlePage({ item }: { item: NewsItem }) {
         <header className="relative isolate overflow-hidden bg-[oklch(0.13_0.035_255)] text-white">
           {item.heroMatte ? (
             /*
-              * A matted hero is a designed graphic, not photography, so it sits
-              * beside the title at its own aspect ratio rather than being
-              * cropped behind it.
-              */
+             * A matted hero is a designed graphic, not photography, so it sits
+             * beside the title at its own aspect ratio rather than being
+             * cropped behind it.
+             */
             <div className="container-padding-x container relative z-10 mx-auto grid items-center gap-10 pb-12 pt-24 sm:pb-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:gap-16 lg:pb-20">
               {titleBlock}
               <div
@@ -145,10 +156,10 @@ export function NewsArticlePage({ item }: { item: NewsItem }) {
             </div>
           ) : (
             /*
-              * Full-bleed header photo. The gradient keeps the white text on the
-              * dark end of the image on every viewport: left-to-right on desktop,
-              * top-to-bottom on mobile where the copy sits at the bottom.
-              */
+             * Full-bleed header photo. The gradient keeps the white text on the
+             * dark end of the image on every viewport: left-to-right on desktop,
+             * top-to-bottom on mobile where the copy sits at the bottom.
+             */
             <>
               <Image
                 src={assetPath(item.heroImage)}
@@ -189,33 +200,7 @@ export function NewsArticlePage({ item }: { item: NewsItem }) {
 
             <BlogAudioReader text={audioText} />
 
-            {item.content.map((block, index) => {
-              if (block.type === "heading") {
-                const Heading = block.level === 3 ? "h3" : "h2";
-                return (
-                  <Heading
-                    key={index}
-                    id={slugifyHeading(block.text)}
-                    className={
-                      block.level === 3
-                        ? "mt-2 scroll-mt-24 text-balance text-xl font-semibold text-foreground"
-                        : "heading-sm mt-6 scroll-mt-24 text-balance text-foreground"
-                    }
-                  >
-                    {block.text}
-                  </Heading>
-                );
-              }
-
-              return (
-                <p
-                  key={index}
-                  className="text-base leading-relaxed text-muted-foreground lg:text-lg"
-                >
-                  {renderText(block.text, block.links)}
-                </p>
-              );
-            })}
+            <ArticleBody value={item.body}/>
 
             <BlogShare title={item.title} slug={item.slug} basePath="/news" />
           </div>
@@ -233,11 +218,10 @@ export function NewsArticlePage({ item }: { item: NewsItem }) {
               id="news-cta-heading"
               className="text-primary-foreground text-2xl font-semibold text-balance sm:text-3xl"
             >
-              Could you show what your agency has done about accessibility?
+              {content.heading_5}
             </h2>
             <p className="text-primary-foreground/80 max-w-xl text-base leading-relaxed">
-              We audit, we fix, and we document every step. A defensible
-              program should not break the budget, and it does not have to.
+              {content.paragraph_6}
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
               <Button
@@ -246,8 +230,8 @@ export function NewsArticlePage({ item }: { item: NewsItem }) {
                 variant="secondary"
                 className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 focus-visible:ring-primary-foreground focus-visible:ring-offset-primary"
               >
-                <Link href="/contact" prefetch>
-                  Let&apos;s talk
+                <Link href={content.href_7} prefetch>
+                  {content.text_8}
                   <ArrowRight aria-hidden="true" />
                 </Link>
               </Button>
@@ -257,8 +241,8 @@ export function NewsArticlePage({ item }: { item: NewsItem }) {
                 variant="outline"
                 className="border-primary-foreground/40 bg-transparent text-primary-foreground hover:border-primary-foreground hover:bg-primary-foreground hover:text-primary focus-visible:ring-primary-foreground focus-visible:ring-offset-primary"
               >
-                <Link href="/a3s" prefetch>
-                  See how A3S works
+                <Link href={content.href_9} prefetch>
+                  {content.text_10}
                 </Link>
               </Button>
             </div>

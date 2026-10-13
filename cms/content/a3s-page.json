@@ -1,0 +1,88 @@
+{
+  "phases": [
+    {
+      "number": "01",
+      "title": "Initial Assessment",
+      "description": "Comprehensive site evaluation, accessibility statement updates, and scope documentation to establish your compliance baseline.",
+      "icon": "Eye"
+    },
+    {
+      "number": "02",
+      "title": "Audit & Remediation",
+      "description": "Issue identification and implementation of fixes with monthly progress reports tracking every change.",
+      "icon": "ClipboardCheck"
+    },
+    {
+      "number": "03",
+      "title": "Final Validation & VPAT",
+      "description": "Complete site validation and official VPAT certification documenting your conformance to WCAG 2.2 AA standards.",
+      "icon": "FileCheck"
+    },
+    {
+      "number": "04",
+      "title": "Optimization & Monitoring",
+      "description": "Continuous monitoring with proactive issue prevention, catching accessibility regressions before they become problems.",
+      "icon": "BarChart3"
+    }
+  ],
+  "features": [
+    {
+      "icon": "Shield",
+      "title": "Legal Protection Documentation",
+      "description": "Build a defensible paper trail with monthly reports, remediation records, and VPAT certifications that demonstrate your compliance commitment."
+    },
+    {
+      "icon": "Users",
+      "title": "IAAP-Certified Specialists",
+      "description": "Work with certified accessibility professionals who manually test with assistive technologies, not just automated scanners."
+    },
+    {
+      "icon": "FileText",
+      "title": "VPAT & ACR Reports",
+      "description": "Receive official Voluntary Product Accessibility Template and Accessibility Conformance Reports for your digital properties."
+    },
+    {
+      "icon": "Lightbulb",
+      "title": "Expert Remediation Guidance",
+      "description": "Get actionable fixes from specialists experienced in WCAG standards, screen reader testing, and assistive technology compatibility."
+    }
+  ],
+  "complianceStandards": [
+    "WCAG 2.2 AA",
+    "Section 508",
+    "ADA Title II",
+    "Section 504"
+  ],
+  "text_1": "Accessibility as a Service",
+  "image_2": "/a3s-logo.png",
+  "alt_3": "A3S Accessibility as a Service logo",
+  "heading_4": "Managed Accessibility Compliance for Government",
+  "paragraph_5": "A subscription-based accessibility service built for local and county governments. Expert teams paired with public-sector workflows to achieve and maintain WCAG 2.2 AA compliance with full legal protection documentation.",
+  "href_6": "https://a3s.app",
+  "text_7": "Visit A3S",
+  "text_8": "(opens in a new tab)",
+  "href_9": "/contact",
+  "text_10": "Talk to Sales",
+  "text_11": "How It Works",
+  "heading_12": "Four-Phase Accessibility Workflow",
+  "paragraph_13": "A structured approach that takes you from initial assessment to ongoing compliance monitoring.",
+  "text_14": "Phase ",
+  "href_15": "/a3s/how-it-works",
+  "text_16": "See how A3S works in detail",
+  "text_17": "Why A3S",
+  "heading_18": "Built for Government Compliance",
+  "paragraph_19": "Manual testing by certified professionals, not overlay widgets or automated-only scans.",
+  "text_20": "A3S Pricing",
+  "heading_21": "Pricing that fits your site",
+  "paragraph_22": "Every site is different. Pricing depends on its size and complexity: the number of pages and documents, the templates it uses, and the tools built into it. Tell us about your site and we'll put together a quote.",
+  "href_23": "/contact",
+  "text_24": "Contact us for pricing",
+  "paragraph_25": "Includes",
+  "items_26": [
+    "4-phase accessibility workflow",
+    "VPAT & legal documentation",
+    "Monthly progress reports",
+    "Continuous monitoring",
+    "IAAP-certified specialists"
+  ]
+}

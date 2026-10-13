@@ -1,0 +1,63 @@
+{
+  "evidence": [
+    {
+      "label": "Cadence",
+      "value": "Monthly audit cycles",
+      "detail": "run without a gap"
+    },
+    {
+      "label": "Coverage",
+      "value": "Public Pages",
+      "detail": "tested and dated in the record"
+    },
+    {
+      "label": "Repairs",
+      "value": "Critical issues addressed",
+      "detail": "retested before the cycle closes"
+    }
+  ],
+  "storyStructure": [
+    {
+      "title": "The constraint",
+      "detail": "One county IT specialist was carrying the website, networks, accounts, and a new accessibility mandate."
+    },
+    {
+      "title": "The operating decision",
+      "detail": "Replace the expensive one-time audit with a monthly test, fix, verify, and document cycle."
+    },
+    {
+      "title": "The proof",
+      "detail": "Keep every test and repair in one record so the county can show what changed and what comes next."
+    }
+  ],
+  "image_1": "/case-studies/kit-carson-county/county-road.webp",
+  "alt_2": "",
+  "paragraph_3": "Case studies",
+  "heading_4": "Accessibility work, shown in the record.",
+  "paragraph_5": "See how public organizations turn high-stakes accessibility requirements into practical systems, verified repairs, and evidence they can stand behind.",
+  "href_6": "#published-studies",
+  "text_7": "Explore the published study",
+  "heading_8": "See what accessibility work looks like in practice.",
+  "paragraph_9": "Each study follows a real organization through the barriers it faced, the decisions it made, and the evidence it keeps.",
+  "image_10": "/case-studies/kit-carson-county/county-prairie.webp",
+  "alt_11": "Prairie grass beneath a wide blue sky in Kit Carson County, Colorado",
+  "paragraph_12": "A rural Colorado county built an ongoing accessibility program around the operating budget it already had.",
+  "image_13": "/case-studies/kit-carson-county/county-logo.png",
+  "alt_14": "Kit Carson County official logo",
+  "paragraph_15": "Local government · Colorado",
+  "heading_16": "Kit Carson County",
+  "paragraph_17": "“I feel like I'm trying to keep the Titanic afloat with a spoon.”",
+  "text_18": "Todd Holmes, IT Support Specialist",
+  "href_19": "/case-studies/kit-carson-county",
+  "text_20": "Read the Kit Carson County case study",
+  "heading_21": "A case study should show the decisions, not just the outcome.",
+  "paragraph_22": "Each story follows the work from the original pressure through the repair and into the evidence kept afterward.",
+  "text_23": "0",
+  "heading_24": "Know what you are facing before you decide anything.",
+  "paragraph_25": "We will spend about an hour reviewing your site at no cost, then explain the barriers, the risk, and a practical path forward.",
+  "href_26": "/contact",
+  "text_27": "Request a no-cost review",
+  "href_28": "/a3s",
+  "text_29": "See how A3S works",
+  "paragraph_30": "A clear assessment, with no obligation to continue."
+}

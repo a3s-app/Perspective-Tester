@@ -1,3 +1,4 @@
+import { getSettings } from "@/cms/server";
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
@@ -69,8 +70,7 @@ export async function POST(request: NextRequest) {
 
     const subject = `New Inquiry: ${body.service} — ${body.firstName} ${body.lastName} (${body.organization})`;
 
-    // Instantiate lazily so a missing key doesn't crash at module load / build
-    // time (the static-export CI build has no RESEND_API_KEY).
+    // Instantiate lazily so a missing optional key does not prevent a build.
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) {
       console.error("[contact/resend] RESEND_API_KEY is not set");
@@ -83,7 +83,7 @@ export async function POST(request: NextRequest) {
 
     const { error } = await resend.emails.send({
       from: FROM_EMAIL,
-      to: CONTACT_EMAIL,
+      to: (await getSettings()).contactEmail || CONTACT_EMAIL,
       replyTo: body.email,
       subject,
       html: buildHtmlEmail(body),

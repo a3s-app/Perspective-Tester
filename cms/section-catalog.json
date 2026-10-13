@@ -1,0 +1,210 @@
+[
+  {
+    "slug": "a3s-how-it-works-page",
+    "label": "How A3S works",
+    "file": "components/pro-blocks/landing-page/a3s-how-it-works-page.tsx",
+    "icons": ["FileCheck", "FilePlus"]
+  },
+  {
+    "slug": "a3s-page",
+    "label": "A3S product page",
+    "file": "components/pro-blocks/landing-page/a3s-page.tsx",
+    "icons": [
+      "Eye",
+      "ClipboardCheck",
+      "FileCheck",
+      "BarChart3",
+      "Shield",
+      "Users",
+      "FileText",
+      "Lightbulb"
+    ]
+  },
+  {
+    "slug": "about-page",
+    "label": "About Page",
+    "file": "components/pro-blocks/landing-page/about-page.tsx",
+    "icons": ["Globe", "Users", "Shield", "Heart"]
+  },
+  {
+    "slug": "accessibility-statement-page",
+    "label": "Accessibility statement",
+    "file": "components/pro-blocks/landing-page/accessibility-statement-page.tsx",
+    "icons": []
+  },
+  {
+    "slug": "blog-index-page",
+    "label": "Blog index",
+    "file": "components/pro-blocks/landing-page/blog-index-page.tsx",
+    "icons": []
+  },
+  {
+    "slug": "blog-post-page",
+    "label": "Blog article layout",
+    "file": "components/pro-blocks/landing-page/blog-post-page.tsx",
+    "icons": []
+  },
+  {
+    "slug": "capabilities-section",
+    "label": "Capabilities Section",
+    "file": "components/pro-blocks/landing-page/capabilities-section.tsx",
+    "icons": [
+      "FileText",
+      "ScanSearch",
+      "Code",
+      "FileCheck",
+      "GraduationCap",
+      "Scale"
+    ]
+  },
+  {
+    "slug": "case-studies-index-page",
+    "label": "Case studies index",
+    "file": "components/pro-blocks/landing-page/case-studies-index-page.tsx",
+    "icons": []
+  },
+  {
+    "slug": "clients-page",
+    "label": "Clients Page",
+    "file": "components/pro-blocks/landing-page/clients-page.tsx",
+    "icons": []
+  },
+  {
+    "slug": "contact-page",
+    "label": "Contact Page",
+    "file": "components/pro-blocks/landing-page/contact-page.tsx",
+    "icons": ["Mail"]
+  },
+  {
+    "slug": "enterprise-section",
+    "label": "Enterprise Section",
+    "file": "components/pro-blocks/landing-page/enterprise-section.tsx",
+    "icons": ["Search", "FileText", "Wrench", "ShieldCheck"]
+  },
+  {
+    "slug": "final-cta-section",
+    "label": "Contact call to action",
+    "file": "components/pro-blocks/landing-page/final-cta-section.tsx",
+    "icons": []
+  },
+  {
+    "slug": "kit-carson-case-study-art",
+    "label": "Case study artwork",
+    "file": "components/pro-blocks/landing-page/kit-carson-case-study-art.tsx",
+    "icons": []
+  },
+  {
+    "slug": "kit-carson-county-case-study",
+    "label": "Kit Carson County case study",
+    "file": "components/pro-blocks/landing-page/kit-carson-county-case-study.tsx",
+    "icons": []
+  },
+  {
+    "slug": "manage-page",
+    "label": "P15R product page",
+    "file": "components/pro-blocks/landing-page/manage-page.tsx",
+    "icons": [
+      "Upload",
+      "ListChecks",
+      "BarChart3",
+      "Users",
+      "GitBranch",
+      "Bell",
+      "MessageSquare",
+      "Link2",
+      "Shield",
+      "Clock"
+    ]
+  },
+  {
+    "slug": "news-article-page",
+    "label": "News article layout",
+    "file": "components/pro-blocks/landing-page/news-article-page.tsx",
+    "icons": []
+  },
+  {
+    "slug": "news-index-page",
+    "label": "News index",
+    "file": "components/pro-blocks/landing-page/news-index-page.tsx",
+    "icons": []
+  },
+  {
+    "slug": "overlay-widgets-page",
+    "label": "Overlay Widgets Page",
+    "file": "components/pro-blocks/landing-page/overlay-widgets-page.tsx",
+    "icons": ["Gavel"]
+  },
+  {
+    "slug": "privacy-page",
+    "label": "Privacy Page",
+    "file": "components/pro-blocks/landing-page/privacy-page.tsx",
+    "icons": []
+  },
+  {
+    "slug": "products-section",
+    "label": "Products Section",
+    "file": "components/pro-blocks/landing-page/products-section.tsx",
+    "icons": [
+      "ClipboardCheck",
+      "FileText",
+      "BarChart3",
+      "Lightbulb",
+      "ListChecks",
+      "GitBranch",
+      "Users",
+      "Code"
+    ]
+  },
+  {
+    "slug": "terms-page",
+    "label": "Terms Page",
+    "file": "components/pro-blocks/landing-page/terms-page.tsx",
+    "icons": []
+  },
+  {
+    "slug": "video-showcase-section",
+    "label": "Video library",
+    "file": "components/pro-blocks/landing-page/video-showcase-section.tsx",
+    "icons": []
+  },
+  {
+    "slug": "hero-section-2",
+    "label": "Homepage hero",
+    "file": "components/pro-blocks/landing-page/hero-sections/hero-section-2.tsx",
+    "icons": []
+  },
+  {
+    "slug": "footer-1",
+    "label": "Footer",
+    "file": "components/pro-blocks/landing-page/footers/footer-1.tsx",
+    "icons": [
+      "ShieldCheck",
+      "RefreshCw",
+      "Sparkles",
+      "Building2",
+      "BookOpen",
+      "ShieldAlert",
+      "Newspaper",
+      "Megaphone",
+      "FileText",
+      "Mail",
+      "Scale",
+      "ArrowUpRight",
+      "Linkedin",
+      "Instagram",
+      "Facebook"
+    ]
+  },
+  {
+    "slug": "lp-navbar-1",
+    "label": "Navigation",
+    "file": "components/pro-blocks/landing-page/lp-navbars/lp-navbar-1.tsx",
+    "icons": []
+  },
+  {
+    "slug": "logo",
+    "label": "Brand logo",
+    "file": "components/pro-blocks/logo.tsx",
+    "icons": []
+  }
+]

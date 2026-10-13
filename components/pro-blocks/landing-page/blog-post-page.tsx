@@ -1,3 +1,9 @@
+"use client";
+
+import { ArticleBody } from '@/components/cms/article-body';
+import { useSection } from "@/components/cms/content-provider";
+import defaults from "@/cms/content/blog-post-page.json";
+
 import { Tagline } from "@/components/pro-blocks/landing-page/tagline";
 import { Button } from "@/components/ui/button";
 import {
@@ -22,6 +28,8 @@ import {
 } from "@/lib/blog";
 
 export function BlogPostPage({ post }: { post: BlogPost }) {
+  const content = useSection("blog-post-page", defaults);
+
   const audioText = [
     post.title,
     post.description,
@@ -45,7 +53,7 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
             className="ml-1 inline h-3.5 w-3.5 align-[-0.125em]"
             aria-hidden="true"
           />
-          <span className="sr-only"> (opens in a new tab)</span>
+          <span className="sr-only"> {content.text_1}</span>
         </a>
       ),
     );
@@ -65,9 +73,9 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
                   variant="ghost"
                   className="h-8 -ml-2 rounded-lg px-2 text-sm font-medium text-muted-foreground"
                 >
-                  <Link href="/blog" prefetch>
+                  <Link href={content.href_2} prefetch>
                     <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-                    All articles
+                    {content.text_3}
                   </Link>
                 </Button>
               </div>
@@ -156,28 +164,7 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
         {/* Body */}
         <div className="container-padding-x container mx-auto pb-16 lg:pb-24">
           <div className="mx-auto flex max-w-3xl flex-col gap-6">
-            {post.content.map((block, index) => {
-              if (block.type === "heading") {
-                return (
-                  <h2
-                    key={index}
-                    id={slugifyHeading(block.text)}
-                    className="heading-sm mt-6 scroll-mt-24 text-balance text-foreground"
-                  >
-                    {block.text}
-                  </h2>
-                );
-              }
-
-              return (
-                <p
-                  key={index}
-                  className="text-base leading-relaxed text-muted-foreground lg:text-lg"
-                >
-                  {renderText(block.text, block.links)}
-                </p>
-              );
-            })}
+            <ArticleBody value={post.body}/>
 
             <BlogShare title={post.title} slug={post.slug} />
           </div>
@@ -189,11 +176,10 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
         <div className="container-padding-x container mx-auto">
           <div className="bg-primary mx-auto flex max-w-4xl flex-col items-center gap-6 rounded-2xl px-6 py-12 text-center sm:px-12 sm:py-16">
             <h2 className="text-primary-foreground text-2xl font-semibold text-balance sm:text-3xl">
-              Ready to Make Your Digital Products Accessible?
+              {content.heading_4}
             </h2>
             <p className="text-primary-foreground/80 max-w-xl text-base leading-relaxed">
-              Whether you need a full managed service or a platform to track your
-              own remediation, we have a solution for you.
+              {content.paragraph_5}
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
               <Button
@@ -202,8 +188,8 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
                 variant="secondary"
                 className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 focus-visible:ring-primary-foreground focus-visible:ring-offset-primary"
               >
-                <Link href="/contact" prefetch>
-                  Talk to Sales
+                <Link href={content.href_6} prefetch>
+                  {content.text_7}
                   <ArrowRight aria-hidden="true" />
                 </Link>
               </Button>
@@ -213,8 +199,8 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
                 variant="outline"
                 className="border-primary-foreground/40 bg-transparent text-primary-foreground hover:border-primary-foreground hover:bg-primary-foreground hover:text-primary focus-visible:ring-primary-foreground focus-visible:ring-offset-primary"
               >
-                <Link href="/blog" prefetch>
-                  Read more articles
+                <Link href={content.href_8} prefetch>
+                  {content.text_9}
                 </Link>
               </Button>
             </div>

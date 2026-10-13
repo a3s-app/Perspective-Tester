@@ -1,0 +1,38 @@
+{
+  "MENU_ITEMS": [
+    {
+      "label": "A3S",
+      "href": "/a3s"
+    },
+    {
+      "label": "P15R",
+      "href": "/manage"
+    },
+    {
+      "label": "Clients",
+      "href": "/clients"
+    },
+    {
+      "label": "Blog",
+      "href": "/blog"
+    },
+    {
+      "label": "News",
+      "href": "/news"
+    },
+    {
+      "label": "About",
+      "href": "/about"
+    }
+  ],
+  "aria_label_1": "Main",
+  "href_2": "/",
+  "href_3": "/contact",
+  "text_4": "Talk to Sales",
+  "href_5": "/#products",
+  "text_6": "View Products",
+  "href_7": "/contact",
+  "text_8": "Talk to Sales",
+  "href_9": "/#products",
+  "text_10": "View Products"
+}

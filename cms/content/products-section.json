@@ -1,0 +1,64 @@
+{
+  "products": [
+    {
+      "name": "A3S",
+      "logo": "/a3s-logo.png",
+      "logoAlt": "",
+      "subtitle": "Accessibility as a Service",
+      "description": "A managed accessibility service for local and county governments. We pair expert accessibility teams with public-sector workflows to help you reach and maintain WCAG 2.2 AA compliance with legal protection documentation.",
+      "features": [
+        {
+          "icon": "ClipboardCheck",
+          "name": "4-phase accessibility workflow"
+        },
+        {
+          "icon": "FileText",
+          "name": "VPAT reports & legal documentation"
+        },
+        {
+          "icon": "BarChart3",
+          "name": "Continuous monitoring & reporting"
+        },
+        {
+          "icon": "Lightbulb",
+          "name": "Expert-led remediation guidance"
+        }
+      ],
+      "cta": "Learn About A3S",
+      "href": "/a3s",
+      "highlighted": true
+    },
+    {
+      "name": "P15R",
+      "logo": "/p15r-logo.webp",
+      "logoAlt": "",
+      "subtitle": "Accessibility Ops Without Chaos",
+      "description": "An accessibility operations platform that helps teams track, assign, and resolve accessibility issues across websites and applications with real-time collaboration and developer integrations.",
+      "features": [
+        {
+          "icon": "ListChecks",
+          "name": "Accessibility issue tracking"
+        },
+        {
+          "icon": "GitBranch",
+          "name": "Remediation workflows"
+        },
+        {
+          "icon": "Users",
+          "name": "Team collaboration & assignments"
+        },
+        {
+          "icon": "Code",
+          "name": "Developer integrations"
+        }
+      ],
+      "cta": "Explore P15R",
+      "href": "/manage",
+      "highlighted": false
+    }
+  ],
+  "text_1": "Products",
+  "heading_2": "Our Products",
+  "paragraph_3": "Two powerful solutions designed to fit every stage of your accessibility journey.",
+  "text_4": "Managed"
+}

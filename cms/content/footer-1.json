@@ -1,0 +1,123 @@
+{
+  "PRODUCT_LINKS": [
+    {
+      "label": "A3S",
+      "href": "/a3s",
+      "icon": "ShieldCheck"
+    },
+    {
+      "label": "How A3S Works",
+      "href": "/a3s/how-it-works",
+      "icon": "RefreshCw"
+    },
+    {
+      "label": "P15R",
+      "href": "/manage",
+      "icon": "Sparkles"
+    }
+  ],
+  "COMPANY_LINKS": [
+    {
+      "label": "Clients",
+      "href": "/clients",
+      "icon": "Building2"
+    },
+    {
+      "label": "Case Studies",
+      "href": "/case-studies",
+      "icon": "BookOpen"
+    },
+    {
+      "label": "Overlay Widgets",
+      "href": "/overlay-widgets",
+      "icon": "ShieldAlert"
+    },
+    {
+      "label": "Blog",
+      "href": "/blog",
+      "icon": "Newspaper"
+    },
+    {
+      "label": "News",
+      "href": "/news",
+      "icon": "Megaphone"
+    },
+    {
+      "label": "About",
+      "href": "/about",
+      "icon": "FileText"
+    },
+    {
+      "label": "Contact",
+      "href": "/contact",
+      "icon": "Mail"
+    }
+  ],
+  "LEGAL_LINKS": [
+    {
+      "label": "Privacy",
+      "href": "/privacy",
+      "icon": "ShieldCheck"
+    },
+    {
+      "label": "Terms",
+      "href": "/terms",
+      "icon": "Scale"
+    },
+    {
+      "label": "Accessibility",
+      "href": "/accessibility",
+      "icon": "FileText"
+    }
+  ],
+  "PLATFORM_LINKS": [
+    {
+      "label": "a3s.app",
+      "href": "https://a3s.app",
+      "icon": "ArrowUpRight",
+      "external": true
+    },
+    {
+      "label": "p15r.com",
+      "href": "https://p15r.com",
+      "icon": "ArrowUpRight",
+      "external": true
+    }
+  ],
+  "SOCIAL_LINKS": [
+    {
+      "label": "LinkedIn",
+      "href": "https://www.linkedin.com/company/perspective-tester",
+      "icon": "Linkedin"
+    },
+    {
+      "label": "Instagram",
+      "href": "https://www.instagram.com/perspectivetester/",
+      "icon": "Instagram"
+    },
+    {
+      "label": "Facebook",
+      "href": "https://www.facebook.com/PerspectiveTester",
+      "icon": "Facebook"
+    }
+  ],
+  "text_1": "(opens in a new tab)",
+  "aria_label_2": "Site footer",
+  "href_3": "/",
+  "paragraph_4": "Enterprise accessibility testing, remediation workflows, and compliance reporting for government and high-stakes digital programs.",
+  "text_5": "Email: ",
+  "text_6": "Typical response: within 1 business day",
+  "aria_label_7": "Footer social links",
+  "heading_8": "Follow Us",
+  "text_9": "(opens in a new tab)",
+  "heading_10": "Products",
+  "linkLabel_11": "Footer product links",
+  "heading_12": "Company",
+  "linkLabel_13": "Footer company links",
+  "heading_14": "Legal",
+  "linkLabel_15": "Footer legal links",
+  "heading_16": "Platforms",
+  "linkLabel_17": "Footer platform links",
+  "paragraph_18": "Perspective Tester. All rights reserved.",
+  "text_19": "Built with accessibility-first standards."
+}

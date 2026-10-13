@@ -1,8 +1,18 @@
 "use client";
 
+import { useSection } from "@/components/cms/content-provider";
+import defaults from "@/cms/content/clients-page.json";
+
 import { Tagline } from "@/components/pro-blocks/landing-page/tagline";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Quote, Building2, GraduationCap, Home, Briefcase } from "lucide-react";
+import {
+  ArrowRight,
+  Quote,
+  Building2,
+  GraduationCap,
+  Home,
+  Briefcase,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { assetPath } from "@/lib/utils";
@@ -22,75 +32,9 @@ interface Testimonial {
   highlight: string;
 }
 
-const testimonials: Testimonial[] = [
-  {
-    quote:
-      "The A3S program works like an extension of our team. They identify accessibility issues, fix them, retest, and monitor new releases. The monthly reports and expert support give us real confidence in compliance. We recommend Perspective Tester to any organization that needs a dependable accessibility system.",
-    name: "T. Holmes",
-    title: "Information Technology Director",
-    org: "Kit Carson County, CO",
-    highlight: "Continuous monitoring & compliance",
-  },
-  {
-    quote:
-      "I would definitely recommend Perspective Tester to other government agencies, nonprofits, and corporations trying to make their website accessible and/or compliant with digital accessibility laws. They make me feel confident that our website will be accessible to all our residents and we have protection from potential lawsuits.",
-    name: "M. Bleyler",
-    title: "Community Engagement Officer",
-    org: "Gilpin County, CO",
-    highlight: "Legal protection & compliance",
-  },
-  {
-    quote:
-      "This has been a positive experience. It has made a very large and overwhelming project manageable!",
-    name: "J. Stanley",
-    title: "Communications and Public Relations Manager",
-    org: "El Paso County, CO, Public Health",
-    highlight: "Complex PDF remediation",
-  },
-];
-
-const governmentClients: Client[] = [
-  { name: "El Paso County", logo: "/clients/elpasoco.png", category: "government" },
-  { name: "El Paso County Health", logo: "/clients/elpasocountyhealth.png", category: "government" },
-  { name: "El Paso County Sheriff's Office", logo: "/clients/epcsheriffsoffice.png", category: "government" },
-  { name: "Gilpin County", logo: "/clients/gilpin-county.png", category: "government" },
-  { name: "Kit Carson County", logo: "/clients/kitcarsoncounty.png", category: "government" },
-  { name: "Saguache County", logo: "/clients/saguachecounty.png", category: "government" },
-];
-
-const educationClients: Client[] = [
-  { name: "Concorde Career College", logo: "/clients/concorde.png", category: "education" },
-  { name: "Portland State University", logo: "/clients/pdx.svg", category: "education" },
-];
-
-const realEstateClients: Client[] = [
-  { name: "280 Gramercy Place", logo: "/clients/280gramercyplace.png", category: "real-estate", darkBg: true },
-  { name: "Bayonne Bay", logo: "/clients/bayonnebaynj.png", category: "real-estate", darkBg: true },
-  { name: "Best Rent NJ", logo: "/clients/bestrentnj.jpg", category: "real-estate" },
-  { name: "Condo Central NJ", logo: "/clients/condocentralnj.png", category: "real-estate" },
-  { name: "Ewing Town Center", logo: "/clients/ewingtowncenter.png", category: "real-estate" },
-  { name: "Hallmark Homes", logo: "/clients/hallmarkhomes.png", category: "real-estate", darkBg: true },
-  { name: "Live at RVR", logo: "/clients/liveatrvr.svg", category: "real-estate" },
-  { name: "Live at Woodlands Square", logo: "/clients/liveatwoodlandsquare.png", category: "real-estate", darkBg: true },
-  { name: "Live Beekman", logo: "/clients/livebeekman.png", category: "real-estate" },
-  { name: "Ready NJ Apartments", logo: "/clients/readynjapartments.png", category: "real-estate" },
-  { name: "Stratford at Monroe", logo: "/clients/stratfordatmonroe.png", category: "real-estate" },
-  { name: "The Continental", logo: "/clients/thecontinental.png", category: "real-estate" },
-  { name: "Tower 31", logo: "/clients/tower31.png", category: "real-estate" },
-  { name: "Woodhaven at Old Bridge", logo: "/clients/woodhavenoldbridge.png", category: "real-estate" },
-  { name: "Xchange NJ", logo: "/clients/xchangenj.png", category: "real-estate" },
-];
-
-const businessClients: Client[] = [
-  { name: "EdCount", logo: "/clients/edcount.jpg", category: "business" },
-  { name: "MRO Corp", logo: "/clients/mrocorp.png", category: "business" },
-  { name: "SubItUp", logo: "/clients/subitup.png", category: "business" },
-  { name: "Visability", logo: "/clients/visability.png", category: "business" },
-  { name: "Vertex Systems", logo: "/clients/vertexsystems.png", category: "business", darkBg: true },
-  { name: "Wilftek", logo: "/clients/wilftek.png", category: "business" },
-];
-
 function ClientLogoGrid({ clients }: { clients: Client[] }) {
+  const content = useSection("clients-page", defaults);
+
   return (
     <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
       {clients.map((client) => (
@@ -105,7 +49,7 @@ function ClientLogoGrid({ clients }: { clients: Client[] }) {
           >
             <Image
               src={assetPath(client.logo)}
-              alt=""
+              alt={content.alt_1}
               width={160}
               height={80}
               className="h-10 w-auto max-w-[130px] object-contain"
@@ -129,6 +73,8 @@ function CategorySection({
   title: string;
   clients: Client[];
 }) {
+  const content = useSection("clients-page", defaults);
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-center gap-3">
@@ -146,6 +92,13 @@ function CategorySection({
 }
 
 export function ClientsPage() {
+  const content = useSection("clients-page", defaults);
+  const testimonials: Testimonial[] = content.testimonials;
+  const governmentClients: Client[] = content.governmentClients;
+  const educationClients: Client[] = content.educationClients;
+  const realEstateClients: Client[] = content.realEstateClients;
+  const businessClients: Client[] = content.businessClients;
+
   return (
     <>
       {/* Hero */}
@@ -153,30 +106,35 @@ export function ClientsPage() {
         <div className="container-padding-x container mx-auto">
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
             <Tagline>
-              <Building2 className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
-              <span className="text-foreground">Our Clients</span>
+              <Building2
+                className="h-3.5 w-3.5 text-primary"
+                aria-hidden="true"
+              />
+              <span className="text-foreground">{content.text_2}</span>
             </Tagline>
 
             <div className="section-title-gap-xl flex flex-col">
               <h1 className="heading-xl text-balance text-foreground">
-                Trusted by Organizations Across Industries
+                {content.heading_3}
               </h1>
               <p className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground lg:text-lg">
-                From local government agencies to universities and healthcare
-                organizations, we help teams achieve and maintain digital
-                accessibility compliance.
+                {content.paragraph_4}
               </p>
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-6 pt-2 text-sm text-muted-foreground">
               <span className="font-medium">
-                <span className="text-foreground text-lg font-semibold">30+</span>{" "}
-                Active Clients
+                <span className="text-foreground text-lg font-semibold">
+                  {content.text_5}
+                </span>{" "}
+                {content.text_6}
               </span>
               <span className="hidden h-4 w-px bg-border sm:block" />
               <span className="font-medium">
-                <span className="text-foreground text-lg font-semibold">6</span>{" "}
-                Industries
+                <span className="text-foreground text-lg font-semibold">
+                  {content.text_7}
+                </span>{" "}
+                {content.text_8}
               </span>
             </div>
           </div>
@@ -187,10 +145,8 @@ export function ClientsPage() {
       <section className="bg-secondary section-padding-y border-b">
         <div className="container-padding-x container mx-auto flex flex-col gap-10 md:gap-12">
           <div className="section-title-gap-lg mx-auto flex max-w-xl flex-col items-center text-center">
-            <Tagline>Testimonials</Tagline>
-            <h2 className="heading-lg text-foreground">
-              What Our Clients Say
-            </h2>
+            <Tagline>{content.text_9}</Tagline>
+            <h2 className="heading-lg text-foreground">{content.heading_10}</h2>
           </div>
 
           <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 lg:grid-cols-3">
@@ -208,12 +164,8 @@ export function ClientsPage() {
                     <p className="text-sm font-semibold text-foreground">
                       {t.name}
                     </p>
-                    <p className="text-xs text-muted-foreground">
-                      {t.title}
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      {t.org}
-                    </p>
+                    <p className="text-xs text-muted-foreground">{t.title}</p>
+                    <p className="text-xs text-muted-foreground">{t.org}</p>
                   </div>
                   <span className="inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
                     {t.highlight}
@@ -229,38 +181,35 @@ export function ClientsPage() {
       <section className="bg-background section-padding-y border-b">
         <div className="container-padding-x container mx-auto flex flex-col gap-12 md:gap-16">
           <div className="section-title-gap-lg mx-auto flex max-w-xl flex-col items-center text-center">
-            <Tagline>All Clients</Tagline>
-            <h2 className="heading-lg text-foreground">
-              Organizations We Work With
-            </h2>
+            <Tagline>{content.text_11}</Tagline>
+            <h2 className="heading-lg text-foreground">{content.heading_12}</h2>
             <p className="text-muted-foreground text-base">
-              Serving government, education, healthcare, real estate, and
-              technology organizations.
+              {content.paragraph_13}
             </p>
           </div>
 
           <div className="mx-auto flex max-w-5xl flex-col gap-12">
             <CategorySection
               icon={Building2}
-              title="Government & Public Services"
+              title={content.title_14}
               clients={governmentClients}
             />
 
             <CategorySection
               icon={GraduationCap}
-              title="Education"
+              title={content.title_15}
               clients={educationClients}
             />
 
             <CategorySection
               icon={Briefcase}
-              title="Business & Technology"
+              title={content.title_16}
               clients={businessClients}
             />
 
             <CategorySection
               icon={Home}
-              title="Real Estate & Property Management"
+              title={content.title_17}
               clients={realEstateClients}
             />
           </div>
@@ -272,11 +221,10 @@ export function ClientsPage() {
         <div className="container-padding-x container mx-auto">
           <div className="bg-primary mx-auto flex max-w-4xl flex-col items-center gap-6 rounded-2xl px-6 py-12 text-center sm:px-12 sm:py-16">
             <h2 className="text-primary-foreground text-2xl font-semibold text-balance sm:text-3xl">
-              Join Our Growing List of Clients
+              {content.heading_18}
             </h2>
             <p className="text-primary-foreground/80 max-w-xl text-base leading-relaxed">
-              Ready to make your digital properties accessible and compliant?
-              Let&apos;s discuss how we can help your organization.
+              {content.paragraph_19}
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
               <Button
@@ -285,8 +233,8 @@ export function ClientsPage() {
                 variant="secondary"
                 className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 focus-visible:ring-primary-foreground focus-visible:ring-offset-primary"
               >
-                <Link href="/contact">
-                  Get Started
+                <Link href={content.href_20}>
+                  {content.text_21}
                   <ArrowRight aria-hidden="true" />
                 </Link>
               </Button>
@@ -296,9 +244,7 @@ export function ClientsPage() {
                 variant="outline"
                 className="border-primary-foreground/40 bg-transparent text-primary-foreground hover:border-primary-foreground hover:bg-primary-foreground hover:text-primary focus-visible:ring-primary-foreground focus-visible:ring-offset-primary"
               >
-                <Link href="/a3s">
-                  Learn About A3S
-                </Link>
+                <Link href={content.href_22}>{content.text_23}</Link>
               </Button>
             </div>
           </div>

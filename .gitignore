@@ -28,3 +28,6 @@ next-env.d.ts
 # Local session logs — never commit
 .waylog/
 .audit-loop/
+
+!.env.example
+.sanity-local/

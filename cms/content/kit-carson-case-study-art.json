@@ -1,0 +1,37 @@
+{
+  "auditEvidence": [
+    {
+      "label": "Coverage",
+      "value": "Priority pages tested",
+      "detail": "and recorded each cycle"
+    },
+    {
+      "label": "WCAG matrix",
+      "value": "Every applicable criterion",
+      "detail": "checked page by page"
+    },
+    {
+      "label": "Finding record",
+      "value": "Every barrier named",
+      "detail": "with the page and the method that caught it"
+    },
+    {
+      "label": "Repairs",
+      "value": "Critical issues addressed",
+      "detail": "retested before the cycle closes"
+    }
+  ],
+  "image_1": "/case-studies/kit-carson-county/county-road.webp",
+  "alt_2": "A rural road crossing the Kit Carson County plains at sunset",
+  "image_3": "/case-studies/kit-carson-county/budget-snapshot.webp",
+  "alt_4": "A heavy audit stack and a website frozen under glass while loose calendar pages move past",
+  "text_5": "What a one-time audit buys",
+  "image_6": "/case-studies/kit-carson-county/county-prairie.webp",
+  "alt_7": "Prairie grass and an open sky in Kit Carson County",
+  "paragraph_8": "Photo:",
+  "href_9": "https://kitcarsoncounty.colorado.gov/",
+  "text_10": "Kit Carson County",
+  "paragraph_11": "The ongoing record",
+  "paragraph_12": "What every cycle produces.",
+  "paragraph_13": "Drawn from the county's live accessibility record."
+}

@@ -1,5 +1,8 @@
 "use client";
 
+import { useSection } from "@/components/cms/content-provider";
+import defaults from "@/cms/content/products-section.json";
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tagline } from "@/components/pro-blocks/landing-page/tagline";
@@ -18,68 +21,21 @@ import Link from "next/link";
 import Image from "next/image";
 import { assetPath } from "@/lib/utils";
 
-const products = [
-  {
-    name: "A3S",
-    logo: "/a3s-logo.png",
-    logoAlt: "",
-    subtitle: "Accessibility as a Service",
-    description:
-      "A managed accessibility service for local and county governments. We pair expert accessibility teams with public-sector workflows to help you reach and maintain WCAG 2.2 AA compliance with legal protection documentation.",
-    features: [
-      {
-        icon: ClipboardCheck,
-        name: "4-phase accessibility workflow",
-      },
-      {
-        icon: FileText,
-        name: "VPAT reports & legal documentation",
-      },
-      {
-        icon: BarChart3,
-        name: "Continuous monitoring & reporting",
-      },
-      {
-        icon: Lightbulb,
-        name: "Expert-led remediation guidance",
-      },
-    ],
-    cta: "Learn About A3S",
-    href: "/a3s",
-    highlighted: true,
-  },
-  {
-    name: "P15R",
-    logo: "/p15r-logo.webp",
-    logoAlt: "",
-    subtitle: "Accessibility Ops Without Chaos",
-    description:
-      "An accessibility operations platform that helps teams track, assign, and resolve accessibility issues across websites and applications with real-time collaboration and developer integrations.",
-    features: [
-      {
-        icon: ListChecks,
-        name: "Accessibility issue tracking",
-      },
-      {
-        icon: GitBranch,
-        name: "Remediation workflows",
-      },
-      {
-        icon: Users,
-        name: "Team collaboration & assignments",
-      },
-      {
-        icon: Code,
-        name: "Developer integrations",
-      },
-    ],
-    cta: "Explore P15R",
-    href: "/manage",
-    highlighted: false,
-  },
-];
+const contentIcons = {
+  ClipboardCheck,
+  FileText,
+  BarChart3,
+  Lightbulb,
+  ListChecks,
+  GitBranch,
+  Users,
+  Code,
+};
 
 export function ProductsSection() {
+  const content = useSection("products-section", defaults, contentIcons);
+  const products = content.products;
+
   return (
     /*
      * WCAG 2.4.3. "View Products" is a same-page link. Without a tabindex the
@@ -97,11 +53,10 @@ export function ProductsSection() {
       <div className="container-padding-x container mx-auto flex flex-col gap-10 md:gap-12">
         {/* Section Title */}
         <div className="section-title-gap-lg mx-auto flex max-w-xl flex-col items-center text-center">
-          <Tagline>Products</Tagline>
-          <h2 className="heading-lg text-foreground">Our Products</h2>
+          <Tagline>{content.text_1}</Tagline>
+          <h2 className="heading-lg text-foreground">{content.heading_2}</h2>
           <p className="text-muted-foreground text-base">
-            Two powerful solutions designed to fit every stage of your
-            accessibility journey.
+            {content.paragraph_3}
           </p>
         </div>
 
@@ -132,7 +87,7 @@ export function ProductsSection() {
                     </h3>
                     {product.highlighted && (
                       <span className="bg-primary/10 text-primary rounded-full px-2.5 py-0.5 text-xs font-medium">
-                        Managed
+                        {content.text_4}
                       </span>
                     )}
                   </div>
@@ -150,11 +105,11 @@ export function ProductsSection() {
                     once the adjacent text carries the meaning. */}
                 <ul className="flex list-none flex-col gap-3">
                   {product.features.map((feature) => (
-                    <li
-                      key={feature.name}
-                      className="flex items-center gap-3"
-                    >
-                      <div className="bg-primary/10 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg" aria-hidden="true">
+                    <li key={feature.name} className="flex items-center gap-3">
+                      <div
+                        className="bg-primary/10 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
+                        aria-hidden="true"
+                      >
                         <feature.icon className="text-primary h-4 w-4" />
                       </div>
                       <span className="text-foreground text-sm font-medium">

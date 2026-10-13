@@ -1,5 +1,8 @@
 "use client";
 
+import { useSection } from "@/components/cms/content-provider";
+import defaults from "@/cms/content/lp-navbar-1.json";
+
 import { Logo } from "@/components/pro-blocks/logo";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
@@ -9,14 +12,6 @@ import { usePathname } from "next/navigation";
 
 // Six items plus both CTAs only just fit a 768px viewport, so the item and
 // CTA padding is tightened between md and lg and restored from lg up.
-const MENU_ITEMS = [
-  { label: "A3S", href: "/a3s" },
-  { label: "P15R", href: "/manage" },
-  { label: "Clients", href: "/clients" },
-  { label: "Blog", href: "/blog" },
-  { label: "News", href: "/news" },
-  { label: "About", href: "/about" },
-] as const;
 
 /*
  * WCAG 1.3.1: the navigation gave no indication of which page you were on --
@@ -27,34 +22,46 @@ const MENU_ITEMS = [
 const useIsCurrent = () => {
   const pathname = usePathname();
   return (href: string) =>
-    href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
+    href === "/"
+      ? pathname === "/"
+      : pathname === href || pathname.startsWith(`${href}/`);
 };
 
 const NavMenuItems = ({ compact }: { compact?: boolean }) => {
+  const content = useSection("lp-navbar-1", defaults);
+  const MENU_ITEMS = content.MENU_ITEMS;
+
   const isCurrent = useIsCurrent();
   return (
-  <div className="flex items-center gap-0.5">
-    {MENU_ITEMS.map(({ label, href }) => (
-      <Button
-        key={label}
-        asChild
-        variant="ghost"
-        className={`rounded-lg font-medium transition-[color,background-color,border-color,transform] duration-300 ease-out ${
-          compact
-            ? "h-8 px-2 text-[13px] lg:px-3"
-            : "h-9 px-2.5 text-sm lg:px-3.5"
-        } ${isCurrent(href) ? "text-foreground underline underline-offset-8 decoration-2" : ""}`}
-      >
-        <Link href={href} prefetch aria-current={isCurrent(href) ? "page" : undefined}>
-          {label}
-        </Link>
-      </Button>
-    ))}
-  </div>
+    <div className="flex items-center gap-0.5">
+      {MENU_ITEMS.map(({ label, href }) => (
+        <Button
+          key={label}
+          asChild
+          variant="ghost"
+          className={`rounded-lg font-medium transition-[color,background-color,border-color,transform] duration-300 ease-out ${
+            compact
+              ? "h-8 px-2 text-[13px] lg:px-3"
+              : "h-9 px-2.5 text-sm lg:px-3.5"
+          } ${isCurrent(href) ? "text-foreground underline underline-offset-8 decoration-2" : ""}`}
+        >
+          <Link
+            href={href}
+            prefetch
+            aria-current={isCurrent(href) ? "page" : undefined}
+          >
+            {label}
+          </Link>
+        </Button>
+      ))}
+    </div>
   );
 };
 
 export function LpNavbar1() {
+  const content = useSection("lp-navbar-1", defaults);
+  const MENU_ITEMS = content.MENU_ITEMS;
+
   const isCurrentPage = useIsCurrent();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCompact, setIsCompact] = useState(false);
@@ -110,7 +117,9 @@ export function LpNavbar1() {
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 768px)");
 
-    const closeMenuOnDesktop = (event: MediaQueryList | MediaQueryListEvent) => {
+    const closeMenuOnDesktop = (
+      event: MediaQueryList | MediaQueryListEvent,
+    ) => {
       if (event.matches) {
         setIsMenuOpen(false);
       }
@@ -148,7 +157,7 @@ export function LpNavbar1() {
         }}
       >
         <nav
-          aria-label="Main"
+          aria-label={content.aria_label_1}
           style={{
             maxWidth: isCompact ? "56rem" : "100%",
             marginLeft: "auto",
@@ -192,7 +201,7 @@ export function LpNavbar1() {
           >
             {/* Logo */}
             <Link
-              href="/"
+              href={content.href_2}
               className="transition-transform duration-300 ease-out hover:scale-[1.02] active:scale-[0.98]"
             >
               <Logo />
@@ -223,8 +232,8 @@ export function LpNavbar1() {
                       : "h-9 px-3 text-sm lg:px-3.5"
                   }`}
                 >
-                  <Link href="/contact" prefetch>
-                    Talk to Sales
+                  <Link href={content.href_3} prefetch>
+                    {content.text_4}
                   </Link>
                 </Button>
                 <Button
@@ -235,8 +244,8 @@ export function LpNavbar1() {
                       : "h-9 px-3 text-sm lg:px-3.5"
                   }`}
                 >
-                  <Link href="/#products" prefetch>
-                    View Products
+                  <Link href={content.href_5} prefetch>
+                    {content.text_6}
                   </Link>
                 </Button>
               </div>
@@ -290,15 +299,15 @@ export function LpNavbar1() {
             }}
           >
             {/*
-              * WCAG 1.4.4 / 1.4.10. This panel lives inside a `sticky top-0`
-              * header, so it stays pinned as the page scrolls -- anything taller
-              * than the viewport is simply unreachable, and page scrolling
-              * cannot bring it back. At 200% zoom (a ~342px tall viewport) the
-              * menu ran to 430px and the "Talk to Sales" and "View Products"
-              * calls to action fell off the bottom with no way to get to them.
-              * Capping to the space below the header bar and scrolling inside
-              * keeps every item reachable at any zoom level.
-              */}
+             * WCAG 1.4.4 / 1.4.10. This panel lives inside a `sticky top-0`
+             * header, so it stays pinned as the page scrolls -- anything taller
+             * than the viewport is simply unreachable, and page scrolling
+             * cannot bring it back. At 200% zoom (a ~342px tall viewport) the
+             * menu ran to 430px and the "Talk to Sales" and "View Products"
+             * calls to action fell off the bottom with no way to get to them.
+             * Capping to the space below the header bar and scrolling inside
+             * keeps every item reachable at any zoom level.
+             */}
             <div
               className="min-h-0 overflow-y-auto overscroll-contain"
               style={{ maxHeight: "calc(100dvh - 5rem)" }}
@@ -310,7 +319,9 @@ export function LpNavbar1() {
                     asChild
                     variant="ghost"
                     className={`h-11 w-full justify-start rounded-lg px-3 text-sm font-medium ${
-                      isCurrentPage(href) ? "text-foreground underline underline-offset-4 decoration-2" : ""
+                      isCurrentPage(href)
+                        ? "text-foreground underline underline-offset-4 decoration-2"
+                        : ""
                     }`}
                   >
                     <Link
@@ -330,20 +341,23 @@ export function LpNavbar1() {
                     className="h-11 w-full rounded-lg text-sm font-medium"
                   >
                     <Link
-                      href="/contact"
+                      href={content.href_7}
                       prefetch
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      Talk to Sales
+                      {content.text_8}
                     </Link>
                   </Button>
-                  <Button asChild className="h-11 w-full rounded-lg text-sm font-medium">
+                  <Button
+                    asChild
+                    className="h-11 w-full rounded-lg text-sm font-medium"
+                  >
                     <Link
-                      href="/#products"
+                      href={content.href_9}
                       prefetch
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      View Products
+                      {content.text_10}
                     </Link>
                   </Button>
                 </div>

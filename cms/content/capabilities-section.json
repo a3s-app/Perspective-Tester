@@ -1,0 +1,37 @@
+{
+  "services": [
+    {
+      "icon": "FileText",
+      "title": "PDF & Document Remediation",
+      "description": "We remediate PDFs, Word documents, and spreadsheets to meet WCAG 2.2 AA and PDF/UA standards, ensuring your downloadable content is fully accessible."
+    },
+    {
+      "icon": "ScanSearch",
+      "title": "One-Time Accessibility Audits",
+      "description": "A comprehensive manual audit of your website or application by IAAP-certified testers using real assistive technologies, with a detailed WCAG 2.2 compliance report."
+    },
+    {
+      "icon": "Code",
+      "title": "Custom Development & Remediation",
+      "description": "Our senior developers write production-ready code fixes for accessibility issues, from ARIA patterns and keyboard navigation to semantic HTML restructuring."
+    },
+    {
+      "icon": "FileCheck",
+      "title": "VPAT & ACR Documentation",
+      "description": "We produce Voluntary Product Accessibility Templates and Accessibility Conformance Reports required for government procurement and enterprise vendor reviews."
+    },
+    {
+      "icon": "GraduationCap",
+      "title": "Training & Workshops",
+      "description": "Live training sessions for designers, developers, and QA teams covering WCAG standards, assistive technology usage, and accessible development practices."
+    },
+    {
+      "icon": "Scale",
+      "title": "Legal Compliance Consulting",
+      "description": "Expert guidance on ADA Title II & III, Section 508, and state-level digital accessibility legislation, including litigation response support."
+    }
+  ],
+  "text_1": "Services",
+  "heading_2": "Services We Offer",
+  "paragraph_3": "Beyond our A3S and P15R products, we provide hands-on accessibility services tailored to your needs."
+}

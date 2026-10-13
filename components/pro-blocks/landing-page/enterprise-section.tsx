@@ -1,5 +1,8 @@
 "use client";
 
+import { useSection } from "@/components/cms/content-provider";
+import defaults from "@/cms/content/enterprise-section.json";
+
 import { Button } from "@/components/ui/button";
 import { Tagline } from "@/components/pro-blocks/landing-page/tagline";
 import {
@@ -13,41 +16,13 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-const bulletPoints = [
-  "WCAG 2.2 compliance tracking",
-  "Accessibility testing with assistive technologies",
-  "Centralized reporting",
-  "Enterprise support",
-];
-
-const processSteps = [
-  {
-    icon: Search,
-    label: "Audit",
-    description: "Full-site accessibility audit with assistive technology testing",
-    color: "bg-blue-500",
-  },
-  {
-    icon: FileText,
-    label: "Report",
-    description: "Detailed WCAG 2.2 compliance report with prioritized issues",
-    color: "bg-amber-500",
-  },
-  {
-    icon: Wrench,
-    label: "Remediate",
-    description: "Expert-led remediation with code-level fixes and guidance",
-    color: "bg-violet-500",
-  },
-  {
-    icon: ShieldCheck,
-    label: "Protect",
-    description: "Ongoing monitoring and legal protection guarantee",
-    color: "bg-emerald-500",
-  },
-];
+const contentIcons = { Search, FileText, Wrench, ShieldCheck };
 
 export function EnterpriseSection() {
+  const content = useSection("enterprise-section", defaults, contentIcons);
+  const bulletPoints = content.bulletPoints;
+  const processSteps = content.processSteps;
+
   return (
     <section
       className="bg-background section-padding-y border-b"
@@ -60,15 +35,13 @@ export function EnterpriseSection() {
             <div className="section-title-gap-lg flex flex-col">
               <Tagline>
                 <Building2 className="h-3.5 w-3.5" aria-hidden="true" />
-                Enterprise
+                {content.text_1}
               </Tagline>
               <h2 className="heading-lg text-foreground">
-                Built for Enterprise Accessibility Programs
+                {content.heading_2}
               </h2>
               <p className="text-muted-foreground text-base leading-relaxed">
-                Perspective Tester helps large organizations manage
-                accessibility compliance across multiple products, teams, and
-                digital experiences.
+                {content.paragraph_3}
               </p>
             </div>
 
@@ -78,8 +51,14 @@ export function EnterpriseSection() {
             <ul className="flex list-none flex-col gap-3">
               {bulletPoints.map((point) => (
                 <li key={point} className="flex items-start gap-3">
-                  <div className="bg-primary/10 mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full" aria-hidden="true">
-                    <Check className="text-primary h-3 w-3" aria-hidden="true" />
+                  <div
+                    className="bg-primary/10 mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full"
+                    aria-hidden="true"
+                  >
+                    <Check
+                      className="text-primary h-3 w-3"
+                      aria-hidden="true"
+                    />
                   </div>
                   <span className="text-foreground text-base font-medium">
                     {point}
@@ -91,8 +70,8 @@ export function EnterpriseSection() {
             {/* CTA */}
             <div>
               <Button asChild size="lg">
-                <Link href="/contact">
-                  Contact Enterprise Team
+                <Link href={content.href_4}>
+                  {content.text_5}
                   <ArrowRight aria-hidden="true" />
                 </Link>
               </Button>
@@ -122,7 +101,8 @@ export function EnterpriseSection() {
                   <div className="flex flex-col gap-1 pb-8">
                     <div className="flex items-center gap-2">
                       <span className="text-muted-foreground text-xs font-medium uppercase tracking-wider">
-                        Step {index + 1}
+                        {content.text_6}
+                        {index + 1}
                       </span>
                     </div>
                     <h3 className="text-foreground text-base font-semibold">

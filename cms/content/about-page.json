@@ -1,0 +1,77 @@
+{
+  "teamMembers": [
+    {
+      "name": "Jason McKee",
+      "role": "Managing Director, CEO & Founder",
+      "photo": "/jason-mckee.jpg"
+    },
+    {
+      "name": "Justin Sales",
+      "role": "Accounts Manager",
+      "photo": "/justin-sales.jpg"
+    },
+    {
+      "name": "Khushwant Parihar",
+      "role": "Web Accessibility Specialist",
+      "credential": "CPACC Certified (IAAP)",
+      "photo": "/khushwant-parihar.jpg"
+    }
+  ],
+  "values": [
+    {
+      "icon": "Globe",
+      "title": "Accessibility for Everyone",
+      "description": "We build for the 2 billion people around the world who need some level of support when accessing the web."
+    },
+    {
+      "icon": "Users",
+      "title": "Real-User Testing",
+      "description": "Our team includes native assistive technology users who test against real-world usage patterns, not just automated checklists."
+    },
+    {
+      "icon": "Shield",
+      "title": "WCAG 2.2 AA Standards",
+      "description": "We test against WCAG 2.2 AA standards with manual testing as our primary approach, backed by IAAP-certified professionals."
+    },
+    {
+      "icon": "Heart",
+      "title": "Building for the Real User",
+      "description": "We focus on building the web for real disabled users, maintaining relationships with accessibility attorneys and advocacy groups."
+    }
+  ],
+  "text_1": "About Us",
+  "heading_2": "Engineering Equity for the Digital World",
+  "paragraph_3": "Perspective Tester is a digital accessibility consultancy helping organizations create inclusive digital experiences. We work to ensure your online presence fosters inclusivity while protecting you from legal liabilities.",
+  "paragraph_4": "2B+",
+  "paragraph_5": "people impacted by digital accessibility",
+  "paragraph_6": "WCAG 2.2 AA",
+  "paragraph_7": "standards-first delivery model",
+  "paragraph_8": "IAAP Team",
+  "paragraph_9": "certified specialists and real-user testers",
+  "image_10": "/team-photo.jpg",
+  "alt_11": "The Perspective Tester team",
+  "paragraph_12": "A multidisciplinary team focused on practical remediation, legal compliance, and inclusive product delivery.",
+  "text_13": "Our Approach",
+  "heading_14": "What Drives Us",
+  "paragraph_15": "We believe accessibility is a fundamental right, not an afterthought.",
+  "text_16": "Our Team",
+  "heading_17": "Meet the People Behind Perspective Tester",
+  "paragraph_18": "IAAP-certified accessibility experts and senior-level programmers with proven experience in accessibility implementation.",
+  "alt_19": "",
+  "text_20": "Trusted By",
+  "heading_21": "Organizations We Work With",
+  "items_22": [
+    "State of Colorado",
+    "Mercer",
+    "Oprah Winfrey Charitable Foundation",
+    "Fordham University",
+    "El Paso County",
+    "Portland State University"
+  ],
+  "heading_23": "Ready to Make Your Digital Products Accessible?",
+  "paragraph_24": "Whether you need a full managed service or a platform to track your own remediation, we have a solution for you.",
+  "href_25": "/contact",
+  "text_26": "Talk to Sales",
+  "href_27": "/#products",
+  "text_28": "View Products"
+}

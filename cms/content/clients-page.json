@@ -1,0 +1,206 @@
+{
+  "testimonials": [
+    {
+      "quote": "The A3S program works like an extension of our team. They identify accessibility issues, fix them, retest, and monitor new releases. The monthly reports and expert support give us real confidence in compliance. We recommend Perspective Tester to any organization that needs a dependable accessibility system.",
+      "name": "T. Holmes",
+      "title": "Information Technology Director",
+      "org": "Kit Carson County, CO",
+      "highlight": "Continuous monitoring & compliance"
+    },
+    {
+      "quote": "I would definitely recommend Perspective Tester to other government agencies, nonprofits, and corporations trying to make their website accessible and/or compliant with digital accessibility laws. They make me feel confident that our website will be accessible to all our residents and we have protection from potential lawsuits.",
+      "name": "M. Bleyler",
+      "title": "Community Engagement Officer",
+      "org": "Gilpin County, CO",
+      "highlight": "Legal protection & compliance"
+    },
+    {
+      "quote": "This has been a positive experience. It has made a very large and overwhelming project manageable!",
+      "name": "J. Stanley",
+      "title": "Communications and Public Relations Manager",
+      "org": "El Paso County, CO, Public Health",
+      "highlight": "Complex PDF remediation"
+    }
+  ],
+  "governmentClients": [
+    {
+      "name": "El Paso County",
+      "logo": "/clients/elpasoco.png",
+      "category": "government"
+    },
+    {
+      "name": "El Paso County Health",
+      "logo": "/clients/elpasocountyhealth.png",
+      "category": "government"
+    },
+    {
+      "name": "El Paso County Sheriff's Office",
+      "logo": "/clients/epcsheriffsoffice.png",
+      "category": "government"
+    },
+    {
+      "name": "Gilpin County",
+      "logo": "/clients/gilpin-county.png",
+      "category": "government"
+    },
+    {
+      "name": "Kit Carson County",
+      "logo": "/clients/kitcarsoncounty.png",
+      "category": "government"
+    },
+    {
+      "name": "Saguache County",
+      "logo": "/clients/saguachecounty.png",
+      "category": "government"
+    }
+  ],
+  "educationClients": [
+    {
+      "name": "Concorde Career College",
+      "logo": "/clients/concorde.png",
+      "category": "education"
+    },
+    {
+      "name": "Portland State University",
+      "logo": "/clients/pdx.svg",
+      "category": "education"
+    }
+  ],
+  "realEstateClients": [
+    {
+      "name": "280 Gramercy Place",
+      "logo": "/clients/280gramercyplace.png",
+      "category": "real-estate",
+      "darkBg": true
+    },
+    {
+      "name": "Bayonne Bay",
+      "logo": "/clients/bayonnebaynj.png",
+      "category": "real-estate",
+      "darkBg": true
+    },
+    {
+      "name": "Best Rent NJ",
+      "logo": "/clients/bestrentnj.jpg",
+      "category": "real-estate"
+    },
+    {
+      "name": "Condo Central NJ",
+      "logo": "/clients/condocentralnj.png",
+      "category": "real-estate"
+    },
+    {
+      "name": "Ewing Town Center",
+      "logo": "/clients/ewingtowncenter.png",
+      "category": "real-estate"
+    },
+    {
+      "name": "Hallmark Homes",
+      "logo": "/clients/hallmarkhomes.png",
+      "category": "real-estate",
+      "darkBg": true
+    },
+    {
+      "name": "Live at RVR",
+      "logo": "/clients/liveatrvr.svg",
+      "category": "real-estate"
+    },
+    {
+      "name": "Live at Woodlands Square",
+      "logo": "/clients/liveatwoodlandsquare.png",
+      "category": "real-estate",
+      "darkBg": true
+    },
+    {
+      "name": "Live Beekman",
+      "logo": "/clients/livebeekman.png",
+      "category": "real-estate"
+    },
+    {
+      "name": "Ready NJ Apartments",
+      "logo": "/clients/readynjapartments.png",
+      "category": "real-estate"
+    },
+    {
+      "name": "Stratford at Monroe",
+      "logo": "/clients/stratfordatmonroe.png",
+      "category": "real-estate"
+    },
+    {
+      "name": "The Continental",
+      "logo": "/clients/thecontinental.png",
+      "category": "real-estate"
+    },
+    {
+      "name": "Tower 31",
+      "logo": "/clients/tower31.png",
+      "category": "real-estate"
+    },
+    {
+      "name": "Woodhaven at Old Bridge",
+      "logo": "/clients/woodhavenoldbridge.png",
+      "category": "real-estate"
+    },
+    {
+      "name": "Xchange NJ",
+      "logo": "/clients/xchangenj.png",
+      "category": "real-estate"
+    }
+  ],
+  "businessClients": [
+    {
+      "name": "EdCount",
+      "logo": "/clients/edcount.jpg",
+      "category": "business"
+    },
+    {
+      "name": "MRO Corp",
+      "logo": "/clients/mrocorp.png",
+      "category": "business"
+    },
+    {
+      "name": "SubItUp",
+      "logo": "/clients/subitup.png",
+      "category": "business"
+    },
+    {
+      "name": "Visability",
+      "logo": "/clients/visability.png",
+      "category": "business"
+    },
+    {
+      "name": "Vertex Systems",
+      "logo": "/clients/vertexsystems.png",
+      "category": "business",
+      "darkBg": true
+    },
+    {
+      "name": "Wilftek",
+      "logo": "/clients/wilftek.png",
+      "category": "business"
+    }
+  ],
+  "alt_1": "",
+  "text_2": "Our Clients",
+  "heading_3": "Trusted by Organizations Across Industries",
+  "paragraph_4": "From local government agencies to universities and healthcare organizations, we help teams achieve and maintain digital accessibility compliance.",
+  "text_5": "30+",
+  "text_6": "Active Clients",
+  "text_7": "6",
+  "text_8": "Industries",
+  "text_9": "Testimonials",
+  "heading_10": "What Our Clients Say",
+  "text_11": "All Clients",
+  "heading_12": "Organizations We Work With",
+  "paragraph_13": "Serving government, education, healthcare, real estate, and technology organizations.",
+  "title_14": "Government & Public Services",
+  "title_15": "Education",
+  "title_16": "Business & Technology",
+  "title_17": "Real Estate & Property Management",
+  "heading_18": "Join Our Growing List of Clients",
+  "paragraph_19": "Ready to make your digital properties accessible and compliant? Let's discuss how we can help your organization.",
+  "href_20": "/contact",
+  "text_21": "Get Started",
+  "href_22": "/a3s",
+  "text_23": "Learn About A3S"
+}

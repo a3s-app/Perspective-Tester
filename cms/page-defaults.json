@@ -1,0 +1,311 @@
+[
+  {
+    "title": "How A3S Works",
+    "path": "/a3s/how-it-works",
+    "sections": [
+      "a3s-how-it-works-page"
+    ],
+    "seo": {
+      "title": "How A3S Works",
+      "description": "How A3S brings your website into conformance with WCAG and keeps it there: assessment, audit and remediation, validation and ACR, ongoing monitoring, vendor coordination and reporting.",
+      "keywords": [
+        "accessibility monitoring",
+        "accessibility regression testing",
+        "accessibility vendor management",
+        "WCAG compliance process",
+        "ongoing accessibility compliance",
+        "accessibility as a service"
+      ],
+      "socialTitle": "How A3S Works | Perspective Tester",
+      "socialDescription": "How A3S brings your website into conformance with WCAG and keeps it there.",
+      "pageType": "WebPage"
+    }
+  },
+  {
+    "title": "A3S - Accessibility as a Service",
+    "path": "/a3s",
+    "sections": [
+      "a3s-page"
+    ],
+    "seo": {
+      "title": "A3S - Accessibility as a Service",
+      "description": "A3S is a fully managed accessibility service that ensures your digital properties achieve and maintain WCAG 2.2 AA compliance. Automated scanning, expert remediation, and legal protection included.",
+      "keywords": [
+        "accessibility as a service",
+        "managed accessibility",
+        "WCAG 2.2 compliance",
+        "accessibility remediation",
+        "ADA compliance service",
+        "web accessibility management"
+      ],
+      "socialTitle": "A3S - Accessibility as a Service | Perspective Tester",
+      "socialDescription": "Fully managed accessibility service ensuring WCAG 2.2 AA compliance with automated scanning, expert remediation, and legal protection.",
+      "pageType": "WebPage"
+    }
+  },
+  {
+    "title": "About Us - Our Mission & Team",
+    "path": "/about",
+    "sections": [
+      "about-page"
+    ],
+    "seo": {
+      "title": "About Us - Our Mission & Team",
+      "description": "Perspective Tester is dedicated to engineering equity in digital accessibility. Meet our team of accessibility experts helping organizations achieve WCAG compliance across government, education, healthcare, and enterprise.",
+      "keywords": [
+        "accessibility consultants",
+        "WCAG experts",
+        "digital accessibility team",
+        "accessibility company",
+        "Perspective Tester team"
+      ],
+      "socialTitle": "About Us | Perspective Tester",
+      "socialDescription": "Meet the team behind Perspective Tester, accessibility experts dedicated to engineering equity in digital experiences.",
+      "pageType": "WebPage"
+    }
+  },
+  {
+    "title": "Accessibility Statement",
+    "path": "/accessibility",
+    "sections": [
+      "accessibility-statement-page"
+    ],
+    "seo": {
+      "title": "Accessibility Statement",
+      "description": "Perspective Tester is committed to WCAG 2.2 Level AA conformance. Read our accessibility statement covering standards, features, assessment methods, and how to provide feedback.",
+      "keywords": [
+        "accessibility statement",
+        "WCAG 2.2 compliance",
+        "ADA compliance",
+        "web accessibility commitment"
+      ],
+      "socialTitle": "Accessibility Statement | Perspective Tester",
+      "socialDescription": "Our commitment to WCAG 2.2 Level AA conformance and digital accessibility for all users.",
+      "pageType": "WebPage"
+    }
+  },
+  {
+    "title": "Blog - Notes on Digital Accessibility",
+    "path": "/blog",
+    "sections": [
+      "blog-index-page"
+    ],
+    "seo": {
+      "title": "Blog - Notes on Digital Accessibility",
+      "description": "Field notes from the Perspective Tester team on WCAG 2.2, accessibility remediation, and building digital experiences that work for real users.",
+      "keywords": [
+        "accessibility blog",
+        "WCAG 2.2",
+        "digital accessibility",
+        "neuroinclusive design",
+        "accessibility insights"
+      ],
+      "socialTitle": "Blog | Perspective Tester",
+      "socialDescription": "Field notes from our team on WCAG 2.2, remediation, and building accessible digital experiences.",
+      "pageType": "WebPage"
+    }
+  },
+  {
+    "title": "Kit Carson County, CO Accessibility Case Study",
+    "path": "/case-studies/kit-carson-county",
+    "sections": [
+      "kit-carson-county-case-study"
+    ],
+    "seo": {
+      "title": "Kit Carson County, CO Accessibility Case Study",
+      "description": "How Kit Carson County turned website accessibility from a costly one-time project into an ongoing, documented monthly program with A3S.",
+      "keywords": [
+        "Kit Carson County accessibility",
+        "Colorado website accessibility",
+        "county website accessibility case study",
+        "ADA Title II county compliance",
+        "A3S case study",
+        "government website remediation"
+      ],
+      "socialTitle": "Kit Carson County, CO Accessibility Case Study",
+      "socialDescription": "Uninterrupted monthly audits, practical remediation, and one defensible accessibility record.",
+      "image": "/case-studies/kit-carson-county/hero-workload.webp",
+      "pageType": "Article"
+    }
+  },
+  {
+    "title": "Digital Accessibility Case Studies",
+    "path": "/case-studies",
+    "sections": [
+      "case-studies-index-page"
+    ],
+    "seo": {
+      "title": "Digital Accessibility Case Studies",
+      "description": "See how public organizations turn accessibility requirements into verified repairs, practical operating programs, and evidence they can defend.",
+      "keywords": [
+        "digital accessibility case studies",
+        "WCAG remediation case study",
+        "government website accessibility",
+        "accessibility compliance program",
+        "A3S case studies"
+      ],
+      "socialTitle": "Digital Accessibility Case Studies | Perspective Tester",
+      "socialDescription": "Real accessibility constraints, operating decisions, verified repairs, and the evidence organizations keep.",
+      "image": "/case-studies/kit-carson-county/county-road.webp",
+      "pageType": "CollectionPage"
+    }
+  },
+  {
+    "title": "Our Clients - Trusted Across Industries",
+    "path": "/clients",
+    "sections": [
+      "clients-page"
+    ],
+    "seo": {
+      "title": "Our Clients - Trusted Across Industries",
+      "description": "Perspective Tester is trusted by 30+ organizations across government, education, healthcare, real estate, and enterprise. See our clients and read testimonials about our accessibility services.",
+      "keywords": [
+        "accessibility clients",
+        "government accessibility",
+        "education accessibility",
+        "healthcare accessibility compliance",
+        "enterprise WCAG compliance",
+        "accessibility testimonials"
+      ],
+      "socialTitle": "Our Clients | Perspective Tester",
+      "socialDescription": "Trusted by 30+ organizations across government, education, healthcare, and enterprise for digital accessibility compliance.",
+      "pageType": "WebPage"
+    }
+  },
+  {
+    "title": "Contact Us - Get a Consultation",
+    "path": "/contact",
+    "sections": [
+      "contact-page"
+    ],
+    "seo": {
+      "title": "Contact Us - Get a Consultation",
+      "description": "Get in touch with Perspective Tester to discuss your accessibility needs. Request a consultation for A3S managed services, P15R, accessibility audits, remediation, or VPAT documentation.",
+      "keywords": [
+        "contact accessibility experts",
+        "accessibility consultation",
+        "WCAG compliance quote",
+        "accessibility audit request",
+        "accessibility services inquiry"
+      ],
+      "socialTitle": "Contact Us | Perspective Tester",
+      "socialDescription": "Request a consultation for accessibility services. We respond within one business day.",
+      "pageType": "WebPage"
+    }
+  },
+  {
+    "title": "P15R - Accessibility Ops Without Chaos",
+    "path": "/manage",
+    "sections": [
+      "manage-page"
+    ],
+    "seo": {
+      "title": "P15R - Accessibility Ops Without Chaos",
+      "description": "Track, manage, and report on accessibility compliance across your entire digital portfolio. Real-time dashboards, Jira and Slack integrations, vendor collaboration, and automated VPAT generation.",
+      "keywords": [
+        "accessibility management platform",
+        "compliance tracking",
+        "accessibility dashboard",
+        "VPAT generation",
+        "accessibility reporting",
+        "Jira accessibility integration"
+      ],
+      "socialTitle": "P15R - Accessibility Ops Without Chaos | Perspective Tester",
+      "socialDescription": "Track and manage accessibility compliance across your digital portfolio with real-time dashboards, integrations, and automated reporting.",
+      "pageType": "WebPage"
+    }
+  },
+  {
+    "title": "News and Announcements",
+    "path": "/news",
+    "sections": [
+      "news-index-page"
+    ],
+    "seo": {
+      "title": "News and Announcements",
+      "description": "Announcements, sponsorships, and company updates from Perspective Tester, including the Utah Association of Counties Annual Convention and the Colorado Digital Government Summit.",
+      "keywords": [
+        "Perspective Tester news",
+        "accessibility announcements",
+        "Utah Association of Counties",
+        "UAC Annual Convention",
+        "Colorado Digital Government Summit",
+        "government technology summit",
+        "digital accessibility announcements"
+      ],
+      "socialTitle": "News | Perspective Tester",
+      "socialDescription": "Announcements, sponsorships, and company updates from the Perspective Tester team.",
+      "pageType": "WebPage"
+    }
+  },
+  {
+    "title": "Accessibility Widgets Do Not Deliver Compliance: The Record",
+    "path": "/overlay-widgets",
+    "sections": [
+      "overlay-widgets-page"
+    ],
+    "seo": {
+      "title": "Accessibility Widgets Do Not Deliver Compliance: The Record",
+      "description": "What courts and federal regulators have said about overlay accessibility widgets like AudioEye, accessiBe, and UserWay, and why real compliance requires human testing and code fixes.",
+      "keywords": [
+        "accessibility overlay widgets",
+        "accessiBe lawsuit",
+        "AudioEye compliance",
+        "UserWay ADA",
+        "FTC accessiBe order",
+        "overlay widget legal",
+        "ADA overlay lawsuits"
+      ],
+      "socialTitle": "Accessibility Widgets Do Not Deliver Compliance: The Record | Perspective Tester",
+      "socialDescription": "Courts and the FTC have ruled on overlay widgets. See what the record actually says and what real compliance requires.",
+      "pageType": "WebPage"
+    }
+  },
+  {
+    "title": "Perspective Tester - Enterprise Accessibility Testing & Compliance",
+    "path": "/",
+    "sections": [
+      "hero-section-2",
+      "video-showcase-section",
+      "products-section",
+      "enterprise-section",
+      "capabilities-section",
+      "final-cta-section"
+    ],
+    "seo": {
+      "title": "Perspective Tester - Enterprise Accessibility Testing & Compliance",
+      "description": "Test, monitor, and manage accessibility across your digital products. Perspective Tester helps enterprises achieve and maintain WCAG 2.2 compliance at scale with A3S and P15R.",
+      "socialTitle": "Perspective Tester - Enterprise Accessibility Testing & Compliance",
+      "socialDescription": "Test, monitor, and manage accessibility across your digital products. Achieve WCAG 2.2 compliance at scale.",
+      "pageType": "WebPage"
+    }
+  },
+  {
+    "title": "Privacy Policy",
+    "path": "/privacy",
+    "sections": [
+      "privacy-page"
+    ],
+    "seo": {
+      "title": "Privacy Policy",
+      "description": "Learn how Perspective Tester collects, uses, and protects your personal information. Read our privacy policy covering data collection, usage, sharing, and your rights.",
+      "socialTitle": "Privacy Policy | Perspective Tester",
+      "socialDescription": "How Perspective Tester collects, uses, and protects your personal information.",
+      "pageType": "WebPage"
+    }
+  },
+  {
+    "title": "Terms of Service",
+    "path": "/terms",
+    "sections": [
+      "terms-page"
+    ],
+    "seo": {
+      "title": "Terms of Service",
+      "description": "Read the Terms of Service for using the Perspective Tester website and accessibility services, including A3S and P15R.",
+      "socialTitle": "Terms of Service | Perspective Tester",
+      "socialDescription": "Terms and conditions for using Perspective Tester's website and accessibility services.",
+      "pageType": "WebPage"
+    }
+  }
+]

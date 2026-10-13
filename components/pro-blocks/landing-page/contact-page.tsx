@@ -1,5 +1,8 @@
 "use client";
 
+import { useSection, useSiteSettings } from "@/components/cms/content-provider";
+import defaults from "@/cms/content/contact-page.json";
+
 import { Tagline } from "@/components/pro-blocks/landing-page/tagline";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,48 +19,16 @@ import { Mail, Send, ArrowRight, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-const CONTACT_EMAIL =
-  process.env.NEXT_PUBLIC_CONTACT_EMAIL || "Info@perspectivetester.com";
-
-const budgetOptions = [
-  { value: "under-5k", label: "Under $5,000" },
-  { value: "5k-15k", label: "$5,000 - $15,000" },
-  { value: "15k-50k", label: "$15,000 - $50,000" },
-  { value: "50k-100k", label: "$50,000 - $100,000" },
-  { value: "100k-plus", label: "$100,000+" },
-  { value: "not-sure", label: "Not sure yet" },
-];
-
-const serviceOptions = [
-  { value: "a3s", label: "A3S - Accessibility as a Service" },
-  { value: "p15r", label: "P15R Platform" },
-  { value: "audit", label: "Accessibility Audit" },
-  { value: "remediation", label: "Remediation Support" },
-  { value: "vpat", label: "VPAT / ACR Documentation" },
-  { value: "training", label: "Training & Consulting" },
-  { value: "other", label: "Other" },
-];
-
-const orgTypeOptions = [
-  { value: "government", label: "Government Agency" },
-  { value: "education", label: "Education" },
-  { value: "healthcare", label: "Healthcare" },
-  { value: "enterprise", label: "Enterprise" },
-  { value: "nonprofit", label: "Non-profit" },
-  { value: "small-business", label: "Small Business" },
-  { value: "other", label: "Other" },
-];
-
-const contactInfo = [
-  {
-    icon: Mail,
-    label: "Email",
-    value: CONTACT_EMAIL,
-    href: `mailto:${CONTACT_EMAIL}`,
-  },
-];
+const contentIcons = { Mail };
 
 export function ContactPage() {
+  const { contactEmail: CONTACT_EMAIL } = useSiteSettings();
+  const content = useSection("contact-page", defaults, contentIcons);
+  const budgetOptions = content.budgetOptions;
+  const serviceOptions = content.serviceOptions;
+  const orgTypeOptions = content.orgTypeOptions;
+  const contactInfo = content.contactInfo;
+
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -80,13 +51,30 @@ export function ContactPage() {
   const REQUIRED_FIELDS: { name: string; label: string; hint: string }[] = [
     { name: "firstName", label: "First name", hint: "Enter your first name." },
     { name: "lastName", label: "Last name", hint: "Enter your last name." },
-    { name: "email", label: "Work email", hint: "Enter a work email address in the format name@organization.gov." },
-    { name: "organization", label: "Organization", hint: "Enter the name of your organization." },
-    { name: "service", label: "Service interested in", hint: "Choose the service you are interested in." },
-    { name: "message", label: "Tell us about your project", hint: "Tell us briefly about your project so we can route your inquiry." },
+    {
+      name: "email",
+      label: "Work email",
+      hint: "Enter a work email address in the format name@organization.gov.",
+    },
+    {
+      name: "organization",
+      label: "Organization",
+      hint: "Enter the name of your organization.",
+    },
+    {
+      name: "service",
+      label: "Service interested in",
+      hint: "Choose the service you are interested in.",
+    },
+    {
+      name: "message",
+      label: "Tell us about your project",
+      hint: "Tell us briefly about your project so we can route your inquiry.",
+    },
   ];
 
-  const describedBy = (name: string) => (fieldErrors[name] ? `${name}-error` : undefined);
+  const describedBy = (name: string) =>
+    fieldErrors[name] ? `${name}-error` : undefined;
   const invalid = (name: string) => (fieldErrors[name] ? true : undefined);
 
   const FieldError = ({ name }: { name: string }) =>
@@ -116,11 +104,16 @@ export function ContactPage() {
       const value =
         field.name === "service"
           ? service
-          : ((form.elements.namedItem(field.name) as HTMLInputElement | null)?.value ?? "");
+          : ((form.elements.namedItem(field.name) as HTMLInputElement | null)
+              ?.value ?? "");
       if (!value.trim()) {
         nextErrors[field.name] = `${field.label} is required. ${field.hint}`;
-      } else if (field.name === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value.trim())) {
-        nextErrors[field.name] = `Enter a valid work email address in the format name@organization.gov.`;
+      } else if (
+        field.name === "email" &&
+        !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value.trim())
+      ) {
+        nextErrors[field.name] =
+          `Enter a valid work email address in the format name@organization.gov.`;
       }
     }
     if (Object.keys(nextErrors).length > 0) {
@@ -144,17 +137,23 @@ export function ContactPage() {
     if (budget) formData.set("budget", budget);
 
     // FormSubmit configuration
-    formData.set("_subject", `New Inquiry: ${service} - ${formData.get("firstName")} ${formData.get("lastName")} (${formData.get("organization")})`);
+    formData.set(
+      "_subject",
+      `New Inquiry: ${service} - ${formData.get("firstName")} ${formData.get("lastName")} (${formData.get("organization")})`,
+    );
     formData.set("_captcha", "false");
     formData.set("_template", "table");
 
     try {
       // Send to FormSubmit (email)
-      const formSubmitPromise = fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
-        method: "POST",
-        body: formData,
-        headers: { Accept: "application/json" },
-      });
+      const formSubmitPromise = fetch(
+        `https://formsubmit.co/ajax/${CONTACT_EMAIL}`,
+        {
+          method: "POST",
+          body: formData,
+          headers: { Accept: "application/json" },
+        },
+      );
 
       const serviceName = formData.get("service") as string;
       const firstName = formData.get("firstName") as string;
@@ -195,7 +194,11 @@ export function ContactPage() {
           blocks: [
             {
               type: "header",
-              text: { type: "plain_text", text: `New Inquiry: ${serviceName}`, emoji: true },
+              text: {
+                type: "plain_text",
+                text: `New Inquiry: ${serviceName}`,
+                emoji: true,
+              },
             },
             {
               type: "section",
@@ -204,10 +207,18 @@ export function ContactPage() {
                 { type: "mrkdwn", text: `*Email:*\n${email}` },
                 { type: "mrkdwn", text: `*Organization:*\n${organization}` },
                 { type: "mrkdwn", text: `*Service:*\n${serviceName}` },
-                ...(phone ? [{ type: "mrkdwn", text: `*Phone:*\n${phone}` }] : []),
-                ...(orgTypeVal ? [{ type: "mrkdwn", text: `*Org Type:*\n${orgTypeVal}` }] : []),
-                ...(budgetVal ? [{ type: "mrkdwn", text: `*Budget:*\n${budgetVal}` }] : []),
-                ...(website ? [{ type: "mrkdwn", text: `*Website:*\n${website}` }] : []),
+                ...(phone
+                  ? [{ type: "mrkdwn", text: `*Phone:*\n${phone}` }]
+                  : []),
+                ...(orgTypeVal
+                  ? [{ type: "mrkdwn", text: `*Org Type:*\n${orgTypeVal}` }]
+                  : []),
+                ...(budgetVal
+                  ? [{ type: "mrkdwn", text: `*Budget:*\n${budgetVal}` }]
+                  : []),
+                ...(website
+                  ? [{ type: "mrkdwn", text: `*Website:*\n${website}` }]
+                  : []),
               ],
             },
             {
@@ -240,7 +251,7 @@ export function ContactPage() {
       // which survives this path. Clearing the polite region avoids the same
       // message being read out twice.
       setError(
-        `There was a problem sending your inquiry. Please try again or email us directly at ${CONTACT_EMAIL}.`
+        `There was a problem sending your inquiry. Please try again or email us directly at ${CONTACT_EMAIL}.`,
       );
       setStatus("");
     } finally {
@@ -256,18 +267,15 @@ export function ContactPage() {
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
             <Tagline>
               <Mail className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
-              <span className="text-foreground">Contact Us</span>
+              <span className="text-foreground">{content.text_1}</span>
             </Tagline>
 
             <div className="section-title-gap-xl flex flex-col">
               <h1 className="heading-xl text-balance text-foreground">
-                Let&apos;s Talk About Your Accessibility Needs
+                {content.heading_2}
               </h1>
               <p className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground lg:text-lg">
-                Whether you need a managed accessibility service, a compliance
-                platform, or expert consulting, we&apos;re here to help. Tell us
-                about your project and we&apos;ll get back to you within one business
-                day.
+                {content.paragraph_3}
               </p>
             </div>
           </div>
@@ -296,39 +304,36 @@ export function ContactPage() {
                     tabIndex={-1}
                     className="text-xl font-semibold text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
                   >
-                    Thank you for reaching out
+                    {content.heading_4}
                   </h2>
                   <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
-                    We&apos;ve received your inquiry and will get back to you
-                    within one business day. In the meantime, feel free to
-                    explore our products.
+                    {content.paragraph_5}
                   </p>
                   <div className="flex gap-3 pt-2">
                     <Button asChild variant="outline" size="sm">
-                      <Link href="/a3s">
-                        Explore A3S
-                      </Link>
+                      <Link href={content.href_6}>{content.text_7}</Link>
                     </Button>
                     <Button asChild variant="outline" size="sm">
-                      <Link href="/manage">
-                        Explore P15R
-                      </Link>
+                      <Link href={content.href_8}>{content.text_9}</Link>
                     </Button>
                   </div>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-6">
+                <form
+                  onSubmit={handleSubmit}
+                  noValidate
+                  className="flex flex-col gap-6"
+                >
                   <div>
                     <h2 className="text-lg font-semibold text-foreground">
-                      Request a Consultation
+                      {content.heading_10}
                     </h2>
                     <p className="mt-1 text-sm text-muted-foreground">
-                      Fill out the form below and our team will reach out to
-                      discuss your accessibility goals.
+                      {content.paragraph_11}
                     </p>
                     <p className="mt-2 text-xs text-muted-foreground">
                       <span className="text-destructive font-semibold">*</span>{" "}
-                      indicates a required field.
+                      {content.paragraph_12}
                     </p>
                   </div>
 
@@ -348,13 +353,14 @@ export function ContactPage() {
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div className="flex flex-col gap-2">
                       <Label htmlFor="firstName">
-                        First name <span className="text-destructive">*</span>
+                        {content.text_13}
+                        <span className="text-destructive">*</span>
                       </Label>
                       <Input
                         id="firstName"
                         name="firstName"
                         autoComplete="given-name"
-                        placeholder="Jane"
+                        placeholder={content.placeholder_14}
                         required
                         aria-invalid={invalid("firstName")}
                         aria-describedby={describedBy("firstName")}
@@ -364,13 +370,14 @@ export function ContactPage() {
                     </div>
                     <div className="flex flex-col gap-2">
                       <Label htmlFor="lastName">
-                        Last name <span className="text-destructive">*</span>
+                        {content.text_15}
+                        <span className="text-destructive">*</span>
                       </Label>
                       <Input
                         id="lastName"
                         name="lastName"
                         autoComplete="family-name"
-                        placeholder="Smith"
+                        placeholder={content.placeholder_16}
                         required
                         aria-invalid={invalid("lastName")}
                         aria-describedby={describedBy("lastName")}
@@ -384,14 +391,15 @@ export function ContactPage() {
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div className="flex flex-col gap-2">
                       <Label htmlFor="email">
-                        Work email <span className="text-destructive">*</span>
+                        {content.text_17}
+                        <span className="text-destructive">*</span>
                       </Label>
                       <Input
                         id="email"
                         name="email"
                         type="email"
                         autoComplete="email"
-                        placeholder="jane@organization.gov"
+                        placeholder={content.placeholder_18}
                         required
                         aria-invalid={invalid("email")}
                         aria-describedby={describedBy("email")}
@@ -400,13 +408,18 @@ export function ContactPage() {
                       <FieldError name="email" />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <Label htmlFor="phone">Phone number <span className="text-muted-foreground font-normal">(optional)</span></Label>
+                      <Label htmlFor="phone">
+                        {content.text_19}
+                        <span className="text-muted-foreground font-normal">
+                          {content.text_20}
+                        </span>
+                      </Label>
                       <Input
                         id="phone"
                         name="phone"
                         type="tel"
                         autoComplete="tel"
-                        placeholder="(555) 123-4567"
+                        placeholder={content.placeholder_21}
                         disabled={loading}
                       />
                     </div>
@@ -416,13 +429,14 @@ export function ContactPage() {
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div className="flex flex-col gap-2">
                       <Label htmlFor="organization">
-                        Organization <span className="text-destructive">*</span>
+                        {content.text_22}
+                        <span className="text-destructive">*</span>
                       </Label>
                       <Input
                         id="organization"
                         name="organization"
                         autoComplete="organization"
-                        placeholder="City of Springfield"
+                        placeholder={content.placeholder_23}
                         required
                         aria-invalid={invalid("organization")}
                         aria-describedby={describedBy("organization")}
@@ -431,7 +445,12 @@ export function ContactPage() {
                       <FieldError name="organization" />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <Label htmlFor="orgType">Organization type <span className="text-muted-foreground font-normal">(optional)</span></Label>
+                      <Label htmlFor="orgType">
+                        {content.text_24}
+                        <span className="text-muted-foreground font-normal">
+                          {content.text_25}
+                        </span>
+                      </Label>
                       <Select
                         name="orgType"
                         value={orgType}
@@ -441,9 +460,9 @@ export function ContactPage() {
                         <SelectTrigger
                           id="orgType"
                           className="w-full"
-                          aria-label="Organization type"
+                          aria-label={content.aria_label_26}
                         >
-                          <SelectValue placeholder="Select type" />
+                          <SelectValue placeholder={content.placeholder_27} />
                         </SelectTrigger>
                         <SelectContent>
                           {orgTypeOptions.map((opt) => (
@@ -460,7 +479,7 @@ export function ContactPage() {
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div className="flex flex-col gap-2">
                       <Label htmlFor="service">
-                        Service interested in{" "}
+                        {content.text_28}{" "}
                         <span className="text-destructive">*</span>
                       </Label>
                       <Select
@@ -473,11 +492,11 @@ export function ContactPage() {
                         <SelectTrigger
                           id="service"
                           className="w-full"
-                          aria-label="Service interested in"
+                          aria-label={content.aria_label_29}
                           aria-invalid={invalid("service")}
                           aria-describedby={describedBy("service")}
                         >
-                          <SelectValue placeholder="Select a service" />
+                          <SelectValue placeholder={content.placeholder_30} />
                         </SelectTrigger>
                         <SelectContent>
                           {serviceOptions.map((opt) => (
@@ -490,7 +509,12 @@ export function ContactPage() {
                       <FieldError name="service" />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <Label htmlFor="budget">Project budget <span className="text-muted-foreground font-normal">(optional)</span></Label>
+                      <Label htmlFor="budget">
+                        {content.text_31}
+                        <span className="text-muted-foreground font-normal">
+                          {content.text_32}
+                        </span>
+                      </Label>
                       <Select
                         name="budget"
                         value={budget}
@@ -500,9 +524,9 @@ export function ContactPage() {
                         <SelectTrigger
                           id="budget"
                           className="w-full"
-                          aria-label="Project budget"
+                          aria-label={content.aria_label_33}
                         >
-                          <SelectValue placeholder="Select budget range" />
+                          <SelectValue placeholder={content.placeholder_34} />
                         </SelectTrigger>
                         <SelectContent>
                           {budgetOptions.map((opt) => (
@@ -517,13 +541,18 @@ export function ContactPage() {
 
                   {/* Website URL */}
                   <div className="flex flex-col gap-2">
-                    <Label htmlFor="website">Website URL <span className="text-muted-foreground font-normal">(optional)</span></Label>
+                    <Label htmlFor="website">
+                      {content.text_35}
+                      <span className="text-muted-foreground font-normal">
+                        {content.text_36}
+                      </span>
+                    </Label>
                     <Input
                       id="website"
                       name="website"
                       type="url"
                       autoComplete="url"
-                      placeholder="https://www.example.gov"
+                      placeholder={content.placeholder_37}
                       disabled={loading}
                     />
                   </div>
@@ -531,13 +560,13 @@ export function ContactPage() {
                   {/* Message */}
                   <div className="flex flex-col gap-2">
                     <Label htmlFor="message">
-                      Tell us about your project{" "}
+                      {content.text_38}{" "}
                       <span className="text-destructive">*</span>
                     </Label>
                     <Textarea
                       id="message"
                       name="message"
-                      placeholder="Describe your accessibility needs, timeline, number of pages/applications, or any specific compliance requirements..."
+                      placeholder={content.placeholder_39}
                       className="min-h-[120px]"
                       required
                       aria-invalid={invalid("message")}
@@ -557,12 +586,15 @@ export function ContactPage() {
                     >
                       {loading ? (
                         <>
-                          <Loader2 className="animate-spin" aria-hidden="true" />
-                          Sending...
+                          <Loader2
+                            className="animate-spin"
+                            aria-hidden="true"
+                          />
+                          {content.text_40}
                         </>
                       ) : (
                         <>
-                          Send Inquiry
+                          {content.text_41}
                           <ArrowRight aria-hidden="true" />
                         </>
                       )}
@@ -577,7 +609,7 @@ export function ContactPage() {
               {/* Contact info */}
               <div className="rounded-xl border bg-card p-6">
                 <h3 className="text-sm font-semibold text-foreground">
-                  Get in Touch
+                  {content.heading_42}
                 </h3>
                 <div className="mt-4 flex flex-col gap-4">
                   {contactInfo.map((item) => (
@@ -605,34 +637,42 @@ export function ContactPage() {
               {/* Quick links */}
               <div className="rounded-xl border bg-card p-6">
                 <h3 className="text-sm font-semibold text-foreground">
-                  Explore Our Services
+                  {content.heading_43}
                 </h3>
                 <div className="mt-4 flex flex-col gap-3">
                   <Link
-                    href="/a3s"
-                    className="group flex items-center justify-between rounded-lg border bg-secondary/50 px-4 py-3 transition-colors hover:bg-secondary"
-                  >
-                    <div>
-                      <p className="text-sm font-medium text-foreground">A3S</p>
-                      <p className="text-xs text-muted-foreground">
-                        Managed accessibility service
-                      </p>
-                    </div>
-                    <ArrowRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" aria-hidden="true" />
-                  </Link>
-                  <Link
-                    href="/manage"
+                    href={content.href_44}
                     className="group flex items-center justify-between rounded-lg border bg-secondary/50 px-4 py-3 transition-colors hover:bg-secondary"
                   >
                     <div>
                       <p className="text-sm font-medium text-foreground">
-                        P15R
+                        {content.paragraph_45}
                       </p>
                       <p className="text-xs text-muted-foreground">
-                        Accessibility Ops Without Chaos
+                        {content.paragraph_46}
                       </p>
                     </div>
-                    <ArrowRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" aria-hidden="true" />
+                    <ArrowRight
+                      className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground"
+                      aria-hidden="true"
+                    />
+                  </Link>
+                  <Link
+                    href={content.href_47}
+                    className="group flex items-center justify-between rounded-lg border bg-secondary/50 px-4 py-3 transition-colors hover:bg-secondary"
+                  >
+                    <div>
+                      <p className="text-sm font-medium text-foreground">
+                        {content.paragraph_48}
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        {content.paragraph_49}
+                      </p>
+                    </div>
+                    <ArrowRight
+                      className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground"
+                      aria-hidden="true"
+                    />
                   </Link>
                 </div>
               </div>
@@ -640,12 +680,10 @@ export function ContactPage() {
               {/* Response time */}
               <div className="rounded-xl border border-primary/10 bg-primary/5 p-6">
                 <p className="text-sm font-medium text-foreground">
-                  Response time
+                  {content.paragraph_50}
                 </p>
                 <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                  We typically respond within one business day. For urgent
-                  accessibility needs, mention it in your message and we&apos;ll
-                  prioritize your request.
+                  {content.paragraph_51}
                 </p>
               </div>
             </div>

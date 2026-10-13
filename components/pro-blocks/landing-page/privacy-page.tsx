@@ -1,9 +1,14 @@
 "use client";
 
+import { useSection } from "@/components/cms/content-provider";
+import defaults from "@/cms/content/privacy-page.json";
+
 import { Tagline } from "@/components/pro-blocks/landing-page/tagline";
 import { Shield } from "lucide-react";
 
 export function PrivacyPage() {
+  const content = useSection("privacy-page", defaults);
+
   return (
     <>
       {/* Hero */}
@@ -12,15 +17,15 @@ export function PrivacyPage() {
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
             <Tagline>
               <Shield className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
-              <span className="text-foreground">Legal</span>
+              <span className="text-foreground">{content.text_1}</span>
             </Tagline>
             <div className="section-title-gap-xl flex flex-col">
               <h1 className="heading-xl text-balance text-foreground">
-                Privacy Policy
+                {content.heading_2}
               </h1>
               <p className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground lg:text-lg">
-                Last updated:{" "}
-                <time dateTime="2025-03-06">March 6, 2025</time>
+                {content.paragraph_3}{" "}
+                <time dateTime="2025-03-06">{content.text_4}</time>
               </p>
             </div>
           </div>
@@ -35,113 +40,84 @@ export function PrivacyPage() {
               <div className="flex flex-col gap-10 text-sm leading-relaxed text-muted-foreground">
                 <div className="flex flex-col gap-3">
                   <h2 className="text-xl font-semibold text-foreground">
-                    Introduction
+                    {content.heading_5}
                   </h2>
-                  <p>
-                    Perspective Tester (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or
-                    &ldquo;us&rdquo;) respects your privacy and is committed to
-                    protecting the personal information you share with us. This
-                    Privacy Policy describes how we collect, use, and safeguard
-                    information when you visit our website at
-                    perspectivetester.com.
-                  </p>
+                  <p>{content.paragraph_6}</p>
                 </div>
 
                 <div className="flex flex-col gap-3">
                   <h2 className="text-xl font-semibold text-foreground">
-                    Information We Collect
+                    {content.heading_7}
                   </h2>
-                  <p>We may collect the following types of information:</p>
+                  <p>{content.paragraph_8}</p>
                   <ul className="flex flex-col gap-2 pl-5 list-disc">
                     <li>
                       <strong className="text-foreground">
-                        Contact Information:
+                        {content.text_9}
                       </strong>{" "}
-                      Name, email address, phone number, and organization name
-                      that you voluntarily provide through our contact form.
+                      {content.text_10}
                     </li>
                     <li>
                       <strong className="text-foreground">
-                        Project Details:
+                        {content.text_11}
                       </strong>{" "}
-                      Service interests, budget range, website URL, and project
-                      descriptions submitted through our inquiry form.
+                      {content.text_12}
                     </li>
                     <li>
                       <strong className="text-foreground">
-                        Usage Information:
+                        {content.text_13}
                       </strong>{" "}
-                      General website analytics such as pages visited, time
-                      spent, and referral sources. This data is collected in
-                      aggregate and does not personally identify you.
+                      {content.text_14}
                     </li>
                   </ul>
                 </div>
 
                 <div className="flex flex-col gap-3">
                   <h2 className="text-xl font-semibold text-foreground">
-                    How We Use Your Information
+                    {content.heading_15}
                   </h2>
-                  <p>We use the information we collect to:</p>
+                  <p>{content.paragraph_16}</p>
                   <ul className="flex flex-col gap-2 pl-5 list-disc">
-                    <li>Respond to your inquiries and consultation requests</li>
-                    <li>Provide accessibility services and support</li>
-                    <li>
-                      Communicate with you about our products, services, and
-                      updates
-                    </li>
-                    <li>Improve our website and user experience</li>
-                    <li>Comply with legal obligations</li>
+                    <li>{content.text_17}</li>
+                    <li>{content.text_18}</li>
+                    <li>{content.text_19}</li>
+                    <li>{content.text_20}</li>
+                    <li>{content.text_21}</li>
                   </ul>
                 </div>
 
                 <div className="flex flex-col gap-3">
                   <h2 className="text-xl font-semibold text-foreground">
-                    Information Sharing
+                    {content.heading_22}
                   </h2>
-                  <p>
-                    We do not sell, trade, or rent your personal information to
-                    third parties. We may share information with trusted service
-                    providers who assist us in operating our website and
-                    delivering services, provided they agree to keep your
-                    information confidential.
-                  </p>
+                  <p>{content.paragraph_23}</p>
                 </div>
 
                 <div className="flex flex-col gap-3">
                   <h2 className="text-xl font-semibold text-foreground">
-                    Data Security
+                    {content.heading_24}
                   </h2>
-                  <p>
-                    We implement industry-standard security measures to protect
-                    your personal information from unauthorized access,
-                    alteration, disclosure, or destruction. However, no method of
-                    electronic transmission or storage is completely secure, and
-                    we cannot guarantee absolute security.
-                  </p>
+                  <p>{content.paragraph_25}</p>
                 </div>
 
                 <div className="flex flex-col gap-3">
                   <h2 className="text-xl font-semibold text-foreground">
-                    Your Rights
+                    {content.heading_26}
                   </h2>
-                  <p>You have the right to:</p>
+                  <p>{content.paragraph_27}</p>
                   <ul className="flex flex-col gap-2 pl-5 list-disc">
-                    <li>
-                      Request access to the personal information we hold about
-                      you
-                    </li>
-                    <li>Request correction of inaccurate information</li>
-                    <li>Request deletion of your personal information</li>
-                    <li>Opt out of marketing communications</li>
+                    <li>{content.text_28}</li>
+                    <li>{content.text_29}</li>
+                    <li>{content.text_30}</li>
+                    <li>{content.text_31}</li>
                   </ul>
                   <p>
-                    To exercise any of these rights, please contact us at{" "}
+                    {content.paragraph_32}{" "}
                     <a
-                      href="mailto:Info@perspectivetester.com"
+                      href={content.href_33}
                       className="font-medium text-foreground hover:text-primary transition-colors"
                     >
-                      Info@perspectivetester.com
+                      {content.text_34}
                     </a>
                     .
                   </p>
@@ -149,28 +125,22 @@ export function PrivacyPage() {
 
                 <div className="flex flex-col gap-3">
                   <h2 className="text-xl font-semibold text-foreground">
-                    Changes to This Policy
+                    {content.heading_35}
                   </h2>
-                  <p>
-                    We may update this Privacy Policy from time to time. Any
-                    changes will be posted on this page with a revised
-                    &ldquo;Last updated&rdquo; date. We encourage you to review
-                    this page periodically.
-                  </p>
+                  <p>{content.paragraph_36}</p>
                 </div>
 
                 <div className="flex flex-col gap-3">
                   <h2 className="text-xl font-semibold text-foreground">
-                    Contact Us
+                    {content.heading_37}
                   </h2>
                   <p>
-                    If you have questions or concerns about this Privacy Policy,
-                    please contact us at{" "}
+                    {content.paragraph_38}{" "}
                     <a
-                      href="mailto:Info@perspectivetester.com"
+                      href={content.href_39}
                       className="font-medium text-foreground hover:text-primary transition-colors"
                     >
-                      Info@perspectivetester.com
+                      {content.text_40}
                     </a>
                     .
                   </p>

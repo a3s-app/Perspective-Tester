@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { SkipToContentLink } from "@/components/skip-to-content-link";
 import "./globals.css";
+import { jsonLD, imageURL } from "@/cms/content-utils";
+import { ContentProvider } from "@/components/cms/content-provider";
+import { getSettings, getSharedContent } from "@/cms/server";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -9,9 +12,10 @@ const inter = Inter({
   weight: ["400", "500", "600", "700"],
 });
 
-export const metadata: Metadata = {
+const defaultMetadata: Metadata = {
   title: {
-    default: "Perspective Tester - Enterprise Accessibility Testing & Compliance",
+    default:
+      "Perspective Tester - Enterprise Accessibility Testing & Compliance",
     template: "%s | Perspective Tester",
   },
   description:
@@ -111,11 +115,55 @@ const websiteJsonLd = {
   url: "https://perspectivetester.com",
 };
 
-export default function RootLayout({
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSettings();
+  const title = settings.seo?.title || settings.name;
+  const description =
+    settings.seo?.description || settings.description || undefined;
+  const image = imageURL(settings.seo?.image);
+  return {
+    ...defaultMetadata,
+    ...(settings.seo?.noIndex
+      ? { robots: { index: false, follow: false } }
+      : {}),
+    metadataBase: new URL(
+      process.env.NEXT_PUBLIC_SITE_URL ||
+        settings.siteURL ||
+        "https://perspectivetester.com",
+    ),
+    keywords:
+      settings.seo?.keywords ?? settings.keywords ?? defaultMetadata.keywords,
+    authors: [{ name: settings.name || "Perspective Tester" }],
+    creator: settings.name || undefined,
+    publisher: settings.name || undefined,
+    title: {
+      default: title || "Perspective Tester",
+      template: `%s | ${settings.name}`,
+    },
+    description,
+    openGraph: {
+      ...defaultMetadata.openGraph,
+      title: settings.seo?.socialTitle || title || undefined,
+      description: settings.seo?.socialDescription || description,
+      siteName: settings.name || undefined,
+      ...(image ? { images: [{ url: image }] } : {}),
+    },
+    twitter: {
+      ...defaultMetadata.twitter,
+      title: settings.seo?.socialTitle || title || undefined,
+      description: settings.seo?.socialDescription || description,
+      ...(image ? { images: [image] } : {}),
+    },
+  };
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const settings = await getSettings();
+  const content = await getSharedContent();
   return (
     <>
       <html lang="en">
@@ -123,19 +171,30 @@ export default function RootLayout({
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
-              __html: JSON.stringify(organizationJsonLd),
+              __html: jsonLD({
+                ...organizationJsonLd,
+                name: settings.name,
+                url: settings.siteURL,
+                email: settings.contactEmail,
+                description: settings.description,
+                sameAs: settings.socialLinks ?? [],
+              }),
             }}
           />
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
-              __html: JSON.stringify(websiteJsonLd),
+              __html: jsonLD({
+                ...websiteJsonLd,
+                name: settings.name,
+                url: settings.siteURL,
+              }),
             }}
           />
         </head>
         <body className={`${inter.variable} font-sans relative antialiased`}>
           <SkipToContentLink />
-          {children}
+          <ContentProvider content={content}>{children}</ContentProvider>
         </body>
       </html>
     </>

@@ -1,51 +1,37 @@
 import type { MetadataRoute } from "next";
-import { getAllPosts } from "@/lib/blog";
-import { getAllNews } from "@/lib/news";
-
-// Regenerates when the Sanity cache tag is revalidated, hourly at the latest.
+import { getRoutes, getSettings } from "@/cms/server";
+import { getAllNews, getAllPosts } from "@/cms/articles";
 export const revalidate = 3600;
-
-const SITE_URL = "https://perspectivetester.com";
-
-const staticRoutes: MetadataRoute.Sitemap = [
-  { url: `${SITE_URL}`, changeFrequency: "weekly", priority: 1.0 },
-  { url: `${SITE_URL}/a3s`, changeFrequency: "monthly", priority: 0.9 },
-  { url: `${SITE_URL}/a3s/how-it-works`, changeFrequency: "monthly", priority: 0.8 },
-  { url: `${SITE_URL}/manage`, changeFrequency: "monthly", priority: 0.9 },
-  { url: `${SITE_URL}/clients`, changeFrequency: "monthly", priority: 0.8 },
-  { url: `${SITE_URL}/case-studies`, changeFrequency: "monthly", priority: 0.8 },
-  {
-    url: `${SITE_URL}/case-studies/kit-carson-county`,
-    changeFrequency: "monthly",
-    priority: 0.8,
-  },
-  { url: `${SITE_URL}/overlay-widgets`, changeFrequency: "monthly", priority: 0.7 },
-  { url: `${SITE_URL}/blog`, changeFrequency: "weekly", priority: 0.7 },
-  { url: `${SITE_URL}/news`, changeFrequency: "weekly", priority: 0.7 },
-  { url: `${SITE_URL}/about`, changeFrequency: "monthly", priority: 0.7 },
-  { url: `${SITE_URL}/contact`, changeFrequency: "yearly", priority: 0.8 },
-  { url: `${SITE_URL}/accessibility`, changeFrequency: "yearly", priority: 0.5 },
-  { url: `${SITE_URL}/privacy`, changeFrequency: "yearly", priority: 0.3 },
-  { url: `${SITE_URL}/terms`, changeFrequency: "yearly", priority: 0.3 },
-];
-
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const posts = await getAllPosts();
-  const news = getAllNews();
-
+  const [settings, pages, posts, news] = await Promise.all([
+    getSettings(),
+    getRoutes(),
+    getAllPosts(),
+    getAllNews(),
+  ]);
+  if (settings.seo?.noIndex) return [];
+  const base = settings.siteURL || "https://perspectivetester.com";
   return [
-    ...staticRoutes,
-    ...posts.map((post) => ({
-      url: `${SITE_URL}/blog/${post.slug}`,
-      lastModified: post.date,
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    })),
-    ...news.map((item) => ({
-      url: `${SITE_URL}/news/${item.slug}`,
-      lastModified: item.date,
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    })),
+    ...pages
+      .filter((p) => p.path && !p.noIndex)
+      .map((p) => ({
+        url: new URL(p.path!, base).href,
+        lastModified: p._updatedAt,
+        priority: p.path === "/" ? 1 : 0.7,
+      })),
+    ...posts
+      .filter((p) => !p.seo?.noIndex)
+      .map((p) => ({
+        url: new URL("/blog/" + p.slug, base).href,
+        lastModified: p.date,
+        priority: 0.6,
+      })),
+    ...news
+      .filter((p) => !p.seo?.noIndex)
+      .map((p) => ({
+        url: new URL("/news/" + p.slug, base).href,
+        lastModified: p.date,
+        priority: 0.6,
+      })),
   ];
 }

@@ -1,13 +1,14 @@
+import { getSettings } from "@/cms/server";
+import { imageURL } from "@/cms/content-utils";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BlogPostPage } from "@/components/pro-blocks/landing-page/blog-post-page";
 import { SiteShell } from "@/components/pro-blocks/landing-page/site-shell";
-import { getAllPosts, getPostBySlug } from "@/lib/blog";
+import { getAllPosts, getPostBySlug } from "@/cms/articles";
 
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  return getAllPosts().map((post) => ({ slug: post.slug }));
+export const revalidate = 3600;
+export async function generateStaticParams() {
+  return (await getAllPosts()).map((x) => ({ slug: x.slug }));
 }
 
 export async function generateMetadata({
@@ -16,34 +17,42 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
 
   if (!post) {
     return { title: "Article Not Found" };
   }
 
+  const settings = await getSettings();
+  const title = post.seo?.title || post.title;
+  const description = post.seo?.description || post.description;
+  const shareImage = imageURL(post.seo?.image, post.heroImage);
   return {
-    title: post.title,
-    description: post.description,
-    keywords: post.tags,
+    robots: {
+      index: !(post.seo?.noIndex || settings.seo?.noIndex),
+      follow: true,
+    },
+    title,
+    description,
+    keywords: post.seo?.keywords || post.tags,
     authors: [{ name: post.author.name }],
     alternates: {
       canonical: `/blog/${post.slug}`,
     },
     openGraph: {
       type: "article",
-      title: `${post.title} | Perspective Tester`,
-      description: post.description,
+      title: post.seo?.socialTitle || title,
+      description: post.seo?.socialDescription || description,
       url: `/blog/${post.slug}`,
       publishedTime: post.date,
       authors: [post.author.name],
-      images: [{ url: post.heroImage }],
+      images: [{ url: shareImage }],
     },
     twitter: {
       card: "summary_large_image",
-      title: post.title,
-      description: post.description,
-      images: [post.heroImage],
+      title: post.seo?.socialTitle || title,
+      description: post.seo?.socialDescription || description,
+      images: [shareImage],
     },
   };
 }
@@ -54,18 +63,20 @@ export default async function Page({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
 
   if (!post) {
     notFound();
   }
 
+  const settings = await getSettings();
+  const SITE_URL = settings.siteURL || "https://perspectivetester.com";
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
     description: post.description,
-    image: `https://perspectivetester.com${post.heroImage}`,
+    image: new URL(post.heroImage, SITE_URL).href,
     datePublished: post.date,
     author: {
       "@type": "Person",
@@ -74,12 +85,12 @@ export default async function Page({
     },
     publisher: {
       "@type": "Organization",
-      name: "Perspective Tester",
-      url: "https://perspectivetester.com",
+      name: settings.name,
+      url: SITE_URL,
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://perspectivetester.com/blog/${post.slug}`,
+      "@id": `${SITE_URL}/blog/${post.slug}`,
     },
   };
 
@@ -87,7 +98,9 @@ export default async function Page({
     <SiteShell>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleJsonLd).replace(/</g, "\\u003c"),
+        }}
       />
       <BlogPostPage post={post} />
     </SiteShell>

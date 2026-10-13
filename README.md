@@ -1,192 +1,146 @@
-# Perspective Tester
+# Perspective Tester — Sanity website
 
-Marketing website for [Perspective Tester](https://perspectivetester.com) — a digital accessibility consultancy helping organizations achieve and maintain WCAG 2.2 compliance.
-**Live Site:** [https://a3s-app.github.io/Perspective-Tester/](https://a3s-app.github.io/Perspective-Tester/)
+The existing marketing website now reads its published content from Sanity project **Perspective Tester (`j6m3ma08`)**, dataset **`production`**. The website runs on Next.js 16 with React 19 and is prepared for Vercel.
 
-## Tech Stack
+- Hosted editor: https://perspective-tester-j6m3ma08.sanity.studio/
+- Local website: http://localhost:3001
+- This copy started from `origin/main` at `73c9040` on branch `codex/sanity-cms`.
+- The original Payload checkout is separate and was preserved.
 
-- **Framework:** Next.js 15 (App Router, static export)
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS 4
-- **UI Components:** shadcn/ui + Radix UI
-- **Deployment:** GitHub Pages via GitHub Actions
+## Folder layout
 
-## Pages
+Keep these two independent projects together:
 
-| Route | Description |
-|-------|-------------|
-| `/` | Homepage with hero, products, services, enterprise, and CTA |
-| `/a3s` | A3S — Accessibility as a Service product page |
-| `/manage` | P15R — Accessibility Ops Without Chaos |
-| `/clients` | Client logos and testimonials |
-| `/case-studies/kit-carson-county` | Kit Carson County accessibility case study |
-| `/news` | News and announcements index |
-| `/news/[slug]` | Individual announcement, e.g. notes from the 2026 UAC Annual Convention |
-| `/about` | Team, values, and company information |
-| `/contact` | Contact form with consultation request |
-| `/accessibility` | Accessibility statement |
-| `/privacy` | Privacy policy |
-| `/terms` | Terms of service |
+```text
+sanity-cms/
+├── Perspective-Tester/          # This Next.js app; pnpm; its own Git repository
+└── studio-perspective-tester/   # Standalone Sanity Studio; npm; its own Git repository
+```
 
-## Getting Started
+The Studio is hosted by Sanity. It is not embedded at `/admin` or `/studio`. Keep both repositories when saving or sharing this work; a website commit does not include the sibling Studio.
 
-### Prerequisites
+## Editing the website
 
-- Node.js 20+
-- npm
+Open the hosted editor and sign in with the Sanity account that owns the project. Its sidebar contains:
 
-### Local Development
+| Area | What it controls |
+| --- | --- |
+| Site settings | Website name, contact email, public URL, default search settings, navigation/footer/shared content references |
+| Pages | All 15 existing pages, their URL paths, ordered sections, additional rich text, and search/social metadata |
+| Content sections | 26 designs with editable headings, paragraphs, buttons, links, images, lists, logos, testimonials, video IDs and transcripts |
+| Blog posts | Article body, author, cover image and description, date, tags, and search/social metadata |
+| News | Announcement body, cover image, date, tags, and search/social metadata |
+| Authors | Author name, job title, and photo |
+
+The current content is already imported: 15 pages, 26 sections, 3 blog posts, 2 news articles, and 1 author. Original images were uploaded to Sanity. The existing visual designs remain in the website's React components; editors change their content and order in Studio.
+
+To edit a page, open **Pages**, choose the page, then open the relevant **Page sections** reference. Publish the section to make its edit public. Publish the page itself when changing its path, section order, rich text, or search settings. Shared sections update every page that uses them. A new page can use existing section designs or its own rich text. New visual designs still require a component and matching schema.
+
+Drafts stay private until published. Sanity Studio provides draft editing; this integration does not add a visual draft-preview mode to the public website.
+
+## Local development
+
+Use Node.js 22.18 or newer and pnpm 9.15.4. From this website folder:
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/a3s-app/Perspective-Tester.git
-cd Perspective-Tester
-
-# 2. Install dependencies
-npm install
-
-# 3. Start dev server
-npm run dev
+pnpm install --frozen-lockfile
+cp .env.example .env.local # Only if .env.local does not already exist
+pnpm dev
 ```
 
-The site will be available at `http://localhost:3000`.
+Set a random `SANITY_REVALIDATE_SECRET` in `.env.local`. Do not commit this file or share the secret. Public project and dataset identifiers are safe to include in source code. Public content reads do not need a Sanity API token.
 
-> **Note:** In local development, `basePath` is not applied (no `/Perspective-Tester` prefix). The subpath is only added during GitHub Pages builds via the `GITHUB_PAGES=true` environment variable.
-
-### Production Build (Local)
+In a second terminal, run the publish listener from the sibling Studio:
 
 ```bash
-# Build static export (without GitHub Pages subpath)
-npm run build
-
-# The static files will be in the ./out directory
-# You can serve them locally with:
-npx serve out
+cd ../studio-perspective-tester
+npm ci
+npm run content:watch
 ```
 
-### Production Build (GitHub Pages)
+Keep it running while editing. It listens for published Sanity changes and signs refresh requests to the local website. It does not require a tunnel or expose the website publicly. Local development uses port 3001 so the original website on port 3000 can remain running. Optional local Studio: run `npm run dev` in the Studio folder and open http://localhost:3333.
+
+To check a production build locally:
 
 ```bash
-# Build with GitHub Pages subpath prefix
-GITHUB_PAGES=true npm run build
-
-# The static files in ./out will have /Perspective-Tester prefix on all assets
+pnpm build
+pnpm start --hostname 127.0.0.1 --port 3001
 ```
 
-## Deploying to GitHub Pages
+Stop the development server first if it is already using port 3001.
 
-This project includes a GitHub Actions workflow that automatically builds and deploys to GitHub Pages on every push to `main`.
+## How caching works
 
-### Step-by-Step Setup
+The website fetches **published** content on the server. Next.js generates and caches pages, so a normal repeat visit does not query Sanity for every piece of content. Images are served by Sanity's image CDN.
 
-1. **Clone and push (if starting fresh):**
-   ```bash
-   git clone https://github.com/a3s-app/Perspective-Tester.git
-   cd Perspective-Tester
-   npm install
-   npm run build          # Verify it builds locally
-   git push origin main   # Triggers the deployment workflow
-   ```
+Sanity queries and generated pages have a one-hour revalidation interval. A signed publish webhook expires the affected cached content sooner; the next request regenerates it. The local listener performs the same refresh while developing. Unpublishing and changing a page path or article slug also clear the old cached route. Sitemap, RSS, and search metadata use CMS content too.
 
-2. **Enable GitHub Pages in the repository:**
-   - Go to your repository on GitHub: [github.com/a3s-app/Perspective-Tester](https://github.com/a3s-app/Perspective-Tester)
-   - Navigate to **Settings** > **Pages**
-   - Under **Build and deployment > Source**, select **GitHub Actions**
-   - Click **Save**
+A page already open in a visitor's browser does not replace itself in real time. Reload or navigate again after publishing. ISR's timed refresh is a fallback; without a working webhook, content can remain cached until a request triggers revalidation after the interval.
 
-3. **Trigger a deployment:**
-   - Push any commit to the `main` branch, OR
-   - Go to **Actions** tab > **Deploy to GitHub Pages** > **Run workflow**
+## Vercel setup
 
-4. **Verify the deployment:**
-   - Go to the **Actions** tab to see the build progress
-   - Once complete, visit [https://a3s-app.github.io/Perspective-Tester/](https://a3s-app.github.io/Perspective-Tester/)
+Deploy the website as a Next.js application. GitHub Pages static export cannot run the refresh endpoint or contact API.
 
-### How It Works
+1. Connect the website repository to a Vercel project. Use this app directory as the root, the **Next.js** framework, and Node.js 22.18+. `vercel.json` supplies the pnpm install and build commands.
+2. Set `NEXT_PUBLIC_SANITY_PROJECT_ID=j6m3ma08`, `NEXT_PUBLIC_SANITY_DATASET=production`, and `NEXT_PUBLIC_SITE_URL` to the intended public website URL.
+3. Add a long random `SANITY_REVALIDATE_SECRET` as a server-only environment variable. Use the same value in the Sanity webhook below.
+4. Deploy the website. Configure its final public URL in **Site settings** as well; it is used in sitemap, RSS and structured data.
+5. In [Sanity project settings](https://www.sanity.io/manage/project/j6m3ma08), create one GROQ-powered webhook for `production`, using the configuration below.
 
-The deployment pipeline (`.github/workflows/deploy.yml`) does the following:
+Use the production webhook configuration below, and enable it once the deployed website includes the refresh endpoint. The endpoint must be reachable by Sanity; if deployment protection is enabled, configure access for the webhook.
 
-1. Checks out the code
-2. Installs Node.js 20 and runs `npm ci`
-3. Runs `npm run build` with `GITHUB_PAGES=true` — this sets `basePath: "/Perspective-Tester"` and `assetPrefix: "/Perspective-Tester"` in `next.config.mjs` so all links, images, CSS, and JS files are served from the correct subpath
-4. Uploads the `./out` directory as a GitHub Pages artifact
-5. Deploys to GitHub Pages
+### Production webhook
 
-### Custom Domain (Optional)
+- URL: `https://www.perspectivetester.com/api/sanity/revalidate` (or your deployed website's canonical hostname)
+- Method: **POST**
+- Triggers: **Create, Update, Delete**
+- Drafts and versions: **off**
+- Secret: exactly the website's `SANITY_REVALIDATE_SECRET`
+- API version: select `v2025-02-19` in the webhook dropdown. This controls the webhook's GROQ evaluation independently of the website client's API date.
 
-If you want to use a custom domain (e.g., `perspectivetester.com`) instead of `a3s-app.github.io/Perspective-Tester`:
+Filter:
 
-1. Go to **Settings** > **Pages** in your GitHub repository
-2. Under **Custom domain**, enter `perspectivetester.com`
-3. Add these DNS records with your domain registrar:
-
-   | Type | Name | Value |
-   |------|------|-------|
-   | A | @ | 185.199.108.153 |
-   | A | @ | 185.199.109.153 |
-   | A | @ | 185.199.110.153 |
-   | A | @ | 185.199.111.153 |
-   | CNAME | www | a3s-app.github.io |
-
-4. Check **Enforce HTTPS** once the certificate is provisioned
-5. Once a custom domain is active, you can remove the `basePath`/`assetPrefix` logic from `next.config.mjs` since the site will be served at the root (`/`)
-
-## Contact Form
-
-The contact form uses two channels for reliability:
-
-### 1. FormSubmit (Email — always active)
-[FormSubmit](https://formsubmit.co) — free, **unlimited submissions**, no API key required. Submissions are sent directly to `Info@perspectivetester.com` as formatted HTML table emails with built-in spam protection.
-
-To change the recipient email, update the FormSubmit URL in `components/pro-blocks/landing-page/contact-page.tsx`.
-
-### 2. Slack Webhook (Optional — instant notifications)
-Get real-time Slack notifications when someone submits the contact form. The Slack message includes all form fields in a rich formatted layout.
-
-**Setup:**
-1. Go to [api.slack.com/messaging/webhooks](https://api.slack.com/messaging/webhooks) and create an incoming webhook for your channel
-2. Set the environment variable:
-   ```bash
-   NEXT_PUBLIC_SLACK_WEBHOOK_URL=https://hooks.slack.com/services/YOUR/WEBHOOK/URL
-   ```
-3. For GitHub Pages, add it to the workflow env in `.github/workflows/deploy.yml`:
-   ```yaml
-   - name: Build
-     run: npm run build
-     env:
-       GITHUB_PAGES: "true"
-       NEXT_PUBLIC_BASE_PATH: "/Perspective-Tester"
-       NEXT_PUBLIC_SLACK_WEBHOOK_URL: ${{ vars.NEXT_PUBLIC_SLACK_WEBHOOK_URL }}
-   ```
-4. Add `NEXT_PUBLIC_SLACK_WEBHOOK_URL` as a repository variable under **Settings > Secrets and variables > Actions > Variables**
-
-> **Note:** Slack delivery is fire-and-forget — if it fails, the form still submits successfully via FormSubmit. The user experience is never blocked by Slack.
-
-## Project Structure
-
-```
-app/                  # Next.js routes (thin — delegates to components)
-components/
-  pro-blocks/         # Page-level components
-    landing-page/     # All landing page sections and sub-pages
-  ui/                 # shadcn/ui primitives
-public/               # Static assets (images, logos, sitemap, robots.txt)
-.github/workflows/    # GitHub Actions CI/CD
+```groq
+coalesce(after()._type, before()._type) in ["page", "section", "siteSettings", "post", "news", "author"]
+&& !(coalesce(after()._id, before()._id) in path("drafts.**"))
+&& !(coalesce(after()._id, before()._id) in path("versions.**"))
 ```
 
-## SEO
+Projection:
 
-- Page-specific metadata with Open Graph and Twitter cards
-- JSON-LD structured data (Organization + WebSite schemas)
-- Static `sitemap.xml` and `robots.txt` in `public/`
-- Semantic HTML with proper heading hierarchy
+```groq
+{
+  "_id": coalesce(after()._id, before()._id),
+  "_type": coalesce(after()._type, before()._type),
+  "path": after().path,
+  "previousPath": before().path,
+  "slug": after().slug.current,
+  "previousSlug": before().slug.current
+}
+```
 
-## Accessibility
+The before/after values support renaming and unpublishing as well as ordinary updates. See Sanity's [webhook reference](https://www.sanity.io/docs/http-reference/webhooks) for the platform settings. This configuration only sends document identifiers and routing fields.
 
-- WCAG 2.2 AA compliant
-- Skip navigation link
-- Proper ARIA labels and landmarks
-- Keyboard-navigable
-- Screen reader tested
-- Scroll-margin-top for focus visibility
-- Minimum 24x24px touch targets
+## Contact delivery
+
+The existing form still uses FormSubmit as its primary delivery service, with the recipient controlled in **Site settings → Contact email**. Its existing optional Resend channel uses server-only `RESEND_API_KEY` and `RESEND_FROM_EMAIL`; use a verified sender when configuring it. No test inquiry was sent during this integration. The old optional Slack integration remains inactive unless configured.
+
+## Development and verification
+
+```bash
+pnpm typecheck
+pnpm build
+```
+
+After changing Studio schemas or GROQ queries, regenerate the types from the sibling Studio:
+
+```bash
+cd ../studio-perspective-tester
+npm run typegen
+npm run typecheck
+npm run schema:deploy
+```
+
+Generated query result types live in `sanity.types.ts`. Runtime queries use those types explicitly. `cms/content/` and `cms/seed/` preserve the original content for import and template shapes; publishing normal content edits does not require changing those files.
+
+With the local production website running, the Studio provides `npm run test:integration` (signed webhook, caching, drafts, routing and unpublish) and `npm run test:local-refresh` (automatic publish listener). These checks create temporary noindex documents in this project's dataset and remove them afterward. The latter requires `npm run content:watch` in another terminal.

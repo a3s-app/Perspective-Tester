@@ -1,9 +1,14 @@
+"use client";
+
+import { useSection } from "@/components/cms/content-provider";
+import defaults from "@/cms/content/news-index-page.json";
+
 import { Tagline } from "@/components/pro-blocks/landing-page/tagline";
 import { ArrowRight, CalendarDays, Clock, Megaphone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { assetPath } from "@/lib/utils";
-import { getAllNews, getNewsReadingTime, type NewsItem } from "@/lib/news";
+import { getNewsReadingTime, type NewsItem } from "@/lib/news";
 
 /**
  * Photography fills its card; a designed graphic is matted on its own backdrop
@@ -18,8 +23,9 @@ function heroCell(item: NewsItem) {
   };
 }
 
-export function NewsIndexPage() {
-  const items = getAllNews();
+export function NewsIndexPage({ items }: { items: NewsItem[] }) {
+  const content = useSection("news-index-page", defaults);
+
   const [featured, ...rest] = items;
 
   return (
@@ -29,17 +35,19 @@ export function NewsIndexPage() {
         <div className="container-padding-x container mx-auto">
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
             <Tagline>
-              <Megaphone className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
-              <span className="text-foreground">News</span>
+              <Megaphone
+                className="h-3.5 w-3.5 text-primary"
+                aria-hidden="true"
+              />
+              <span className="text-foreground">{content.text_1}</span>
             </Tagline>
 
             <div className="section-title-gap-xl flex flex-col">
               <h1 className="heading-xl text-balance text-foreground">
-                News and Announcements
+                {content.heading_2}
               </h1>
               <p className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground lg:text-lg">
-                Announcements, sponsorships, and company updates from the
-                Perspective Tester team.
+                {content.paragraph_3}
               </p>
             </div>
           </div>
@@ -53,7 +61,7 @@ export function NewsIndexPage() {
       >
         <div className="container-padding-x container mx-auto flex flex-col gap-10">
           <h2 id="latest-news-heading" className="sr-only">
-            Latest news
+            {content.heading_4}
           </h2>
 
           {featured ? (
@@ -102,8 +110,10 @@ export function NewsIndexPage() {
                           aria-hidden="true"
                         />
                         <span>
-                          Published{" "}
-                          <time dateTime={featured.date}>{featured.dateLabel}</time>
+                          {content.text_5}{" "}
+                          <time dateTime={featured.date}>
+                            {featured.dateLabel}
+                          </time>
                         </span>
                       </span>
                       <span className="inline-flex items-center gap-1.5">
@@ -118,7 +128,7 @@ export function NewsIndexPage() {
                       className="inline-flex items-center gap-1.5 text-sm font-medium text-primary"
                       aria-hidden="true"
                     >
-                      Read the announcement
+                      {content.text_6}
                       <ArrowRight
                         className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0"
                         aria-hidden="true"
@@ -130,7 +140,7 @@ export function NewsIndexPage() {
             </Link>
           ) : (
             <p className="text-center text-muted-foreground">
-              No announcements yet. Check back soon.
+              {content.paragraph_7}
             </p>
           )}
 
@@ -159,7 +169,8 @@ export function NewsIndexPage() {
                     </div>
                     <div className="flex flex-1 flex-col gap-3 p-6">
                       <p className="text-xs text-muted-foreground">
-                        Published <time dateTime={item.date}>{item.dateLabel}</time>
+                        {content.paragraph_8}
+                        <time dateTime={item.date}>{item.dateLabel}</time>
                       </p>
                       <h3 className="text-base font-semibold leading-snug text-foreground">
                         {item.title}

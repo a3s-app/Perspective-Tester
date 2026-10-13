@@ -1,18 +1,8 @@
 /** @type {import('next').NextConfig} */
 
-const isGitHubPages = process.env.GITHUB_PAGES === "true";
-const repoName = "/Perspective-Tester";
-
 const nextConfig = {
-  output: "export",
-  basePath: isGitHubPages ? repoName : "",
-  assetPrefix: isGitHubPages ? repoName : "",
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  images: {
-    unoptimized: true,
-  },
+  images: { unoptimized: true, remotePatterns: [{ protocol: 'https', hostname: 'cdn.sanity.io' }] },
+  // The CMS webhook and ISR require a server deployment, such as Vercel.
 }
 
 export default nextConfig

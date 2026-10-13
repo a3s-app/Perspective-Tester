@@ -1,3 +1,8 @@
+"use client";
+
+import { useSection } from "@/components/cms/content-provider";
+import defaults from "@/cms/content/a3s-how-it-works-page.json";
+
 import Link from "next/link";
 import type { ReactNode } from "react";
 import {
@@ -8,46 +13,15 @@ import {
   FilePlus,
 } from "lucide-react";
 
-const startingPoints = [
-  {
-    title: "You have an ACR",
-    icon: FileCheck,
-    lead: "We start from your existing report.",
-    questions: [
-      "When was it created?",
-      "Has your site changed since then?",
-    ],
-  },
-  {
-    title: "You don't have an ACR yet",
-    icon: FilePlus,
-    lead: "Your efforts don't go to waste.",
-    questions: [
-      "Has anyone tested the work you've already done?",
-      "If someone asked for proof of conformance, what would you share?",
-    ],
-  },
-] as const;
-
-const afterCompliance = [
-  "We set up monitoring for your site and review it every month.",
-  "New issues and regressions are logged, prioritized and fixed.",
-  "Your documentation is kept current with the site.",
-] as const;
-
-const vendors = [
-  "We contact the vendor directly with a clear description of each issue and how to fix it.",
-  "We track each issue until it is resolved and verified.",
-  "Everyone involved works from the same record.",
-] as const;
-
-const tracking = [
-  "Every issue is recorded with its status, owner and date.",
-  "You receive a monthly progress report.",
-  "Your records provide a documented history of compliance.",
-] as const;
+const contentIcons = { FileCheck, FilePlus };
 
 export function A3SHowItWorksPage() {
+  const content = useSection("a3s-how-it-works-page", defaults, contentIcons);
+  const startingPoints = content.startingPoints;
+  const afterCompliance = content.afterCompliance;
+  const vendors = content.vendors;
+  const tracking = content.tracking;
+
   return (
     <article className="bg-background">
       <header className="border-b py-20 sm:py-24">
@@ -55,22 +29,20 @@ export function A3SHowItWorksPage() {
           <div className="mx-auto max-w-4xl">
             <p className="text-sm font-medium text-muted-foreground">
               <Link
-                href="/a3s"
+                href={content.href_1}
                 className="rounded-sm text-primary underline decoration-primary/30 underline-offset-4 hover:decoration-primary"
               >
-                A3S
+                {content.text_2}
               </Link>
               <span aria-hidden="true"> / </span>
               <span className="sr-only">, </span>
-              How it works
+              {content.paragraph_3}
             </p>
             <h1 className="mt-5 max-w-[20ch] text-balance text-4xl font-semibold tracking-[-0.03em] text-foreground sm:text-5xl">
-              How A3S makes your site accessible and keeps it that way
+              {content.heading_4}
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-              A3S brings your website into conformance with WCAG and keeps
-              it there. Here is what that involves, from the first
-              assessment to ongoing monitoring.
+              {content.paragraph_5}
             </p>
           </div>
         </div>
@@ -87,13 +59,10 @@ export function A3SHowItWorksPage() {
               id="starting-point-heading"
               className="text-2xl font-semibold tracking-[-0.02em] text-foreground sm:text-3xl"
             >
-              Where you are today
+              {content.heading_6}
             </h2>
             <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Most organizations we work with already have some accessibility
-              work in place, such as fixes made over time, an accessibility
-              plugin or an existing ACR. A3S is the missing piece: we validate
-              what you already have, close the gaps and keep it documented.
+              {content.paragraph_7}
             </p>
 
             <div className="mt-10 grid gap-6 md:grid-cols-2">
@@ -115,7 +84,7 @@ export function A3SHowItWorksPage() {
                     {option.lead}
                   </p>
                   <p className="mt-6 border-t pt-6 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-                    Ask yourself
+                    {content.paragraph_8}
                   </p>
                   <ul className="mt-4 flex flex-col gap-4">
                     {option.questions.map((question) => (
@@ -136,61 +105,50 @@ export function A3SHowItWorksPage() {
             </div>
 
             <p className="mt-8 text-base font-medium text-foreground sm:text-lg">
-              If you&apos;re not sure of the answers, that&apos;s where A3S
-              comes in.
+              {content.paragraph_9}
             </p>
           </div>
         </div>
       </section>
 
-      <Section id="process" title="Our process">
+      <Section id="process" title={content.title_10}>
         <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
-          We start by reviewing your site and agreeing on what is in scope.
-          Certified specialists then manually test it with assistive
-          technology, and we fix the issues we find, most serious first. Once every fix has been retested, we document your
-          site&apos;s conformance in an ACR. From then on, we monitor your
-          site every month so it stays that way.
+          {content.paragraph_11}
         </p>
         <p>
           <a
-            href="https://www.a3s.app/program"
+            href={content.href_12}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 rounded-sm text-base font-medium text-primary underline decoration-primary/30 underline-offset-4 hover:decoration-primary"
           >
-            See the full process on a3s.app
-            <span className="sr-only"> (opens in a new tab)</span>
+            {content.text_13}
+            <span className="sr-only"> {content.text_14}</span>
             <ArrowUpRight className="size-4" aria-hidden="true" />
           </a>
         </p>
       </Section>
 
-      <Section id="after-compliance" title="After your site is compliant">
+      <Section id="after-compliance" title={content.title_15}>
         <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
-          An ACR reflects your site on the date it was tested. New pages,
-          documents and system updates can introduce new issues, so
-          conformance has to be maintained.
+          {content.paragraph_16}
         </p>
         <CheckList items={afterCompliance} />
       </Section>
 
-      <Section id="vendors" title="Working with your vendors">
+      <Section id="vendors" title={content.title_17}>
         <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Some issues sit in systems managed by others, such as your CMS
-          provider. We handle that communication for you.
+          {content.paragraph_18}
         </p>
         <CheckList items={vendors} />
       </Section>
 
-      <Section id="tracking" title="Tracking and reporting">
+      <Section id="tracking" title={content.title_19}>
         <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
-          We keep track of everything. Every issue, fix and retest is
-          documented in one clear, organized record that you can share with
-          anyone who asks.
+          {content.paragraph_20}
         </p>
         <CheckList items={tracking} />
       </Section>
-
     </article>
   );
 }
@@ -204,9 +162,16 @@ function Section({
   title: string;
   children: ReactNode;
 }) {
+  const content = useSection("a3s-how-it-works-page", defaults, contentIcons);
+  const tracking = content.tracking;
+
   const headingId = `${id}-heading`;
   return (
-    <section id={id} aria-labelledby={headingId} className="border-b py-14 sm:py-16">
+    <section
+      id={id}
+      aria-labelledby={headingId}
+      className="border-b py-14 sm:py-16"
+    >
       <div className="container-padding-x container mx-auto">
         <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-[14rem_1fr] md:gap-12">
           <h2
@@ -223,11 +188,19 @@ function Section({
 }
 
 function CheckList({ items }: { items: readonly string[] }) {
+  const content = useSection("a3s-how-it-works-page", defaults, contentIcons);
+
   return (
     <ul className="flex flex-col gap-3">
       {items.map((item) => (
-        <li key={item} className="flex gap-3 text-base leading-relaxed text-foreground">
-          <Check className="mt-1 size-4 shrink-0 text-primary" aria-hidden="true" />
+        <li
+          key={item}
+          className="flex gap-3 text-base leading-relaxed text-foreground"
+        >
+          <Check
+            className="mt-1 size-4 shrink-0 text-primary"
+            aria-hidden="true"
+          />
           <span>{item}</span>
         </li>
       ))}

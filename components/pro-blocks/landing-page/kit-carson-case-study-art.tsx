@@ -1,5 +1,8 @@
 "use client";
 
+import { useSection } from "@/components/cms/content-provider";
+import defaults from "@/cms/content/kit-carson-case-study-art.json";
+
 import Image from "next/image";
 import { useRef } from "react";
 import {
@@ -13,6 +16,8 @@ import { assetPath } from "@/lib/utils";
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export function HeroArtwork() {
+  const content = useSection("kit-carson-case-study-art", defaults);
+
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({
@@ -29,10 +34,8 @@ export function HeroArtwork() {
         style={reduce ? undefined : { y: imageY, scale: imageScale }}
       >
         <Image
-          src={assetPath(
-            "/case-studies/kit-carson-county/county-road.webp",
-          )}
-          alt="A rural road crossing the Kit Carson County plains at sunset"
+          src={assetPath(content.image_1)}
+          alt={content.alt_2}
           fill
           priority
           sizes="100vw"
@@ -52,6 +55,8 @@ export function HeroArtwork() {
 }
 
 export function CostSnapshotFigure() {
+  const content = useSection("kit-carson-case-study-art", defaults);
+
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({
@@ -76,8 +81,8 @@ export function CostSnapshotFigure() {
           style={reduce ? undefined : { y: imageY, scale: imageScale }}
         >
           <Image
-            src={assetPath("/case-studies/kit-carson-county/budget-snapshot.webp")}
-            alt="A heavy audit stack and a website frozen under glass while loose calendar pages move past"
+            src={assetPath(content.image_3)}
+            alt={content.alt_4}
             fill
             sizes="(min-width: 1024px) 42vw, 100vw"
             className="object-cover"
@@ -85,36 +90,16 @@ export function CostSnapshotFigure() {
         </motion.div>
       </div>
       <figcaption className="px-5 py-4 text-sm font-semibold text-[oklch(0.48_0.13_42)] sm:px-6">
-        What a one-time audit buys
+        {content.text_5}
       </figcaption>
     </motion.figure>
   );
 }
 
-const auditEvidence = [
-  {
-    label: "Coverage",
-    value: "Priority pages tested",
-    detail: "and recorded each cycle",
-  },
-  {
-    label: "WCAG matrix",
-    value: "Every applicable criterion",
-    detail: "checked page by page",
-  },
-  {
-    label: "Finding record",
-    value: "Every barrier named",
-    detail: "with the page and the method that caught it",
-  },
-  {
-    label: "Repairs",
-    value: "Critical issues addressed",
-    detail: "retested before the cycle closes",
-  },
-] as const;
-
 export function EvidenceTrail() {
+  const content = useSection("kit-carson-case-study-art", defaults);
+  const auditEvidence = content.auditEvidence;
+
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({
@@ -141,10 +126,8 @@ export function EvidenceTrail() {
           style={reduce ? undefined : { y: imageY, scale: imageScale }}
         >
           <Image
-            src={assetPath(
-              "/case-studies/kit-carson-county/county-prairie.webp",
-            )}
-            alt="Prairie grass and an open sky in Kit Carson County"
+            src={assetPath(content.image_6)}
+            alt={content.alt_7}
             fill
             sizes="(min-width: 1024px) 60vw, 100vw"
             className="object-cover object-center"
@@ -155,14 +138,14 @@ export function EvidenceTrail() {
           aria-hidden="true"
         />
         <p className="absolute bottom-4 left-5 text-xs font-semibold uppercase tracking-[0.14em] text-white/86 sm:bottom-5 sm:left-8">
-          Photo:{" "}
+          {content.paragraph_8}{" "}
           <a
-            href="https://kitcarsoncounty.colorado.gov/"
+            href={content.href_9}
             target="_blank"
             rel="noopener noreferrer"
             className="underline decoration-white/40 underline-offset-4 hover:decoration-white"
           >
-            Kit Carson County
+            {content.text_10}
           </a>
         </p>
       </motion.div>
@@ -170,10 +153,10 @@ export function EvidenceTrail() {
       <div className="p-5 sm:p-8">
         <div>
           <p className="text-sm font-semibold text-[oklch(0.48_0.13_42)]">
-            The ongoing record
+            {content.paragraph_11}
           </p>
           <p className="mt-1 text-2xl font-semibold tracking-[-0.02em] text-foreground">
-            What every cycle produces.
+            {content.paragraph_12}
           </p>
         </div>
 
@@ -181,12 +164,8 @@ export function EvidenceTrail() {
           {auditEvidence.map((item, index) => (
             <motion.div
               key={item.label}
-              className={`py-3.5 ${
-                index < 2 ? "border-b" : ""
-              } ${
-                index % 2 === 0
-                  ? "sm:border-r sm:pr-6"
-                  : "sm:pl-6"
+              className={`py-3.5 ${index < 2 ? "border-b" : ""} ${
+                index % 2 === 0 ? "sm:border-r sm:pr-6" : "sm:pl-6"
               }`}
               initial={reduce ? false : { opacity: 0, x: -10 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -209,7 +188,7 @@ export function EvidenceTrail() {
         </dl>
 
         <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-          Drawn from the county&apos;s live accessibility record.
+          {content.paragraph_13}
         </p>
       </div>
     </div>

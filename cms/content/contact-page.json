@@ -1,0 +1,147 @@
+{
+  "budgetOptions": [
+    {
+      "value": "under-5k",
+      "label": "Under $5,000"
+    },
+    {
+      "value": "5k-15k",
+      "label": "$5,000 - $15,000"
+    },
+    {
+      "value": "15k-50k",
+      "label": "$15,000 - $50,000"
+    },
+    {
+      "value": "50k-100k",
+      "label": "$50,000 - $100,000"
+    },
+    {
+      "value": "100k-plus",
+      "label": "$100,000+"
+    },
+    {
+      "value": "not-sure",
+      "label": "Not sure yet"
+    }
+  ],
+  "serviceOptions": [
+    {
+      "value": "a3s",
+      "label": "A3S - Accessibility as a Service"
+    },
+    {
+      "value": "p15r",
+      "label": "P15R Platform"
+    },
+    {
+      "value": "audit",
+      "label": "Accessibility Audit"
+    },
+    {
+      "value": "remediation",
+      "label": "Remediation Support"
+    },
+    {
+      "value": "vpat",
+      "label": "VPAT / ACR Documentation"
+    },
+    {
+      "value": "training",
+      "label": "Training & Consulting"
+    },
+    {
+      "value": "other",
+      "label": "Other"
+    }
+  ],
+  "orgTypeOptions": [
+    {
+      "value": "government",
+      "label": "Government Agency"
+    },
+    {
+      "value": "education",
+      "label": "Education"
+    },
+    {
+      "value": "healthcare",
+      "label": "Healthcare"
+    },
+    {
+      "value": "enterprise",
+      "label": "Enterprise"
+    },
+    {
+      "value": "nonprofit",
+      "label": "Non-profit"
+    },
+    {
+      "value": "small-business",
+      "label": "Small Business"
+    },
+    {
+      "value": "other",
+      "label": "Other"
+    }
+  ],
+  "contactInfo": [
+    {
+      "icon": "Mail",
+      "label": "Email",
+      "value": "Info@perspectivetester.com",
+      "href": "mailto:Info@perspectivetester.com"
+    }
+  ],
+  "text_1": "Contact Us",
+  "heading_2": "Let's Talk About Your Accessibility Needs",
+  "paragraph_3": "Whether you need a managed accessibility service, a compliance platform, or expert consulting, we're here to help. Tell us about your project and we'll get back to you within one business day.",
+  "heading_4": "Thank you for reaching out",
+  "paragraph_5": "We've received your inquiry and will get back to you within one business day. In the meantime, feel free to explore our products.",
+  "href_6": "/a3s",
+  "text_7": "Explore A3S",
+  "href_8": "/manage",
+  "text_9": "Explore P15R",
+  "heading_10": "Request a Consultation",
+  "paragraph_11": "Fill out the form below and our team will reach out to discuss your accessibility goals.",
+  "paragraph_12": "indicates a required field.",
+  "text_13": "First name ",
+  "placeholder_14": "Jane",
+  "text_15": "Last name ",
+  "placeholder_16": "Smith",
+  "text_17": "Work email ",
+  "placeholder_18": "jane@organization.gov",
+  "text_19": "Phone number ",
+  "text_20": "(optional)",
+  "placeholder_21": "(555) 123-4567",
+  "text_22": "Organization ",
+  "placeholder_23": "City of Springfield",
+  "text_24": "Organization type ",
+  "text_25": "(optional)",
+  "aria_label_26": "Organization type",
+  "placeholder_27": "Select type",
+  "text_28": "Service interested in",
+  "aria_label_29": "Service interested in",
+  "placeholder_30": "Select a service",
+  "text_31": "Project budget ",
+  "text_32": "(optional)",
+  "aria_label_33": "Project budget",
+  "placeholder_34": "Select budget range",
+  "text_35": "Website URL ",
+  "text_36": "(optional)",
+  "placeholder_37": "https://www.example.gov",
+  "text_38": "Tell us about your project",
+  "placeholder_39": "Describe your accessibility needs, timeline, number of pages/applications, or any specific compliance requirements...",
+  "text_40": "Sending...",
+  "text_41": "Send Inquiry",
+  "heading_42": "Get in Touch",
+  "heading_43": "Explore Our Services",
+  "href_44": "/a3s",
+  "paragraph_45": "A3S",
+  "paragraph_46": "Managed accessibility service",
+  "href_47": "/manage",
+  "paragraph_48": "P15R",
+  "paragraph_49": "Accessibility Ops Without Chaos",
+  "paragraph_50": "Response time",
+  "paragraph_51": "We typically respond within one business day. For urgent accessibility needs, mention it in your message and we'll prioritize your request."
+}

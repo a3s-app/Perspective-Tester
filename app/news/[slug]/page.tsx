@@ -1,15 +1,14 @@
+import { getSettings } from "@/cms/server";
+import { imageURL } from "@/cms/content-utils";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { NewsArticlePage } from "@/components/pro-blocks/landing-page/news-article-page";
 import { SiteShell } from "@/components/pro-blocks/landing-page/site-shell";
-import { getAllNews, getNewsBySlug } from "@/lib/news";
+import { getAllNews, getNewsBySlug } from "@/cms/articles";
 
-const SITE_URL = "https://perspectivetester.com";
-
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  return getAllNews().map((item) => ({ slug: item.slug }));
+export const revalidate = 3600;
+export async function generateStaticParams() {
+  return (await getAllNews()).map((x) => ({ slug: x.slug }));
 }
 
 export async function generateMetadata({
@@ -18,7 +17,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const item = getNewsBySlug(slug);
+  const item = await getNewsBySlug(slug);
 
   if (!item) {
     return { title: "Announcement Not Found" };
@@ -28,22 +27,30 @@ export async function generateMetadata({
   // cropped by it, so it gets the thumbnail card instead.
   const isWideHero = item.heroSize.width / item.heroSize.height >= 1.6;
 
+  const settings = await getSettings();
+  const title = item.seo?.title || item.title;
+  const description = item.seo?.description || item.description;
+  const shareImage = imageURL(item.seo?.image, item.heroImage);
   return {
-    title: item.title,
-    description: item.description,
-    keywords: item.tags,
+    robots: {
+      index: !(item.seo?.noIndex || settings.seo?.noIndex),
+      follow: true,
+    },
+    title,
+    description,
+    keywords: item.seo?.keywords || item.tags,
     alternates: {
       canonical: `/news/${item.slug}`,
     },
     openGraph: {
       type: "article",
-      title: `${item.title} | Perspective Tester`,
-      description: item.description,
+      title: item.seo?.socialTitle || title,
+      description: item.seo?.socialDescription || description,
       url: `/news/${item.slug}`,
       publishedTime: item.date,
       images: [
         {
-          url: item.heroImage,
+          url: shareImage,
           width: item.heroSize.width,
           height: item.heroSize.height,
           alt: item.heroAlt,
@@ -52,9 +59,9 @@ export async function generateMetadata({
     },
     twitter: {
       card: isWideHero ? "summary_large_image" : "summary",
-      title: item.title,
-      description: item.description,
-      images: [item.heroImage],
+      title: item.seo?.socialTitle || title,
+      description: item.seo?.socialDescription || description,
+      images: [shareImage],
     },
   };
 }
@@ -65,27 +72,29 @@ export default async function Page({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const item = getNewsBySlug(slug);
+  const item = await getNewsBySlug(slug);
 
   if (!item) {
     notFound();
   }
 
+  const settings = await getSettings();
+  const SITE_URL = settings.siteURL || "https://perspectivetester.com";
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "NewsArticle",
     headline: item.title,
     description: item.description,
-    image: `${SITE_URL}${item.heroImage}`,
+    image: new URL(item.heroImage, SITE_URL).href,
     datePublished: item.date,
     author: {
       "@type": "Organization",
-      name: "Perspective Tester",
+      name: settings.name,
       url: SITE_URL,
     },
     publisher: {
       "@type": "Organization",
-      name: "Perspective Tester",
+      name: settings.name,
       url: SITE_URL,
     },
     mainEntityOfPage: {
@@ -98,7 +107,9 @@ export default async function Page({
     <SiteShell>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleJsonLd).replace(/</g, "\\u003c"),
+        }}
       />
       <NewsArticlePage item={item} />
     </SiteShell>

@@ -1,5 +1,8 @@
 "use client";
 
+import { useSection } from "@/components/cms/content-provider";
+import defaults from "@/cms/content/overlay-widgets-page.json";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tagline } from "@/components/pro-blocks/landing-page/tagline";
@@ -68,7 +71,10 @@ const records: CaseRecord[] = [
       </>
     ),
     sources: [
-      { label: "lflegal.com", href: "https://lflegal.com/2021/11/overlay-legal-update/" },
+      {
+        label: "lflegal.com",
+        href: "https://lflegal.com/2021/11/overlay-legal-update/",
+      },
       { label: "overlaytimeline.com", href: "https://overlaytimeline.com" },
     ],
   },
@@ -121,13 +127,12 @@ const records: CaseRecord[] = [
   },
 ];
 
-const stats = [
-  { value: "$1,000,000", label: "FTC penalty against a leading overlay vendor" },
-  { value: "~600", label: "Companies running widgets still sued in 2022 alone" },
-  { value: "1,000+", label: "Accessibility professionals who signed against overlays" },
-];
+const contentIcons = { Gavel };
 
 export function OverlayWidgetsPage() {
+  const content = useSection("overlay-widgets-page", defaults, contentIcons);
+  const stats = content.stats;
+
   return (
     <>
       {/* Hero */}
@@ -135,31 +140,31 @@ export function OverlayWidgetsPage() {
         <div className="container-padding-x container mx-auto">
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-8 text-center">
             <Tagline>
-              <ShieldAlert className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
-              <span className="text-foreground">The Overlay Record</span>
+              <ShieldAlert
+                className="h-3.5 w-3.5 text-primary"
+                aria-hidden="true"
+              />
+              <span className="text-foreground">{content.text_1}</span>
             </Tagline>
 
             <div className="section-title-gap-xl flex flex-col">
               <h1 className="heading-xl text-balance text-foreground">
-                Accessibility Widgets Do Not Deliver Compliance
+                {content.heading_2}
               </h1>
               <p className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground lg:text-lg">
-                Overlay widgets, including AudioEye, accessiBe, and
-                UserWay, add a toolbar over a website. They do not fix the
-                code underneath, and courts and federal regulators treat them
-                accordingly. Here is what the record actually says.
+                {content.paragraph_3}
               </p>
             </div>
 
             <div className="flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg">
-                <Link href="/a3s">
-                  See the Real Fix
+                <Link href={content.href_4}>
+                  {content.text_5}
                   <ArrowRight aria-hidden="true" />
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <Link href="/contact">Talk to Sales</Link>
+                <Link href={content.href_6}>{content.text_7}</Link>
               </Button>
             </div>
           </div>
@@ -170,13 +175,10 @@ export function OverlayWidgetsPage() {
       <section className="bg-secondary section-padding-y border-b">
         <div className="container-padding-x container mx-auto flex flex-col gap-10 md:gap-12">
           <div className="section-title-gap-lg mx-auto flex max-w-xl flex-col items-center text-center">
-            <Tagline>What Courts &amp; Regulators Said</Tagline>
-            <h2 className="heading-lg text-foreground">
-              Four Things Every Website Owner Should Know
-            </h2>
+            <Tagline>{content.text_8}</Tagline>
+            <h2 className="heading-lg text-foreground">{content.heading_9}</h2>
             <p className="text-muted-foreground text-base">
-              A widget is a subscription, not a shield. Every one of these
-              involved a site that was running an overlay.
+              {content.paragraph_10}
             </p>
           </div>
 
@@ -192,7 +194,8 @@ export function OverlayWidgetsPage() {
                       <record.icon className="text-primary h-5 w-5" />
                     </div>
                     <span className="text-primary text-xs font-semibold uppercase tracking-wider">
-                      Record {record.number}
+                      {content.text_11}
+                      {record.number}
                     </span>
                   </div>
 
@@ -263,21 +266,18 @@ export function OverlayWidgetsPage() {
           <div className="bg-foreground mx-auto flex max-w-5xl flex-col gap-6 rounded-2xl p-8 shadow-sm sm:p-12 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex flex-col gap-3">
               <h2 className="text-background text-2xl font-semibold sm:text-3xl">
-                The law measures your actual website, not your vendor invoice.
+                {content.heading_12}
               </h2>
               <p className="text-background/70 max-w-2xl text-sm leading-relaxed sm:text-base">
-                Compliance requires human testing by accessibility specialists
-                and fixes to the underlying code. That is exactly what
-                Perspective Tester&rsquo;s A3S program provides.
+                {content.paragraph_13}
               </p>
               <div className="mt-2 flex flex-wrap gap-x-5 gap-y-2">
-                {[
-                  "IAAP-certified manual testing",
-                  "Real code remediation",
-                  "VPAT & legal documentation",
-                ].map((item) => (
+                {content.items_14.map((item) => (
                   <div key={item} className="flex items-center gap-2">
-                    <CheckCircle2 className="text-background/80 h-4 w-4 shrink-0" aria-hidden="true" />
+                    <CheckCircle2
+                      className="text-background/80 h-4 w-4 shrink-0"
+                      aria-hidden="true"
+                    />
                     <span className="text-background/80 text-sm">{item}</span>
                   </div>
                 ))}
@@ -289,8 +289,8 @@ export function OverlayWidgetsPage() {
               variant="secondary"
               className="shrink-0 focus-visible:ring-background focus-visible:ring-offset-foreground"
             >
-              <Link href="/a3s">
-                Explore A3S
+              <Link href={content.href_15}>
+                {content.text_16}
                 <ArrowRight aria-hidden="true" />
               </Link>
             </Button>

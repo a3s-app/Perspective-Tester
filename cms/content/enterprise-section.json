@@ -1,0 +1,40 @@
+{
+  "bulletPoints": [
+    "WCAG 2.2 compliance tracking",
+    "Accessibility testing with assistive technologies",
+    "Centralized reporting",
+    "Enterprise support"
+  ],
+  "processSteps": [
+    {
+      "icon": "Search",
+      "label": "Audit",
+      "description": "Full-site accessibility audit with assistive technology testing",
+      "color": "bg-blue-500"
+    },
+    {
+      "icon": "FileText",
+      "label": "Report",
+      "description": "Detailed WCAG 2.2 compliance report with prioritized issues",
+      "color": "bg-amber-500"
+    },
+    {
+      "icon": "Wrench",
+      "label": "Remediate",
+      "description": "Expert-led remediation with code-level fixes and guidance",
+      "color": "bg-violet-500"
+    },
+    {
+      "icon": "ShieldCheck",
+      "label": "Protect",
+      "description": "Ongoing monitoring and legal protection guarantee",
+      "color": "bg-emerald-500"
+    }
+  ],
+  "text_1": "Enterprise",
+  "heading_2": "Built for Enterprise Accessibility Programs",
+  "paragraph_3": "Perspective Tester helps large organizations manage accessibility compliance across multiple products, teams, and digital experiences.",
+  "href_4": "/contact",
+  "text_5": "Contact Enterprise Team",
+  "text_6": "Step "
+}

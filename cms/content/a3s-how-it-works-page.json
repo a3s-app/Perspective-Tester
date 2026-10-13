@@ -1,0 +1,54 @@
+{
+  "startingPoints": [
+    {
+      "title": "You have an ACR",
+      "icon": "FileCheck",
+      "lead": "We start from your existing report.",
+      "questions": ["When was it created?", "Has your site changed since then?"]
+    },
+    {
+      "title": "You don't have an ACR yet",
+      "icon": "FilePlus",
+      "lead": "Your efforts don't go to waste.",
+      "questions": [
+        "Has anyone tested the work you've already done?",
+        "If someone asked for proof of conformance, what would you share?"
+      ]
+    }
+  ],
+  "afterCompliance": [
+    "We set up monitoring for your site and review it every month.",
+    "New issues and regressions are logged, prioritized and fixed.",
+    "Your documentation is kept current with the site."
+  ],
+  "vendors": [
+    "We contact the vendor directly with a clear description of each issue and how to fix it.",
+    "We track each issue until it is resolved and verified.",
+    "Everyone involved works from the same record."
+  ],
+  "tracking": [
+    "Every issue is recorded with its status, owner and date.",
+    "You receive a monthly progress report.",
+    "Your records provide a documented history of compliance."
+  ],
+  "href_1": "/a3s",
+  "text_2": "A3S",
+  "paragraph_3": "How it works",
+  "heading_4": "How A3S makes your site accessible and keeps it that way",
+  "paragraph_5": "A3S brings your website into conformance with WCAG and keeps it there. Here is what that involves, from the first assessment to ongoing monitoring.",
+  "heading_6": "Where you are today",
+  "paragraph_7": "Most organizations we work with already have some accessibility work in place, such as fixes made over time, an accessibility plugin or an existing ACR. A3S is the missing piece: we validate what you already have, close the gaps and keep it documented.",
+  "paragraph_8": "Ask yourself",
+  "paragraph_9": "If you're not sure of the answers, that's where A3S comes in.",
+  "title_10": "Our process",
+  "paragraph_11": "We start by reviewing your site and agreeing on what is in scope. Certified specialists then manually test it with assistive technology, and we fix the issues we find, most serious first. Once every fix has been retested, we document your site's conformance in an ACR. From then on, we monitor your site every month so it stays that way.",
+  "href_12": "https://www.a3s.app/program",
+  "text_13": "See the full process on a3s.app",
+  "text_14": "(opens in a new tab)",
+  "title_15": "After your site is compliant",
+  "paragraph_16": "An ACR reflects your site on the date it was tested. New pages, documents and system updates can introduce new issues, so conformance has to be maintained.",
+  "title_17": "Working with your vendors",
+  "paragraph_18": "Some issues sit in systems managed by others, such as your CMS provider. We handle that communication for you.",
+  "title_19": "Tracking and reporting",
+  "paragraph_20": "We keep track of everything. Every issue, fix and retest is documented in one clear, organized record that you can share with anyone who asks."
+}

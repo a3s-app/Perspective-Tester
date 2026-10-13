@@ -1,13 +1,15 @@
 "use client";
 
+import { useSection } from "@/components/cms/content-provider";
+import defaults from "@/cms/content/video-showcase-section.json";
+
 import { Tagline } from "@/components/pro-blocks/landing-page/tagline";
 import { FileText, PlayCircle } from "lucide-react";
-import {
-  homepageVideos as videos,
-  type HomepageVideo,
-} from "@/lib/video-alternatives";
+import type { HomepageVideo } from "@/lib/video-alternatives";
 
 function VideoEmbed({ id, title }: { id: string; title: string }) {
+  const content = useSection("video-showcase-section", defaults);
+
   return (
     <div className="aspect-video overflow-hidden rounded-xl border bg-secondary">
       <iframe
@@ -24,6 +26,8 @@ function VideoEmbed({ id, title }: { id: string; title: string }) {
 }
 
 function TextAlternative({ video }: { video: HomepageVideo }) {
+  const content = useSection("video-showcase-section", defaults);
+
   if (!video.alternative) return null;
 
   return (
@@ -33,14 +37,16 @@ function TextAlternative({ video }: { video: HomepageVideo }) {
     >
       <summary className="text-primary flex cursor-pointer items-center gap-1.5 px-3 py-2 font-medium hover:underline">
         <FileText className="h-4 w-4 shrink-0" aria-hidden="true" />
-        Transcript and visual description
+        {content.text_1}
         <span className="sr-only">: {video.title}</span>
       </summary>
       <div className="text-muted-foreground flex flex-col gap-2 border-t px-3 py-3 leading-relaxed">
         {video.alternative.map((line, index) =>
           line.kind === "speech" ? (
             <p key={index}>
-              <span className="text-foreground font-semibold">{line.speaker}:</span>{" "}
+              <span className="text-foreground font-semibold">
+                {line.speaker}:
+              </span>{" "}
               {line.text}
             </p>
           ) : (
@@ -55,6 +61,9 @@ function TextAlternative({ video }: { video: HomepageVideo }) {
 }
 
 export function VideoShowcaseSection() {
+  const content = useSection("video-showcase-section", defaults);
+  const videos = content.videos as HomepageVideo[];
+
   const [featuredVideo, ...secondaryVideos] = videos;
 
   return (
@@ -62,15 +71,15 @@ export function VideoShowcaseSection() {
       <div className="container-padding-x container mx-auto flex flex-col gap-10 md:gap-12">
         <div className="section-title-gap-lg mx-auto flex max-w-3xl flex-col items-center text-center">
           <Tagline>
-            <PlayCircle className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
-            <span className="text-foreground">Video Library</span>
+            <PlayCircle
+              className="h-3.5 w-3.5 text-primary"
+              aria-hidden="true"
+            />
+            <span className="text-foreground">{content.text_2}</span>
           </Tagline>
-          <h2 className="heading-lg text-foreground">
-            Accessibility Stories in Motion
-          </h2>
+          <h2 className="heading-lg text-foreground">{content.heading_3}</h2>
           <p className="text-muted-foreground text-base">
-            Watch how Perspective Tester brings engineering equity to digital
-            experiences with practical, human-centered accessibility work.
+            {content.paragraph_4}
           </p>
         </div>
 
@@ -82,7 +91,7 @@ export function VideoShowcaseSection() {
             <VideoEmbed id={featuredVideo.id} title={featuredVideo.title} />
             <div className="mt-4 flex flex-col gap-2">
               <p className="text-primary text-xs font-semibold tracking-wide uppercase">
-                Main Video
+                {content.paragraph_5}
               </p>
               <h3
                 id={`video-card-${featuredVideo.id}`}
@@ -121,7 +130,6 @@ export function VideoShowcaseSection() {
             ))}
           </div>
         </div>
-
       </div>
     </section>
   );

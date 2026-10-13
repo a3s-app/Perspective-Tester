@@ -1,3 +1,8 @@
+"use client";
+
+import { useSection } from "@/components/cms/content-provider";
+import defaults from "@/cms/content/kit-carson-county-case-study.json";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check, Quote } from "lucide-react";
@@ -9,16 +14,10 @@ import {
   HeroArtwork,
 } from "@/components/pro-blocks/landing-page/kit-carson-case-study-art";
 
-const outcomes = [
-  "Compliance demonstrated every month",
-  "No more guessing whether the work is good enough",
-  "Continuous documented record of progress",
-  "Accessibility no longer Todd's solo burden",
-  "Compliant with Colorado's accessibility law and federal Title II requirements",
-  "Critical barriers fixed first, everything else follows",
-] as const;
-
 export function KitCarsonCountyCaseStudy() {
+  const content = useSection("kit-carson-county-case-study", defaults);
+  const outcomes = content.outcomes;
+
   return (
     <article className="overflow-clip bg-background">
       <header className="relative isolate min-h-[calc(100dvh-4.25rem)] overflow-hidden bg-[oklch(0.13_0.035_255)] text-white">
@@ -27,42 +26,32 @@ export function KitCarsonCountyCaseStudy() {
           <div className="max-w-5xl">
             <div className="mb-7 flex items-center gap-4">
               <a
-                href="https://kitcarsoncounty.colorado.gov/"
+                href={content.href_1}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="shrink-0 rounded-lg bg-white/96 p-1.5 shadow-lg transition-transform hover:scale-[1.03] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-                aria-label="Visit the Kit Carson County official website"
+                aria-label={content.aria_label_2}
               >
                 <Image
-                  src={assetPath(
-                    "/case-studies/kit-carson-county/county-logo.png",
-                  )}
-                  alt="Kit Carson County official logo"
+                  src={assetPath(content.image_3)}
+                  alt={content.alt_4}
                   width={263}
                   height={200}
                   className="h-11 w-auto rounded-sm sm:h-12"
                 />
               </a>
               <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-medium text-white/78">
-                <span>Kit Carson County, Colorado</span>
+                <span>{content.text_5}</span>
                 <span className="h-4 w-px bg-white/30" aria-hidden="true" />
-                <span>A3S case study</span>
+                <span>{content.text_6}</span>
               </div>
             </div>
             <h1 className="max-w-[21ch] text-balance text-[clamp(2.5rem,5.6vw,5.75rem)] font-semibold leading-[0.98] tracking-[-0.035em]">
-              “I feel like I&apos;m trying to keep the Titanic afloat with a
-              spoon.”
+              {content.heading_7}
             </h1>
             <div className="mt-6 max-w-2xl space-y-4 text-base leading-relaxed text-white/76 sm:text-lg">
-              <p>
-                That&apos;s Todd Holmes, IT support specialist at Kit Carson
-                County. His title on paper: one. His actual job: five public
-                systems.
-              </p>
-              <p>
-                When Colorado made website accessibility the law, it landed on
-                his desk too.
-              </p>
+              <p>{content.paragraph_8}</p>
+              <p>{content.paragraph_9}</p>
             </div>
           </div>
         </div>
@@ -72,15 +61,13 @@ export function KitCarsonCountyCaseStudy() {
         <div className="container-padding-x container mx-auto">
           <div className="mx-auto max-w-4xl">
             <h2 className="max-w-3xl text-balance text-3xl font-semibold tracking-[-0.025em] text-foreground sm:text-4xl lg:text-5xl">
-              He was already doing real accessibility work.
+              {content.heading_10}
             </h2>
             <p className="mt-7 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Todd tagged every site image by hand. He added automated PDF
-              tagging. He held back documents that failed quality checks. He was
-              doing genuinely good work.
+              {content.paragraph_11}
             </p>
             <p className="mt-6 text-2xl font-semibold tracking-[-0.02em] text-foreground sm:text-3xl">
-              But he had no idea if it was enough.
+              {content.paragraph_12}
             </p>
 
             <blockquote className="mt-12 border-t border-[oklch(0.48_0.13_42)] pt-8">
@@ -89,17 +76,15 @@ export function KitCarsonCountyCaseStudy() {
                 aria-hidden="true"
               />
               <p className="mt-5 max-w-4xl text-balance text-2xl font-semibold leading-tight tracking-[-0.02em] text-foreground sm:text-3xl">
-                “Are we there? No. I&apos;m doing the best I can. Is it going to
-                be good enough? I don&apos;t know.”
+                {content.paragraph_13}
               </p>
               <footer className="mt-5 text-sm font-medium text-muted-foreground">
-                Todd Holmes, IT Support Specialist, Kit Carson County
+                {content.text_14}
               </footer>
             </blockquote>
 
             <p className="mt-8 max-w-3xl text-lg font-medium leading-relaxed text-foreground">
-              Not neglect. A capable person doing real work with no clarity on
-              whether he was meeting Colorado&apos;s requirements.
+              {content.paragraph_15}
             </p>
           </div>
         </div>
@@ -110,43 +95,37 @@ export function KitCarsonCountyCaseStudy() {
           <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1.08fr_.92fr] lg:items-start lg:gap-16">
             <div>
               <h2 className="text-balance text-3xl font-semibold tracking-[-0.025em] text-foreground sm:text-4xl lg:text-5xl">
-                Why he was stuck
+                {content.heading_16}
               </h2>
 
               <p className="mt-7 max-w-2xl text-xl font-semibold leading-snug text-foreground sm:text-2xl">
-                Auditing a site and fixing what it finds is expensive. And it
-                is never a one-time job.
+                {content.paragraph_17}
               </p>
               <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-                Websites change. New content gets added. Pages get updated.
-                Every change has the potential to introduce a new barrier, so the work has to 
-                keep going.
+                {content.paragraph_18}
               </p>
               <p className="mt-7 text-2xl font-semibold tracking-[-0.02em] text-foreground sm:text-3xl">
-                He couldn&apos;t afford that cycle.
+                {content.paragraph_19}
               </p>
 
               <blockquote className="mt-10 rounded-2xl border border-border bg-secondary p-6 sm:p-8">
                 <p className="text-xl font-semibold leading-snug text-foreground sm:text-2xl">
-                  “The cost of it was just ridiculous. So not doing that. At
-                  that point, it&apos;s cheaper to pay the fine.”
+                  {content.paragraph_20}
                 </p>
                 <footer className="mt-4 text-sm text-muted-foreground">
-                  Todd, after pricing traditional solutions
+                  {content.text_21}
                 </footer>
               </blockquote>
 
               <div className="mt-14 border-t-2 border-[oklch(0.48_0.13_42)] pt-8">
                 <h3 className="text-2xl font-semibold tracking-[-0.025em] text-foreground sm:text-3xl">
-                  The shift
+                  {content.heading_22}
                 </h3>
                 <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-                  A3S is a monthly program that handles continuous auditing,
-                  remediating, and validating. Every month. Built into the
-                  operating budget.
+                  {content.paragraph_23}
                 </p>
                 <p className="mt-6 max-w-2xl text-xl font-semibold leading-snug text-foreground sm:text-2xl">
-                  Todd got continuous compliance without breaking the bank.
+                  {content.paragraph_24}
                 </p>
               </div>
             </div>
@@ -163,18 +142,13 @@ export function KitCarsonCountyCaseStudy() {
           <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[.9fr_1.1fr] lg:items-center lg:gap-16">
             <div>
               <h2 className="text-balance text-3xl font-semibold tracking-[-0.025em] sm:text-4xl lg:text-5xl">
-                Todd still runs IT for the whole county. Accessibility just
-                isn&apos;t his alone anymore.
+                {content.heading_25}
               </h2>
               <p className="mt-6 text-base leading-relaxed text-white/70 sm:text-lg">
-                A3S runs the county&apos;s accessibility audit cycle every
-                month. Each cycle produces the same evidence: tested pages,
-                barriers found, fixes applied, verification complete.
+                {content.paragraph_26}
               </p>
               <p className="mt-6 text-base font-semibold leading-relaxed text-[oklch(0.78_0.12_52)] sm:text-lg">
-                That documented record is the proof Colorado requires.
-                Todd&apos;s answer changed from “I don&apos;t know” to “I have
-                proof.”
+                {content.paragraph_27}
               </p>
             </div>
             <EvidenceTrail />
@@ -187,10 +161,8 @@ export function KitCarsonCountyCaseStudy() {
           <div className="mx-auto max-w-6xl overflow-hidden rounded-2xl bg-[oklch(0.18_0.035_255)] text-white">
             <figure className="relative aspect-[16/9] overflow-hidden sm:aspect-[5/2] lg:aspect-[3/1]">
               <Image
-                src={assetPath(
-                  "/case-studies/kit-carson-county/county-sunset-prairie.webp",
-                )}
-                alt="Sunset over an open prairie of wild sunflowers"
+                src={assetPath(content.image_28)}
+                alt={content.alt_29}
                 fill
                 sizes="(min-width: 1200px) 1152px, 100vw"
                 className="object-cover object-center transition-transform duration-700 hover:scale-[1.025]"
@@ -203,13 +175,13 @@ export function KitCarsonCountyCaseStudy() {
                 aria-hidden="true"
               />
               <p className="mt-6 text-sm font-semibold uppercase tracking-[0.12em] text-white/58">
-                In his own words
+                {content.paragraph_30}
               </p>
               <p className="mt-4 max-w-3xl text-balance text-3xl font-semibold leading-tight tracking-[-0.025em] sm:text-4xl">
-                “Don&apos;t know where I would be without you.”
+                {content.paragraph_31}
               </p>
               <footer className="mt-7 text-sm font-medium text-white/68">
-                Todd Holmes, Kit Carson County
+                {content.text_32}
               </footer>
             </blockquote>
           </div>
@@ -221,13 +193,10 @@ export function KitCarsonCountyCaseStudy() {
           <div className="mx-auto max-w-6xl">
             <div className="max-w-3xl">
               <h2 className="text-balance text-3xl font-semibold tracking-[-0.025em] text-foreground sm:text-4xl lg:text-5xl">
-                Continuous compliance. One clear record.
+                {content.heading_33}
               </h2>
               <p className="mt-6 text-base leading-relaxed text-muted-foreground sm:text-lg">
-                Colorado and Title II both require continuous compliance and
-                documented proof. Most counties are doing the work but
-                struggling to prove it meets either standard. Kit Carson County
-                now has evidence every month.
+                {content.paragraph_34}
               </p>
             </div>
 
@@ -254,23 +223,20 @@ export function KitCarsonCountyCaseStudy() {
           <div className="mx-auto max-w-6xl">
             <div className="max-w-3xl">
               <h2 className="text-balance text-3xl font-semibold tracking-[-0.025em] text-foreground sm:text-4xl lg:text-5xl">
-                Where your county stands
+                {content.heading_35}
               </h2>
               <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
-                Both Colorado penalties and Title II violations carry real
-                costs. Most counties are caught between doing the work and
-                proving they&apos;re compliant. Kit Carson County demonstrates
-                compliance to both.
+                {content.paragraph_36}
               </p>
             </div>
 
             <div className="mt-10 grid gap-8 rounded-2xl bg-[oklch(0.18_0.035_255)] p-6 text-white sm:p-10 lg:grid-cols-[1fr_auto] lg:items-end lg:gap-16">
               <div>
                 <p className="text-2xl font-semibold tracking-[-0.02em] sm:text-3xl">
-                  We&apos;ll spend an hour looking at your site, at no cost.
+                  {content.paragraph_37}
                 </p>
                 <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/70">
-                  You will see exactly where you stand.
+                  {content.paragraph_38}
                 </p>
               </div>
               <Button
@@ -278,32 +244,32 @@ export function KitCarsonCountyCaseStudy() {
                 size="lg"
                 className="w-full whitespace-nowrap bg-white text-[oklch(0.18_0.035_255)] hover:bg-white/90 focus-visible:ring-white lg:w-auto"
               >
-                <Link href="/contact">
-                  Check my site
+                <Link href={content.href_39}>
+                  {content.text_40}
                   <ArrowRight aria-hidden="true" />
                 </Link>
               </Button>
             </div>
 
             <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
-              <span>Legal references:</span>
+              <span>{content.text_41}</span>
               <a
-                href="https://www.ada.gov/resources/web-rule-first-steps/"
+                href={content.href_42}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="rounded-sm font-medium text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground"
               >
-                DOJ Title II deadlines
-                <span className="sr-only"> (opens in a new tab)</span>
+                {content.text_43}
+                <span className="sr-only"> {content.text_44}</span>
               </a>
               <a
-                href="https://oit.colorado.gov/accessibility-law"
+                href={content.href_45}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="rounded-sm font-medium text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground"
               >
-                Colorado accessibility law
-                <span className="sr-only"> (opens in a new tab)</span>
+                {content.text_46}
+                <span className="sr-only"> {content.text_47}</span>
               </a>
             </div>
           </div>
