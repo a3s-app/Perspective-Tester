@@ -1,6 +1,7 @@
 import Link from "next/link";
 import {
   ArrowDown,
+  ArrowLeftRight,
   ArrowRight,
   ArrowUpRight,
   BookOpen,
@@ -10,6 +11,7 @@ import {
   Code2,
   Eye,
   Image as ImageIcon,
+  ListChecks,
   ScanLine,
 } from "lucide-react";
 import { CoverageExplorer } from "./coverage-explorer";
@@ -157,10 +159,18 @@ export function AccessibilityTestingGuide() {
       <nav aria-label="On this page" className={styles.pageNav}>
         <div className={styles.container}>
           <span>In this guide</span>
-          <a href="#coverage">Issue coverage</a>
-          <a href="#tool-differences">Tool differences</a>
-          <a href="#testing-workflow">Testing workflow</a>
-          <a href="#sources">Sources</a>
+          <a href="#coverage">
+            <ScanLine size={16} aria-hidden="true" /> Issue coverage
+          </a>
+          <a href="#tool-differences">
+            <ArrowLeftRight size={16} aria-hidden="true" /> Tool differences
+          </a>
+          <a href="#testing-workflow">
+            <ListChecks size={16} aria-hidden="true" /> Testing workflow
+          </a>
+          <a href="#sources">
+            <BookOpen size={16} aria-hidden="true" /> Sources
+          </a>
         </div>
       </nav>
 
