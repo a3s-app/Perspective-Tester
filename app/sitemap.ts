@@ -11,9 +11,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
   if (settings.seo?.noIndex) return [];
   const base = settings.siteURL || "https://perspectivetester.com";
+  const guidePath = "/accessibility-testing-guide";
   return [
+    { url: new URL(guidePath, base).href, priority: 0.8 },
     ...pages
-      .filter((p) => p.path && !p.noIndex)
+      .filter((p) => p.path && !p.noIndex && p.path !== guidePath)
       .map((p) => ({
         url: new URL(p.path!, base).href,
         lastModified: p._updatedAt,

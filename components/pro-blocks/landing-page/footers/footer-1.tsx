@@ -91,11 +91,18 @@ function FooterLinks({
   );
 }
 
-export function Footer1() {
+export function Footer1({ hideCopyrightYear = false }: { hideCopyrightYear?: boolean }) {
   const { contactEmail: CONTACT_EMAIL } = useSiteSettings();
   const content = useSection("footer-1", defaults, contentIcons);
   const PRODUCT_LINKS: FooterLink[] = content.PRODUCT_LINKS;
-  const COMPANY_LINKS: FooterLink[] = content.COMPANY_LINKS;
+  const COMPANY_LINKS: FooterLink[] = content.COMPANY_LINKS.some(
+    (link) => link.href === "/accessibility-testing-guide",
+  )
+    ? content.COMPANY_LINKS
+    : [
+        ...content.COMPANY_LINKS,
+        { label: "Accessibility Testing Guide", href: "/accessibility-testing-guide", icon: BookOpen },
+      ];
   const LEGAL_LINKS: FooterLink[] = content.LEGAL_LINKS;
   const PLATFORM_LINKS: FooterLink[] = content.PLATFORM_LINKS;
   const SOCIAL_LINKS = content.SOCIAL_LINKS;
@@ -188,7 +195,7 @@ export function Footer1() {
 
         <div className="flex flex-col gap-3 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>
-            &copy; {new Date().getFullYear()} {content.paragraph_18}
+            &copy; {hideCopyrightYear ? null : `${new Date().getFullYear()} `}{content.paragraph_18}
           </p>
           <p className="inline-flex items-center gap-2">
             <ShieldCheck
