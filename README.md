@@ -36,7 +36,13 @@ The current content is already imported: 15 pages, 26 sections, 3 blog posts, 2 
 
 To edit a page, open **Pages**, choose the page, then open the relevant **Page sections** reference. Publish the section to make its edit public. Publish the page itself when changing its path, section order, rich text, or search settings. Shared sections update every page that uses them. A new page can use existing section designs or its own rich text. New visual designs still require a component and matching schema.
 
-Drafts stay private until published. Sanity Studio provides draft editing; this integration does not add a visual draft-preview mode to the public website.
+Drafts stay private until published. To show someone an unpublished blog post or news article as it will look on the site, send them a preview link:
+
+```text
+https://www.perspectivetester.com/api/preview?secret=<SANITY_PREVIEW_SECRET>&slug=<post-slug>
+```
+
+Add `&type=news` for a news article. The link shows a "Draft preview" banner, is marked `noindex`, and lasts for that browser session; **Exit preview** returns to the public site. Anyone holding the secret can see every draft, so share it only with reviewers and change it if it leaks. Unpublished posts do not appear in the blog list, sitemap or RSS feed.
 
 ## Local development
 
@@ -84,8 +90,9 @@ Deploy the website as a Next.js application. GitHub Pages static export cannot r
 1. Connect the website repository to a Vercel project. Use this app directory as the root, the **Next.js** framework, and Node.js 22.18+. `vercel.json` supplies the pnpm install and build commands.
 2. Set `NEXT_PUBLIC_SANITY_PROJECT_ID=j6m3ma08`, `NEXT_PUBLIC_SANITY_DATASET=production`, and `NEXT_PUBLIC_SITE_URL` to the intended public website URL.
 3. Add a long random `SANITY_REVALIDATE_SECRET` as a server-only environment variable. Use the same value in the Sanity webhook below.
-4. Deploy the website. Configure its final public URL in **Site settings** as well; it is used in sitemap, RSS and structured data.
-5. In [Sanity project settings](https://www.sanity.io/manage/project/j6m3ma08), create one GROQ-powered webhook for `production`, using the configuration below.
+4. For draft preview links, add `SANITY_PREVIEW_SECRET` (a long random value) and `SANITY_VIEWER_TOKEN` (a **Viewer** API token from the Sanity project's API settings), both server-only.
+5. Deploy the website. Configure its final public URL in **Site settings** as well; it is used in sitemap, RSS and structured data.
+6. In [Sanity project settings](https://www.sanity.io/manage/project/j6m3ma08), create one GROQ-powered webhook for `production`, using the configuration below.
 
 Use the production webhook configuration below, and enable it once the deployed website includes the refresh endpoint. The endpoint must be reachable by Sanity; if deployment protection is enabled, configure access for the webhook.
 

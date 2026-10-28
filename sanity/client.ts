@@ -13,3 +13,10 @@ export const client = createClient({
 });
 // ISR already caches these responses. Regeneration must read the latest publish.
 export const publishedClient = client.withConfig({ useCdn: false });
+// Draft preview only. The token is server-side and never sent to the browser.
+export const previewClient = client.withConfig({
+  useCdn: false,
+  perspective: "drafts",
+  token: process.env.SANITY_VIEWER_TOKEN,
+  stega: false,
+});

@@ -2,6 +2,8 @@ import { getSettings } from "@/cms/server";
 import { imageURL } from "@/cms/content-utils";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { draftMode } from "next/headers";
+import { DraftBanner } from "@/components/cms/draft-banner";
 import { BlogPostPage } from "@/components/pro-blocks/landing-page/blog-post-page";
 import { SiteShell } from "@/components/pro-blocks/landing-page/site-shell";
 import { getAllPosts, getPostBySlug } from "@/cms/articles";
@@ -29,7 +31,7 @@ export async function generateMetadata({
   const shareImage = imageURL(post.seo?.image, post.heroImage);
   return {
     robots: {
-      index: !(post.seo?.noIndex || settings.seo?.noIndex),
+      index: !(await draftMode()).isEnabled && !(post.seo?.noIndex || settings.seo?.noIndex),
       follow: true,
     },
     title,
@@ -96,6 +98,7 @@ export default async function Page({
 
   return (
     <SiteShell>
+      <DraftBanner path={`/blog/${post.slug}`} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

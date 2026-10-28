@@ -2,6 +2,8 @@ import { getSettings } from "@/cms/server";
 import { imageURL } from "@/cms/content-utils";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { draftMode } from "next/headers";
+import { DraftBanner } from "@/components/cms/draft-banner";
 import { NewsArticlePage } from "@/components/pro-blocks/landing-page/news-article-page";
 import { SiteShell } from "@/components/pro-blocks/landing-page/site-shell";
 import { getAllNews, getNewsBySlug } from "@/cms/articles";
@@ -33,7 +35,7 @@ export async function generateMetadata({
   const shareImage = imageURL(item.seo?.image, item.heroImage);
   return {
     robots: {
-      index: !(item.seo?.noIndex || settings.seo?.noIndex),
+      index: !(await draftMode()).isEnabled && !(item.seo?.noIndex || settings.seo?.noIndex),
       follow: true,
     },
     title,
@@ -105,6 +107,7 @@ export default async function Page({
 
   return (
     <SiteShell>
+      <DraftBanner path={`/news/${item.slug}`} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

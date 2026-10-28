@@ -1,6 +1,7 @@
 import "server-only";
 import { cache } from "react";
-import { publishedClient } from "@/sanity/client";
+import { draftMode } from "next/headers";
+import { previewClient, publishedClient } from "@/sanity/client";
 import {
   POSTS_QUERY,
   POST_QUERY,
@@ -82,12 +83,21 @@ export const getAllPosts = cache(async () =>
     )
   ).map(blogPost),
 );
+// Draft mode is switched on only by /api/preview, which checks the secret.
+const previewing = async () =>
+  !!process.env.SANITY_VIEWER_TOKEN && (await draftMode()).isEnabled;
 export const getPostBySlug = cache(async (slug: string) => {
-  const doc = await publishedClient.fetch<POST_QUERY_RESULT>(
-    POST_QUERY,
-    { slug },
-    cacheOptions([`post:${slug}`, "authors"]),
-  );
+  const doc = (await previewing())
+    ? await previewClient.fetch<POST_QUERY_RESULT>(
+        POST_QUERY,
+        { slug },
+        { cache: "no-store" },
+      )
+    : await publishedClient.fetch<POST_QUERY_RESULT>(
+        POST_QUERY,
+        { slug },
+        cacheOptions([`post:${slug}`, "authors"]),
+      );
   return doc ? blogPost(doc) : null;
 });
 export const getAllNews = cache(async () =>
@@ -100,10 +110,16 @@ export const getAllNews = cache(async () =>
   ).map(newsItem),
 );
 export const getNewsBySlug = cache(async (slug: string) => {
-  const doc = await publishedClient.fetch<NEWS_ITEM_QUERY_RESULT>(
-    NEWS_ITEM_QUERY,
-    { slug },
-    cacheOptions([`news:${slug}`]),
-  );
+  const doc = (await previewing())
+    ? await previewClient.fetch<NEWS_ITEM_QUERY_RESULT>(
+        NEWS_ITEM_QUERY,
+        { slug },
+        { cache: "no-store" },
+      )
+    : await publishedClient.fetch<NEWS_ITEM_QUERY_RESULT>(
+        NEWS_ITEM_QUERY,
+        { slug },
+        cacheOptions([`news:${slug}`]),
+      );
   return doc ? newsItem(doc) : null;
 });
