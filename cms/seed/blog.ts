@@ -33,7 +33,7 @@ export const blogPosts: BlogPost[] = [
     description:
       "If you bid on government work, accessibility isn't just about what you build. It's about every document you hand over in the submission process. That can be easy to forget when you're heads-down, ensuring every requirement is met during your response, and it's exactly where great vendors lose points.",
     author: {
-      name: "Justin Sales",
+      name: "Justin Salas",
       role: "Accounts Manager",
       photo: "/justin-sales.jpg",
     },
@@ -118,7 +118,7 @@ export const blogPosts: BlogPost[] = [
     description:
       "A Texas State Library webinar on ADA Title II compliance made one thing clear: compliance is a program you run, not a project you finish. Notes on who owns the risk, why PDFs are the highest-cost area, how the 35.201 exceptions really work, and the lawsuit that could reinstate the original 2026 deadline.",
     author: {
-      name: "Justin Sales",
+      name: "Justin Salas",
       role: "Accounts Manager",
       photo: "/justin-sales.jpg",
     },
@@ -275,7 +275,7 @@ export const blogPosts: BlogPost[] = [
     description:
       "Neuroinclusive design in physical spaces and WCAG on the web turn out to be the same problem. A reflection on a Mid-Atlantic ADA Center webinar and the vocabulary that makes our accessibility work obvious.",
     author: {
-      name: "Justin Sales",
+      name: "Justin Salas",
       role: "Accounts Manager",
       photo: "/justin-sales.jpg",
     },
