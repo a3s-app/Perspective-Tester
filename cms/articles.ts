@@ -7,12 +7,16 @@ import {
   POST_QUERY,
   NEWS_QUERY,
   NEWS_ITEM_QUERY,
+  GUIDES_QUERY,
+  GUIDE_QUERY,
 } from "@/sanity/queries";
 import type {
   POST_QUERY_RESULT,
   NEWS_ITEM_QUERY_RESULT,
   POSTS_QUERY_RESULT,
   NEWS_QUERY_RESULT,
+  GUIDES_QUERY_RESULT,
+  GUIDE_QUERY_RESULT,
 } from "@/sanity.types";
 import type { BlogPost, BlogContentBlock } from "@/lib/blog";
 import type { NewsItem } from "@/lib/news";
@@ -122,4 +126,48 @@ export const getNewsBySlug = cache(async (slug: string) => {
         cacheOptions([`news:${slug}`]),
       );
   return doc ? newsItem(doc) : null;
+});
+function guide(doc: NonNullable<GUIDE_QUERY_RESULT>) {
+  return {
+    slug: doc.slug ?? "",
+    title: doc.title ?? "",
+    description: doc.description ?? "",
+    date: doc.date ?? "",
+    dateLabel: doc.date
+      ? new Date(doc.date).toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+          timeZone: "UTC",
+        })
+      : "",
+    byline: doc.byline ?? "",
+    tags: doc.tags ?? [],
+    body: doc.body ?? [],
+    seo: doc.seo,
+  };
+}
+export type Guide = ReturnType<typeof guide>;
+export const getAllGuides = cache(async () =>
+  (
+    await publishedClient.fetch<GUIDES_QUERY_RESULT>(
+      GUIDES_QUERY,
+      {},
+      cacheOptions(["guides"]),
+    )
+  ).map(guide),
+);
+export const getGuideBySlug = cache(async (slug: string) => {
+  const doc = (await previewing())
+    ? await previewClient.fetch<GUIDE_QUERY_RESULT>(
+        GUIDE_QUERY,
+        { slug },
+        { cache: "no-store" },
+      )
+    : await publishedClient.fetch<GUIDE_QUERY_RESULT>(
+        GUIDE_QUERY,
+        { slug },
+        cacheOptions([`guide:${slug}`]),
+      );
+  return doc ? guide(doc) : null;
 });

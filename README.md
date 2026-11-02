@@ -30,6 +30,7 @@ Open the hosted editor and sign in with the Sanity account that owns the project
 | Content sections | 26 designs with editable headings, paragraphs, buttons, links, images, lists, logos, testimonials, video IDs and transcripts |
 | Blog posts | Article body, author, cover image and description, date, tags, and search/social metadata |
 | News | Announcement body, cover image, date, tags, and search/social metadata |
+| Guides | Guide body with tables and checklists, byline, date, tags, and search/social metadata |
 | Authors | Author name, job title, and photo |
 
 The current content is already imported: 15 pages, 26 sections, 3 blog posts, 2 news articles, and 1 author. Original images were uploaded to Sanity. The existing visual designs remain in the website's React components; editors change their content and order in Studio.
@@ -42,7 +43,7 @@ Drafts stay private until published. To show someone an unpublished blog post or
 https://www.perspectivetester.com/api/preview?secret=<SANITY_PREVIEW_SECRET>&slug=<post-slug>
 ```
 
-Add `&type=news` for a news article. The link shows a "Draft preview" banner, is marked `noindex`, and lasts for that browser session; **Exit preview** returns to the public site. Anyone holding the secret can see every draft, so share it only with reviewers and change it if it leaks. Unpublished posts do not appear in the blog list, sitemap or RSS feed.
+Add `&type=news` for a news article or `&type=guides` for a guide. The link shows a "Draft preview" banner, is marked `noindex`, and lasts for that browser session; **Exit preview** returns to the public site. Anyone holding the secret can see every draft, so share it only with reviewers and change it if it leaks. Unpublished posts do not appear in the blog list, sitemap or RSS feed.
 
 ## Local development
 
@@ -108,7 +109,7 @@ Use the production webhook configuration below, and enable it once the deployed 
 Filter:
 
 ```groq
-coalesce(after()._type, before()._type) in ["page", "section", "siteSettings", "post", "news", "author"]
+coalesce(after()._type, before()._type) in ["page", "section", "siteSettings", "post", "news", "guide", "author"]
 && !(coalesce(after()._id, before()._id) in path("drafts.**"))
 && !(coalesce(after()._id, before()._id) in path("versions.**"))
 ```

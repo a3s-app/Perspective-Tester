@@ -43,6 +43,13 @@ export function changeTags(change: ContentChange): string[] {
           .filter((s): s is string => !!s && s.length < 240)
           .map((s) => `news:${s}`),
       ];
+    case "guide":
+      return [
+        "guides",
+        ...[change.slug, change.previousSlug]
+          .filter((s): s is string => !!s && s.length < 240)
+          .map((s) => `guide:${s}`),
+      ];
     default:
       return [];
   }

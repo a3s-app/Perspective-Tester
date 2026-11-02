@@ -70,6 +70,71 @@ export type ProductsItemLogo = {
   _type: "image";
 };
 
+export type Guide = {
+  _id: string;
+  _type: "guide";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  description?: string;
+  date?: string;
+  tags?: Array<string>;
+  seo?: Seo;
+  sourceKey?: string;
+  byline?: string;
+  body?: GuideBody;
+};
+
+export type GuideBody = Array<
+  | {
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal" | "h2" | "h3" | "blockquote";
+      listItem?: "bullet" | "number" | "check";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }
+  | ({
+      _key: string;
+    } & GuideTable)
+>;
+
+export type Seo = {
+  _type: "seo";
+  title?: string;
+  description?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  socialTitle?: string;
+  socialDescription?: string;
+  keywords?: Array<string>;
+  pageType?: "WebPage" | "Article" | "CollectionPage";
+  noIndex?: boolean;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
+
 export type News = {
   _id: string;
   _type: "news";
@@ -105,24 +170,6 @@ export type News = {
   };
 };
 
-export type Seo = {
-  _type: "seo";
-  title?: string;
-  description?: string;
-  image?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  socialTitle?: string;
-  socialDescription?: string;
-  keywords?: Array<string>;
-  pageType?: "WebPage" | "Article" | "CollectionPage";
-  noIndex?: boolean;
-};
-
 export type PortableBody = Array<{
   children?: Array<{
     marks?: Array<string>;
@@ -156,12 +203,6 @@ export type SanityImageHotspot = {
   y?: number;
   height?: number;
   width?: number;
-};
-
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
 };
 
 export type AuthorReference = {
@@ -1927,6 +1968,16 @@ export type Section_a3s_how_it_works_page = {
   paragraph_20?: string;
 };
 
+export type GuideTable = {
+  _type: "guideTable";
+  label?: string;
+  rows?: Array<{
+    cells?: Array<string>;
+    _type: "row";
+    _key: string;
+  }>;
+};
+
 export type SanityImagePaletteSwatch = {
   _type: "sanity.imagePaletteSwatch";
   background?: string;
@@ -2032,12 +2083,14 @@ export type AllSanitySchemaTypes =
   | RealEstateClientsItemLogo
   | BusinessClientsItemLogo
   | ProductsItemLogo
-  | News
+  | Guide
+  | GuideBody
   | Seo
+  | Slug
+  | News
   | PortableBody
   | SanityImageCrop
   | SanityImageHotspot
-  | Slug
   | AuthorReference
   | Post
   | Author
@@ -2071,6 +2124,7 @@ export type AllSanitySchemaTypes =
   | Section_about_page
   | Section_a3s_page
   | Section_a3s_how_it_works_page
+  | GuideTable
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
@@ -2080,7 +2134,7 @@ export type AllSanitySchemaTypes =
   | SanityImageAsset
   | Geopoint;
 
-// Source: ../Perspective-Tester/sanity/queries.ts
+// Source: ../../../../Perspective-Tester/sanity/queries.ts
 // Variable: SETTINGS_QUERY
 // Query: *[_type == "siteSettings" && _id == "siteSettings"][0]{  _id, name, description, siteURL, contactEmail, seo, keywords, socialLinks,  "sharedSectionIds": sharedSections[]._ref}
 export type SETTINGS_QUERY_RESULT = {
@@ -2095,7 +2149,7 @@ export type SETTINGS_QUERY_RESULT = {
   sharedSectionIds: Array<string> | null;
 } | null;
 
-// Source: ../Perspective-Tester/sanity/queries.ts
+// Source: ../../../../Perspective-Tester/sanity/queries.ts
 // Variable: PAGE_QUERY
 // Query: *[_type == "page" && path == $path][0]{  _id, title, path, seo, body, "sectionIds": sections[]._ref}
 export type PAGE_QUERY_RESULT = {
@@ -2107,7 +2161,7 @@ export type PAGE_QUERY_RESULT = {
   sectionIds: Array<string> | null;
 } | null;
 
-// Source: ../Perspective-Tester/sanity/queries.ts
+// Source: ../../../../Perspective-Tester/sanity/queries.ts
 // Variable: SECTION_QUERY
 // Query: *[_type == "section" && _id == $id][0]{ _id, template, content }
 export type SECTION_QUERY_RESULT = {
@@ -2222,7 +2276,7 @@ export type SECTION_QUERY_RESULT = {
   > | null;
 } | null;
 
-// Source: ../Perspective-Tester/sanity/queries.ts
+// Source: ../../../../Perspective-Tester/sanity/queries.ts
 // Variable: ROUTES_QUERY
 // Query: *[_type == "page" && defined(path)]{path, title, _updatedAt, "noIndex": seo.noIndex}
 export type ROUTES_QUERY_RESULT = Array<{
@@ -2232,7 +2286,7 @@ export type ROUTES_QUERY_RESULT = Array<{
   noIndex: boolean | null;
 }>;
 
-// Source: ../Perspective-Tester/sanity/queries.ts
+// Source: ../../../../Perspective-Tester/sanity/queries.ts
 // Variable: POSTS_QUERY
 // Query: *[_type == "post" && defined(slug.current)] | order(date desc){  _id, "slug": slug.current, title, description, date, hero, heroAlt, heroCredit, tags, body, seo,  author->{name, role, photo}}
 export type POSTS_QUERY_RESULT = Array<{
@@ -2266,7 +2320,7 @@ export type POSTS_QUERY_RESULT = Array<{
   } | null;
 }>;
 
-// Source: ../Perspective-Tester/sanity/queries.ts
+// Source: ../../../../Perspective-Tester/sanity/queries.ts
 // Variable: POST_QUERY
 // Query: *[_type == "post" && slug.current == $slug][0]{  _id, "slug": slug.current, title, description, date, hero, heroAlt, heroCredit, tags, body, seo,  author->{name, role, photo}}
 export type POST_QUERY_RESULT = {
@@ -2300,7 +2354,7 @@ export type POST_QUERY_RESULT = {
   } | null;
 } | null;
 
-// Source: ../Perspective-Tester/sanity/queries.ts
+// Source: ../../../../Perspective-Tester/sanity/queries.ts
 // Variable: NEWS_QUERY
 // Query: *[_type == "news" && defined(slug.current)] | order(date desc){  _id, "slug": slug.current, title, description, date, hero, heroAlt, heroCredit, tags, body, seo,  heroSize, heroMatte}
 export type NEWS_QUERY_RESULT = Array<{
@@ -2333,7 +2387,7 @@ export type NEWS_QUERY_RESULT = Array<{
   } | null;
 }>;
 
-// Source: ../Perspective-Tester/sanity/queries.ts
+// Source: ../../../../Perspective-Tester/sanity/queries.ts
 // Variable: NEWS_ITEM_QUERY
 // Query: *[_type == "news" && slug.current == $slug][0]{  _id, "slug": slug.current, title, description, date, hero, heroAlt, heroCredit, tags, body, seo,  heroSize, heroMatte}
 export type NEWS_ITEM_QUERY_RESULT = {
@@ -2364,4 +2418,34 @@ export type NEWS_ITEM_QUERY_RESULT = {
   heroMatte: {
     background?: string;
   } | null;
+} | null;
+
+// Source: ../../../../Perspective-Tester/sanity/queries.ts
+// Variable: GUIDES_QUERY
+// Query: *[_type == "guide" && defined(slug.current)] | order(date desc){  _id, "slug": slug.current, title, description, date, byline, tags, body, seo}
+export type GUIDES_QUERY_RESULT = Array<{
+  _id: string;
+  slug: string | null;
+  title: string | null;
+  description: string | null;
+  date: string | null;
+  byline: string | null;
+  tags: Array<string> | null;
+  body: GuideBody | null;
+  seo: Seo | null;
+}>;
+
+// Source: ../../../../Perspective-Tester/sanity/queries.ts
+// Variable: GUIDE_QUERY
+// Query: *[_type == "guide" && slug.current == $slug][0]{  _id, "slug": slug.current, title, description, date, byline, tags, body, seo}
+export type GUIDE_QUERY_RESULT = {
+  _id: string;
+  slug: string | null;
+  title: string | null;
+  description: string | null;
+  date: string | null;
+  byline: string | null;
+  tags: Array<string> | null;
+  body: GuideBody | null;
+  seo: Seo | null;
 } | null;

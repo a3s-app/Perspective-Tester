@@ -1,13 +1,14 @@
 import type { MetadataRoute } from "next";
 import { getRoutes, getSettings } from "@/cms/server";
-import { getAllNews, getAllPosts } from "@/cms/articles";
+import { getAllGuides, getAllNews, getAllPosts } from "@/cms/articles";
 export const revalidate = 3600;
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [settings, pages, posts, news] = await Promise.all([
+  const [settings, pages, posts, news, guides] = await Promise.all([
     getSettings(),
     getRoutes(),
     getAllPosts(),
     getAllNews(),
+    getAllGuides(),
   ]);
   if (settings.seo?.noIndex) return [];
   const base = settings.siteURL || "https://perspectivetester.com";
@@ -32,6 +33,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .filter((p) => !p.seo?.noIndex)
       .map((p) => ({
         url: new URL("/news/" + p.slug, base).href,
+        lastModified: p.date,
+        priority: 0.6,
+      })),
+    ...guides
+      .filter((p) => !p.seo?.noIndex)
+      .map((p) => ({
+        url: new URL("/guides/" + p.slug, base).href,
         lastModified: p.date,
         priority: 0.6,
       })),

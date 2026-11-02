@@ -3,7 +3,7 @@ import { draftMode } from "next/headers";
 import { redirect } from "next/navigation";
 import { NextRequest } from "next/server";
 
-const SECTIONS = new Set(["blog", "news"]);
+const SECTIONS = new Set(["blog", "news", "guides"]);
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 function matches(given: string, expected: string) {
@@ -12,7 +12,7 @@ function matches(given: string, expected: string) {
   return a.length === b.length && timingSafeEqual(a, b);
 }
 
-// /api/preview?secret=…&slug=my-post (&type=news) shows that unpublished draft.
+// /api/preview?secret=…&slug=my-post (&type=news or guides) shows that unpublished draft.
 export async function GET(request: NextRequest) {
   const expected = process.env.SANITY_PREVIEW_SECRET;
   if (!expected || !process.env.SANITY_VIEWER_TOKEN)

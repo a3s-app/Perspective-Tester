@@ -34,3 +34,11 @@ export const NEWS_ITEM_QUERY =
   _id, "slug": slug.current, title, description, date, hero, heroAlt, heroCredit, tags, body, seo,
   heroSize, heroMatte
 }`);
+export const GUIDES_QUERY =
+  defineQuery(`*[_type == "guide" && defined(slug.current)] | order(date desc){
+  _id, "slug": slug.current, title, description, date, byline, tags, body, seo
+}`);
+export const GUIDE_QUERY =
+  defineQuery(`*[_type == "guide" && slug.current == $slug][0]{
+  _id, "slug": slug.current, title, description, date, byline, tags, body, seo
+}`);
