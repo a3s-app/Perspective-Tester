@@ -8,45 +8,68 @@ type Body = PortableBody | GuideBody | null;
 function ArticleTable({ value }: { value: GuideTable }) {
   const [header, ...rows] = value.rows ?? [];
   return (
-    <div
-      role="region"
-      aria-label={value.label}
-      tabIndex={0}
-      className="overflow-x-auto rounded-lg border focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-    >
-      <table className="w-full min-w-[40rem] border-collapse text-left text-sm leading-relaxed">
-        <thead className="bg-secondary text-foreground">
-          <tr>
-            {header?.cells?.map((cell, index) => (
-              <th key={index} scope="col" className="px-4 py-3 font-semibold">
-                {cell}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row) => (
-            <tr key={row._key} className="border-t align-top">
-              {row.cells?.map((cell, index) =>
-                index === 0 ? (
-                  <th
-                    key={index}
-                    scope="row"
-                    className="px-4 py-3 font-medium text-foreground"
-                  >
-                    {cell}
-                  </th>
-                ) : (
-                  <td key={index} className="px-4 py-3 text-muted-foreground">
-                    {cell}
-                  </td>
-                ),
-              )}
+    <>
+      {/* Only one layout is displayed, so assistive tech meets the content once. */}
+      <div className="hidden rounded-lg border md:block">
+        <table
+          aria-label={value.label}
+          className="w-full border-collapse text-left text-sm leading-relaxed"
+        >
+          <thead className="bg-secondary text-foreground">
+            <tr>
+              {header?.cells?.map((cell, index) => (
+                <th key={index} scope="col" className="px-4 py-3 font-semibold">
+                  {cell}
+                </th>
+              ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {rows.map((row) => (
+              <tr key={row._key} className="border-t align-top">
+                {row.cells?.map((cell, index) =>
+                  index === 0 ? (
+                    <th
+                      key={index}
+                      scope="row"
+                      className="px-4 py-3 font-medium text-foreground"
+                    >
+                      {cell}
+                    </th>
+                  ) : (
+                    <td key={index} className="px-4 py-3 text-muted-foreground">
+                      {cell}
+                    </td>
+                  ),
+                )}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <ul role="list" aria-label={value.label} className="flex flex-col gap-3 md:hidden">
+        {rows.map((row) => {
+          const [title, ...cells] = row.cells ?? [];
+          return (
+            <li key={row._key} className="rounded-lg border p-4 text-sm leading-relaxed">
+              <p className="text-base font-semibold text-foreground">{title}</p>
+              <dl className="mt-3 flex flex-col gap-3">
+                {cells.map((cell, index) =>
+                  cell ? (
+                    <div key={index}>
+                      <dt className="font-medium text-foreground">
+                        {header?.cells?.[index + 1]}
+                      </dt>
+                      <dd className="text-muted-foreground">{cell}</dd>
+                    </div>
+                  ) : null,
+                )}
+              </dl>
+            </li>
+          );
+        })}
+      </ul>
+    </>
   );
 }
 export function ArticleBody({ value }: { value: Body | undefined }) {
@@ -96,7 +119,11 @@ export function ArticleBody({ value }: { value: Body | undefined }) {
           number: ({ children }) => (
             <ol className="ml-6 list-decimal space-y-2">{children}</ol>
           ),
-          check: ({ children }) => <ul className="space-y-2">{children}</ul>,
+          check: ({ children }) => (
+            <ul role="list" className="space-y-2">
+              {children}
+            </ul>
+          ),
         },
         listItem: {
           check: ({ children }) => (
