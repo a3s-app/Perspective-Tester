@@ -65,6 +65,7 @@ export function LpNavbar1() {
   const isCurrentPage = useIsCurrent();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCompact, setIsCompact] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const compactRef = useRef(false);
 
@@ -144,7 +145,19 @@ export function LpNavbar1() {
     <header
       className="sticky top-0 isolate z-50"
       onKeyDown={(event) => {
-        if (event.key === "Escape" && isMenuOpen) setIsMenuOpen(false);
+        if (event.key !== "Escape" || !isMenuOpen) return;
+        setIsMenuOpen(false);
+        // Return focus to the toggle instead of letting it fall to <body>
+        // when the focused menu link is hidden by `inert`.
+        menuButtonRef.current?.focus();
+      }}
+      onBlur={(event) => {
+        // Close the menu once keyboard focus moves past it, so the open
+        // panel never sits over the focused control in the page below.
+        const next = event.relatedTarget;
+        if (isMenuOpen && next && !event.currentTarget.contains(next)) {
+          setIsMenuOpen(false);
+        }
       }}
     >
       {/* Outer wrapper - padding animates to create the floating inset */}
@@ -255,6 +268,7 @@ export function LpNavbar1() {
             <Button
               variant="ghost"
               className="flex size-9 items-center justify-center rounded-lg md:hidden"
+              ref={menuButtonRef}
               onClick={toggleMenu}
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMenuOpen}

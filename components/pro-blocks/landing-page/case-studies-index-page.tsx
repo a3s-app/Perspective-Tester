@@ -41,7 +41,7 @@ export function CaseStudiesIndexPage() {
             <p className="text-sm font-semibold text-[oklch(0.82_0.11_55)]">
               {content.paragraph_3}
             </p>
-            <h1 className="mt-5 max-w-[16ch] text-balance text-[clamp(2.75rem,6vw,5.75rem)] font-semibold leading-[0.98] tracking-[-0.035em]">
+            <h1 className="mt-5 max-w-[16ch] text-balance hyphens-auto [overflow-wrap:anywhere] text-[clamp(2.75rem,6vw,5.75rem)] font-semibold leading-[0.98] tracking-[-0.035em]">
               {content.heading_4}
             </h1>
             <p className="mt-6 max-w-2xl text-pretty text-base leading-relaxed text-white/82 sm:text-lg">
@@ -145,7 +145,7 @@ export function CaseStudiesIndexPage() {
 
                 <Button
                   asChild
-                  className="mt-5 min-h-11 w-full justify-between bg-white px-5 text-[oklch(0.18_0.035_255)] hover:bg-[oklch(0.93_0.02_55)] focus-visible:ring-white focus-visible:ring-offset-[oklch(0.18_0.035_255)] sm:w-fit"
+                  className="mt-5 h-auto min-h-11 w-full justify-between whitespace-normal bg-white px-5 py-2.5 text-left text-[oklch(0.18_0.035_255)] hover:bg-[oklch(0.93_0.02_55)] focus-visible:ring-white focus-visible:ring-offset-[oklch(0.18_0.035_255)] sm:w-fit"
                 >
                   <Link href={content.href_19} prefetch>
                     {content.text_20}

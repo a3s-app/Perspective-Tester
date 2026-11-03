@@ -109,6 +109,7 @@ export function BlogAudioReader({ text }: { text: string }) {
   const segmentStartRef = useRef(0);
   const segmentElapsedRef = useRef(0);
   const progressTimerRef = useRef<number | null>(null);
+  const playButtonRef = useRef<HTMLButtonElement>(null);
 
   if (chunksRef.current.length === 0) {
     chunksRef.current = chunkText(text);
@@ -363,6 +364,7 @@ export function BlogAudioReader({ text }: { text: string }) {
         </select>
 
         <button
+          ref={playButtonRef}
           type="button"
           onClick={isPlaying ? handlePause : handlePlay}
           aria-label={playLabel}
@@ -378,7 +380,12 @@ export function BlogAudioReader({ text }: { text: string }) {
 
         <button
           type="button"
-          onClick={handleStop}
+          onClick={() => {
+            handleStop();
+            // Stop disables itself, which would drop focus to <body>; hand it
+            // to the play button, now labelled "Listen to this article".
+            playButtonRef.current?.focus();
+          }}
           disabled={status === "idle"}
           aria-label="Stop"
           title="Stop"
