@@ -332,7 +332,7 @@ export function BlogAudioReader({ text }: { text: string }) {
 
       <div className="flex items-center gap-2 sm:ml-auto sm:gap-3">
         <div
-          className="h-1.5 min-w-16 flex-1 overflow-hidden rounded-full bg-secondary sm:w-28 sm:flex-none"
+          className="h-2 min-w-16 flex-1 overflow-hidden rounded-full border border-input bg-secondary sm:w-28 sm:flex-none"
           role="progressbar"
           aria-label="Playback progress"
           aria-valuenow={Math.round(progress)}

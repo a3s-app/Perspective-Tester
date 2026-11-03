@@ -63,9 +63,9 @@ function FooterLinks({
 
   return (
     <nav aria-label={linkLabel} className="flex flex-col gap-3">
-      <h3 className="text-foreground text-sm font-semibold tracking-wide">
+      <h2 className="text-foreground text-sm font-semibold tracking-wide">
         {heading}
-      </h3>
+      </h2>
       <div className="flex flex-col gap-1.5">
         {links.map(({ label, href, icon: Icon, external }) => (
           <Link
@@ -144,9 +144,9 @@ export function Footer1({ hideCopyrightYear = false }: { hideCopyrightYear?: boo
               aria-label={content.aria_label_7}
               className="flex flex-col gap-3"
             >
-              <h3 className="text-foreground text-sm font-semibold tracking-wide">
+              <h2 className="text-foreground text-sm font-semibold tracking-wide">
                 {content.heading_8}
-              </h3>
+              </h2>
               <div className="flex flex-wrap items-center gap-2">
                 {SOCIAL_LINKS.map(({ label, href, icon: Icon }) => (
                   <a

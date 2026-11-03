@@ -87,11 +87,11 @@ export function CaseStudiesIndexPage() {
                   className="object-cover object-center transition-transform duration-700 ease-out motion-reduce:transition-none"
                 />
                 <div
-                  className="absolute inset-0 bg-[linear-gradient(180deg,transparent_48%,oklch(0.1_0.03_255/.8)_100%)]"
+                  className="absolute inset-0 bg-[linear-gradient(180deg,transparent_10%,oklch(0.1_0.03_255/.82)_45%,oklch(0.1_0.03_255/.9)_100%)] sm:bg-[linear-gradient(180deg,transparent_48%,oklch(0.1_0.03_255/.8)_100%)]"
                   aria-hidden="true"
                 />
                 <figcaption className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-5 p-6 sm:p-8">
-                  <p className="max-w-sm text-sm font-medium leading-relaxed text-white/84">
+                  <p className="max-w-sm text-sm font-medium leading-relaxed text-white">
                     {content.paragraph_12}
                   </p>
                   <div className="shrink-0 rounded-lg bg-white p-1.5">

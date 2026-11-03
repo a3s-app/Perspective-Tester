@@ -68,7 +68,7 @@ export function NewsIndexPage({ items }: { items: NewsItem[] }) {
             <Link
               href={`/news/${featured.slug}`}
               prefetch
-              aria-label={`Read: ${featured.title}`}
+              aria-labelledby={`news-title-${featured.slug}`}
               className="group block overflow-hidden rounded-2xl border bg-card shadow-sm transition-shadow hover:shadow-lg focus-visible:shadow-lg"
             >
               <article className="grid gap-0 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
@@ -78,7 +78,7 @@ export function NewsIndexPage({ items }: { items: NewsItem[] }) {
                 >
                   <Image
                     src={assetPath(featured.heroImage)}
-                    alt={featured.heroAlt}
+                    alt=""
                     fill
                     sizes="(min-width: 1024px) 50vw, 100vw"
                     className={`${heroCell(featured).fit} transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100`}
@@ -96,7 +96,10 @@ export function NewsIndexPage({ items }: { items: NewsItem[] }) {
                       </span>
                     ))}
                   </div>
-                  <h3 className="heading-sm text-balance text-foreground">
+                  <h3
+                    id={`news-title-${featured.slug}`}
+                    className="heading-sm text-balance text-foreground"
+                  >
                     {featured.title}
                   </h3>
                   <p className="text-sm leading-relaxed text-muted-foreground">
@@ -151,7 +154,7 @@ export function NewsIndexPage({ items }: { items: NewsItem[] }) {
                   key={item.slug}
                   href={`/news/${item.slug}`}
                   prefetch
-                  aria-label={`Read: ${item.title}`}
+                  aria-labelledby={`news-title-${item.slug}`}
                   className="group flex flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-shadow hover:shadow-lg focus-visible:shadow-lg"
                 >
                   <article className="flex h-full flex-col">
@@ -161,7 +164,7 @@ export function NewsIndexPage({ items }: { items: NewsItem[] }) {
                     >
                       <Image
                         src={assetPath(item.heroImage)}
-                        alt={item.heroAlt}
+                        alt=""
                         fill
                         sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                         className={`${heroCell(item).fit} transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100`}
@@ -172,7 +175,10 @@ export function NewsIndexPage({ items }: { items: NewsItem[] }) {
                         {content.paragraph_8}
                         <time dateTime={item.date}>{item.dateLabel}</time>
                       </p>
-                      <h3 className="text-base font-semibold leading-snug text-foreground">
+                      <h3
+                        id={`news-title-${item.slug}`}
+                        className="text-base font-semibold leading-snug text-foreground"
+                      >
                         {item.title}
                       </h3>
                       <p className="line-clamp-3 text-sm leading-relaxed text-muted-foreground">

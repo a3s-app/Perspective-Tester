@@ -100,7 +100,7 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
                   <div className="h-11 w-11 overflow-hidden rounded-full border-2 border-primary/10">
                     <Image
                       src={assetPath(post.author.photo)}
-                      alt={`${post.author.name}, ${post.author.role}`}
+                      alt=""
                       width={44}
                       height={44}
                       className="h-full w-full object-cover"

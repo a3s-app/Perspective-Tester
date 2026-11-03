@@ -327,7 +327,6 @@
 }
 .filters button span {
   font-size: 10px;
-  opacity: 0.85;
 }
 .filters button[aria-pressed="true"] {
   color: var(--guide-ink);
