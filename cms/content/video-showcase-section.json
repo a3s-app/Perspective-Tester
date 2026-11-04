@@ -16,7 +16,7 @@
         },
         {
           "kind": "visual",
-          "text": "Over Justin's shoulder: he leans in to a large monitor showing the Google home page, then gestures at it from a normal viewing distance. The screen zooms in until one letter of the Google logo and the mouse pointer fill the whole display."
+          "text": "Over Justin's shoulder: a large monitor shows the Google home page, and he gestures at it from his chair. Then the screen magnifies until the “G” of the Google logo and the mouse pointer fill the display."
         },
         {
           "kind": "speech",
@@ -25,7 +25,7 @@
         },
         {
           "kind": "visual",
-          "text": "Back at the monitor, magnified so far that the mouse pointer, then the text cursor, fills the screen while Justin types."
+          "text": "Justin leans in close to the monitor. At this magnification only part of the Google logo fits on screen; he moves the pointer to the search box and types."
         },
         {
           "kind": "speech",
@@ -34,7 +34,7 @@
         },
         {
           "kind": "visual",
-          "text": "Justin pans across a magnified website a few letters at a time: part of a navigation link, “Join now” and “Sign in” buttons, a search field, and a pale “Get tickets” button that barely stands out from its background."
+          "text": "Justin pans across a magnified website a few letters at a time, the text blurring as it moves: “Sign in”, a yellow “Join now” button and a black banner with “Get tickets” in yellow. Zoomed out, the page shows a notification popup with “Later” and “Subscribe” buttons."
         },
         {
           "kind": "speech",
@@ -43,7 +43,7 @@
         },
         {
           "kind": "visual",
-          "text": "Justin browses a web page with a photo of a man holding a guitar, then zooms in on a heading beginning “Our” with the text cursor over it."
+          "text": "At normal size, Justin scrolls through the website's menu and articles. Then he zooms in on a blue heading beginning “Our F”, with the text cursor over it."
         },
         {
           "kind": "speech",
@@ -51,113 +51,9 @@
           "text": "It's really amazing, but when it doesn't work, it creates huge limiting factors."
         },
         {
-          "kind": "visual",
-          "text": "Justin, seated facing the camera again."
-        },
-        {
           "kind": "speech",
           "speaker": "Justin Salas",
           "text": "My name's Justin, and this is my perspective."
-        }
-      ]
-    },
-    {
-      "id": "usiTK_CvwkA",
-      "title": "About Perspective Tester",
-      "description": "Hear the story about the inspiration behind Perspective Tester.",
-      "alternative": [
-        {
-          "kind": "visual",
-          "text": "Text on a dark blue screen: “In the US, about 74.6 million people have some type of physical disability.” Source: John Hopkins Medicine, “Statistics of Disability,” 2013."
-        },
-        {
-          "kind": "visual",
-          "text": "Two people sit at a table with a laptop. Text: “Globally, more than 1 billion people use assistive technology.” Source: World Health Organization. Then: “23% percent of disabled respondents say they ‘never’ go online.” Source: Pew Research."
-        },
-        {
-          "kind": "speech",
-          "speaker": "Jason McKee",
-          "text": "First time I met someone who was disabled and watched them use the internet through assistive technology, I realized that I had never considered how these people were engaging online. It changed the way I thought about getting a message across to an audience. It's changed the way I thought about how websites should be built, how users should interact with apps. It really transformed my understanding of digital as a whole."
-        },
-        {
-          "kind": "visual",
-          "text": "Jason, a man with short fair hair in a light shirt, speaks in a blue-lit room, intercut with people typing code, using a phone, and working on laptops."
-        },
-        {
-          "kind": "speech",
-          "speaker": "Jason McKee",
-          "text": "So from that point on, I was pretty much invested in not only learning more about this new perspective, but also in helping corporations bridge this gap that a lot of them are not even aware exists."
-        },
-        {
-          "kind": "visual",
-          "text": "Music."
-        },
-        {
-          "kind": "speech",
-          "speaker": "Jason McKee",
-          "text": "My name is Jason McKee, and I'm an accessibility consultant."
-        },
-        {
-          "kind": "visual",
-          "text": "On-screen title: “Accessibility Consultant, Jason McKee.” The Perspective Tester logo appears."
-        },
-        {
-          "kind": "visual",
-          "text": "A woman shops for clothes online. Text: “Accessibility is the practice of making your websites usable by as many people as possible.”"
-        },
-        {
-          "kind": "speech",
-          "speaker": "Jason McKee",
-          "text": "Well, when I learned what accessibility was, I realized that I wanted to be part of the solution. I realized it's a large problem. It affects up to a billion people, and it affects everything you do online, on your phone, your computer, whatnot."
-        },
-        {
-          "kind": "visual",
-          "text": "A world map. Text: “15% of the world's population has some sort of disability.” Source: World Health Organization. Then hands typing on a laptop, and a close-up of a screen reflected in someone's glasses."
-        },
-        {
-          "kind": "speech",
-          "speaker": "Jason McKee",
-          "text": "Perspective Tester is an accessibility consultancy that helps corporate clients find the best solution to address accessibility in their organization."
-        },
-        {
-          "kind": "visual",
-          "text": "Quote card over a phone: “The best solution to address accessibility.” Perspective Tester."
-        },
-        {
-          "kind": "speech",
-          "speaker": "Jason McKee",
-          "text": "Every company with an online presence is required to understand what is sufficient and compliant for accessibility."
-        },
-        {
-          "kind": "visual",
-          "text": "A person at a laptop. Text: “Laws and guidelines exist to make websites more accessible. Only a few companies understand that non-compliance to those laws means discrimination against people with disabilities.”"
-        },
-        {
-          "kind": "speech",
-          "speaker": "Jason McKee",
-          "text": "One of the challenges with accessibility is, you know, it's not a quick fix. It's not just pushing a button or buying a piece of software, so it doesn't fit in with some of the other compliance techniques and tactics that are out there. Accessibility means that the people who are designing and developing for you understand accessibility. This is the start of an education process. This is not going to go away. It will eventually be accepted as a layer of QA: how was this viewed and tested for accessibility? That's going to be standard."
-        },
-        {
-          "kind": "visual",
-          "text": "Code on a screen, reflected in a pair of glasses. Then a business meeting. Text: “Perspective Tester will ensure your website complies with all major guidelines such as WCAG, ADA, CCPA, Section 508 of the Rehabilitation Act of 1973 and AODA.”"
-        },
-        {
-          "kind": "speech",
-          "speaker": "Jason McKee",
-          "text": "I think before any big decisions are made, I think a simple consultation with someone who is an expert and understands this, and hopefully can also bring along the perspective of a disabled user who's certified in testing for accessibility and understands the legal requirements as well, that can give you a clear picture of what users are experiencing on your site. And then you can start deciding, well, what are our options for improving?"
-        },
-        {
-          "kind": "visual",
-          "text": "Hands holding a tablet. Text: “How can you schedule a consultation with Perspective Tester?”"
-        },
-        {
-          "kind": "speech",
-          "speaker": "Jason McKee",
-          "text": "The easiest way is to go to perspectivetester.com and contact us through there. We'll be in touch. We'll talk about what your options are."
-        },
-        {
-          "kind": "visual",
-          "text": "The Perspective Tester logo, then the web address: PerspectiveTester.com."
         }
       ]
     },
@@ -168,7 +64,7 @@
       "alternative": [
         {
           "kind": "visual",
-          "text": "Over Justin's shoulder as he sits close to a large monitor showing a news website. Title text: “What makes a website inaccessible?”"
+          "text": "Over Justin's shoulder as he sits at a large monitor showing a website. On-screen title: “What makes a website inaccessible?”"
         },
         {
           "kind": "speech",
@@ -177,7 +73,7 @@
         },
         {
           "kind": "visual",
-          "text": "Justin magnifies the site's navigation. The word “NEWS” appears in dark text on a white background."
+          "text": "Justin magnifies the site's menu until the word “NEWS” fills the screen in dark text on white."
         },
         {
           "kind": "speech",
@@ -186,7 +82,7 @@
         },
         {
           "kind": "visual",
-          "text": "When the pointer hovers over “NEWS”, the link turns pale yellow on white and becomes hard to see."
+          "text": "When the pointer hovers over “NEWS”, the link turns pale yellow on white."
         },
         {
           "kind": "speech",
@@ -195,7 +91,7 @@
         },
         {
           "kind": "visual",
-          "text": "A popup has opened: a dark box with a large letter “C” and the text “Subscribe to our notifications and updates,” with “Subscribe” and “Later” buttons. Magnified, Justin sees only fragments of it as he moves around the page."
+          "text": "A notification popup has appeared: a dark square logo with the letter “C”, the text “Subscribe to our notifications and updates. You can disable anytime.”, a “Later” link and a blue “Subscribe” button. Magnified, Justin sees only fragments of it at a time."
         },
         {
           "kind": "speech",
@@ -204,7 +100,7 @@
         },
         {
           "kind": "visual",
-          "text": "Justin pans past an advertisement for a reverse mortgage guide, finds the “Later” button and closes the popup. Hovering over the “PEOPLE” link turns it yellow, and the page responds again."
+          "text": "Justin moves the pointer onto “Later”, then zooms out to the whole page and back in. Hovering over the “PEOPLE” link turns it yellow."
         },
         {
           "kind": "speech",
@@ -213,7 +109,7 @@
         },
         {
           "kind": "visual",
-          "text": "Music. End card: Perspective Tester."
+          "text": "End card: the Perspective Tester logo."
         }
       ]
     }

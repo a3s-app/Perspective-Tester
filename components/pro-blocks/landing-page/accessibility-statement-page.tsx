@@ -144,7 +144,7 @@ export function AccessibilityStatementPage() {
                     </div>
                     <a
                       href={content.href_41}
-                      className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+                      className="min-w-0 text-sm font-medium text-foreground hover:text-primary transition-colors [overflow-wrap:anywhere]"
                     >
                       <span className="sr-only">{content.text_42}</span>
                       {content.text_43}

@@ -621,11 +621,11 @@ export function ContactPage() {
                       <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10">
                         <item.icon className="h-4 w-4 text-primary" />
                       </div>
-                      <div>
+                      <div className="min-w-0">
                         <p className="text-xs text-muted-foreground">
                           {item.label}
                         </p>
-                        <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+                        <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors [overflow-wrap:anywhere]">
                           {item.value}
                         </p>
                       </div>
