@@ -64,26 +64,33 @@ const MAX_CHUNK_CHARS = 220;
  * Break the article into short, sentence-aligned chunks. Speaking many small
  * utterances back-to-back is the reliable way around Chrome's long-utterance
  * bug, where a single multi-thousand-character utterance never starts.
+ *
+ * Paragraphs (split on blank lines) never share a chunk, so each heading is
+ * its own utterance and is followed by a short pause. A heading has no closing
+ * punctuation, so a full stop is added to end it on a falling tone instead of
+ * running into the next sentence.
  */
 function chunkText(text: string): string[] {
-  const normalized = text.replace(/\s+/g, " ").trim();
-  if (!normalized) return [];
-
-  const sentences = normalized.match(/[^.!?]+[.!?]*\s*/g) ?? [normalized];
   const chunks: string[] = [];
-  let current = "";
+  for (const paragraph of text.split(/\n\s*\n/)) {
+    let normalized = paragraph.replace(/\s+/g, " ").trim();
+    if (!normalized) continue;
+    if (!/[.!?:;]["'”’)]?$/.test(normalized)) normalized += ".";
 
-  for (const raw of sentences) {
-    const sentence = raw.trim();
-    if (!sentence) continue;
-    if (current && current.length + sentence.length + 1 > MAX_CHUNK_CHARS) {
-      chunks.push(current);
-      current = sentence;
-    } else {
-      current = current ? `${current} ${sentence}` : sentence;
+    const sentences = normalized.match(/[^.!?]+[.!?]*\s*/g) ?? [normalized];
+    let current = "";
+    for (const raw of sentences) {
+      const sentence = raw.trim();
+      if (!sentence) continue;
+      if (current && current.length + sentence.length + 1 > MAX_CHUNK_CHARS) {
+        chunks.push(current);
+        current = sentence;
+      } else {
+        current = current ? `${current} ${sentence}` : sentence;
+      }
     }
+    if (current) chunks.push(current);
   }
-  if (current) chunks.push(current);
   return chunks;
 }
 
