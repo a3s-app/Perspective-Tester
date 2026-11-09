@@ -20,6 +20,7 @@ import { BlogShare } from "@/components/pro-blocks/landing-page/blog-share";
 import { BlogAudioReader } from "@/components/pro-blocks/landing-page/blog-audio-reader";
 import { ReadingProgress } from "@/components/pro-blocks/landing-page/reading-progress";
 import {
+  getAudioText,
   getReadingTime,
   slugifyHeading,
   toSegments,
@@ -30,11 +31,7 @@ import {
 export function BlogPostPage({ post }: { post: BlogPost }) {
   const content = useSection("blog-post-page", defaults);
 
-  const audioText = [
-    post.title,
-    post.description,
-    ...post.content.map((block) => block.text),
-  ].join("\n\n");
+  const audioText = getAudioText(post.title, post.description, post.content);
 
   const renderText = (text: string, links?: BlogLink[]) =>
     toSegments(text, links).map((segment, index) =>

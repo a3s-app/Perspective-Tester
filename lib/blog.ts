@@ -1,4 +1,4 @@
-import type { POST_QUERY_RESULT } from '@/sanity.types';
+import type { POST_QUERY_RESULT } from "@/sanity.types";
 export interface BlogLink {
   /** Exact substring of the paragraph text to turn into a link. */
   text: string;
@@ -24,8 +24,8 @@ export interface BlogPost {
   heroAlt: string;
   heroCredit?: string;
   tags: string[];
-  body?: NonNullable<POST_QUERY_RESULT>['body'];
-  seo?: NonNullable<POST_QUERY_RESULT>['seo'];
+  body?: NonNullable<POST_QUERY_RESULT>["body"];
+  seo?: NonNullable<POST_QUERY_RESULT>["seo"];
   content: BlogContentBlock[];
 }
 
@@ -70,6 +70,38 @@ export function toSegments(
   }
   if (cursor < text.length) segments.push(text.slice(cursor));
   return segments;
+}
+
+const REFERENCE_HEADING = /^(sources|references|further reading)$/i;
+const WEB_ADDRESS = /\b(?:https?:\/\/|www\.)\S+|\bmailto:\S+/gi;
+
+/**
+ * Text for the audio reader. A reference list and raw web addresses read
+ * aloud as noise ("n-a-s-c-i-o underscore…"), so the reader stops at a
+ * Sources-style heading and drops any address left in the prose.
+ */
+export function getAudioText(
+  title: string,
+  description: string,
+  content: BlogContentBlock[],
+): string {
+  const end = content.findIndex(
+    (block) =>
+      block.type === "heading" && REFERENCE_HEADING.test(block.text.trim()),
+  );
+  return [
+    title,
+    description,
+    ...content.slice(0, end < 0 ? undefined : end).map((b) => b.text),
+  ]
+    .map((text) =>
+      text
+        .replace(WEB_ADDRESS, "")
+        .replace(/[:,]\s*$/, "")
+        .trim(),
+    )
+    .filter(Boolean)
+    .join("\n\n");
 }
 
 /** URL-safe id for a heading, used for in-page anchors. */

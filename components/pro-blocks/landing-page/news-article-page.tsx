@@ -18,7 +18,7 @@ import { assetPath } from "@/lib/utils";
 import { BlogShare } from "@/components/pro-blocks/landing-page/blog-share";
 import { BlogAudioReader } from "@/components/pro-blocks/landing-page/blog-audio-reader";
 import { ReadingProgress } from "@/components/pro-blocks/landing-page/reading-progress";
-import { slugifyHeading, toSegments } from "@/lib/blog";
+import { getAudioText, slugifyHeading, toSegments } from "@/lib/blog";
 import { getNewsReadingTime, type NewsItem, type NewsLink } from "@/lib/news";
 
 const LINK_CLASS =
@@ -55,11 +55,7 @@ function ExternalAnchor({
 export function NewsArticlePage({ item }: { item: NewsItem }) {
   const content = useSection("news-article-page", defaults);
 
-  const audioText = [
-    item.title,
-    item.description,
-    ...item.content.map((block) => block.text),
-  ].join("\n\n");
+  const audioText = getAudioText(item.title, item.description, item.content);
 
   const renderText = (text: string, links?: NewsLink[]) =>
     toSegments(text, links).map((segment, index) => {
