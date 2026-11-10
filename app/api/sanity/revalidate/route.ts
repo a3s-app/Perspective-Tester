@@ -1,7 +1,11 @@
 import { NextRequest } from "next/server";
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { parseBody } from "next-sanity/webhook";
-import { changeTags, type ContentChange } from "@/cms/revalidation";
+import {
+  changePaths,
+  changeTags,
+  type ContentChange,
+} from "@/cms/revalidation";
 
 export async function POST(request: NextRequest) {
   const secret = process.env.SANITY_REVALIDATE_SECRET;
@@ -25,7 +29,9 @@ export async function POST(request: NextRequest) {
       );
     const tags = [...new Set(changeTags(body))];
     tags.forEach((tag) => revalidateTag(tag, { expire: 0 }));
-    return Response.json({ revalidated: tags });
+    const paths = changePaths(body);
+    paths.forEach((path) => revalidatePath(path));
+    return Response.json({ revalidated: tags, paths });
   } catch {
     return Response.json(
       { error: "Unable to validate content change" },
