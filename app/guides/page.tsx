@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getAllGuides, type Guide } from "@/cms/articles";
+import { getSettings } from "@/cms/server";
 import { SiteShell } from "@/components/pro-blocks/landing-page/site-shell";
 import {
   GuidesIndexPage,
@@ -44,9 +45,13 @@ export default async function GuidesPage() {
     dateLabel: guide.dateLabel,
     readingTime: readingTime(guide),
   }));
+  const settings = await getSettings();
   return (
     <SiteShell>
-      <GuidesIndexPage guides={guides} />
+      <GuidesIndexPage
+        guides={guides}
+        siteURL={settings.siteURL || "https://perspectivetester.com"}
+      />
     </SiteShell>
   );
 }

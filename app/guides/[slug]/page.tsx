@@ -31,7 +31,9 @@ export async function generateMetadata({
   const shareImage = imageURL(guide.seo?.image, "/pt-logo.png");
   return {
     robots: {
-      index: !(await draftMode()).isEnabled && !(guide.seo?.noIndex || settings.seo?.noIndex),
+      index:
+        !(await draftMode()).isEnabled &&
+        !(guide.seo?.noIndex || settings.seo?.noIndex),
       follow: true,
     },
     title,
@@ -69,10 +71,14 @@ export default async function Page({
     notFound();
   }
 
+  const settings = await getSettings();
   return (
     <SiteShell>
       <DraftBanner path={`/guides/${guide.slug}`} />
-      <GuidePage guide={guide} />
+      <GuidePage
+        guide={guide}
+        siteURL={settings.siteURL || "https://perspectivetester.com"}
+      />
     </SiteShell>
   );
 }

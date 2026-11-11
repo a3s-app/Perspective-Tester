@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, BookOpen, CalendarDays, Clock } from "lucide-react";
 import { Tagline } from "@/components/pro-blocks/landing-page/tagline";
+import { PageBreadcrumb } from "@/components/pro-blocks/landing-page/page-breadcrumb";
 
 export type GuideCard = {
   href: string;
@@ -11,11 +12,21 @@ export type GuideCard = {
   readingTime?: string;
 };
 
-export function GuidesIndexPage({ guides }: { guides: GuideCard[] }) {
+export function GuidesIndexPage({
+  guides,
+  siteURL,
+}: {
+  guides: GuideCard[];
+  siteURL: string;
+}) {
   return (
     <>
-      <section className="bg-background section-padding-y border-b">
-        <div className="container-padding-x container mx-auto">
+      <section className="bg-background border-b pb-16 pt-8 lg:pb-24 lg:pt-10">
+        <div className="container-padding-x container mx-auto flex flex-col gap-10 lg:gap-14">
+          <PageBreadcrumb
+            siteURL={siteURL}
+            items={[{ label: "Home", href: "/" }, { label: "Guides" }]}
+          />
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
             <Tagline>
               <BookOpen
