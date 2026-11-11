@@ -15,6 +15,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const guidePath = "/accessibility-testing-guide";
   return [
     { url: new URL(guidePath, base).href, priority: 0.8 },
+    { url: new URL("/guides", base).href, priority: 0.7 },
     ...pages
       .filter((p) => p.path && !p.noIndex && p.path !== guidePath)
       .map((p) => ({

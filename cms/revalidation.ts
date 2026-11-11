@@ -19,7 +19,8 @@ export function changePaths(change: ContentChange): string[] {
     return [];
   return [change.slug, change.previousSlug]
     .filter((s): s is string => !!s && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(s))
-    .map((s) => `${base}/${s}`);
+    .map((s) => `${base}/${s}`)
+    .concat(change._type === "guide" ? ["/guides"] : []);
 }
 export function changeTags(change: ContentChange): string[] {
   if (

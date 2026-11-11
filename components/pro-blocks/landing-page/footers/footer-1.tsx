@@ -13,6 +13,7 @@ import {
   Clock,
   Facebook,
   FileText,
+  Library,
   Instagram,
   Linkedin,
   Mail,
@@ -42,6 +43,7 @@ const contentIcons = {
   Newspaper,
   Megaphone,
   FileText,
+  Library,
   Mail,
   Scale,
   ArrowUpRight,
@@ -95,14 +97,14 @@ export function Footer1({ hideCopyrightYear = false }: { hideCopyrightYear?: boo
   const { contactEmail: CONTACT_EMAIL } = useSiteSettings();
   const content = useSection("footer-1", defaults, contentIcons);
   const PRODUCT_LINKS: FooterLink[] = content.PRODUCT_LINKS;
-  const COMPANY_LINKS: FooterLink[] = content.COMPANY_LINKS.some(
-    (link) => link.href === "/accessibility-testing-guide",
-  )
-    ? content.COMPANY_LINKS
-    : [
-        ...content.COMPANY_LINKS,
-        { label: "Accessibility Testing Guide", href: "/accessibility-testing-guide", icon: BookOpen },
-      ];
+  // Code-added links stay until the same link is added to the footer in Sanity.
+  const COMPANY_LINKS: FooterLink[] = [
+    ...content.COMPANY_LINKS,
+    ...[
+      { label: "Guides", href: "/guides", icon: Library },
+      { label: "Accessibility Testing Guide", href: "/accessibility-testing-guide", icon: BookOpen },
+    ].filter((extra) => !content.COMPANY_LINKS.some((link) => link.href === extra.href)),
+  ];
   const LEGAL_LINKS: FooterLink[] = content.LEGAL_LINKS;
   const PLATFORM_LINKS: FooterLink[] = content.PLATFORM_LINKS;
   const SOCIAL_LINKS = content.SOCIAL_LINKS;
