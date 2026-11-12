@@ -5,7 +5,7 @@
 //   node scripts/check-video-alternatives.mjs https://perspectivetester.com
 //
 // Fails when:
-//   - an embedded YouTube video has no on-page text alternative
+//   - an embedded video (self-hosted or YouTube) has no on-page text alternative
 //     (<details id="transcript-<video id>"> with real content),
 //   - a document link returns anything but 200 with the content type its
 //     extension promises, or whose bytes don't match the format (catches soft
@@ -53,10 +53,12 @@ function textOf(html) {
 function checkAlternatives(html) {
   const videoIds = [
     ...html.matchAll(/youtube(?:-nocookie)?\.com\/embed\/([\w-]{11})/g),
+    // Self-hosted players: <video src="/videos/<id>.mp4">.
+    ...html.matchAll(/<video[^>]*src="\/videos\/([\w-]{11})\.mp4"/g),
   ].map((m) => m[1]);
   const unique = [...new Set(videoIds)];
 
-  if (unique.length === 0) failures.push("No embedded YouTube videos found.");
+  if (unique.length === 0) failures.push("No embedded videos found.");
 
   for (const id of unique) {
     const match = html.match(

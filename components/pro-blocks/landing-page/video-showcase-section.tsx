@@ -5,7 +5,8 @@ import { useSection } from "@/components/cms/content-provider";
 import defaults from "@/cms/content/video-showcase-section.json";
 
 import { Tagline } from "@/components/pro-blocks/landing-page/tagline";
-import { AudioLines, FileText, PlayCircle } from "lucide-react";
+import { AccessibleVideoPlayer } from "@/components/pro-blocks/landing-page/accessible-video-player";
+import { ArrowUpRight, AudioLines, FileText, PlayCircle } from "lucide-react";
 import {
   describedVersions,
   type HomepageVideo,
@@ -13,20 +14,30 @@ import {
 
 const retiredVideoIds = new Set(["usiTK_CvwkA"]);
 
-function VideoEmbed({ id, title }: { id: string; title: string }) {
-  const content = useSection("video-showcase-section", defaults);
-
+// Self-hosted rather than a YouTube iframe: YouTube's player contains a
+// channel-avatar button named "thumbnail-image" that the site cannot relabel
+// (WCAG 1.1.1). The site's own player has keyboard-operable, clearly focused
+// controls, and the captions are the corrected, timed English track.
+function VideoPlayer({ id, title }: { id: string; title: string }) {
   return (
-    <div className="aspect-video overflow-hidden rounded-xl border bg-secondary">
-      <iframe
-        src={`https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1`}
+    <div className="flex flex-col gap-2">
+      <AccessibleVideoPlayer
+        src={`/videos/${id}.mp4`}
+        poster={`/videos/${id}.jpg`}
+        captions={`/videos/${id}.en.vtt`}
         title={title}
-        loading="lazy"
-        className="h-full w-full"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerPolicy="strict-origin-when-cross-origin"
-        allowFullScreen
+        videoClassName="aspect-video"
       />
+      <a
+        href={`https://www.youtube.com/watch?v=${id}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-primary inline-flex w-fit items-center gap-1.5 rounded-sm py-0.5 text-sm font-medium underline underline-offset-4"
+      >
+        Watch on YouTube
+        <span className="sr-only">: {title} (opens in a new tab)</span>
+        <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+      </a>
     </div>
   );
 }
@@ -91,27 +102,14 @@ function DescribedVersion({ video }: { video: HomepageVideo }) {
           The picture pauses while a narrator describes what is on screen.
           Captions include the descriptions.
         </p>
-        <video
-          ref={player}
+        <AccessibleVideoPlayer
+          videoRef={player}
           src={version.src}
-          controls
-          playsInline
-          preload="none"
           poster={version.poster}
-          aria-label={`${video.title}, audio-described version`}
-          className="mx-auto max-h-[70vh] w-full rounded-md bg-black"
-        >
-          <track
-            kind="captions"
-            src={version.captions}
-            srcLang="en"
-            label="English"
-            default
-          />
-          <a href={version.src}>
-            Download the audio-described version of {video.title}
-          </a>
-        </video>
+          captions={version.captions}
+          title={`${video.title}, audio-described version`}
+          videoClassName="max-h-[70vh]"
+        />
       </div>
     </details>
   );
@@ -149,7 +147,7 @@ export function VideoShowcaseSection() {
             aria-labelledby={`video-card-${featuredVideo.id}`}
             className="min-w-0 rounded-2xl border bg-card p-4 shadow-sm sm:p-5"
           >
-            <VideoEmbed id={featuredVideo.id} title={featuredVideo.title} />
+            <VideoPlayer id={featuredVideo.id} title={featuredVideo.title} />
             <div className="mt-4 flex flex-col gap-2">
               <p className="text-primary text-xs font-semibold tracking-wide uppercase">
                 {content.paragraph_5}
@@ -175,7 +173,7 @@ export function VideoShowcaseSection() {
                 aria-labelledby={`video-card-${video.id}`}
                 className="min-w-0 rounded-2xl border bg-card p-3.5 shadow-sm"
               >
-                <VideoEmbed id={video.id} title={video.title} />
+                <VideoPlayer id={video.id} title={video.title} />
                 <div className="mt-3 flex flex-col gap-1.5">
                   <h3
                     id={`video-card-${video.id}`}
