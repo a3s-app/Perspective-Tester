@@ -36,7 +36,7 @@
   flex-wrap: wrap;
   gap: 11px;
   color: var(--guide-muted);
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 .breadcrumb a:hover {
   text-decoration: underline;
@@ -53,7 +53,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 11px;
+  font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.11em;
   text-transform: uppercase;
@@ -72,7 +72,7 @@
 .heroDescription {
   max-width: 505px;
   margin-top: 24px;
-  font-size: 17px;
+  font-size: 1.0625rem;
   line-height: 1.75;
   color: var(--guide-muted);
 }
@@ -85,7 +85,7 @@
   border: 1px solid var(--guide-ink);
   background: var(--guide-ink);
   color: white;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 500;
   border-radius: 7px;
   transition: background 0.15s;
@@ -94,7 +94,7 @@
   background: #2c4970;
 }
 .heroNote {
-  font-size: 11px;
+  font-size: 0.6875rem;
   color: var(--guide-muted);
   margin-top: 17px;
   display: flex;
@@ -113,7 +113,7 @@
   align-items: center;
   gap: 8px;
   padding: 17px 24px;
-  font-size: 11px;
+  font-size: 0.6875rem;
   color: var(--guide-muted);
   border-bottom: 1px solid var(--guide-line);
 }
@@ -146,12 +146,12 @@
 }
 .exampleLabel {
   display: block;
-  font-size: 12px;
+  font-size: 0.75rem;
   color: var(--guide-muted);
   margin-bottom: 6px;
 }
 .exampleImage code {
-  font-size: 15px;
+  font-size: 0.9375rem;
   color: var(--guide-ink);
 }
 .exampleFinding {
@@ -162,13 +162,13 @@
   border-top: 1px solid #edf0f4;
 }
 .exampleFinding p {
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 600;
 }
 .exampleFinding div > span {
   display: block;
   color: var(--guide-muted);
-  font-size: 11px;
+  font-size: 0.6875rem;
   margin-top: 3px;
 }
 .autoIcon,
@@ -195,13 +195,13 @@
 }
 .smallLabel {
   margin-left: auto;
-  font-size: 10px;
+  font-size: 0.625rem;
   color: var(--guide-muted);
 }
 .exampleCaption {
   padding: 18px 24px;
   background: #f9fafc;
-  font-size: 11px;
+  font-size: 0.6875rem;
   line-height: 1.7;
   color: var(--guide-muted);
   border-top: 1px solid var(--guide-line);
@@ -225,7 +225,7 @@
 }
 .pageNav > div > span {
   margin-right: auto;
-  font-size: 11px;
+  font-size: 0.6875rem;
   color: var(--guide-muted);
 }
 .pageNav a {
@@ -236,7 +236,7 @@
   padding: 10px 13px;
   border: 1px solid #748399;
   border-radius: 6px;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 500;
   line-height: 1.4;
 }
@@ -272,7 +272,7 @@
 .comparisonIntro > div > p:not(.eyebrow) {
   margin-top: 16px;
   color: var(--guide-muted);
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 1.8;
 }
 .legend {
@@ -289,12 +289,12 @@
   align-items: center;
 }
 .legend h3 {
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 600;
   margin-bottom: 4px;
 }
 .legend p {
-  font-size: 11px;
+  font-size: 0.6875rem;
   line-height: 1.5;
   color: var(--guide-muted);
 }
@@ -321,12 +321,12 @@
   padding: 10px 12px;
   min-height: 40px;
   border-radius: 5px;
-  font-size: 12px;
+  font-size: 0.75rem;
   color: var(--guide-muted);
   border: 1px solid transparent;
 }
 .filters button span {
-  font-size: 10px;
+  font-size: 0.625rem;
 }
 .filters button[aria-pressed="true"] {
   color: var(--guide-ink);
@@ -358,7 +358,7 @@
   border: 1px solid #748399;
   padding: 10px 10px 10px 39px;
   border-radius: 6px;
-  font-size: 12px;
+  font-size: 0.75rem;
   background: white;
 }
 .search input::placeholder {
@@ -371,7 +371,7 @@
   gap: 10px;
   padding: 21px 0 12px;
   color: var(--guide-muted);
-  font-size: 11px;
+  font-size: 0.6875rem;
 }
 .resultsMeta > span {
   color: #657287;
@@ -402,12 +402,12 @@
   flex: 1;
 }
 .issueHeading h3 {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
   line-height: 1.5;
 }
 .issueHeading p {
-  font-size: 12px;
+  font-size: 0.75rem;
   color: var(--guide-muted);
   line-height: 1.65;
   margin-top: 4px;
@@ -423,7 +423,7 @@
 }
 .coverageBadge {
   border-radius: 4px;
-  font-size: 10px;
+  font-size: 0.625rem;
   font-weight: 500;
   padding: 5px 8px;
   white-space: nowrap;
@@ -465,13 +465,13 @@
   display: flex;
   align-items: center;
   gap: 7px;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 600;
   margin-bottom: 8px;
 }
 .issueDetails p {
   color: var(--guide-muted);
-  font-size: 12px;
+  font-size: 0.75rem;
   line-height: 1.8;
 }
 .humanCheck {
@@ -494,19 +494,19 @@
 }
 .issueReferences dt,
 .issueSources > span {
-  font-size: 10px;
+  font-size: 0.625rem;
   font-weight: 600;
   color: var(--guide-muted);
 }
 .issueReferences dd {
-  font-size: 11px;
+  font-size: 0.6875rem;
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
   color: var(--guide-muted);
 }
 .issueReferences code {
-  font-size: 10px;
+  font-size: 0.625rem;
   background: #edf1f5;
   padding: 3px 6px;
   border-radius: 3px;
@@ -524,7 +524,7 @@
   display: inline-flex;
   align-items: center;
   gap: 3px;
-  font-size: 11px;
+  font-size: 0.6875rem;
   padding-block: 7px;
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -538,13 +538,13 @@
   margin: 0 auto 13px;
 }
 .emptyState h3 {
-  font-size: 17px;
+  font-size: 1.0625rem;
   color: var(--guide-ink);
   font-weight: 600;
 }
 .emptyState p {
   margin-top: 8px;
-  font-size: 13px;
+  font-size: 0.8125rem;
 }
 .emptyState button {
   margin-top: 18px;
@@ -552,7 +552,7 @@
   background: var(--guide-ink);
   color: white;
   border-radius: 6px;
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 .scopeNote {
   display: flex;
@@ -566,7 +566,7 @@
   margin-top: 2px;
 }
 .scopeNote p {
-  font-size: 12px;
+  font-size: 0.75rem;
   line-height: 1.75;
   color: var(--guide-muted);
   max-width: 900px;
@@ -591,7 +591,7 @@
   align-items: center;
   gap: 5px;
   margin-top: 14px;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 500;
   text-decoration: underline;
   text-underline-offset: 4px;
@@ -613,14 +613,14 @@
   color: var(--guide-human);
 }
 .toolCards h3 {
-  font-size: 19px;
+  font-size: 1.1875rem;
   font-weight: 600;
   margin-bottom: 10px;
   letter-spacing: -0.02em;
 }
 .toolCards p {
   color: var(--guide-muted);
-  font-size: 13px;
+  font-size: 0.8125rem;
   line-height: 1.8;
   max-width: 460px;
 }
@@ -629,7 +629,7 @@
   border-top: 1px solid var(--guide-line);
   margin-top: 22px;
   padding-top: 14px;
-  font-size: 11px;
+  font-size: 0.6875rem;
   font-weight: 500;
 }
 .comparisonDetails {
@@ -645,7 +645,7 @@
   list-style: none;
   padding: 19px 24px;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 500;
 }
 .comparisonDetails summary > svg {
@@ -656,7 +656,7 @@
   transform: rotate(180deg);
 }
 .versionLabel {
-  font-size: 10px;
+  font-size: 0.625rem;
   color: var(--guide-muted);
   font-weight: 400;
   margin-left: auto;
@@ -668,7 +668,7 @@
   padding: 0 24px 16px;
 }
 .comparisonContent > p {
-  font-size: 12px;
+  font-size: 0.75rem;
   line-height: 1.7;
   color: var(--guide-muted);
   max-width: 770px;
@@ -678,7 +678,7 @@
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 .comparisonContent th,
 .comparisonContent td {
@@ -690,7 +690,7 @@
 }
 .comparisonContent thead th {
   background: var(--guide-soft);
-  font-size: 11px;
+  font-size: 0.6875rem;
   font-weight: 600;
 }
 .comparisonContent th:first-child {
@@ -706,7 +706,7 @@
 .comparisonContent code {
   display: block;
   font-weight: 400;
-  font-size: 10px;
+  font-size: 0.625rem;
   margin-top: 5px;
   color: var(--guide-muted);
   overflow-wrap: anywhere;
@@ -734,21 +734,21 @@
   color: var(--guide-human);
 }
 .scoreNote h3 {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
 }
 .scoreNote p {
   max-width: 720px;
   margin-top: 7px;
   color: var(--guide-muted);
-  font-size: 12px;
+  font-size: 0.75rem;
   line-height: 1.75;
 }
 .scoreNote > a {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 11px;
+  font-size: 0.6875rem;
   white-space: nowrap;
   margin-left: auto;
   text-decoration: underline;
@@ -772,16 +772,16 @@
   background: var(--guide-soft);
   border: 1px solid var(--guide-line);
   border-radius: 50%;
-  font-size: 12px;
+  font-size: 0.75rem;
   margin-bottom: 18px;
 }
 .workflow h3 {
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-weight: 600;
   margin-bottom: 10px;
 }
 .workflow p {
-  font-size: 13px;
+  font-size: 0.8125rem;
   color: var(--guide-muted);
   line-height: 1.85;
 }
@@ -789,7 +789,7 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 11px;
+  font-size: 0.6875rem;
   text-decoration: underline;
   text-underline-offset: 3px;
   margin-top: 15px;
@@ -802,7 +802,7 @@
   margin-top: 36px;
 }
 .resultKey h3 {
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 600;
   margin-bottom: 20px;
 }
@@ -813,12 +813,12 @@
 }
 .resultKey dt {
   font-family: Menlo, monospace;
-  font-size: 11px;
+  font-size: 0.6875rem;
   margin-bottom: 6px;
 }
 .resultKey dd {
   color: var(--guide-muted);
-  font-size: 11px;
+  font-size: 0.6875rem;
   line-height: 1.6;
 }
 .sourcesSection {
@@ -833,7 +833,7 @@
 }
 .sourcesHeader > p {
   color: var(--guide-muted);
-  font-size: 11px;
+  font-size: 0.6875rem;
   max-width: 240px;
   line-height: 1.7;
 }
@@ -848,7 +848,7 @@
   border-top: 1px solid var(--guide-line);
 }
 .sourceGrid a > span {
-  font-size: 10px;
+  font-size: 0.625rem;
   color: var(--guide-muted);
 }
 .sourceGrid h3 {
@@ -857,7 +857,7 @@
   justify-content: space-between;
   gap: 14px;
   margin-block: 12px 9px;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
 }
 .sourceGrid h3 svg {
@@ -865,7 +865,7 @@
 }
 .sourceGrid p {
   color: var(--guide-muted);
-  font-size: 12px;
+  font-size: 0.75rem;
   line-height: 1.8;
 }
 .sourceGrid a:hover h3 {
@@ -888,10 +888,10 @@
   margin-bottom: 12px;
 }
 .cta h2 {
-  font-size: 29px;
+  font-size: 1.8125rem;
 }
 .cta p:not(.eyebrow) {
-  font-size: 13px;
+  font-size: 0.8125rem;
   line-height: 1.7;
   color: #c7d3e3;
   margin-top: 12px;
@@ -905,7 +905,7 @@
   border-radius: 6px;
   background: white;
   color: var(--guide-ink);
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 500;
 }
 .cta a:focus-visible {
@@ -915,7 +915,7 @@
   flex-shrink: 0;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 62.5em) {
   .heroGrid {
     gap: 35px;
   }
@@ -941,7 +941,7 @@
     margin-left: 71px;
   }
 }
-@media (max-width: 760px) {
+@media (max-width: 47.5em) {
   .container {
     width: calc(100% - 2.5rem);
   }
@@ -957,7 +957,7 @@
     font-size: clamp(2.3rem, 8vw, 3rem);
   }
   .heroDescription {
-    font-size: 15px;
+    font-size: 0.9375rem;
     margin-top: 20px;
   }
   .example {
@@ -987,10 +987,10 @@
     gap: 19px;
   }
   .legend h3 {
-    font-size: 13px;
+    font-size: 0.8125rem;
   }
   .legend p {
-    font-size: 12px;
+    font-size: 0.75rem;
   }
   .explorerToolbar {
     gap: 12px;
@@ -1001,7 +1001,7 @@
     width: 100%;
   }
   .filters button {
-    font-size: 12px;
+    font-size: 0.75rem;
     min-height: 43px;
   }
   .search {
@@ -1010,10 +1010,10 @@
     min-width: 0;
   }
   .search input {
-    font-size: 16px;
+    font-size: 1rem;
   }
   .resultsMeta {
-    font-size: 10px;
+    font-size: 0.625rem;
   }
   .resultsMeta > span {
     display: none;
@@ -1035,16 +1035,16 @@
     grid-row: 1 / 3;
   }
   .issueHeading h3 {
-    font-size: 14px;
+    font-size: 0.875rem;
   }
   .issueHeading p {
-    font-size: 12px;
+    font-size: 0.75rem;
   }
   .coverageBadge {
     grid-column: 2;
     grid-row: 3;
     justify-self: start;
-    font-size: 10px;
+    font-size: 0.625rem;
   }
   .expandIcon {
     grid-column: 3;
@@ -1059,7 +1059,7 @@
     gap: 21px;
   }
   .issueDetails p {
-    font-size: 13px;
+    font-size: 0.8125rem;
   }
   .humanCheck {
     border-left: 0;
@@ -1080,7 +1080,7 @@
     padding: 21px 18px;
   }
   .toolCards h3 {
-    font-size: 17px;
+    font-size: 1.0625rem;
   }
   .toolCards span {
     line-height: 1.6;
@@ -1101,10 +1101,10 @@
   }
   .comparisonContent :is(th, td) {
     padding: 12px 7px;
-    font-size: 11px;
+    font-size: 0.6875rem;
   }
   .comparisonContent code {
-    font-size: 9px;
+    font-size: 0.5625rem;
   }
   .comparisonContent th:first-child {
     width: 40%;
@@ -1171,7 +1171,7 @@
     gap: 25px;
   }
 }
-@media (max-width: 390px) {
+@media (max-width: 24.375em) {
   .exampleImage {
     margin: 18px;
     padding: 16px;

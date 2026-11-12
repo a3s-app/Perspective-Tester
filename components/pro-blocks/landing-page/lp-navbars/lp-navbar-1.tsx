@@ -41,7 +41,7 @@ const NavMenuItems = ({ compact }: { compact?: boolean }) => {
           variant="ghost"
           className={`rounded-lg font-medium transition-[color,background-color,border-color,transform] duration-300 ease-out ${
             compact
-              ? "h-8 px-2 text-[13px] lg:px-3"
+              ? "h-8 px-2 text-[0.8125rem] lg:px-3"
               : "h-9 px-2.5 text-sm lg:px-3.5"
           } ${isCurrent(href) ? "text-foreground underline underline-offset-8 decoration-2" : ""}`}
         >
@@ -241,7 +241,7 @@ export function LpNavbar1() {
                   variant="outline"
                   className={`rounded-lg font-medium transition-[color,background-color,border-color,transform] duration-300 ease-out ${
                     isCompact
-                      ? "h-8 px-2.5 text-[13px] lg:px-3"
+                      ? "h-8 px-2.5 text-[0.8125rem] lg:px-3"
                       : "h-9 px-3 text-sm lg:px-3.5"
                   }`}
                 >
@@ -253,7 +253,7 @@ export function LpNavbar1() {
                   asChild
                   className={`rounded-lg font-medium transition-[color,background-color,border-color,transform] duration-300 ease-out ${
                     isCompact
-                      ? "h-8 px-2.5 text-[13px] lg:px-3"
+                      ? "h-8 px-2.5 text-[0.8125rem] lg:px-3"
                       : "h-9 px-3 text-sm lg:px-3.5"
                   }`}
                 >
