@@ -14,6 +14,7 @@ import {
   Facebook,
   FileText,
   Library,
+  Map,
   Instagram,
   Linkedin,
   Mail,
@@ -105,7 +106,12 @@ export function Footer1({ hideCopyrightYear = false }: { hideCopyrightYear?: boo
       { label: "Accessibility Testing Guide", href: "/accessibility-testing-guide", icon: BookOpen },
     ].filter((extra) => !content.COMPANY_LINKS.some((link) => link.href === extra.href)),
   ];
-  const LEGAL_LINKS: FooterLink[] = content.LEGAL_LINKS;
+  const LEGAL_LINKS: FooterLink[] = [
+    ...content.LEGAL_LINKS,
+    ...[{ label: "Site map", href: "/site-map", icon: Map }].filter(
+      (extra) => !content.LEGAL_LINKS.some((link) => link.href === extra.href),
+    ),
+  ];
   const PLATFORM_LINKS: FooterLink[] = content.PLATFORM_LINKS;
   const SOCIAL_LINKS = content.SOCIAL_LINKS;
 
