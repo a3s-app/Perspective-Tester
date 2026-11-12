@@ -77,9 +77,14 @@ export function ContactPage() {
     fieldErrors[name] ? `${name}-error` : undefined;
   const invalid = (name: string) => (fieldErrors[name] ? true : undefined);
 
-  const FieldError = ({ name }: { name: string }) =>
+  // Called as a function, not rendered as <FieldError />: a component declared
+  // inside ContactPage is a new type on every render, so React remounted each
+  // message and screen readers re-announced them whenever the form updated.
+  // No role="alert" either: focus moves to the first invalid field, and each
+  // field reads its own message through aria-describedby.
+  const fieldError = (name: string) =>
     fieldErrors[name] ? (
-      <p id={`${name}-error`} className="text-destructive text-sm" role="alert">
+      <p id={`${name}-error`} className="text-destructive text-sm">
         {fieldErrors[name]}
       </p>
     ) : null;
@@ -93,6 +98,7 @@ export function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
     setError(null);
     setStatus("Sending your inquiry, please wait.");
@@ -364,9 +370,9 @@ export function ContactPage() {
                         required
                         aria-invalid={invalid("firstName")}
                         aria-describedby={describedBy("firstName")}
-                        disabled={loading}
+                        readOnly={loading}
                       />
-                      <FieldError name="firstName" />
+                      {fieldError("firstName")}
                     </div>
                     <div className="flex flex-col gap-2">
                       <Label htmlFor="lastName">
@@ -381,9 +387,9 @@ export function ContactPage() {
                         required
                         aria-invalid={invalid("lastName")}
                         aria-describedby={describedBy("lastName")}
-                        disabled={loading}
+                        readOnly={loading}
                       />
-                      <FieldError name="lastName" />
+                      {fieldError("lastName")}
                     </div>
                   </div>
 
@@ -403,9 +409,9 @@ export function ContactPage() {
                         required
                         aria-invalid={invalid("email")}
                         aria-describedby={describedBy("email")}
-                        disabled={loading}
+                        readOnly={loading}
                       />
-                      <FieldError name="email" />
+                      {fieldError("email")}
                     </div>
                     <div className="flex flex-col gap-2">
                       <Label htmlFor="phone">
@@ -420,7 +426,7 @@ export function ContactPage() {
                         type="tel"
                         autoComplete="tel"
                         placeholder={content.placeholder_21}
-                        disabled={loading}
+                        readOnly={loading}
                       />
                     </div>
                   </div>
@@ -440,9 +446,9 @@ export function ContactPage() {
                         required
                         aria-invalid={invalid("organization")}
                         aria-describedby={describedBy("organization")}
-                        disabled={loading}
+                        readOnly={loading}
                       />
-                      <FieldError name="organization" />
+                      {fieldError("organization")}
                     </div>
                     <div className="flex flex-col gap-2">
                       <Label htmlFor="orgType">
@@ -506,7 +512,7 @@ export function ContactPage() {
                           ))}
                         </SelectContent>
                       </Select>
-                      <FieldError name="service" />
+                      {fieldError("service")}
                     </div>
                     <div className="flex flex-col gap-2">
                       <Label htmlFor="budget">
@@ -553,7 +559,7 @@ export function ContactPage() {
                       type="url"
                       autoComplete="url"
                       placeholder={content.placeholder_37}
-                      disabled={loading}
+                      readOnly={loading}
                     />
                   </div>
 
@@ -571,9 +577,9 @@ export function ContactPage() {
                       required
                       aria-invalid={invalid("message")}
                       aria-describedby={describedBy("message")}
-                      disabled={loading}
+                      readOnly={loading}
                     />
-                    <FieldError name="message" />
+                    {fieldError("message")}
                   </div>
 
                   {/* Submit */}
@@ -581,8 +587,10 @@ export function ContactPage() {
                     <Button
                       type="submit"
                       size="lg"
-                      className="w-full sm:w-auto"
-                      disabled={loading}
+                      // aria-disabled, not disabled: disabling the focused button
+                      // dropped keyboard focus to <body> while the inquiry was sending.
+                      className="w-full sm:w-auto aria-disabled:cursor-not-allowed aria-disabled:opacity-50"
+                      aria-disabled={loading || undefined}
                     >
                       {loading ? (
                         <>

@@ -30,7 +30,7 @@ export function KitCarsonCountyCaseStudy() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="shrink-0 rounded-lg bg-white/96 p-1.5 shadow-lg transition-transform hover:scale-[1.03] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-                aria-label={content.aria_label_2}
+                aria-label={`${content.aria_label_2} ${content.text_44}`}
               >
                 <Image
                   src={assetPath(content.image_3)}

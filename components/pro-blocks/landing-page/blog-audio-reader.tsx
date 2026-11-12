@@ -117,6 +117,9 @@ export function BlogAudioReader({ text }: { text: string }) {
   const segmentElapsedRef = useRef(0);
   const progressTimerRef = useRef<number | null>(null);
   const playButtonRef = useRef<HTMLButtonElement>(null);
+  // Set when the speed changes while paused: the new rate applies on the next
+  // Play instead of starting speech the listener did not ask for.
+  const restartOnResumeRef = useRef(false);
 
   if (chunksRef.current.length === 0) {
     chunksRef.current = chunkText(text);
@@ -260,6 +263,15 @@ export function BlogAudioReader({ text }: { text: string }) {
   );
 
   const handlePlay = useCallback(() => {
+    if (status === "paused" && restartOnResumeRef.current) {
+      restartOnResumeRef.current = false;
+      // resume() first: a paused synth stays paused after cancel(), which
+      // would hold the restarted utterance silent.
+      window.speechSynthesis.resume();
+      speakFromChunk(chunkIndexRef.current, rate);
+      setAnnouncement("Resumed playing the article");
+      return;
+    }
     if (status === "paused") {
       window.speechSynthesis.resume();
       segmentStartRef.current = Date.now();
@@ -281,6 +293,7 @@ export function BlogAudioReader({ text }: { text: string }) {
   }, [stopProgressTimer]);
 
   const handleStop = useCallback(() => {
+    restartOnResumeRef.current = false;
     detachCurrent();
     window.speechSynthesis.cancel();
     completedCharsRef.current = 0;
@@ -297,9 +310,11 @@ export function BlogAudioReader({ text }: { text: string }) {
       setRate(nextRate);
       setAnnouncement(`Speed set to ${nextRate} times`);
       // The Web Speech API can't change rate mid-utterance, so restart from the
-      // current chunk if the article is currently playing or paused.
-      if (status !== "idle") {
+      // current chunk while playing. While paused, wait for Play (WCAG 3.2.2).
+      if (status === "playing") {
         speakFromChunk(chunkIndexRef.current, nextRate);
+      } else if (status === "paused") {
+        restartOnResumeRef.current = true;
       }
     },
     [status, speakFromChunk],

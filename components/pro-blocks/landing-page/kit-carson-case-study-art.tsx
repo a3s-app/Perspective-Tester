@@ -146,6 +146,7 @@ export function EvidenceTrail() {
             className="underline decoration-white/40 underline-offset-4 hover:decoration-white"
           >
             {content.text_10}
+            <span className="sr-only"> (opens in a new tab)</span>
           </a>
         </p>
       </motion.div>
