@@ -43,7 +43,7 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
           href={segment.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="font-medium text-primary underline underline-offset-4 transition-colors hover:text-primary/80"
+          className="font-medium text-primary underline underline-offset-4 transition-colors hover:text-primary/80 [overflow-wrap:anywhere]"
         >
           {segment.text}
           <ExternalLink

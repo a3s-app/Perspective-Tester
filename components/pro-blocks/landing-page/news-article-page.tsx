@@ -22,7 +22,7 @@ import { getAudioText, slugifyHeading, toSegments } from "@/lib/blog";
 import { getNewsReadingTime, type NewsItem, type NewsLink } from "@/lib/news";
 
 const LINK_CLASS =
-  "font-medium text-primary underline underline-offset-4 transition-colors hover:text-primary/80";
+  "font-medium text-primary underline underline-offset-4 transition-colors hover:text-primary/80 [overflow-wrap:anywhere]";
 
 function ExternalAnchor({
   href,

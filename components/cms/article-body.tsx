@@ -145,7 +145,7 @@ export function ArticleBody({ value }: { value: Body | undefined }) {
           link: ({ children, value }) => (
             <a
               href={safeHref(value?.href ?? "")}
-              className="font-medium text-primary underline underline-offset-4"
+              className="font-medium text-primary underline underline-offset-4 [overflow-wrap:anywhere]"
             >
               {children}
             </a>
