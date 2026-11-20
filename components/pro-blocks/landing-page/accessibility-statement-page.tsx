@@ -4,10 +4,11 @@ import Link from "next/link";
 import { useSection } from "@/components/cms/content-provider";
 import defaults from "@/cms/content/accessibility-statement-page.json";
 
-// A plain document, not a marketing page: a heading, short sections in the
-// order W3C's statement guidance uses (commitment, conformance status,
-// feedback, compatibility, technical specifications, assessment approach,
-// date), and nothing promotional.
+// A plain document, not a marketing page: a heading, short sections drawn
+// from W3C's statement guidance (commitment, feedback, conformance status,
+// compatibility, technical specifications, assessment approach, date), and
+// nothing promotional. Feedback sits near the top as "Need help or have
+// feedback?" so people who are stuck find a contact first.
 // https://www.w3.org/WAI/planning/statements/
 
 const H2 = "text-xl font-semibold text-foreground";
@@ -56,8 +57,10 @@ export function AccessibilityStatementPage() {
           <p className={P}>{content.paragraph_2}</p>
         </header>
 
-        {/* Help first: someone stuck on the site should not have to read the
-            whole statement to find out how to reach a person. */}
+        {/* Help and feedback first: someone stuck on the site should not have
+            to read the whole statement to find out how to reach a person.
+            This is also the statement's feedback section, so it is not
+            repeated further down. */}
         <section
           aria-labelledby="need-help"
           className="flex flex-col gap-3 rounded-lg border bg-muted/40 p-6"
@@ -81,6 +84,7 @@ export function AccessibilityStatementPage() {
               </li>
             ) : null}
           </ul>
+          <p className={P}>{content.paragraph_15}</p>
         </section>
 
         <Section heading={content.heading_3}>
@@ -90,26 +94,6 @@ export function AccessibilityStatementPage() {
 
         <Section heading={content.heading_6}>
           <p className={P}>{content.paragraph_7}</p>
-        </Section>
-
-        <Section heading={content.heading_8}>
-          <p className={P}>{content.paragraph_9}</p>
-          <ul className={LIST}>
-            <li>
-              {content.text_10}{" "}
-              <a href={content.href_12} className={LINK}>
-                {content.text_11}
-              </a>
-            </li>
-            {content.text_13 ? (
-              <li>
-                <Link href={content.href_14} className={LINK}>
-                  {content.text_13}
-                </Link>
-              </li>
-            ) : null}
-          </ul>
-          <p className={P}>{content.paragraph_15}</p>
         </Section>
 
         <Section heading={content.heading_16}>
