@@ -142,25 +142,7 @@ export function ContactPage() {
     if (orgType) formData.set("orgType", orgType);
     if (budget) formData.set("budget", budget);
 
-    // FormSubmit configuration
-    formData.set(
-      "_subject",
-      `New Inquiry: ${service} - ${formData.get("firstName")} ${formData.get("lastName")} (${formData.get("organization")})`,
-    );
-    formData.set("_captcha", "false");
-    formData.set("_template", "table");
-
     try {
-      // Send to FormSubmit (email)
-      const formSubmitPromise = fetch(
-        `https://formsubmit.co/ajax/${CONTACT_EMAIL}`,
-        {
-          method: "POST",
-          body: formData,
-          headers: { Accept: "application/json" },
-        },
-      );
-
       const serviceName = formData.get("service") as string;
       const firstName = formData.get("firstName") as string;
       const lastName = formData.get("lastName") as string;
@@ -172,8 +154,9 @@ export function ContactPage() {
       const website = formData.get("website") as string;
       const message = formData.get("message") as string;
 
-      // Send email via Resend (server-side, fire and forget)
-      fetch("/api/contact", {
+      // Email goes out through our own route (Resend). This is the delivery
+      // the visitor's success or failure message depends on.
+      const emailPromise = fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -188,60 +171,9 @@ export function ContactPage() {
           website: website || undefined,
           message,
         }),
-      }).catch(() => {
-        // Resend failure is non-critical, FormSubmit is the primary delivery
       });
 
-      // Send to Slack webhook (if configured)
-      const slackWebhookUrl = process.env.NEXT_PUBLIC_SLACK_WEBHOOK_URL;
-      if (slackWebhookUrl) {
-        const slackBlocks = {
-          text: `New inquiry from ${firstName} ${lastName} (${organization})`,
-          blocks: [
-            {
-              type: "header",
-              text: {
-                type: "plain_text",
-                text: `New Inquiry: ${serviceName}`,
-                emoji: true,
-              },
-            },
-            {
-              type: "section",
-              fields: [
-                { type: "mrkdwn", text: `*Name:*\n${firstName} ${lastName}` },
-                { type: "mrkdwn", text: `*Email:*\n${email}` },
-                { type: "mrkdwn", text: `*Organization:*\n${organization}` },
-                { type: "mrkdwn", text: `*Service:*\n${serviceName}` },
-                ...(phone
-                  ? [{ type: "mrkdwn", text: `*Phone:*\n${phone}` }]
-                  : []),
-                ...(orgTypeVal
-                  ? [{ type: "mrkdwn", text: `*Org Type:*\n${orgTypeVal}` }]
-                  : []),
-                ...(budgetVal
-                  ? [{ type: "mrkdwn", text: `*Budget:*\n${budgetVal}` }]
-                  : []),
-                ...(website
-                  ? [{ type: "mrkdwn", text: `*Website:*\n${website}` }]
-                  : []),
-              ],
-            },
-            {
-              type: "section",
-              text: { type: "mrkdwn", text: `*Message:*\n${message}` },
-            },
-          ],
-        };
-
-        fetch(slackWebhookUrl, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(slackBlocks),
-        }).catch(() => {});
-      }
-
-      const response = await formSubmitPromise;
+      const response = await emailPromise;
 
       if (!response.ok) {
         throw new Error("Failed to send inquiry");

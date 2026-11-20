@@ -1,9 +1,14 @@
-import { getSettings } from "@/cms/server";
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const CONTACT_EMAIL =
-  process.env.NEXT_PUBLIC_CONTACT_EMAIL || "Info@perspectivetester.com";
+// Where form enquiries are delivered. Deliberately separate from the address
+// shown on the site (the CMS contact email), which stays as it is.
+// Several addresses can be given, separated by commas; everyone listed gets
+// the same email and can see the others.
+const CONTACT_FORM_TO = (process.env.CONTACT_FORM_TO || "Info@perspectivetester.com")
+  .split(",")
+  .map((address) => address.trim())
+  .filter(Boolean);
 const FROM_EMAIL =
   process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
 
@@ -57,6 +62,88 @@ function escapeHtml(str: string): string {
     .replace(/"/g, "&quot;");
 }
 
+async function sendEmail(data: ContactPayload, subject: string) {
+  // Instantiate lazily so a missing optional key does not prevent a build.
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    console.error("[contact/resend] RESEND_API_KEY is not set");
+    return false;
+  }
+  try {
+    const { error } = await new Resend(apiKey).emails.send({
+      from: FROM_EMAIL,
+      to: CONTACT_FORM_TO,
+      replyTo: data.email,
+      subject,
+      html: buildHtmlEmail(data),
+    });
+    if (error) {
+      console.error("[contact/resend] Failed to send email:", error);
+      return false;
+    }
+    return true;
+  } catch (err) {
+    console.error("[contact/resend] Unexpected error:", err);
+    return false;
+  }
+}
+
+// Slack's mrkdwn treats &, < and > as control characters.
+function slackEscape(str: string): string {
+  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+async function postToSlack(data: ContactPayload) {
+  // Server-only on purpose: a NEXT_PUBLIC_ variable would put the webhook URL
+  // in the page's JavaScript, where anyone could copy it and post to Slack.
+  const url = process.env.SLACK_WEBHOOK_URL;
+  if (!url) return false;
+
+  const field = (label: string, value?: string) =>
+    value ? [{ type: "mrkdwn", text: `*${label}:*\n${slackEscape(value)}` }] : [];
+
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        text: `New inquiry from ${data.firstName} ${data.lastName} (${data.organization})`,
+        blocks: [
+          {
+            type: "header",
+            text: { type: "plain_text", text: `New Inquiry: ${data.service}`, emoji: true },
+          },
+          {
+            type: "section",
+            fields: [
+              ...field("Name", `${data.firstName} ${data.lastName}`),
+              ...field("Email", data.email),
+              ...field("Organization", data.organization),
+              ...field("Service", data.service),
+              ...field("Phone", data.phone),
+              ...field("Org Type", data.orgType),
+              ...field("Budget", data.budget),
+              ...field("Website", data.website),
+            ],
+          },
+          {
+            type: "section",
+            text: { type: "mrkdwn", text: `*Message:*\n${slackEscape(data.message)}` },
+          },
+        ],
+      }),
+    });
+    if (!res.ok) {
+      console.error("[contact/slack] Webhook returned", res.status, await res.text());
+      return false;
+    }
+    return true;
+  } catch (err) {
+    console.error("[contact/slack] Unexpected error:", err);
+    return false;
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = (await request.json()) as ContactPayload;
@@ -70,36 +157,23 @@ export async function POST(request: NextRequest) {
 
     const subject = `New Inquiry: ${body.service} — ${body.firstName} ${body.lastName} (${body.organization})`;
 
-    // Instantiate lazily so a missing optional key does not prevent a build.
-    const apiKey = process.env.RESEND_API_KEY;
-    if (!apiKey) {
-      console.error("[contact/resend] RESEND_API_KEY is not set");
-      return NextResponse.json(
-        { error: "Email service not configured" },
-        { status: 500 }
-      );
-    }
-    const resend = new Resend(apiKey);
+    // Email (Resend) and Slack go out together. The enquiry counts as
+    // received if at least one of them gets through; each failure is logged.
+    const [emailSent, slackSent] = await Promise.all([
+      sendEmail(body, subject),
+      postToSlack(body),
+    ]);
 
-    const { error } = await resend.emails.send({
-      from: FROM_EMAIL,
-      to: (await getSettings()).contactEmail || CONTACT_EMAIL,
-      replyTo: body.email,
-      subject,
-      html: buildHtmlEmail(body),
-    });
-
-    if (error) {
-      console.error("[contact/resend] Failed to send email:", error);
+    if (!emailSent && !slackSent) {
       return NextResponse.json(
-        { error: "Failed to send email" },
+        { error: "Failed to send inquiry" },
         { status: 500 }
       );
     }
 
     return NextResponse.json({ success: true });
   } catch (err) {
-    console.error("[contact/resend] Unexpected error:", err);
+    console.error("[contact] Unexpected error:", err);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
