@@ -56,6 +56,33 @@ export function AccessibilityStatementPage() {
           <p className={P}>{content.paragraph_2}</p>
         </header>
 
+        {/* Help first: someone stuck on the site should not have to read the
+            whole statement to find out how to reach a person. */}
+        <section
+          aria-labelledby="need-help"
+          className="flex flex-col gap-3 rounded-lg border bg-muted/40 p-6"
+        >
+          <h2 id="need-help" className={H2}>
+            {content.heading_28 || defaults.heading_28}
+          </h2>
+          <p className={P}>{content.paragraph_29 || defaults.paragraph_29}</p>
+          <ul className={LIST}>
+            <li>
+              {content.text_10}{" "}
+              <a href={content.href_12} className={LINK}>
+                {content.text_11}
+              </a>
+            </li>
+            {content.text_13 ? (
+              <li>
+                <Link href={content.href_14} className={LINK}>
+                  {content.text_13}
+                </Link>
+              </li>
+            ) : null}
+          </ul>
+        </section>
+
         <Section heading={content.heading_3}>
           <p className={P}>{content.paragraph_4}</p>
           <p className={P}>{content.paragraph_5}</p>
